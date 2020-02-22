@@ -1,0 +1,15 @@
+.word {
+  margin: 0 0.2em;
+}
+
+.reader__text {
+  outline: 2px solid red;
+  width: 80%;
+  margin: 0 auto;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.word--target {
+  font-weight: bold;
+}

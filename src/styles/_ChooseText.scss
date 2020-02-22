@@ -1,0 +1,24 @@
+.chooseText__wrapper {
+  outline: 2px solid blue;
+  height: 100%;
+}
+
+.chooseText__texts {
+  outline: 2px solid red;
+  display: flex;
+  flex-wrap: wrap;
+  height: 100%;
+}
+
+.chooseText__filter {
+  display: flex;
+}
+
+.chooseText__topic-list {
+  display: flex;
+  list-style: none;
+  border: 2px solid orange;
+  li {
+    margin: 0 1rem;
+  }
+}
