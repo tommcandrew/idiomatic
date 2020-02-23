@@ -2,6 +2,7 @@ import React from "react";
 import TextTile from "./TextTile";
 
 const MyTexts = ({ texts, handleChooseText }) => {
+  console.log(texts);
   return (
     <div className="myTexts__wrapper">
       <div className="myTexts__texts">

@@ -35,14 +35,29 @@ const UploadText = ({ handleShowDashboard }) => {
 
   const handleSubmit = async e => {
     e.preventDefault();
+    const targetSentences = [];
+    const allSentences = uploadedFile.content.split(".");
+
+    for (let i = 0; i < selectedWords.length; i++) {
+      for (let j = 0; j < allSentences.length; j++) {
+        if (allSentences[j].includes(selectedWords[i])) {
+          targetSentences.push(allSentences[j]);
+          break;
+        }
+      }
+    }
+
+    console.log(targetSentences);
+
     axios
       .post("/saveText", {
-        title: uploadedFile.fileName,
+        title: uploadedFile.title,
         content: uploadedFile.content,
-        targetWords: selectedWords
+        targetWords: selectedWords,
+        targetSentences: targetSentences
       })
-      .then(res => {
-        console.log(res);
+      .then(() => {
+        handleShowDashboard();
       });
   };
 
@@ -52,7 +67,6 @@ const UploadText = ({ handleShowDashboard }) => {
       /(~|`|!|@|#|$|%|^|&|\*|\(|\)|{|}|\[|\]|;|:|\"|'|<|,|\.|>|\?|\/|\\|\||-|_|\+|=)/g,
       ""
     );
-    console.log(selectedWords);
     setSelectedWords([...refValue.current, newWord]);
   };
 

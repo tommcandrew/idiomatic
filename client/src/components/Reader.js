@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import dictionaryKey from "../apiKey";
 
-const Reader = ({ text }) => {
+const Reader = ({ text, handleShowGapFill }) => {
   const [targetWords, setTargetWords] = useState(null);
   const [textAsSpanElements, setTextAsSpanElements] = useState([]);
   const [selectedDef, setSelectedDef] = useState(null);
@@ -52,7 +52,7 @@ const Reader = ({ text }) => {
 
   const createSpanArray = () => {
     //change the text into an array of span elements with classNames and save to state
-    const splitText = text.text.split(" ");
+    const splitText = text.content.split(" ");
     const textAsSpanElements = splitText.map((word, index) => {
       if (
         text.targetWords.includes(
@@ -116,15 +116,15 @@ const Reader = ({ text }) => {
   return (
     <div className="reader__wrapper">
       <div className="reader__content">
+        <div>{selectedDef && selectedDef}</div>
         <h1>{text.title}</h1>
         <div className="reader__text">{textAsSpanElements}</div>
-        <div>{selectedDef && selectedDef}</div>
         <p>
           Target words are shown in <strong>bold</strong>.
         </p>
         <p>Click once to see the definition.</p>
         <p>Double click to hear the pronunciation</p>
-        <button>Go to exercises</button>
+        <button onClick={handleShowGapFill}>Go to exercises</button>
       </div>
     </div>
   );
