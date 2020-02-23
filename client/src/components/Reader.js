@@ -9,12 +9,14 @@ const Reader = ({ text }) => {
 
   useEffect(() => {
     createTargetWordObjs();
+    //eslint-disable-next-line
   }, []);
 
   useEffect(() => {
     if (targetWords && targetWords.length > 0) {
       createSpanArray();
     }
+    //eslint-disable-next-line
   }, [targetWords]);
 
   const createTargetWordObjs = async () => {

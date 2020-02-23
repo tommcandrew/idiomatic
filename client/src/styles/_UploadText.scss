@@ -1,0 +1,21 @@
+.uploadText__text-content {
+  width: 60%;
+  margin: 0 auto;
+  border: 2px solid red;
+  text-align: center;
+  div {
+    margin-top: 2rem;
+    font-size: 1.4rem;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    span {
+      margin: 0 0.2em;
+      user-select: none;
+      &:hover {
+        background: yellow;
+        cursor: pointer;
+      }
+    }
+  }
+}

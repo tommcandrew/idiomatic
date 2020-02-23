@@ -16,6 +16,8 @@ mongoose.connect(
 
 const app = express();
 
+app.use(express.json());
+
 app.use(fileUpload());
 
 app.post("/upload", async (req, res) => {
@@ -23,35 +25,29 @@ app.post("/upload", async (req, res) => {
     return res.status(400).json({ msg: "No file uploaded" });
   }
   const file = req.files.file;
-  let fileContent;
-  console.log(file.mimetype);
+  let content;
   if (file.mimetype === "application/pdf") {
-    console.log("file is pdf");
     const data = await pdf(file.data);
-    fileContent = data.text;
+    content = data.text;
   } else {
-    console.log("file is not pdf");
-    fileContent = file.data.toString("utf8");
+    content = file.data.toString("utf8");
   }
+  const title = file.name.substr(0, file.name.length - 4);
+  res.status(200).send({ title, content });
+});
 
-  console.log(fileContent);
-  const text = new Text({ title: file.name, content: fileContent });
-
+app.post("/saveText", (req, res) => {
+  const { title, content, targetWords } = req.body;
+  const text = new Text({ title, content, targetWords });
   text.save().then(() => {
     console.log("text saved");
   });
+});
 
-  // file.mv(`${__dirname}/client/public/uploads/${file.name}`, err => {
-  //   if (err) {
-  //     console.log(err);
-  //     return res.status(500).send(err);
-  //   }
-  //   res.json({
-  //     fileName: file.name,
-  //     fileContent: fileContent,
-  //     filePath: `/uploads/${file.name}`
-  //   });
-  // });
+app.get("/savedTexts", (req, res) => {
+  Text.find().then(texts => {
+    res.status(200).send(texts);
+  });
 });
 
 app.listen(5000, () => console.log("listening on port 5000"));

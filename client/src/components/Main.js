@@ -1,10 +1,12 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Dashboard from "./Dashboard";
 import ChooseText from "./ChooseText";
 import UploadText from "./UploadText";
 import Header from "./Header";
 import StartPage from "./StartPage";
 import Reader from "./Reader";
+import axios from "axios";
+import MyTexts from "./MyTexts";
 
 const texts = [
   {
@@ -40,6 +42,15 @@ const Main = () => {
   const [showStartPage, setShowStartPage] = useState(false);
   const [selectedText, setSelectedText] = useState(null);
   const [showReader, setShowReader] = useState(false);
+  const [showMyTexts, setShowMyTexts] = useState(false);
+  const [savedTexts, setSavedTexts] = useState([]);
+
+  useEffect(() => {
+    axios.get("/savedtexts").then(res => {
+      setSavedTexts(res.data);
+    });
+  }, []);
+
   const handleShowChooseText = () => {
     setShowDashboard(false);
     setShowChooseText(true);
@@ -55,13 +66,20 @@ const Main = () => {
     setShowUploadText(false);
     setShowStartPage(false);
     setShowReader(false);
+    setShowMyTexts(false);
     setShowDashboard(true);
   };
 
   const handleChooseText = title => {
-    const selectedText = texts.filter(text => text.title === title)[0];
+    let selectedText;
+    if (showMyTexts) {
+      selectedText = savedTexts.filter(text => text.title === title)[0];
+    } else {
+      selectedText = texts.filter(text => text.title === title)[0];
+    }
     setSelectedText(selectedText);
     setShowChooseText(false);
+    setShowMyTexts(false);
     setShowStartPage(true);
   };
 
@@ -70,9 +88,17 @@ const Main = () => {
     setShowReader(true);
   };
 
+  const handleShowMyTexts = () => {
+    setShowDashboard(false);
+    setShowMyTexts(true);
+  };
+
   return (
     <>
-      <Header handleShowDashboard={handleShowDashboard} />
+      <Header
+        handleShowDashboard={handleShowDashboard}
+        handleShowMyTexts={handleShowMyTexts}
+      />
 
       {showDashboard && (
         <Dashboard
@@ -97,6 +123,9 @@ const Main = () => {
         />
       )}
       {showReader && <Reader text={selectedText} />}
+      {showMyTexts && (
+        <MyTexts texts={savedTexts} handleChooseText={handleChooseText} />
+      )}
     </>
   );
 };
