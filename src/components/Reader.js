@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 import dictionaryKey from "../apiKey";
 
@@ -7,54 +7,48 @@ const Reader = ({ text }) => {
   const [textAsSpanElements, setTextAsSpanElements] = useState([]);
   const [selectedDef, setSelectedDef] = useState(null);
 
-  //this required otherwise onClick handler below uses stale state (because of closure on first render)
-  const refValue = useRef(targetWords);
   useEffect(() => {
-    refValue.current = targetWords;
-  });
+    createTargetWordObjs();
+  }, []);
 
-  const createTargetWordObjs = () => {
-    const targetWordObjs = [];
-    text.targetWords.forEach(word => {
-      axios
-        .get(
-          "https://dictionaryapi.com/api/v3/references/learners/json/" +
-            word +
-            "?key=" +
-            dictionaryKey
-        )
-        .then(res => {
-          console.log(res);
-          let def;
-          if (res.data[0].shortdef[0]) {
-            def = res.data[0].shortdef[0];
-          } else {
-            def = null;
-          }
-          let audioUrl;
-          if (res.data[0].hwi.prs) {
-            audioUrl =
-              "https://media.merriam-webster.com/soundc11/" +
-              res.data[0].hwi.prs[0].sound.audio.toString().charAt(0) +
-              "/" +
-              res.data[0].hwi.prs[0].sound.audio +
-              ".wav";
-          } else {
-            audioUrl = null;
-          }
-          targetWordObjs.push({
-            word,
-            audioUrl,
-            def
-          });
-        });
-    });
-    setTargetWords(targetWordObjs);
+  useEffect(() => {
+    if (targetWords && targetWords.length > 0) {
+      createSpanArray();
+    }
+  }, [targetWords]);
+
+  const createTargetWordObjs = async () => {
+    //create array of objects for each target word with the word itself and the url for its audio and save to state
+    const targetWordObjects = [];
+    for (let i = 0; i < text.targetWords.length; i++) {
+      const res = await axios.get(
+        "https://dictionaryapi.com/api/v3/references/learners/json/" +
+          text.targetWords[i] +
+          "?key=" +
+          dictionaryKey
+      );
+      const shortDef = res.data[0].shortdef[0];
+      let audioUrl;
+      if (res.data[0].hwi.prs) {
+        audioUrl =
+          "https://media.merriam-webster.com/soundc11/" +
+          res.data[0].hwi.prs[0].sound.audio.toString().charAt(0) +
+          "/" +
+          res.data[0].hwi.prs[0].sound.audio +
+          ".wav";
+      } else {
+        audioUrl = null;
+      }
+      targetWordObjects.push({
+        word: text.targetWords[i],
+        def: shortDef,
+        audio: audioUrl
+      });
+    }
+    setTargetWords(targetWordObjects);
   };
 
-  useEffect(() => {
-    //create array of objects for each target word with the word itself and the url for its audio and save to state
-    createTargetWordObjs();
+  const createSpanArray = () => {
     //change the text into an array of span elements with classNames and save to state
     const splitText = text.text.split(" ");
     const textAsSpanElements = splitText.map((word, index) => {
@@ -87,7 +81,7 @@ const Reader = ({ text }) => {
     });
     setTextAsSpanElements(textAsSpanElements);
     //eslint-disable-next-line
-  }, []);
+  };
 
   const handleTargetClick = e => {
     const selectedWord = e.target.innerText.replace(
@@ -95,13 +89,12 @@ const Reader = ({ text }) => {
       /(~|`|!|@|#|$|%|^|&|\*|\(|\)|{|}|\[|\]|;|:|\"|'|<|,|\.|>|\?|\/|\\|\||-|_|\+|=)/g,
       ""
     );
-    const targetWordsUpdated = refValue.current;
     //eslint-disable-next-line
-    const selectedTargetWordObj = targetWordsUpdated.filter(
+    const selectedTargetWordObj = targetWords.filter(
       obj => obj.word === selectedWord
     )[0];
-    const selectedAudioUrl = selectedTargetWordObj.audioUrl;
-    const audio = new Audio(selectedAudioUrl);
+    const selectedAudio = selectedTargetWordObj.audio;
+    const audio = new Audio(selectedAudio);
     audio.play();
   };
 
@@ -111,8 +104,7 @@ const Reader = ({ text }) => {
       /(~|`|!|@|#|$|%|^|&|\*|\(|\)|{|}|\[|\]|;|:|\"|'|<|,|\.|>|\?|\/|\\|\||-|_|\+|=)/g,
       ""
     );
-    const targetWordsUpdated = refValue.current;
-    const selectedTargetWordObj = targetWordsUpdated.filter(
+    const selectedTargetWordObj = targetWords.filter(
       obj => obj.word === selectedWord
     )[0];
     const def = selectedTargetWordObj.def;
