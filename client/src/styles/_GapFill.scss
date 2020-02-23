@@ -1,0 +1,29 @@
+.gapFill__wrapper {
+  height: 100vh;
+}
+
+.gapFill__form {
+  width: 70%;
+  margin: 0 auto;
+}
+
+.gapFill__sentence {
+  font-size: 1.5rem;
+  display: flex;
+  flex-wrap: wrap;
+  margin: 2rem 0;
+}
+.gapFill__word {
+  margin: 0 0.2em;
+  user-select: none;
+}
+
+//so there isn't a space before the full stop
+.gapFill__word:last-child {
+  margin-left: 0.2em;
+  margin-right: 0;
+}
+
+.gapFill__word--target {
+  color: blue;
+}

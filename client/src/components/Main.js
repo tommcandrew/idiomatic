@@ -137,7 +137,12 @@ const Main = () => {
       {showMyTexts && (
         <MyTexts texts={savedTexts} handleChooseText={handleChooseText} />
       )}
-      {showGapFill && <GapFill sentences={selectedText.targetSentences} />}
+      {showGapFill && (
+        <GapFill
+          sentences={selectedText.targetSentences}
+          targetWords={selectedText.targetWords}
+        />
+      )}
     </>
   );
 };
