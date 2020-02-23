@@ -5,6 +5,7 @@ const Header = ({ handleShowDashboard }) => {
     <div className="header__wrapper">
       <button onClick={handleShowDashboard}>Dashboard</button>
       <button>My Vocab</button>
+      <button>My Texts</button>
       <button>My Account</button>
     </div>
   );

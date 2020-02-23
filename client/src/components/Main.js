@@ -87,7 +87,9 @@ const Main = () => {
           handleChooseText={handleChooseText}
         />
       )}
-      {showUploadText && <UploadText />}
+      {showUploadText && (
+        <UploadText handleShowDashboard={handleShowDashboard} />
+      )}
       {showStartPage && (
         <StartPage
           selectedText={selectedText}
