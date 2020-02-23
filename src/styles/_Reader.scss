@@ -1,5 +1,6 @@
 .word {
   margin: 0 0.2em;
+  user-select: none;
 }
 
 .reader__text {
@@ -12,4 +13,5 @@
 
 .word--target {
   font-weight: bold;
+  cursor: pointer;
 }
