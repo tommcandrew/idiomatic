@@ -9,7 +9,8 @@ import axios from "axios";
 import MyTexts from "./MyTexts";
 import GapFill from "./GapFill";
 import MatchDefinitions from "./MatchDefinitions";
-import Unscramble from "./Unscramble";
+import Spelling from "./Spelling";
+import Results from "./Results";
 
 const texts = [
   {
@@ -49,7 +50,10 @@ const Main = () => {
   const [savedTexts, setSavedTexts] = useState([]);
   const [showGapFill, setShowGapFill] = useState(false);
   const [showMatchDefinitions, setShowMatchDefinitions] = useState(false);
-  const [showUnscramble, setShowUnscramble] = useState(false);
+  const [showSpelling, setShowSpelling] = useState(false);
+  const [showResults, setShowResults] = useState(false);
+  const [correctAnswers, setCorrectAnswers] = useState(0);
+  const [numQuestions, setNumQuestions] = useState(null);
 
   useEffect(() => {
     axios.get("/savedtexts").then(res => {
@@ -88,6 +92,7 @@ const Main = () => {
     setShowTexts(false);
     setShowMyTexts(false);
     setShowStartPage(true);
+    setNumQuestions(selectedText.targetWords.length * 3);
   };
 
   const handleShowReader = () => {
@@ -111,9 +116,18 @@ const Main = () => {
     setShowMatchDefinitions(true);
   };
 
-  const handleShowUnscramble = () => {
+  const handleShowSpelling = () => {
     setShowMatchDefinitions(false);
-    setShowUnscramble(true);
+    setShowSpelling(true);
+  };
+
+  const handleShowResults = () => {
+    setShowSpelling(false);
+    setShowResults(true);
+  };
+
+  const incrementCorrectAnswers = num => {
+    setCorrectAnswers(correctAnswers + num);
   };
 
   return (
@@ -156,15 +170,26 @@ const Main = () => {
           sentences={selectedText.targetSentences}
           targetWords={selectedText.targetWords}
           handleShowMatchDefinitions={handleShowMatchDefinitions}
+          incrementCorrectAnswers={incrementCorrectAnswers}
         />
       )}
       {showMatchDefinitions && (
         <MatchDefinitions
           text={selectedText}
-          handleShowUnscramble={handleShowUnscramble}
+          handleShowSpelling={handleShowSpelling}
+          incrementCorrectAnswers={incrementCorrectAnswers}
         />
       )}
-      {showUnscramble && <Unscramble text={selectedText} />}
+      {showSpelling && (
+        <Spelling
+          text={selectedText}
+          handleShowResults={handleShowResults}
+          incrementCorrectAnswers={incrementCorrectAnswers}
+        />
+      )}
+      {showResults && (
+        <Results correctAnswers={correctAnswers} numQuestions={numQuestions} />
+      )}
     </>
   );
 };

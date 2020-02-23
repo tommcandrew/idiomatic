@@ -1,6 +1,10 @@
 import React, { useEffect, useState } from "react";
 
-const MatchDefinitions = ({ text, handleShowUnscramble }) => {
+const MatchDefinitions = ({
+  text,
+  handleShowSpelling,
+  incrementCorrectAnswers
+}) => {
   const [definitions, setDefinitions] = useState([]);
   const [selectedOptions, setSelectedOptions] = useState(null);
   const [results, setResults] = useState({});
@@ -17,6 +21,7 @@ const MatchDefinitions = ({ text, handleShowUnscramble }) => {
       selectedOptionsObj[i] = null;
     }
     setSelectedOptions(selectedOptionsObj);
+    //eslint-disable-next-line
   }, []);
 
   const shuffle = array => {
@@ -30,21 +35,24 @@ const MatchDefinitions = ({ text, handleShowUnscramble }) => {
 
   const handleSubmit = e => {
     e.preventDefault();
+
     const userAnswerIndices = Object.values(selectedOptions);
     const userAnswerWords = userAnswerIndices.map(
       index => text.targetWords[index]
     );
-    console.log(userAnswerWords);
-    console.log(answers);
+
+    let correctAnswers = 0;
 
     const resultsObj = {};
     for (let j = 0; j < userAnswerWords.length; j++) {
       if (userAnswerWords[j] === answers[j]) {
         resultsObj[j] = "Right";
+        correctAnswers++;
       } else {
         resultsObj[j] = "Wrong";
       }
     }
+    incrementCorrectAnswers(correctAnswers);
     setResults(resultsObj);
   };
 
@@ -87,7 +95,7 @@ const MatchDefinitions = ({ text, handleShowUnscramble }) => {
                 </p>
               );
             })}
-            <button onClick={handleShowUnscramble}>Go to next exercise</button>{" "}
+            <button onClick={handleShowSpelling}>Go to next exercise</button>{" "}
           </div>
         )}
       </div>

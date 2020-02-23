@@ -1,6 +1,11 @@
 import React, { useState, useEffect } from "react";
 
-const GapFill = ({ sentences, targetWords, handleShowMatchDefinitions }) => {
+const GapFill = ({
+  sentences,
+  targetWords,
+  handleShowMatchDefinitions,
+  incrementCorrectAnswers
+}) => {
   const [sentencesWithSpans, setSentencesWithSpans] = useState(null);
   const [answers, setAnswers] = useState(null);
   const [results, setResults] = useState({});
@@ -55,7 +60,6 @@ const GapFill = ({ sentences, targetWords, handleShowMatchDefinitions }) => {
     e.preventDefault();
     e.persist();
     const inputs = e.target.form.elements;
-    console.log(inputs);
     const values = [];
     for (let i = 0; i < inputs.length; i++) {
       if (inputs[i].value !== "") {
@@ -63,13 +67,16 @@ const GapFill = ({ sentences, targetWords, handleShowMatchDefinitions }) => {
       }
     }
     const resultsObj = {};
+    let correctAnswers = 0;
     for (let j = 0; j < values.length; j++) {
       if (values[j] === answers[j]) {
         resultsObj[j] = "Right";
+        correctAnswers++;
       } else {
         resultsObj[j] = "Wrong";
       }
     }
+    incrementCorrectAnswers(correctAnswers);
     setResults(resultsObj);
   };
 
