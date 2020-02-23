@@ -3,36 +3,29 @@ import axios from "axios";
 
 const UploadText = ({ handleShowDashboard }) => {
   const [file, setFile] = useState("");
-  const [fileName, setFileName] = useState("");
-  const [uploadedFile, setUploadedFile] = useState({});
 
   const handleUpload = e => {
     setFile(e.target.files[0]);
-    setFileName(e.target.files[0].name);
   };
 
   const handleSubmit = async e => {
     e.preventDefault();
     const formData = new FormData();
     formData.append("file", file);
-
-    try {
-      const res = await axios.post("/upload", formData, {
+    axios
+      .post("/upload", formData, {
         headers: {
           "Content-Type": "multipart/form-data"
         }
+      })
+      .then(() => {
+        handleShowDashboard();
+      })
+      .catch(err => {
+        console.log(err);
       });
-      const { fileName, fileContent, filePath } = res.data;
-      setUploadedFile({ fileName, fileContent, filePath });
-      handleShowDashboard();
-    } catch (err) {
-      if (err.response.status === 500) {
-        console.log("There was a problem with the server!");
-      } else {
-        console.log(err.response.data.msg);
-      }
-    }
   };
+
   return (
     <>
       <form onSubmit={handleSubmit}>
