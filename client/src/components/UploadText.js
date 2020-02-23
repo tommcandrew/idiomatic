@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import axios from "axios";
+import dictionaryKey from "../apiKey";
 
 const UploadText = ({ handleShowDashboard }) => {
   const [uploadedFile, setUploadedFile] = useState(null);
@@ -47,12 +48,39 @@ const UploadText = ({ handleShowDashboard }) => {
       }
     }
 
-    console.log(targetSentences);
+    const targetWordObjects = [];
+    for (let i = 0; i < selectedWords.length; i++) {
+      const res = await axios.get(
+        "https://dictionaryapi.com/api/v3/references/learners/json/" +
+          selectedWords[i] +
+          "?key=" +
+          dictionaryKey
+      );
+      const shortDef = res.data[0].shortdef[0];
+      let audioUrl;
+      if (res.data[0].hwi.prs) {
+        audioUrl =
+          "https://media.merriam-webster.com/soundc11/" +
+          res.data[0].hwi.prs[0].sound.audio.toString().charAt(0) +
+          "/" +
+          res.data[0].hwi.prs[0].sound.audio +
+          ".wav";
+      } else {
+        audioUrl = null;
+      }
+
+      targetWordObjects.push({
+        word: selectedWords[i],
+        def: shortDef,
+        audio: audioUrl
+      });
+    }
 
     axios
       .post("/saveText", {
         title: uploadedFile.title,
         content: uploadedFile.content,
+        targetWordObjs: targetWordObjects,
         targetWords: selectedWords,
         targetSentences: targetSentences
       })

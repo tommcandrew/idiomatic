@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 
-const GapFill = ({ sentences, targetWords }) => {
+const GapFill = ({ sentences, targetWords, handleShowMatchDefinitions }) => {
   const [sentencesWithSpans, setSentencesWithSpans] = useState(null);
   const [answers, setAnswers] = useState(null);
   const [results, setResults] = useState({});
@@ -8,6 +8,7 @@ const GapFill = ({ sentences, targetWords }) => {
   useEffect(() => {
     createSentences();
     createAnswerObj();
+    //eslint-disable-next-line
   }, []);
 
   const createSentences = () => {
@@ -83,21 +84,27 @@ const GapFill = ({ sentences, targetWords }) => {
               className="gapFill__sentence"
               onSubmit={handleSubmit}
             >
-              {index}.{sentence}.
+              {index + 1}.{sentence}.
             </div>
           ))}
         <button onClick={handleSubmit}>Submit answers</button>
       </form>
       <div className="gapFill__results">
-        {results &&
-          Object.keys(results).map((key, index) => {
-            return (
-              <p key={"result" + index}>
-                <span>{parseInt(key) + 1}</span>
-                <span>{results[key]}</span>
-              </p>
-            );
-          })}
+        {results && Object.entries(results).length > 0 && (
+          <div>
+            {Object.keys(results).map((key, index) => {
+              return (
+                <p key={"result" + index}>
+                  <span>{parseInt(key) + 1}</span>
+                  <span>{results[key]}</span>
+                </p>
+              );
+            })}
+            <button onClick={handleShowMatchDefinitions}>
+              Go to next exercise
+            </button>
+          </div>
+        )}
       </div>
     </div>
   );

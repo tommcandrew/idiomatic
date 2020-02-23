@@ -8,6 +8,8 @@ import Reader from "./Reader";
 import axios from "axios";
 import MyTexts from "./MyTexts";
 import GapFill from "./GapFill";
+import MatchDefinitions from "./MatchDefinitions";
+import Unscramble from "./Unscramble";
 
 const texts = [
   {
@@ -46,6 +48,8 @@ const Main = () => {
   const [showMyTexts, setShowMyTexts] = useState(false);
   const [savedTexts, setSavedTexts] = useState([]);
   const [showGapFill, setShowGapFill] = useState(false);
+  const [showMatchDefinitions, setShowMatchDefinitions] = useState(false);
+  const [showUnscramble, setShowUnscramble] = useState(false);
 
   useEffect(() => {
     axios.get("/savedtexts").then(res => {
@@ -102,6 +106,16 @@ const Main = () => {
     setShowGapFill(true);
   };
 
+  const handleShowMatchDefinitions = () => {
+    setShowGapFill(false);
+    setShowMatchDefinitions(true);
+  };
+
+  const handleShowUnscramble = () => {
+    setShowMatchDefinitions(false);
+    setShowUnscramble(true);
+  };
+
   return (
     <>
       <Header
@@ -141,8 +155,16 @@ const Main = () => {
         <GapFill
           sentences={selectedText.targetSentences}
           targetWords={selectedText.targetWords}
+          handleShowMatchDefinitions={handleShowMatchDefinitions}
         />
       )}
+      {showMatchDefinitions && (
+        <MatchDefinitions
+          text={selectedText}
+          handleShowUnscramble={handleShowUnscramble}
+        />
+      )}
+      {showUnscramble && <Unscramble text={selectedText} />}
     </>
   );
 };

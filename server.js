@@ -37,8 +37,21 @@ app.post("/upload", async (req, res) => {
 });
 
 app.post("/saveText", (req, res) => {
-  const { title, content, targetWords, targetSentences } = req.body;
-  const text = new Text({ title, content, targetWords, targetSentences });
+  const {
+    title,
+    content,
+    targetWords,
+    targetWordObjs,
+    targetSentences
+  } = req.body;
+  console.log(targetWordObjs);
+  const text = new Text({
+    title,
+    content,
+    targetWords,
+    targetWordObjs,
+    targetSentences
+  });
   text.save().then(() => {
     console.log("text saved");
     res.status(200).send();

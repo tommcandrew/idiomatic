@@ -4,7 +4,8 @@ const Schema = mongoose.Schema;
 const Text = new Schema({
   title: String,
   content: String,
-  targetWords: [String],
+  targetWordObjs: [{}],
+  targetWords: [],
   targetSentences: [String]
 });
 
