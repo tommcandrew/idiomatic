@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from "react";
 import axios from "axios";
 import dictionaryKey from "../apiKey";
 
-const UploadText = ({ handleShowDashboard }) => {
+const UploadText = ({ handleShowDashboard, fetchSavedTexts }) => {
   const [uploadedFile, setUploadedFile] = useState(null);
   const [spans, setSpans] = useState(null);
   const [selectedWords, setSelectedWords] = useState([]);
@@ -38,10 +38,15 @@ const UploadText = ({ handleShowDashboard }) => {
     e.preventDefault();
     const targetSentences = [];
     const allSentences = uploadedFile.content.split(".");
+    const allSentencesSplit = [];
+    for (let i = 0; i < allSentences.length; i++) {
+      const splitSentence = allSentences[i].split(" ");
+      allSentencesSplit.push(splitSentence);
+    }
 
     for (let i = 0; i < selectedWords.length; i++) {
-      for (let j = 0; j < allSentences.length; j++) {
-        if (allSentences[j].includes(selectedWords[i])) {
+      for (let j = 0; j < allSentencesSplit.length; j++) {
+        if (allSentencesSplit[j].includes(selectedWords[i])) {
           targetSentences.push(allSentences[j]);
           break;
         }
@@ -75,17 +80,27 @@ const UploadText = ({ handleShowDashboard }) => {
         audio: audioUrl
       });
     }
+    const token = localStorage.getItem("idiomatic-token");
 
     axios
-      .post("/saveText", {
-        title: uploadedFile.title,
-        content: uploadedFile.content,
-        targetWordObjs: targetWordObjects,
-        targetWords: selectedWords,
-        targetSentences: targetSentences
-      })
+      .post(
+        "/saveText",
+        {
+          title: uploadedFile.title,
+          content: uploadedFile.content,
+          targetWordObjs: targetWordObjects,
+          targetWords: selectedWords,
+          targetSentences: targetSentences
+        },
+        {
+          headers: {
+            Authorization: "Bearer " + token
+          }
+        }
+      )
       .then(() => {
         handleShowDashboard();
+        fetchSavedTexts();
       });
   };
 

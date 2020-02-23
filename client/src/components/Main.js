@@ -59,11 +59,21 @@ const Main = () => {
   const [showMyWords, setShowMyWords] = useState(false);
 
   useEffect(() => {
-    axios.get("/savedtexts").then(res => {
-      setSavedTexts(res.data);
-      console.log(res.data);
-    });
+    fetchSavedTexts();
   }, []);
+
+  const fetchSavedTexts = () => {
+    const token = localStorage.getItem("idiomatic-token");
+    axios
+      .get("/savedtexts", {
+        headers: {
+          Authorization: "Bearer " + token
+        }
+      })
+      .then(res => {
+        setSavedTexts(res.data);
+      });
+  };
 
   const handleShowTexts = () => {
     setShowDashboard(false);
@@ -82,6 +92,8 @@ const Main = () => {
     setShowReader(false);
     setShowMyTexts(false);
     setShowMyWords(false);
+    setShowResults(false);
+    setShowSpelling(false);
     setShowDashboard(true);
   };
 
@@ -165,7 +177,10 @@ const Main = () => {
         />
       )}
       {showUploadText && (
-        <UploadText handleShowDashboard={handleShowDashboard} />
+        <UploadText
+          handleShowDashboard={handleShowDashboard}
+          fetchSavedTexts={fetchSavedTexts}
+        />
       )}
       {showStartPage && (
         <StartPage
