@@ -1,6 +1,11 @@
 import React, { useState } from "react";
 
-const Spelling = ({ text, handleShowResults, incrementCorrectAnswers }) => {
+const Spelling = ({
+  text,
+  handleShowResults,
+  incrementCorrectAnswers,
+  markTextComplete
+}) => {
   const [questionIndex, setQuestionIndex] = useState(0);
 
   const playAudio = () => {
@@ -22,6 +27,7 @@ const Spelling = ({ text, handleShowResults, incrementCorrectAnswers }) => {
     }
     incrementCorrectAnswers(correctAnswers);
     if (questionIndex === text.targetWordObjs.length - 1) {
+      markTextComplete();
       handleShowResults();
     } else {
       setQuestionIndex(questionIndex + 1);

@@ -1,10 +1,14 @@
 import React from "react";
 
-const Header = ({ handleShowDashboard, handleShowMyTexts }) => {
+const Header = ({
+  handleShowDashboard,
+  handleShowMyTexts,
+  handleShowMyWords
+}) => {
   return (
     <div className="header__wrapper">
       <button onClick={handleShowDashboard}>Dashboard</button>
-      <button>My Vocab</button>
+      <button onClick={handleShowMyWords}>My Words</button>
       <button onClick={handleShowMyTexts}>My Texts</button>
       <button>My Account</button>
     </div>

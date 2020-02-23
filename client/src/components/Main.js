@@ -11,6 +11,7 @@ import GapFill from "./GapFill";
 import MatchDefinitions from "./MatchDefinitions";
 import Spelling from "./Spelling";
 import Results from "./Results";
+import MyWords from "./MyWords";
 
 const texts = [
   {
@@ -54,6 +55,8 @@ const Main = () => {
   const [showResults, setShowResults] = useState(false);
   const [correctAnswers, setCorrectAnswers] = useState(0);
   const [numQuestions, setNumQuestions] = useState(null);
+  const [completedTexts, setCompletedTexts] = useState([]);
+  const [showMyWords, setShowMyWords] = useState(false);
 
   useEffect(() => {
     axios.get("/savedtexts").then(res => {
@@ -78,6 +81,7 @@ const Main = () => {
     setShowStartPage(false);
     setShowReader(false);
     setShowMyTexts(false);
+    setShowMyWords(false);
     setShowDashboard(true);
   };
 
@@ -130,11 +134,21 @@ const Main = () => {
     setCorrectAnswers(correctAnswers + num);
   };
 
+  const markTextComplete = () => {
+    setCompletedTexts([...completedTexts, selectedText.title]);
+  };
+
+  const handleShowMyWords = () => {
+    setShowDashboard(false);
+    setShowMyWords(true);
+  };
+
   return (
     <>
       <Header
         handleShowDashboard={handleShowDashboard}
         handleShowMyTexts={handleShowMyTexts}
+        handleShowMyWords={handleShowMyWords}
       />
 
       {showDashboard && (
@@ -185,10 +199,18 @@ const Main = () => {
           text={selectedText}
           handleShowResults={handleShowResults}
           incrementCorrectAnswers={incrementCorrectAnswers}
+          markTextComplete={markTextComplete}
         />
       )}
       {showResults && (
         <Results correctAnswers={correctAnswers} numQuestions={numQuestions} />
+      )}
+      {showMyWords && (
+        <MyWords
+          texts={texts}
+          savedTexts={savedTexts}
+          completedTexts={completedTexts}
+        />
       )}
     </>
   );
