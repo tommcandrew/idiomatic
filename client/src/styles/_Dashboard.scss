@@ -1,0 +1,73 @@
+.dashboard__wrapper {
+  height: 100vh;
+  background: #eee;
+  display: flex;
+  flex-direction: column;
+}
+
+.dashboard__greeting {
+  font-size: 2.5rem;
+}
+
+.dashboard__instruction {
+  font-size: 1.5rem;
+  font-weight: normal;
+}
+
+.dashboard__buttons {
+  height: 20vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  margin-top: 10vh;
+  button {
+    @include button($myLilac, 1.7rem);
+    min-width: 55vw;
+    color: white;
+    &:hover {
+      background: $myLilacDark;
+    }
+  }
+}
+
+.dashboard__text {
+  text-align: center;
+  height: 25vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  margin-top: 5vh;
+}
+
+@media only screen and (min-width: 1000px) {
+  .dashboard__wrapper {
+    flex-direction: row;
+  }
+  .dashboard__buttons {
+    margin-top: 20vh;
+    flex-grow: 1;
+    width: 30vw;
+    height: 40vh;
+    button {
+      min-width: auto;
+      font-size: 3rem;
+    }
+  }
+  .dashboard__greeting {
+    font-size: 4rem;
+  }
+
+  .dashboard__instruction {
+    font-size: 2rem;
+  }
+
+  .dashboard__text {
+    width: 35vw;
+    text-align: center;
+    height: 40vh;
+    text-align: left;
+    margin-left: 3vw;
+    padding-top: 10vh;
+  }
+}

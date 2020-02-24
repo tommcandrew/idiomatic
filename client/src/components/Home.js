@@ -12,18 +12,21 @@ const Home = () => {
     return <Redirect to="/main" />;
   }
   return (
-    <div className="home">
+    <div className="home__wrapper">
       <div className="home__content">
         <div className="home__header">
-          <h1 className="home__app-title">Idiomatic</h1>
+          <div className="home__buttons">
+            <Link to="/login">
+              <button className="home__button">Log in</button>
+            </Link>
+            <Link to="/register">
+              <button className="home__button">Register</button>
+            </Link>
+          </div>
         </div>
-        <div className="home__buttons">
-          <Link to="/login">
-            <button className="home__button">Log in</button>
-          </Link>
-          <Link to="/register">
-            <button className="home__button">Register</button>
-          </Link>
+        <div className="home__titles">
+          <h1 className="home__app-title">Idiomatic</h1>
+          <h2 className="home__app-subtitle">Personalised learning.</h2>
         </div>
       </div>
     </div>

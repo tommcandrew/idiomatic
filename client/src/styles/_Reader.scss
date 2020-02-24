@@ -1,17 +1,46 @@
 .word {
   margin: 0 0.2em;
-  user-select: none;
+}
+
+.reader__content {
+  text-align: center;
 }
 
 .reader__text {
-  outline: 2px solid red;
-  width: 80%;
-  margin: 0 auto;
+  width: 90%;
   display: flex;
   flex-wrap: wrap;
+  font-size: 1.3rem;
+  border-radius: 6px;
+  justify-content: center;
+  margin: 0 auto;
 }
 
 .word--target {
   font-weight: bold;
   cursor: pointer;
+  &:hover {
+    color: green;
+  }
+}
+
+.reader__title {
+  margin: 1rem auto;
+  border-bottom: 3px solid black;
+  border-top: 3px solid black;
+  padding: 0.5rem 0;
+}
+
+.reader__exercises-button {
+  @include button($mySeaBlue, 1.3rem);
+  margin: 1rem 0;
+  &:hover {
+    background: $mySeaBlueDark;
+  }
+}
+
+@media only screen and (min-width: 1000px) {
+  .reader__text {
+    font-size: 1.6rem;
+  }
 }

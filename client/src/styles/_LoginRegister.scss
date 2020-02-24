@@ -1,0 +1,106 @@
+.loginRegister__wrapper {
+  height: 100vh;
+  background: #eee;
+  display: flex;
+  flex-direction: column;
+}
+
+.loginRegister__content {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.loginRegister__header {
+  background: #26547c;
+  height: 7vh;
+  display: flex;
+  position: relative;
+  align-items: center;
+}
+
+.loginRegister__app-title {
+  color: #eee;
+  margin-left: 0.5rem;
+  font-size: 1.6rem;
+}
+
+.loginRegister__form-title {
+  text-align: center;
+  margin-top: 5vh;
+  font-size: 2rem;
+  padding: 10px 0;
+}
+
+.loginRegister__form {
+  display: flex;
+  flex-direction: column;
+  width: 60%;
+  height: 60%;
+  align-items: center;
+  margin: 0 auto;
+  padding: 10px 0;
+  & input {
+    padding: 5px 10px;
+    width: 100%;
+    margin: 5px 0;
+    font-size: 1.2rem;
+    // border: 3px solid $mainColor;
+    border-radius: 5px;
+    color: black;
+    margin: 1rem 0;
+    &.valid {
+      background-color: lightgreen;
+    }
+    &.invalid {
+      background-color: pink;
+    }
+    //overrides default autfill styles (default is light blue background)
+    &:-webkit-autofill.valid {
+      -webkit-box-shadow: 0 0 0px 1000px lightgreen inset;
+    }
+    &:-webkit-autofill.invalid {
+      -webkit-box-shadow: 0 0 0px 1000px pink inset;
+    }
+  }
+}
+
+.loginRegister__link-container {
+  width: 60%;
+  margin: 0 auto;
+  text-align: center;
+  margin-top: 40px;
+  flex-grow: 1;
+  & p {
+    margin-bottom: 1rem;
+  }
+}
+
+.loginRegister__button {
+  @include button($myBlue, 1.5rem);
+  margin-top: 0.5rem;
+  &:hover {
+    background: $myBlueDark;
+  }
+}
+
+.loginRegister__login,
+.loginRegister__register {
+  @include button(white, 1.2rem);
+  color: black;
+  border: 1px solid black;
+}
+
+@media only screen and (min-width: 1000px) {
+  .loginRegister__form {
+    width: 40vw;
+    input {
+      width: 80%;
+    }
+  }
+  .loginRegister__link-container {
+    & p {
+      margin-bottom: 1.5rem;
+    }
+  }
+}

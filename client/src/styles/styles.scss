@@ -1,8 +1,9 @@
 @import "./global.scss";
+@import "./variables";
+@import "./_Texts.scss";
 @import "./Dashboard";
 @import "./Header";
 @import "./TextTile.scss";
-@import "./ChooseText";
 @import "./App";
 @import "./StartPage";
 @import "./Reader";
@@ -11,3 +12,10 @@
 @import "./UploadText";
 @import "./GapFill";
 @import "./MatchDefinitions.scss";
+@import "./Home.scss";
+@import "./LoginRegister";
+@import "./MobileMenu";
+@import "./DefintionModal";
+@import "./GapFillResults";
+@import "./Spelling.scss";
+@import "./Results.scss";

@@ -1,0 +1,36 @@
+.header__wrapper {
+  background: #4a98f8;
+  height: 8vh;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.header__hamburger {
+  cursor: pointer;
+  position: absolute;
+  right: 1rem;
+  & div {
+    width: 35px;
+    height: 5px;
+    background-color: white;
+    margin: 6px 0;
+  }
+}
+
+@media only screen and (min-width: 1000px) {
+  .header__wrapper {
+    button {
+      @include button($mySeaBlue, 1.2rem);
+      border: 2px solid #eee;
+      margin: 0 0.2rem;
+    }
+  }
+
+  .header__buttons--left {
+    margin-left: 1rem;
+  }
+  .header__buttons--right {
+    margin-right: 1rem;
+  }
+}

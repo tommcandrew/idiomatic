@@ -1,7 +1,22 @@
+.uploadText__wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100vh;
+  label {
+    margin: 1rem 0;
+    font-size: 1.5rem;
+  }
+  form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+}
+
 .uploadText__text-content {
   width: 60%;
   margin: 0 auto;
-  border: 2px solid red;
   text-align: center;
   div {
     margin-top: 2rem;
@@ -18,4 +33,42 @@
       }
     }
   }
+}
+
+.uploadText__wrapper {
+  button {
+    @include button($mySeaBlue, 1.3rem);
+    margin: 1rem 0;
+    &:hover {
+      background: $mySeaBlueDark;
+    }
+  }
+}
+
+.uploadText__text-wrapper {
+  display: flex;
+  justify-content: center;
+  margin-top: 2rem;
+  flex-direction: column;
+  align-items: center;
+}
+
+.uploadText__selected-words {
+  display: flex;
+}
+
+.uploadText__selected-words {
+  border: 2px solid black;
+  min-height: 2rem;
+  min-width: 50vw;
+  margin-bottom: 0.5rem;
+}
+
+.uploadText__selected-word {
+  margin: 0 0.5rem;
+}
+
+.uploadText__instruction {
+  text-align: center;
+  font-size: 1.2rem;
 }

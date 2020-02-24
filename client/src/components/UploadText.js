@@ -114,26 +114,32 @@ const UploadText = ({ handleShowDashboard, fetchSavedTexts }) => {
   };
 
   return (
-    <>
+    <div className="uploadText__wrapper">
       <form onSubmit={handleSubmit}>
-        <label htmlFor="myfile">Select a file:</label>
+        <label htmlFor="myfile">Select a file (must be .txt or .pdf):</label>
         <input
           type="file"
           id="myfile"
           name="myfile"
           onChange={handleUpload}
+          className="uploadText__choose-file"
         ></input>
         <button type="submit">Submit</button>
       </form>
       <div className="uploadText__text">
         {uploadedFile && spans && (
           <>
-            <div>
-              <h2>
+            <div className="uploadText__text-wrapper">
+              <div className="uploadText__selected-words">
+                {selectedWords.map(word => (
+                  <div className="uploadText__selected-word">{word}</div>
+                ))}
+              </div>
+              <h2 className="uploadText__instruction">
                 Select the words in the text you would like to be tested on.
-                Click submit when you're done.
+                When you're done, click submit. You'll find your uploaded text
+                in My Texts.
               </h2>
-              <div>{selectedWords}</div>
             </div>
             <div className="uploadText__text-content">
               <h1>{uploadedFile.fileName}</h1>
@@ -142,7 +148,7 @@ const UploadText = ({ handleShowDashboard, fetchSavedTexts }) => {
           </>
         )}
       </div>
-    </>
+    </div>
   );
 };
 

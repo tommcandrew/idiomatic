@@ -1,0 +1,65 @@
+.spelling__wrapper {
+  height: 100vh;
+}
+
+.spelling__title {
+  margin: 0.7rem 0;
+  font-size: 1.6rem;
+  text-align: center;
+}
+
+.spelling__content {
+  text-align: center;
+  width: 90%;
+  margin: 0 auto;
+  input {
+    font-size: 1.5rem;
+  }
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+  height: 30%;
+  button {
+    @include button($mySeaBlue, 1.3rem);
+    margin: 1rem 0;
+    &:hover {
+      background: $mySeaBlueDark;
+    }
+  }
+}
+
+.spelling__sentence {
+  font-size: 1.5rem;
+  display: flex;
+  flex-wrap: wrap;
+  margin: 2rem 0;
+}
+.spelling__word {
+  margin: 0 0.2em;
+  user-select: none;
+}
+
+//so there isn't a space before the full stop
+.spelling__word:last-child {
+  margin-left: 0.2em;
+  margin-right: 0;
+}
+
+.spelling__word--target {
+  color: blue;
+}
+
+.spelling__submit {
+  @include button($mySeaBlue, 1.3rem);
+  margin: 1rem 0;
+  &:hover {
+    background: $mySeaBlueDark;
+  }
+}
+
+@media only screen and (min-width: 1000px) {
+  .spelling__wrapper {
+    padding-top: 10vh;
+  }
+}

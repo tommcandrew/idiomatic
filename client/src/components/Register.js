@@ -78,7 +78,7 @@ const Register = () => {
     register(e);
   };
   return (
-    <div className="loginRegister">
+    <div className="loginRegister__wrapper">
       <div className="loginRegister__header">
         <Link to="/">
           <h1 className="loginRegister__app-title">Idiomatic</h1>
@@ -131,7 +131,9 @@ const Register = () => {
         </form>
         <div className="loginRegister__link-container">
           <p>Have an account?</p>
-          <Link to="/login">Log in</Link>
+          <Link to="/login" className="loginRegister__login">
+            Log in
+          </Link>
         </div>
       </div>
     </div>

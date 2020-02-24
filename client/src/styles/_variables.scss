@@ -1,0 +1,23 @@
+@mixin button($bgColor, $fontSize) {
+  background: $bgColor;
+  font-size: $fontSize;
+  border-radius: 2rem;
+  font-weight: bold;
+  cursor: pointer;
+  padding: 0.5rem 1rem;
+  outline: none;
+  color: #eee;
+  border: none;
+}
+
+$myBlue: #26547c;
+
+$myBlueDark: #163d5f;
+
+$myLilac: #7f7caf;
+
+$myLilacDark: #373277;
+
+$mySeaBlue: #4a98f8;
+
+$mySeaBlueDark: #366fb6;

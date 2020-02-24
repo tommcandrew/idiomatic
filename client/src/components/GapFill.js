@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import ResultsPage from "./ResultsPage";
 
 const GapFill = ({
   sentences,
@@ -82,35 +83,31 @@ const GapFill = ({
 
   return (
     <div className="gapFill__wrapper">
-      <form className="gapFill__content">
-        <h1>Gap Fill:</h1>
-        {sentencesWithSpans &&
-          sentencesWithSpans.map((sentence, index) => (
-            <div
-              key={"sentence" + index}
-              className="gapFill__sentence"
-              onSubmit={handleSubmit}
-            >
-              {index + 1}.{sentence}.
-            </div>
-          ))}
-        <button onClick={handleSubmit}>Submit answers</button>
-      </form>
+      {!results ||
+        (Object.entries(results).length === 0 && (
+          <form className="gapFill__content">
+            <h1 className="gapFill__title">Complete the sentences:</h1>
+            {sentencesWithSpans &&
+              sentencesWithSpans.map((sentence, index) => (
+                <div
+                  key={"sentence" + index}
+                  className="gapFill__sentence"
+                  onSubmit={handleSubmit}
+                >
+                  {index + 1}.{sentence}.
+                </div>
+              ))}
+            <button onClick={handleSubmit} className="gapFill__submit">
+              Submit answers
+            </button>
+          </form>
+        ))}
       <div className="gapFill__results">
         {results && Object.entries(results).length > 0 && (
-          <div>
-            {Object.keys(results).map((key, index) => {
-              return (
-                <p key={"result" + index}>
-                  <span>{parseInt(key) + 1}</span>
-                  <span>{results[key]}</span>
-                </p>
-              );
-            })}
-            <button onClick={handleShowMatchDefinitions}>
-              Go to next exercise
-            </button>
-          </div>
+          <ResultsPage
+            results={results}
+            handleShowMatchDefinitions={handleShowMatchDefinitions}
+          />
         )}
       </div>
     </div>

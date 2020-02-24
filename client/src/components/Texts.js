@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import TextTile from "./TextTile";
 
-const ChooseText = ({ handleChooseText, texts }) => {
+const Texts = ({ handleChooseText, texts }) => {
   const [filteredTexts, setFilteredTexts] = useState(texts);
   const [filters, setFilters] = useState([]);
 
@@ -34,30 +34,43 @@ const ChooseText = ({ handleChooseText, texts }) => {
     //eslint-disable-next-line
   }, [filters]);
 
+  const topics = [
+    "Animals",
+    "Cities",
+    "Nature",
+    "Food",
+    "Environment",
+    "Science",
+    "Festivals"
+  ];
+
   return (
-    <div className="chooseText__wrapper">
-      <div className="chooseText__filter">
-        <span>Filter texts by topic:</span>
-        <ul className="chooseText__topic-list" onClick={handleClick}>
-          <li>Animals</li>
-          <li>Cities</li>
-          <li>Nature</li>
-          <li>Food</li>
-          <li>Environment</li>
-          <li>Geography</li>
-          <li>History</li>
-          <li>Science</li>
-          <li>Culture</li>
-          <li>Festivals</li>
+    <div className="texts__wrapper">
+      <div className="texts__filter">
+        <span className="texts__filter-label">Filter by topic:</span>
+        <ul className="texts__topic-list" onClick={handleClick}>
+          {topics.map((topic, index) => (
+            <li
+              key={"topic" + index}
+              className={`texts__filter-item ${
+                filters.includes(topic) ? "texts__filter-item--selected" : ""
+              }`}
+            >
+              {topic}
+            </li>
+          ))}
         </ul>
-        <span onClick={clearFilters}>Clear filters</span>
+        <span onClick={clearFilters} className="texts__clear-filters">
+          Clear filters
+        </span>
       </div>
 
-      <div className="chooseText__texts">
+      <div className="texts__texts">
         {filteredTexts.map((text, index) => (
           <TextTile
             key={"tile" + index}
             title={text.title}
+            level={text.level}
             handleChooseText={handleChooseText}
           />
         ))}
@@ -66,4 +79,4 @@ const ChooseText = ({ handleChooseText, texts }) => {
   );
 };
 
-export default ChooseText;
+export default Texts;

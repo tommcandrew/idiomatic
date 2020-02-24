@@ -4,11 +4,14 @@ import "./index.css";
 import App from "./App";
 import * as serviceWorker from "./serviceWorker";
 import { AuthContextProvider } from "./context/AuthContext";
+import { DeviceContextProvider } from "./context/DeviceContext";
 
 ReactDOM.render(
-  <AuthContextProvider>
-    <App />{" "}
-  </AuthContextProvider>,
+  <DeviceContextProvider>
+    <AuthContextProvider>
+      <App />{" "}
+    </AuthContextProvider>
+  </DeviceContextProvider>,
   document.getElementById("root")
 );
 

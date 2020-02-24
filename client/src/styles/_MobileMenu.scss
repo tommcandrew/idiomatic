@@ -1,0 +1,44 @@
+.mobile-menu {
+  animation: expand 300ms ease-out;
+  background: rgba($color: $mySeaBlueDark, $alpha: 1);
+  bottom: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  left: 0;
+  position: fixed;
+  right: 0;
+  top: 0;
+  z-index: 100;
+  clip-path: circle(360px at 100% 0%);
+
+  &__close-button {
+    color: white;
+    font-size: 4rem;
+    position: absolute;
+    right: 0.7rem;
+    top: -8px;
+  }
+  &__links {
+    color: white;
+    display: flex;
+    flex-direction: column;
+    font-size: 1.8rem;
+    height: 35vh;
+    position: absolute;
+    top: 6vh;
+    right: 1rem;
+    justify-content: space-around;
+    text-align: center;
+    width: 80vw;
+  }
+}
+
+@keyframes expand {
+  from {
+    clip-path: circle(100px at 100% -10%);
+  }
+  to {
+    clip-path: circle(360px at 100% 0%);
+  }
+}

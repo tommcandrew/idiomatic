@@ -21,7 +21,7 @@ const Login = () => {
   }
 
   return (
-    <div className="loginRegister">
+    <div className="loginRegister__wrapper">
       <div className="loginRegister__header">
         <Link to="/">
           <h1 className="loginRegister__app-title">Idiomatic</h1>
@@ -39,7 +39,9 @@ const Login = () => {
         </form>
         <div className="loginRegister__link-container">
           <p>No account?</p>
-          <Link to="/register">Register</Link>
+          <Link to="/register" className="loginRegister__register">
+            Register
+          </Link>
         </div>
       </div>
     </div>

@@ -3,10 +3,24 @@ import React from "react";
 const StartPage = ({ selectedText, handleShowReader }) => {
   return (
     <div className="startPage__wrapper">
-      <div className="startPage__content">
-        <h1>{selectedText.title}</h1>{" "}
-        <button onClick={handleShowReader}>Start</button>
-      </div>
+      {selectedText.title && (
+        <div className="startPage__content">
+          <h1 className="startPage__title">{selectedText.title}</h1>{" "}
+          {selectedText.level && (
+            <p className="startPage__level">{selectedText.level}</p>
+          )}
+          <div className="startPage__instructions">
+            <p>
+              Target words will be shown in <strong>bold</strong>.
+            </p>
+            <p>Click to see the definition and listen to the pronunciation.</p>
+            <p>When you're finished reading, do the exercises.</p>
+          </div>
+          <button onClick={handleShowReader} className="startPage__button">
+            Start
+          </button>
+        </div>
+      )}
     </div>
   );
 };

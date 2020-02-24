@@ -1,13 +1,43 @@
 .startPage__wrapper {
   display: flex;
   align-items: center;
+  flex-direction: column;
   height: 100vh;
-  justify-content: center;
 }
 
 .startPage__content {
-  outline: 2px solid pink;
-  width: 50vw;
-  height: 70vh;
   text-align: center;
+  background: pink;
+  padding: 5rem 2rem;
+  border-radius: 8px;
+  margin-top: 10vh;
+}
+
+.startPage__title {
+  font-size: 3rem;
+}
+
+.startPage__level {
+  font-size: 1.5rem;
+  margin-top: 0.5rem;
+}
+
+.startPage__button {
+  @include button($mySeaBlue, 2rem);
+  margin-top: 10vh;
+  &:hover {
+    background: $mySeaBlueDark;
+  }
+}
+
+.startPage__instructions {
+  margin-top: 2rem;
+  font-size: 1.1rem;
+}
+
+@media only screen and (min-width: 1000px) {
+  .startPage__content {
+    padding: 8rem 30rem;
+    margin-top: 5vh;
+  }
 }
