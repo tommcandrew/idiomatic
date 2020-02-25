@@ -1,7 +1,7 @@
 import React from "react";
 import TextTile from "./TextTile";
 
-const MyTexts = ({ texts, handleChooseText }) => {
+const MyTexts = ({ texts, handleChooseText, deleteText }) => {
   return (
     <div className="myTexts__wrapper">
       <div className="myTexts__texts">
@@ -10,6 +10,8 @@ const MyTexts = ({ texts, handleChooseText }) => {
             title={text.title}
             key={"saved-text" + index}
             handleChooseText={handleChooseText}
+            edit="true"
+            deleteText={deleteText}
           />
         ))}
       </div>

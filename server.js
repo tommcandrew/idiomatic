@@ -170,4 +170,20 @@ app.post("/deleteAccount", verifyToken, (req, res) => {
     });
 });
 
+app.put("/deleteText", verifyToken, (req, res) => {
+  const { title } = req.body;
+  const email = req.tokenData.user.email;
+  User.update(
+    { email: email },
+    { $pull: { texts: { title: title } } },
+    { safe: true, multi: true }
+  )
+    .then(() => {
+      res.status(200).send("Text deleted");
+    })
+    .catch(err => {
+      console.log(err);
+    });
+});
+
 app.listen(5000, () => console.log("listening on port 5000"));

@@ -13,11 +13,12 @@
   text-align: center;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
   border-radius: 8px;
   padding: 8% 0;
   cursor: pointer;
+  position: relative;
 }
 
 .textTile__title {
@@ -31,6 +32,24 @@
   font-weight: bold;
 }
 
+.textTile__edit-buttons {
+  display: flex;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  justify-content: space-around;
+  width: 60%;
+  margin: 0 auto;
+  margin-top: 5%;
+}
+
+.textTile__delete,
+.textTile__edit {
+  font-size: 1.5rem;
+  color: #4a98f8;
+}
+
 @media only screen and (min-width: 1000px) {
   .textTile__wrapper {
     flex-basis: calc(100% / 5);
@@ -38,7 +57,26 @@
   }
   .textTile__content {
     &:hover {
-      background: #2f6db9;
+      background: #4084d8;
+      .textTile__delete,
+      .textTile__edit {
+        color: black;
+      }
+    }
+  }
+
+  .textTile__delete-wrapper {
+    &:hover {
+      .textTile__delete {
+        color: red;
+      }
+    }
+  }
+  .textTile__edit-wrapper {
+    &:hover {
+      .textTile__edit {
+        color: gold;
+      }
     }
   }
 }

@@ -126,6 +126,13 @@ const Main = () => {
 
   const handleShowTexts = () => {
     setShowDashboard(false);
+    setShowMyWords(false);
+    setShowMyProfile(false);
+    setShowSpelling(false);
+    setShowResults(false);
+    setShowStartPage(false);
+    setShowUploadText(false);
+    setShowMyTexts(false);
     setShowTexts(true);
   };
 
@@ -146,7 +153,29 @@ const Main = () => {
     setShowDashboard(true);
   };
 
-  const handleChooseText = title => {
+  const deleteText = title => {
+    const textToDelete = savedTexts.filter(text => text.title === title)[0];
+    const token = localStorage.getItem("idiomatic-token");
+    axios
+      .put(
+        "/deleteText",
+        { title },
+        {
+          headers: {
+            Authorization: "Bearer " + token
+          }
+        }
+      )
+      .then(res => {
+        fetchSavedTexts();
+        console.log(res);
+      });
+  };
+
+  const handleChooseText = (e, title) => {
+    if (!e.target.classList.contains("textTile__content")) {
+      return;
+    }
     let selectedText;
     if (showMyTexts) {
       selectedText = savedTexts.filter(text => text.title === title)[0];
@@ -167,6 +196,13 @@ const Main = () => {
 
   const handleShowMyTexts = () => {
     setShowDashboard(false);
+    setShowTexts(false);
+    setShowMyWords(false);
+    setShowMyProfile(false);
+    setShowSpelling(false);
+    setShowResults(false);
+    setShowStartPage(false);
+    setShowUploadText(false);
     setShowMyTexts(true);
   };
 
@@ -247,7 +283,11 @@ const Main = () => {
         <Reader text={selectedText} handleShowGapFill={handleShowGapFill} />
       )}
       {showMyTexts && (
-        <MyTexts texts={savedTexts} handleChooseText={handleChooseText} />
+        <MyTexts
+          texts={savedTexts}
+          handleChooseText={handleChooseText}
+          deleteText={deleteText}
+        />
       )}
       {showGapFill && (
         <GapFill
