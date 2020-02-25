@@ -37,8 +37,6 @@ const UploadText = ({ handleShowDashboard, fetchSavedTexts }) => {
     const formData = new FormData();
     let splitText;
     if (showUploadForm) {
-      setShowUploadForm(false);
-      setShowPasteForm(false);
       formData.append("file", e.target.elements.myfile.files[0]);
       axios
         .post("/upload", formData, {
@@ -47,6 +45,12 @@ const UploadText = ({ handleShowDashboard, fetchSavedTexts }) => {
           }
         })
         .then(res => {
+          if (res.data.content.length < 50) {
+            alert("The text must be at least 50 characters long");
+            return;
+          }
+          setShowUploadForm(false);
+          setShowPasteForm(false);
           setUploadedFile(res.data);
           splitText = res.data.content.match(/\w+|\s+|[^\s\w]+/g);
         });
@@ -55,6 +59,10 @@ const UploadText = ({ handleShowDashboard, fetchSavedTexts }) => {
       const title = e.target.title.value;
       if (!title) {
         alert("You must add a title");
+        return;
+      }
+      if (content.length < 50) {
+        alert("The text must be at least 50 characters long");
         return;
       }
       setShowUploadForm(false);
