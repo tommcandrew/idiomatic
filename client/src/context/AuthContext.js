@@ -1,5 +1,6 @@
 import axios from "axios";
 import React, { useState, createContext, useEffect } from "react";
+import { Redirect } from "react-router-dom";
 
 const AuthContext = createContext();
 
@@ -9,6 +10,7 @@ export const AuthContextProvider = props => {
   const [userEmail, setUserEmail] = useState(null);
   const [loading, setLoading] = useState(true);
   const [errorMessage, setErrorMessage] = useState();
+  const [registerDate, setRegisterDate] = useState();
 
   useEffect(() => {
     console.log("authcontext");
@@ -46,11 +48,12 @@ export const AuthContextProvider = props => {
     axios
       .post("/login", { email, password })
       .then(res => {
-        const { token, userName } = res.data;
+        const { token, userName, registerDate } = res.data;
         localStorage.setItem("idiomatic-token", token);
         setAuthenticated(true);
         setUserEmail(email);
         setUserName(userName);
+        setRegisterDate(registerDate);
       })
       .catch(err => {
         errorMessage = err.response.data;
@@ -67,15 +70,49 @@ export const AuthContextProvider = props => {
     axios
       .post("/register", { name, email, password, password2 })
       .then(res => {
-        const token = res.data;
+        const { token, registerDate } = res.data;
         localStorage.setItem("idiomatic-token", token);
         setAuthenticated(true);
         setUserEmail(email);
         setUserName(name);
+        setRegisterDate(registerDate);
       })
       .catch(err => {
         errorMessage = err.response.data;
         setErrorMessage(errorMessage);
+      });
+  };
+
+  const deleteAccount = () => {
+    const token = localStorage.getItem("idiomatic-token");
+    console.log(token);
+    axios
+      .post(
+        "/deleteAccount",
+        { email: userEmail },
+
+        {
+          headers: {
+            Authorization: "Bearer " + token
+          }
+        }
+      )
+      .then(() => {
+        setAuthenticated(false);
+        //show alert here
+        return (
+          <Redirect
+            to={{
+              pathname: "/",
+              state: {
+                from: props.location
+              }
+            }}
+          />
+        );
+      })
+      .catch(err => {
+        console.log(err);
       });
   };
 
@@ -90,7 +127,9 @@ export const AuthContextProvider = props => {
         setAuthenticated,
         setErrorMessage,
         userEmail,
-        userName
+        userName,
+        registerDate,
+        deleteAccount
       }}
     >
       {props.children}

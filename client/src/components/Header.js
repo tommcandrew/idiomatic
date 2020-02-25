@@ -6,7 +6,8 @@ const Header = ({
   handleShowDashboard,
   handleShowMyTexts,
   handleShowMyWords,
-  handleShowTexts
+  handleShowTexts,
+  handleShowMyAccount
 }) => {
   const { device } = useContext(DeviceContext);
   const [showMenu, setShowMenu] = useState(false);
@@ -30,7 +31,7 @@ const Header = ({
             <button onClick={handleShowTexts}>Choose Text</button>
           </div>
           <div className="header__buttons--right">
-            <button>My Account</button>
+            <button onClick={handleShowMyAccount}>My Account</button>
           </div>
         </>
       )}

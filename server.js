@@ -23,6 +23,8 @@ app.use(express.json());
 app.use(fileUpload());
 
 const verifyToken = (req, res, next) => {
+  console.log(req.headers);
+
   const bearer = req.headers["authorization"];
   const bearerHeader = bearer.split(" ");
   const token = bearerHeader[1];
@@ -52,7 +54,11 @@ app.post("/login", (req, res) => {
             res.status(403).send("Wrong password");
           } else {
             jwt.sign({ user }, "secretkey", (err, token) => {
-              res.status(200).send({ token: token, userName: user.name });
+              res.status(200).send({
+                token: token,
+                userName: user.name,
+                registerDate: user.createdAt
+              });
             });
           }
         }
@@ -87,7 +93,7 @@ app.post("/register", (req, res) => {
       user.password = hash;
       user.save().then(user => {
         jwt.sign({ user }, "secretkey", (err, token) => {
-          res.send(token);
+          res.send({ token, registerDate: user.createdAt });
         });
       });
     });
@@ -148,6 +154,18 @@ app.get("/savedTexts", verifyToken, (req, res) => {
   User.findOne({ email })
     .then(user => {
       res.status(200).send(user.texts);
+    })
+    .catch(err => {
+      console.log(err);
+    });
+});
+
+//why can't I see the req.body with axios.post?
+app.post("/deleteAccount", verifyToken, (req, res) => {
+  const { email } = req.body;
+  User.findOneAndDelete({ email })
+    .then(() => {
+      res.status(200).send("Account deleted");
     })
     .catch(err => {
       console.log(err);

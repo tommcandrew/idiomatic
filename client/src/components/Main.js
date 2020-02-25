@@ -12,6 +12,7 @@ import MatchDefinitions from "./MatchDefinitions";
 import Spelling from "./Spelling";
 import Results from "./Results";
 import MyWords from "./MyWords";
+import MyAccount from "./MyAccount";
 
 const texts = [
   {
@@ -104,6 +105,7 @@ const Main = () => {
   const [numQuestions, setNumQuestions] = useState(null);
   const [completedTexts, setCompletedTexts] = useState([]);
   const [showMyWords, setShowMyWords] = useState(false);
+  const [showMyAccount, setShowMyAccount] = useState(false);
 
   useEffect(() => {
     fetchSavedTexts();
@@ -202,6 +204,11 @@ const Main = () => {
     setShowMyWords(true);
   };
 
+  const handleShowMyAccount = () => {
+    setShowDashboard(false);
+    setShowMyAccount(true);
+  };
+
   return (
     <>
       <Header
@@ -209,6 +216,7 @@ const Main = () => {
         handleShowMyTexts={handleShowMyTexts}
         handleShowMyWords={handleShowMyWords}
         handleShowTexts={handleShowTexts}
+        handleShowMyAccount={handleShowMyAccount}
       />
 
       {showDashboard && (
@@ -275,6 +283,7 @@ const Main = () => {
           completedTexts={completedTexts}
         />
       )}
+      {showMyAccount && <MyAccount />}
     </>
   );
 };

@@ -7,6 +7,13 @@ const Texts = ({ handleChooseText, texts }) => {
 
   const handleClick = e => {
     const selectedFilter = e.target.innerText;
+    if (filters.includes(selectedFilter)) {
+      const updatetedFilters = filters.filter(
+        filter => filter !== selectedFilter
+      );
+      setFilters([...updatetedFilters]);
+      return;
+    }
     setFilters([...filters, selectedFilter]);
   };
 
