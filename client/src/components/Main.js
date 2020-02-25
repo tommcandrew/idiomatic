@@ -12,7 +12,7 @@ import MatchDefinitions from "./MatchDefinitions";
 import Spelling from "./Spelling";
 import Results from "./Results";
 import MyWords from "./MyWords";
-import MyAccount from "./MyAccount";
+import MyProfile from "./MyProfile";
 
 const texts = [
   {
@@ -105,7 +105,7 @@ const Main = () => {
   const [numQuestions, setNumQuestions] = useState(null);
   const [completedTexts, setCompletedTexts] = useState([]);
   const [showMyWords, setShowMyWords] = useState(false);
-  const [showMyAccount, setShowMyAccount] = useState(false);
+  const [showMyProfile, setShowMyProfile] = useState(false);
 
   useEffect(() => {
     fetchSavedTexts();
@@ -171,7 +171,6 @@ const Main = () => {
   };
 
   const handleShowGapFill = () => {
-    console.log(selectedText);
     setShowReader(false);
     setShowGapFill(true);
   };
@@ -204,9 +203,9 @@ const Main = () => {
     setShowMyWords(true);
   };
 
-  const handleShowMyAccount = () => {
+  const handleShowMyProfile = () => {
     setShowDashboard(false);
-    setShowMyAccount(true);
+    setShowMyProfile(true);
   };
 
   return (
@@ -216,7 +215,7 @@ const Main = () => {
         handleShowMyTexts={handleShowMyTexts}
         handleShowMyWords={handleShowMyWords}
         handleShowTexts={handleShowTexts}
-        handleShowMyAccount={handleShowMyAccount}
+        handleShowMyProfile={handleShowMyProfile}
       />
 
       {showDashboard && (
@@ -283,7 +282,7 @@ const Main = () => {
           completedTexts={completedTexts}
         />
       )}
-      {showMyAccount && <MyAccount />}
+      {showMyProfile && <MyProfile />}
     </>
   );
 };

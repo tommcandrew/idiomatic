@@ -13,7 +13,6 @@ export const AuthContextProvider = props => {
   const [registerDate, setRegisterDate] = useState();
 
   useEffect(() => {
-    console.log("authcontext");
     const token = localStorage.getItem("idiomatic-token");
     if (token) {
       axios
@@ -34,7 +33,6 @@ export const AuthContextProvider = props => {
           console.log(err);
         });
     } else {
-      console.log("setting authenticated to false");
       setAuthenticated(false);
       setLoading(false);
     }
@@ -116,6 +114,12 @@ export const AuthContextProvider = props => {
       });
   };
 
+  const logout = () => {
+    setAuthenticated(false);
+    localStorage.removeItem("idiomatic-token");
+    return <Redirect to="/" />;
+  };
+
   return (
     <AuthContext.Provider
       value={{
@@ -129,7 +133,8 @@ export const AuthContextProvider = props => {
         userEmail,
         userName,
         registerDate,
-        deleteAccount
+        deleteAccount,
+        logout
       }}
     >
       {props.children}

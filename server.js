@@ -23,8 +23,6 @@ app.use(express.json());
 app.use(fileUpload());
 
 const verifyToken = (req, res, next) => {
-  console.log(req.headers);
-
   const bearer = req.headers["authorization"];
   const bearerHeader = bearer.split(" ");
   const token = bearerHeader[1];
