@@ -6,6 +6,9 @@ const UploadText = ({ handleShowDashboard, fetchSavedTexts }) => {
   const [uploadedFile, setUploadedFile] = useState(null);
   const [spans, setSpans] = useState(null);
   const [selectedWords, setSelectedWords] = useState([]);
+  const [showOptionButtons, setShowOptionButtons] = useState(true);
+  const [showUploadForm, setShowUploadForm] = useState(false);
+  const [showPasteForm, setShowPasteForm] = useState(false);
 
   //necessary to avoid handleSelectWord using stale state
   const refValue = useRef(selectedWords);
@@ -13,37 +16,70 @@ const UploadText = ({ handleShowDashboard, fetchSavedTexts }) => {
     refValue.current = selectedWords;
   });
 
+  const goBack = () => {
+    setShowUploadForm(false);
+    setShowPasteForm(false);
+    setShowOptionButtons(true);
+  };
+
+  const handleShowUploadForm = () => {
+    setShowOptionButtons(false);
+    setShowUploadForm(true);
+  };
+
+  const handleShowPasteForm = () => {
+    setShowOptionButtons(false);
+    setShowPasteForm(true);
+  };
+
   const handleUpload = e => {
+    setShowUploadForm(false);
+    setShowPasteForm(false);
+    e.preventDefault();
+    e.persist();
     const formData = new FormData();
-    formData.append("file", e.target.files[0]);
-    axios
-      .post("/upload", formData, {
-        headers: {
-          "Content-Type": "multipart/form-data"
-        }
-      })
-      .then(res => {
-        setUploadedFile(res.data);
-        const split = res.data.content.split(" ");
-        const spans = split.map((word, index) => (
-          <span key={"span" + index} onClick={handleSelectWord}>
-            {word}
-          </span>
-        ));
-        setSpans(spans);
-      });
+    if (showUploadForm) {
+      formData.append("file", e.target.elements.myfile.files[0]);
+      axios
+        .post("/upload", formData, {
+          headers: {
+            "Content-Type": "multipart/form-data"
+          }
+        })
+        .then(res => {
+          setUploadedFile(res.data);
+          const split = res.data.content.split(" ");
+          const spans = split.map((word, index) => (
+            <span key={"span" + index} onClick={handleSelectWord}>
+              {word}
+            </span>
+          ));
+          setSpans(spans);
+        });
+    } else {
+      const content = e.target.pasted.value;
+      const title = e.target.title.value;
+      setUploadedFile({ content, title });
+      const split = content.split(" ");
+      const spans = split.map((word, index) => (
+        <span key={"span" + index} onClick={handleSelectWord}>
+          {word}
+        </span>
+      ));
+      setSpans(spans);
+    }
   };
 
   const handleSubmit = async e => {
     e.preventDefault();
     const targetSentences = [];
-    const allSentences = uploadedFile.content.split(".");
+    let allSentences;
+    allSentences = uploadedFile.content.split(".");
     const allSentencesSplit = [];
     for (let i = 0; i < allSentences.length; i++) {
       const splitSentence = allSentences[i].split(" ");
       allSentencesSplit.push(splitSentence);
     }
-
     for (let i = 0; i < selectedWords.length; i++) {
       for (let j = 0; j < allSentencesSplit.length; j++) {
         if (allSentencesSplit[j].includes(selectedWords[i])) {
@@ -115,17 +151,40 @@ const UploadText = ({ handleShowDashboard, fetchSavedTexts }) => {
 
   return (
     <div className="uploadText__wrapper">
-      <form onSubmit={handleSubmit}>
-        <label htmlFor="myfile">Select a file (must be .txt or .pdf):</label>
-        <input
-          type="file"
-          id="myfile"
-          name="myfile"
-          onChange={handleUpload}
-          className="uploadText__choose-file"
-        ></input>
-        <button type="submit">Submit</button>
-      </form>
+      {showOptionButtons && (
+        <div className="uploadText__option-buttons">
+          <button onClick={handleShowUploadForm}>
+            Upload file from computer
+          </button>
+          <button onClick={handleShowPasteForm}>Paste text</button>
+        </div>
+      )}
+      {showUploadForm && (
+        <form onSubmit={handleUpload}>
+          <label htmlFor="myfile">Select a file (must be .txt or .pdf):</label>
+          <input
+            type="file"
+            id="myfile"
+            name="myfile"
+            className="uploadText__choose-file"
+          ></input>
+          <button type="submit">Go</button>
+          <button type="button" onClick={goBack}>
+            Back
+          </button>
+        </form>
+      )}
+      {showPasteForm && (
+        <form onSubmit={handleUpload}>
+          <label htmlFor="title">Title</label>
+          <input type="text" id="title" />
+          <textarea name="pasted" cols="150" rows="20"></textarea>
+          <button type="submit">Go</button>
+          <button type="button" onClick={goBack}>
+            Back
+          </button>
+        </form>
+      )}
       <div className="uploadText__text">
         {uploadedFile && spans && (
           <>
@@ -145,6 +204,7 @@ const UploadText = ({ handleShowDashboard, fetchSavedTexts }) => {
               <h1>{uploadedFile.fileName}</h1>
               <div>{spans}</div>
             </div>
+            <button onClick={handleSubmit}>Save</button>
           </>
         )}
       </div>
