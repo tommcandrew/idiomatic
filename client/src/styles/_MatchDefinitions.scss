@@ -2,6 +2,10 @@
   display: flex;
 }
 
+.matchDefinitions__definition {
+  font-style: italic;
+}
+
 .matchDefinitions__button {
   background: yellow;
   cursor: pointer;

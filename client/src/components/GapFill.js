@@ -4,12 +4,13 @@ import ResultsPage from "./ResultsPage";
 const GapFill = ({
   sentences,
   targetWords,
-  handleShowMatchDefinitions,
-  incrementCorrectAnswers
+  incrementCorrectAnswers,
+  handleShowMatchDefinitions
 }) => {
-  const [sentencesWithSpans, setSentencesWithSpans] = useState(null);
+  const [gappedSentences, setGappedSentences] = useState(null);
   const [answers, setAnswers] = useState(null);
   const [results, setResults] = useState({});
+  const [filledSentences, setFilledSentences] = useState();
 
   useEffect(() => {
     createSentences();
@@ -18,16 +19,17 @@ const GapFill = ({
   }, []);
 
   const createSentences = () => {
-    const sentenceArray = [];
+    const gappedSentenceArray = [];
     for (let i = 0; i < sentences.length; i++) {
-      const split = sentences[i]
+      const splitSentence = sentences[i]
         .replace(
           //eslint-disable-next-line
           /(~|`|!|@|#|$|%|^|&|\*|\(|\)|{|}|\[|\]|;|:|\"|'|<|,|\.|>|\?|\/|\\|\||-|_|\+|=)/g,
           ""
         )
         .split(" ");
-      const sentenceWithSpans = split.map((word, index) => {
+
+      const gappedSentence = splitSentence.map((word, index) => {
         if (targetWords.includes(word)) {
           return (
             <input
@@ -44,9 +46,9 @@ const GapFill = ({
           );
         }
       });
-      sentenceArray.push(sentenceWithSpans);
+      gappedSentenceArray.push(gappedSentence);
     }
-    setSentencesWithSpans(sentenceArray);
+    setGappedSentences(gappedSentenceArray);
   };
 
   const createAnswerObj = () => {
@@ -67,6 +69,36 @@ const GapFill = ({
         values.push(inputs[i].value);
       }
     }
+
+    const filledSentences = [];
+
+    for (let i = 0; i < gappedSentences.length; i++) {
+      const newSentence = gappedSentences[i].map((el, index) => {
+        if (el.props.className === "gapFill__input") {
+          if (values[i] === answers[i]) {
+            el = (
+              <span key={"filled" + index} className="gapFill__filled--right">
+                {values[i]}
+              </span>
+            );
+          } else {
+            el = (
+              <span
+                key={"filled" + index}
+                className="gapFill__filled--wrong"
+                data-answer={answers[i]}
+              >
+                {values[i]}
+              </span>
+            );
+          }
+        }
+        return el;
+      });
+      filledSentences.push(newSentence);
+    }
+    setFilledSentences(filledSentences);
+
     const resultsObj = {};
     let correctAnswers = 0;
     for (let j = 0; j < values.length; j++) {
@@ -87,29 +119,46 @@ const GapFill = ({
         (Object.entries(results).length === 0 && (
           <form className="gapFill__content">
             <h1 className="gapFill__title">Complete the sentences:</h1>
-            {sentencesWithSpans &&
-              sentencesWithSpans.map((sentence, index) => (
-                <div
-                  key={"sentence" + index}
-                  className="gapFill__sentence"
-                  onSubmit={handleSubmit}
-                >
-                  {index + 1}.{sentence}.
-                </div>
-              ))}
+            <div className="gapFill__sentences">
+              {gappedSentences &&
+                gappedSentences.map((sentence, index) => (
+                  <div
+                    key={"sentence" + index}
+                    className="gapFill__sentence"
+                    onSubmit={handleSubmit}
+                  >
+                    {index + 1}.{sentence}.
+                  </div>
+                ))}
+            </div>
             <button onClick={handleSubmit} className="gapFill__submit">
               Submit answers
             </button>
           </form>
         ))}
-      <div className="gapFill__results">
-        {results && Object.entries(results).length > 0 && (
-          <ResultsPage
-            results={results}
-            handleShowMatchDefinitions={handleShowMatchDefinitions}
-          />
-        )}
-      </div>
+      {results && Object.entries(results).length > 0 && (
+        <div className="gapFill__results">
+          <h1 className="gapFill__title">
+            Hover over the wrong answers to see the right answer:
+          </h1>
+          <div className="gapFill__result-sentences">
+            {filledSentences.map((sentence, index) => (
+              <div
+                key={"sentence" + index}
+                className="gapFill__result-sentence"
+              >
+                {index + 1}. {sentence}.
+              </div>
+            ))}
+          </div>
+          <button
+            onClick={handleShowMatchDefinitions}
+            className="gapFill__next-button"
+          >
+            Next Exercise
+          </button>
+        </div>
+      )}
     </div>
   );
 };

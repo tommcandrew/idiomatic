@@ -71,12 +71,12 @@ const MatchDefinitions = ({
                   className="matchDefinitions__field"
                   key={"field" + defIndef}
                 >
-                  <h3
+                  <p
                     key={"def" + defIndef}
                     className="matchDefinitions__definition"
                   >
                     {def}
-                  </h3>
+                  </p>
                   <div className="matchDefinitions__options">
                     {text.targetWords.map((word, optionIndex) => (
                       <button
@@ -102,21 +102,20 @@ const MatchDefinitions = ({
             </button>
           </div>
         ))}
-      {results &&
-        Object.entries(results).length > 0 && (
-          <div className="matchDefinitions__results">
-            {results && Object.entries(results).length > 0 && (
-              <div className="matching__results">
-                {results && Object.entries(results).length > 0 && (
-                  <ResultsPage
-                    results={results}
-                    handleShowSpelling={handleShowSpelling}
-                  />
-                )}
-              </div>
-            )}
-          </div>
-        )}
+      {results && Object.entries(results).length > 0 && (
+        <div className="matchDefinitions__results">
+          {results && Object.entries(results).length > 0 && (
+            <div className="matching__results">
+              {results && Object.entries(results).length > 0 && (
+                <ResultsPage
+                  results={results}
+                  handleShowSpelling={handleShowSpelling}
+                />
+              )}
+            </div>
+          )}
+        </div>
+      )}
     </div>
   );
 };

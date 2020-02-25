@@ -133,11 +133,14 @@ const Main = () => {
     setShowStartPage(false);
     setShowUploadText(false);
     setShowMyTexts(false);
+    setShowGapFill(false);
+    setShowMatchDefinitions(false);
     setShowTexts(true);
   };
 
   const handleShowUploadText = () => {
     setShowDashboard(false);
+    setShowMyTexts(false);
     setShowUploadText(true);
   };
 
@@ -150,6 +153,8 @@ const Main = () => {
     setShowMyWords(false);
     setShowResults(false);
     setShowSpelling(false);
+    setShowGapFill(false);
+    setShowMatchDefinitions(false);
     setShowDashboard(true);
   };
 
@@ -173,7 +178,10 @@ const Main = () => {
   };
 
   const handleChooseText = (e, title) => {
-    if (!e.target.classList.contains("textTile__content")) {
+    if (
+      !e.target.classList.contains("textTile__content") &&
+      !e.target.classList.contains("textTile__title")
+    ) {
       return;
     }
     let selectedText;
@@ -203,6 +211,8 @@ const Main = () => {
     setShowResults(false);
     setShowStartPage(false);
     setShowUploadText(false);
+    setShowGapFill(false);
+    setShowMatchDefinitions(false);
     setShowMyTexts(true);
   };
 
@@ -236,16 +246,34 @@ const Main = () => {
 
   const handleShowMyWords = () => {
     setShowDashboard(false);
+    setShowTexts(false);
+    setShowMyProfile(false);
+    setShowSpelling(false);
+    setShowResults(false);
+    setShowStartPage(false);
+    setShowUploadText(false);
+    setShowMyTexts(false);
+    setShowGapFill(false);
+    setShowMatchDefinitions(false);
     setShowMyWords(true);
   };
 
   const handleShowMyProfile = () => {
     setShowDashboard(false);
+    setShowTexts(false);
+    setShowSpelling(false);
+    setShowResults(false);
+    setShowStartPage(false);
+    setShowUploadText(false);
+    setShowMyTexts(false);
+    setShowGapFill(false);
+    setShowMatchDefinitions(false);
+    setShowMyWords(false);
     setShowMyProfile(true);
   };
 
   return (
-    <>
+    <div className="main__wrapper">
       <Header
         handleShowDashboard={handleShowDashboard}
         handleShowMyTexts={handleShowMyTexts}
@@ -269,8 +297,8 @@ const Main = () => {
       )}
       {showUploadText && (
         <UploadText
-          handleShowDashboard={handleShowDashboard}
           fetchSavedTexts={fetchSavedTexts}
+          handleShowMyTexts={handleShowMyTexts}
         />
       )}
       {showStartPage && (
@@ -287,6 +315,7 @@ const Main = () => {
           texts={savedTexts}
           handleChooseText={handleChooseText}
           deleteText={deleteText}
+          handleShowUploadText={handleShowUploadText}
         />
       )}
       {showGapFill && (
@@ -323,7 +352,7 @@ const Main = () => {
         />
       )}
       {showMyProfile && <MyProfile />}
-    </>
+    </div>
   );
 };
 

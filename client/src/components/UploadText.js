@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from "react";
 import axios from "axios";
 import dictionaryKey from "../apiKey";
 
-const UploadText = ({ handleShowDashboard, fetchSavedTexts }) => {
+const UploadText = ({ handleShowMyTexts, fetchSavedTexts }) => {
   const [uploadedFile, setUploadedFile] = useState(null);
   const [splitText, setSplitText] = useState(null);
   const [selectedWordIndices, setSelectedWordIndices] = useState([]);
@@ -53,6 +53,7 @@ const UploadText = ({ handleShowDashboard, fetchSavedTexts }) => {
           setShowPasteForm(false);
           setUploadedFile(res.data);
           splitText = res.data.content.match(/\w+|\s+|[^\s\w]+/g);
+          setSplitText(splitText);
         });
     } else {
       const content = e.target.pasted.value;
@@ -69,8 +70,8 @@ const UploadText = ({ handleShowDashboard, fetchSavedTexts }) => {
       setShowPasteForm(false);
       setUploadedFile({ content, title });
       splitText = content.match(/\w+|\s+|[^\s\w]+/g);
+      setSplitText(splitText);
     }
-    setSplitText(splitText);
   };
 
   const handleSubmit = async e => {
@@ -147,7 +148,7 @@ const UploadText = ({ handleShowDashboard, fetchSavedTexts }) => {
         }
       )
       .then(() => {
-        handleShowDashboard();
+        handleShowMyTexts();
         fetchSavedTexts();
       });
   };

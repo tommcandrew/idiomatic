@@ -21,9 +21,13 @@ const MyWords = ({ texts, savedTexts, completedTexts }) => {
     <div className="myWords__wrapper">
       <h1>My Words</h1>
       <div className="myWords__content">
-        {studiedWords.map((word, index) => (
-          <div key={"word" + index}>{word}</div>
-        ))}
+        {studiedWords.length > 0 ? (
+          studiedWords.map((word, index) => (
+            <div key={"word" + index}>{word}</div>
+          ))
+        ) : (
+          <h2>You don't have any studied words.</h2>
+        )}
       </div>
     </div>
   );

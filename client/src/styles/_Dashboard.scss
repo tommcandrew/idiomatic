@@ -1,8 +1,8 @@
 .dashboard__wrapper {
-  height: 100vh;
   background: #eee;
   display: flex;
   flex-direction: column;
+  flex-grow: 1;
 }
 
 .dashboard__greeting {
