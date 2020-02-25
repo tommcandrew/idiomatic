@@ -4,16 +4,16 @@ import dictionaryKey from "../apiKey";
 
 const UploadText = ({ handleShowDashboard, fetchSavedTexts }) => {
   const [uploadedFile, setUploadedFile] = useState(null);
-  const [spans, setSpans] = useState(null);
-  const [selectedWords, setSelectedWords] = useState([]);
+  const [splitText, setSplitText] = useState(null);
+  const [selectedWordIndices, setSelectedWordIndices] = useState([]);
   const [showOptionButtons, setShowOptionButtons] = useState(true);
   const [showUploadForm, setShowUploadForm] = useState(false);
   const [showPasteForm, setShowPasteForm] = useState(false);
 
   //necessary to avoid handleSelectWord using stale state
-  const refValue = useRef(selectedWords);
+  const refValue = useRef(selectedWordIndices);
   useEffect(() => {
-    refValue.current = selectedWords;
+    refValue.current = selectedWordIndices;
   });
 
   const goBack = () => {
@@ -33,12 +33,12 @@ const UploadText = ({ handleShowDashboard, fetchSavedTexts }) => {
   };
 
   const handleUpload = e => {
-    setShowUploadForm(false);
-    setShowPasteForm(false);
     e.preventDefault();
-    e.persist();
     const formData = new FormData();
+    let splitText;
     if (showUploadForm) {
+      setShowUploadForm(false);
+      setShowPasteForm(false);
       formData.append("file", e.target.elements.myfile.files[0]);
       axios
         .post("/upload", formData, {
@@ -48,30 +48,31 @@ const UploadText = ({ handleShowDashboard, fetchSavedTexts }) => {
         })
         .then(res => {
           setUploadedFile(res.data);
-          const split = res.data.content.split(" ");
-          const spans = split.map((word, index) => (
-            <span key={"span" + index} onClick={handleSelectWord}>
-              {word}
-            </span>
-          ));
-          setSpans(spans);
+          splitText = res.data.content.match(/\w+|\s+|[^\s\w]+/g);
         });
     } else {
       const content = e.target.pasted.value;
       const title = e.target.title.value;
+      if (!title) {
+        alert("You must add a title");
+        return;
+      }
+      setShowUploadForm(false);
+      setShowPasteForm(false);
       setUploadedFile({ content, title });
-      const split = content.split(" ");
-      const spans = split.map((word, index) => (
-        <span key={"span" + index} onClick={handleSelectWord}>
-          {word}
-        </span>
-      ));
-      setSpans(spans);
+      splitText = content.match(/\w+|\s+|[^\s\w]+/g);
     }
+    setSplitText(splitText);
   };
 
   const handleSubmit = async e => {
     e.preventDefault();
+    const selectedWords = splitText.filter((word, index) => {
+      if (selectedWordIndices.includes(index)) {
+        return word;
+      }
+    });
+
     const targetSentences = [];
     let allSentences;
     allSentences = uploadedFile.content.split(".");
@@ -88,6 +89,9 @@ const UploadText = ({ handleShowDashboard, fetchSavedTexts }) => {
         }
       }
     }
+
+    const set = new Set(targetSentences);
+    const targetSentencesNoDuplicates = [...set];
 
     const targetWordObjects = [];
     for (let i = 0; i < selectedWords.length; i++) {
@@ -126,7 +130,7 @@ const UploadText = ({ handleShowDashboard, fetchSavedTexts }) => {
           content: uploadedFile.content,
           targetWordObjs: targetWordObjects,
           targetWords: selectedWords,
-          targetSentences: targetSentences
+          targetSentences: targetSentencesNoDuplicates
         },
         {
           headers: {
@@ -141,12 +145,21 @@ const UploadText = ({ handleShowDashboard, fetchSavedTexts }) => {
   };
 
   const handleSelectWord = e => {
-    const newWord = e.target.innerText.replace(
-      //eslint-disable-next-line
-      /(~|`|!|@|#|$|%|^|&|\*|\(|\)|{|}|\[|\]|;|:|\"|'|<|,|\.|>|\?|\/|\\|\||-|_|\+|=)/g,
-      ""
-    );
-    setSelectedWords([...refValue.current, newWord]);
+    const selectedIndex = parseInt(e.target.dataset.index);
+    if (e.target.classList.contains("uploadText__word--selected")) {
+      const updatedSelectedWordIndices = selectedWordIndices.filter(
+        index => index !== selectedIndex
+      );
+      setSelectedWordIndices([...updatedSelectedWordIndices]);
+      return;
+    }
+    // selectedWord.word = e.target.innerText.replace(
+    //   //eslint-disable-next-line
+    //   /(~|`|!|@|#|$|%|^|&|\*|\(|\)|{|}|\[|\]|;|:|\"|'|<|,|\.|>|\?|\/|\\|\||-|_|\+|=)/g,
+    //   ""
+    // );
+    // selectedWord.index = index;
+    setSelectedWordIndices([...refValue.current, selectedIndex]);
   };
 
   return (
@@ -186,14 +199,9 @@ const UploadText = ({ handleShowDashboard, fetchSavedTexts }) => {
         </form>
       )}
       <div className="uploadText__text">
-        {uploadedFile && spans && (
+        {uploadedFile && splitText && (
           <>
             <div className="uploadText__text-wrapper">
-              <div className="uploadText__selected-words">
-                {selectedWords.map(word => (
-                  <div className="uploadText__selected-word">{word}</div>
-                ))}
-              </div>
               <h2 className="uploadText__instruction">
                 Select the words in the text you would like to be tested on.
                 When you're done, click submit. You'll find your uploaded text
@@ -202,7 +210,29 @@ const UploadText = ({ handleShowDashboard, fetchSavedTexts }) => {
             </div>
             <div className="uploadText__text-content">
               <h1>{uploadedFile.fileName}</h1>
-              <div>{spans}</div>
+              <div>
+                {splitText.map((word, index) => (
+                  <span
+                    key={"span" + index}
+                    onClick={handleSelectWord}
+                    data-index={index}
+                    className={`uploadText__word ${
+                      selectedWordIndices.includes(index)
+                        ? "uploadText__word--selected"
+                        : ""
+                    } ${
+                      word === "." ||
+                      word === "," ||
+                      word === "'" ||
+                      word === "?"
+                        ? "uploadText__punctuation"
+                        : ""
+                    }`}
+                  >
+                    {word}
+                  </span>
+                ))}
+              </div>
             </div>
             <button onClick={handleSubmit}>Save</button>
           </>

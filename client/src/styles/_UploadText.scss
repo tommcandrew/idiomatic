@@ -25,7 +25,6 @@
     flex-wrap: wrap;
     justify-content: center;
     span {
-      margin: 0 0.2em;
       user-select: none;
       &:hover {
         background: yellow;
@@ -33,6 +32,18 @@
       }
     }
   }
+}
+
+.uploadText__word {
+  margin: 0 0.2em;
+}
+
+.uploadText__punctuation {
+  margin: 0;
+}
+
+.uploadText__word--selected {
+  background: yellow;
 }
 
 .uploadText__wrapper {
@@ -51,21 +62,6 @@
   margin-top: 2rem;
   flex-direction: column;
   align-items: center;
-}
-
-.uploadText__selected-words {
-  display: flex;
-}
-
-.uploadText__selected-words {
-  border: 2px solid black;
-  min-height: 2rem;
-  min-width: 50vw;
-  margin-bottom: 0.5rem;
-}
-
-.uploadText__selected-word {
-  margin: 0 0.5rem;
 }
 
 .uploadText__instruction {
