@@ -8,6 +8,11 @@
   font-size: 1.6rem;
 }
 
+.gapFill__filled--right,
+.gapFill__filled--wrong {
+  border-bottom: 2px solid black;
+}
+
 .gapFill__content,
 .gapFill__results {
   text-align: center;
@@ -85,7 +90,7 @@
   padding: 0.5rem;
 }
 
-.gapFill__next-button {
+.gapFill__next {
   @include button($mySeaBlue, 1.3rem);
   margin: 1rem 0;
   &:hover {

@@ -1,5 +1,5 @@
-@import "./global.scss";
 @import "./variables";
+@import "./global.scss";
 @import "./_Texts.scss";
 @import "./Dashboard";
 @import "./Header";
@@ -23,3 +23,5 @@
 @import "./Main";
 @import "./Alert";
 @import "./MyWords";
+@import "./Loader";
+@import "./ConfirmModal";

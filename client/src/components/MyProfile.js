@@ -1,17 +1,15 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import AuthContext from "../context/AuthContext";
+import ConfirmModal from "../components/ConfirmModal";
 
 const MyAccount = () => {
   const { userEmail, userName, registerDate, deleteAccount } = useContext(
     AuthContext
   );
+  const [showConfirmModal, setShowConfirmModal] = useState(false);
 
   const handleDeleteAccount = () => {
-    if (window.confirm("Are you sure you want to delete your account?")) {
-      deleteAccount();
-    } else {
-      return;
-    }
+    setShowConfirmModal(true);
   };
   return (
     <div className="myProfile__wrapper">
@@ -27,6 +25,12 @@ const MyAccount = () => {
       >
         Delete account
       </button>
+      {showConfirmModal && (
+        <ConfirmModal
+          setShowConfirmModal={setShowConfirmModal}
+          deleteAccount={deleteAccount}
+        />
+      )}
     </div>
   );
 };

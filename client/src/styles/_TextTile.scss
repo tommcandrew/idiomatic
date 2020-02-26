@@ -24,12 +24,14 @@
 .textTile__title {
   font-size: 1.5rem;
   color: white;
+  user-select: none;
 }
 
 .textTile__level {
   font-size: 0.9rem;
   color: gold;
   font-weight: bold;
+  user-select: none;
 }
 
 .textTile__edit-buttons {

@@ -2,7 +2,8 @@ import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faCheckCircle,
-  faTimesCircle
+  faTimesCircle,
+  faExclamationCircle
 } from "@fortawesome/free-solid-svg-icons";
 
 const Alert = ({ alertInfo, closeAlert }) => {
@@ -11,11 +12,13 @@ const Alert = ({ alertInfo, closeAlert }) => {
     icon = faCheckCircle;
   } else if (alertInfo.type === "failure") {
     icon = faTimesCircle;
+  } else {
+    icon = faExclamationCircle;
   }
   return (
     <div className={`alert alert--${alertInfo.type}`}>
       <span className="alert__icon-wrapper">
-        {icon && <FontAwesomeIcon icon={icon} />}
+        <FontAwesomeIcon icon={icon} />
       </span>
       <p className="alert__text">{alertInfo.text}</p>
       {alertInfo.type === "info" && (

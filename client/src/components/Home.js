@@ -27,7 +27,7 @@ const Home = () => {
         <div className="home__titles">
           <h1 className="home__app-title">Idiomatic</h1>
           <h2 className="home__app-subtitle">
-            Personalised language learning.
+            Personalise your language learning.
           </h2>
         </div>
       </div>

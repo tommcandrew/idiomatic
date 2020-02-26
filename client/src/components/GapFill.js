@@ -1,33 +1,27 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 
 const GapFill = ({
-  sentences,
   targetWords,
+  targetSentences,
   incrementCorrectAnswers,
   handleShowMatchDefinitions
 }) => {
-  const [gappedSentences, setGappedSentences] = useState(null);
-  const [answers, setAnswers] = useState(null);
-  const [results, setResults] = useState({});
-  const [filledSentences, setFilledSentences] = useState();
+  const [gappedSentences] = useState(createGappedSentences());
+  const [answerObj] = useState(createAnswerObj());
+  const [sentencesWithAnswers, setSentencesWithAnswers] = useState();
 
-  useEffect(() => {
-    createSentences();
-    createAnswerObj();
-    //eslint-disable-next-line
-  }, []);
-
-  const createSentences = () => {
+  function createGappedSentences() {
     const gappedSentenceArray = [];
-    for (let i = 0; i < sentences.length; i++) {
-      const splitSentence = sentences[i]
+    for (let i = 0; i < targetSentences.length; i++) {
+      //remove all punctuation from sentence and split into individual words
+      const splitSentence = targetSentences[i]
         .replace(
           //eslint-disable-next-line
           /(~|`|!|@|#|$|%|^|&|\*|\(|\)|{|}|\[|\]|;|:|\"|'|<|,|\.|>|\?|\/|\\|\||-|_|\+|=)/g,
           ""
         )
         .split(" ");
-
+      //replace words in sentence with elements - input for a gap or span for a word
       const gappedSentence = splitSentence.map((word, index) => {
         if (targetWords.includes(word)) {
           return (
@@ -47,37 +41,47 @@ const GapFill = ({
       });
       gappedSentenceArray.push(gappedSentence);
     }
-    setGappedSentences(gappedSentenceArray);
-  };
+    return gappedSentenceArray;
+  }
 
-  const createAnswerObj = () => {
-    const answers = {};
+  function createAnswerObj() {
+    const answerObj = {};
     for (let i = 0; i < targetWords.length; i++) {
-      answers[i] = targetWords[i];
+      answerObj[i] = targetWords[i];
     }
-    setAnswers(answers);
-  };
+    return answerObj;
+  }
 
   const handleSubmit = e => {
     e.preventDefault();
-    e.persist();
+    //get all user answers
     const inputs = e.target.form.elements;
-    const values = [];
+    const inputValues = [];
     for (let i = 0; i < inputs.length; i++) {
-      if (inputs[i].value !== "") {
-        values.push(inputs[i].value);
-      }
+      inputValues.push(inputs[i].value);
     }
-
-    const filledSentences = [];
-
+    //reconstruct sentences with just span elements with classnames for gap words - right/wrong
+    const sentencesWithAnswers = [];
+    let correctAnswers = 0;
     for (let i = 0; i < gappedSentences.length; i++) {
       const newSentence = gappedSentences[i].map((el, index) => {
         if (el.props.className === "gapFill__input") {
-          if (values[i] === answers[i]) {
+          if (inputValues[i] === answerObj[i]) {
+            correctAnswers++;
             el = (
               <span key={"filled" + index} className="gapFill__filled--right">
-                {values[i]}
+                {inputValues[i]}
+              </span>
+            );
+            //if user left input blank
+          } else if (inputValues[i] === "") {
+            el = (
+              <span
+                key={"filled" + index}
+                className="gapFill__filled--wrong"
+                data-answer={answerObj[i]}
+              >
+                (blank)
               </span>
             );
           } else {
@@ -85,79 +89,68 @@ const GapFill = ({
               <span
                 key={"filled" + index}
                 className="gapFill__filled--wrong"
-                data-answer={answers[i]}
+                data-answer={answerObj[i]}
               >
-                {values[i]}
+                {inputValues[i]}
               </span>
             );
           }
         }
         return el;
       });
-      filledSentences.push(newSentence);
+      sentencesWithAnswers.push(newSentence);
     }
-    setFilledSentences(filledSentences);
-
-    const resultsObj = {};
-    let correctAnswers = 0;
-    for (let j = 0; j < values.length; j++) {
-      if (values[j] === answers[j]) {
-        resultsObj[j] = "Right";
-        correctAnswers++;
-      } else {
-        resultsObj[j] = "Wrong";
-      }
-    }
+    setSentencesWithAnswers(sentencesWithAnswers);
     incrementCorrectAnswers(correctAnswers);
-    setResults(resultsObj);
   };
 
   return (
     <div className="gapFill__wrapper">
-      {!results ||
-        (Object.entries(results).length === 0 && (
-          <form className="gapFill__content">
+      <div className="gapFill__content">
+        {!sentencesWithAnswers && (
+          <>
             <h1 className="gapFill__title">Complete the sentences:</h1>
             <div className="gapFill__sentences">
-              {gappedSentences &&
-                gappedSentences.map((sentence, index) => (
-                  <div
-                    key={"sentence" + index}
-                    className="gapFill__sentence"
-                    onSubmit={handleSubmit}
-                  >
-                    {index + 1}.{sentence}.
-                  </div>
-                ))}
+              {gappedSentences.map((sentence, index) => (
+                <div
+                  key={"sentence" + index}
+                  className="gapFill__sentence"
+                  onSubmit={handleSubmit}
+                >
+                  {index + 1}.{sentence}.
+                </div>
+              ))}
             </div>
-            <button onClick={handleSubmit} className="gapFill__submit">
+            <button
+              type="button"
+              onClick={handleSubmit}
+              className="gapFill__submit"
+            >
               Submit answers
             </button>
-          </form>
-        ))}
-      {results && Object.entries(results).length > 0 && (
-        <div className="gapFill__content">
-          <h1 className="gapFill__title">
-            Hover over the wrong answers to see the right answer:
-          </h1>
-          <div className="gapFill__result-sentences">
-            {filledSentences.map((sentence, index) => (
-              <div
-                key={"sentence" + index}
-                className="gapFill__result-sentence"
-              >
-                {index + 1}. {sentence}.
-              </div>
-            ))}
-          </div>
-          <button
-            onClick={handleShowMatchDefinitions}
-            className="gapFill__next-button"
-          >
-            Next Exercise
-          </button>
-        </div>
-      )}
+          </>
+        )}
+        {sentencesWithAnswers && (
+          <>
+            <h1 className="gapFill__title">
+              Hover over the wrong answers to see the right answer:
+            </h1>
+            <div className="gapFill__sentences">
+              {sentencesWithAnswers.map((sentence, index) => (
+                <div key={"sentence" + index} className="gapFill__sentence">
+                  {index + 1}. {sentence}.
+                </div>
+              ))}
+            </div>
+            <button
+              onClick={handleShowMatchDefinitions}
+              className="gapFill__next"
+            >
+              Next Exercise
+            </button>
+          </>
+        )}
+      </div>
     </div>
   );
 };
