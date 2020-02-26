@@ -1,8 +1,11 @@
 import React, { useState, useEffect, useRef } from "react";
 import axios from "axios";
-import dictionaryKey from "../apiKey";
 
-const UploadText = ({ handleShowMyTexts, fetchSavedTexts }) => {
+const UploadText = ({
+  handleShowMyTexts,
+  fetchSavedTexts,
+  setErrorMessages
+}) => {
   const [uploadedFile, setUploadedFile] = useState(null);
   const [splitText, setSplitText] = useState(null);
   const [selectedWordIndices, setSelectedWordIndices] = useState([]);
@@ -99,37 +102,14 @@ const UploadText = ({ handleShowMyTexts, fetchSavedTexts }) => {
         }
       }
     }
-
     const set = new Set(targetSentences);
     const targetSentencesNoDuplicates = [...set];
-
-    const targetWordObjects = [];
-    for (let i = 0; i < selectedWords.length; i++) {
-      const res = await axios.get(
-        "https://dictionaryapi.com/api/v3/references/learners/json/" +
-          selectedWords[i] +
-          "?key=" +
-          dictionaryKey
-      );
-      const shortDef = res.data[0].shortdef[0];
-      let audioUrl;
-      if (res.data[0].hwi.prs) {
-        audioUrl =
-          "https://media.merriam-webster.com/soundc11/" +
-          res.data[0].hwi.prs[0].sound.audio.toString().charAt(0) +
-          "/" +
-          res.data[0].hwi.prs[0].sound.audio +
-          ".wav";
-      } else {
-        audioUrl = null;
-      }
-
-      targetWordObjects.push({
-        word: selectedWords[i],
-        def: shortDef,
-        audio: audioUrl
-      });
+    const res = await axios.post("/getWordData", { selectedWords });
+    let errorMessages;
+    if (res.data.errorMessages.length > 0) {
+      errorMessages = res.data.errorMessages;
     }
+    const targetWordObjects = res.data.targetWordObjects;
     const token = localStorage.getItem("idiomatic-token");
 
     axios
@@ -149,6 +129,7 @@ const UploadText = ({ handleShowMyTexts, fetchSavedTexts }) => {
         }
       )
       .then(() => {
+        setErrorMessages(errorMessages);
         handleShowMyTexts();
         fetchSavedTexts();
       });
@@ -163,12 +144,7 @@ const UploadText = ({ handleShowMyTexts, fetchSavedTexts }) => {
       setSelectedWordIndices([...updatedSelectedWordIndices]);
       return;
     }
-    // selectedWord.word = e.target.innerText.replace(
-    //   //eslint-disable-next-line
-    //   /(~|`|!|@|#|$|%|^|&|\*|\(|\)|{|}|\[|\]|;|:|\"|'|<|,|\.|>|\?|\/|\\|\||-|_|\+|=)/g,
-    //   ""
-    // );
-    // selectedWord.index = index;
+
     setSelectedWordIndices([...refValue.current, selectedIndex]);
   };
 

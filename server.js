@@ -5,6 +5,8 @@ const mongoose = require("mongoose");
 const User = require("./models/User.model");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcryptjs");
+const axios = require("axios");
+const dictionaryKey = "083cdcb6-cd9f-4856-a7b6-21c474d149c8";
 
 mongoose.connect(
   "mongodb://localhost:27017/idiomatic",
@@ -173,6 +175,47 @@ app.post("/deleteAccount", verifyToken, (req, res) => {
     .catch(err => {
       console.log(err);
     });
+});
+
+//why can't I see the req.body with axios.post?
+app.post("/getWordData", async (req, res) => {
+  const errorMessages = [];
+  const { selectedWords } = req.body;
+  const targetWordObjects = [];
+  for (let i = 0; i < selectedWords.length; i++) {
+    const response = await axios.get(
+      "https://dictionaryapi.com/api/v3/references/learners/json/" +
+        selectedWords[i] +
+        "?key=" +
+        dictionaryKey
+    );
+    if (!response.data[0].shortdef) {
+      errorMessages.push(
+        '"' + selectedWords[i] + '"' + " was not found in the dictionary"
+      );
+      break;
+    }
+    const shortDef = response.data[0].shortdef[0];
+    let audioUrl;
+    if (response.data[0].hwi.prs) {
+      audioUrl =
+        "https://media.merriam-webster.com/soundc11/" +
+        response.data[0].hwi.prs[0].sound.audio.toString().charAt(0) +
+        "/" +
+        response.data[0].hwi.prs[0].sound.audio +
+        ".wav";
+    } else {
+      audioUrl = null;
+    }
+
+    targetWordObjects.push({
+      word: selectedWords[i],
+      def: shortDef,
+      audio: audioUrl
+    });
+    console.log(JSON.stringify(targetWordObjects));
+  }
+  res.status(200).send({ targetWordObjects, errorMessages });
 });
 
 app.put("/deleteText", verifyToken, (req, res) => {

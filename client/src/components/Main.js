@@ -13,6 +13,7 @@ import Spelling from "./Spelling";
 import Results from "./Results";
 import MyWords from "./MyWords";
 import MyProfile from "./MyProfile";
+import Alert from "./Alert";
 
 const texts = [
   {
@@ -106,6 +107,7 @@ const Main = () => {
   const [completedTexts, setCompletedTexts] = useState([]);
   const [showMyWords, setShowMyWords] = useState(false);
   const [showMyProfile, setShowMyProfile] = useState(false);
+  const [errorMessages, setErrorMessages] = useState(null);
 
   useEffect(() => {
     fetchSavedTexts();
@@ -271,6 +273,10 @@ const Main = () => {
     setShowMyProfile(true);
   };
 
+  const closeAlert = () => {
+    setErrorMessages(null);
+  };
+
   return (
     <div className="main__wrapper">
       <Header
@@ -298,6 +304,7 @@ const Main = () => {
         <UploadText
           fetchSavedTexts={fetchSavedTexts}
           handleShowMyTexts={handleShowMyTexts}
+          setErrorMessages={setErrorMessages}
         />
       )}
       {showStartPage && (
@@ -351,6 +358,18 @@ const Main = () => {
         />
       )}
       {showMyProfile && <MyProfile />}
+      {errorMessages &&
+        errorMessages.map((message, index) => (
+          <Alert
+            alertInfo={{ type: "info", text: message }}
+            alertInfo={{
+              type: "info",
+              text: "The word fathomless was not found in the dictionary"
+            }}
+            closeAlert={closeAlert}
+            key={"alert" + index}
+          />
+        ))}
     </div>
   );
 };

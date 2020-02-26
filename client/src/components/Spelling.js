@@ -40,12 +40,12 @@ const Spelling = ({
     if (input === text.targetWordObjs[questionIndex].word) {
       const audio = new Audio(correctSound);
       audio.play();
-      setAlertInfo({ success: true, text: "Right!" });
+      setAlertInfo({ type: "success", text: "Right!" });
       correctAnswers++;
     } else {
       const audio = new Audio(incorrectSound);
       audio.play();
-      setAlertInfo({ success: false, text: "Wrong!" });
+      setAlertInfo({ type: "failure", text: "Wrong!" });
     }
     incrementCorrectAnswers(correctAnswers);
     if (questionIndex === text.targetWordObjs.length - 1) {

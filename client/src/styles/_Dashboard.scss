@@ -21,6 +21,7 @@
   justify-content: space-around;
   align-items: center;
   margin-top: 10vh;
+  user-select: none;
   button {
     @include button($myLilac, 1.7rem);
     min-width: 55vw;
