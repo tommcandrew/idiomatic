@@ -21,13 +21,12 @@ const texts = [
     level: "Upper-intermediate",
     tags: ["geography"],
     targetSentences: [
-      "In the summer months, the sun never sets; it is light all through the night.",
       "The warmest part of the island is on the south coast and that is where most Greenlanders live.",
       "Erik's name might have come from the colour of his hair and beard, or possibly because of his fiery temper.",
       "The old stories of Iceland say that Erik became bored and lonely and wanted to persuade other people to come and live on this freezing-cold island with him.",
       "What happened to them is still a mystery."
     ],
-    targetWords: ["sets", "coast", "beard", "persuade", "mystery"],
+    targetWords: ["coast", "beard", "persuade", "mystery"],
     targetWordObjs: [
       {
         word: "coast",
