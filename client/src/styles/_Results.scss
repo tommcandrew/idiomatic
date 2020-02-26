@@ -15,6 +15,7 @@
 .results__button {
   @include button($mySeaBlue, 1.3rem);
   margin: 1rem 0;
+  width: 10vw;
   &:hover {
     background: $mySeaBlueDark;
   }

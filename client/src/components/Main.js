@@ -30,11 +30,6 @@ const texts = [
     targetWords: ["sets", "coast", "beard", "persuade", "mystery"],
     targetWordObjs: [
       {
-        word: "sets",
-        def: "When the sun goes down in the evening.",
-        audio: "https://media.merriam-webster.com/soundc11/s/set00001.wav"
-      },
-      {
         word: "coast",
         def: "The land near the sea.",
         audio: "https://media.merriam-webster.com/soundc11/c/coast001.wav"
