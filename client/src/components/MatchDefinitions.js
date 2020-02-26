@@ -9,28 +9,35 @@ const MatchDefinitions = ({
   const [definitions, setDefinitions] = useState([]);
   const [selectedOptions, setSelectedOptions] = useState();
   const [results, setResults] = useState({});
-  const [answers, setAnswers] = useState(null);
-
-  const wordsForExercise = text.targetWordObjs.map(wordObj => {
-    if (wordObj.isPlural) {
-      return wordObj.singularForm;
-    } else {
-      return wordObj.word;
-    }
-  });
+  const [targetWords, setTargetWords] = useState([]);
+  const [answerReference, setAnswerReference] = useState([]);
 
   useEffect(() => {
-    const shuffledTargetWordObjs = shuffle(text.targetWordObjs);
+    //make copy to avoid passing by reference
+    const targetWordObjsCopy = JSON.parse(JSON.stringify(text.targetWordObjs));
+    //definitions will appear in random order
+    const shuffledTargetWordObjs = shuffle(targetWordObjsCopy);
     const shuffledDefs = shuffledTargetWordObjs.map(obj => obj.def);
     setDefinitions(shuffledDefs);
-    const answers = shuffledTargetWordObjs.map(wordObj => {
+    //but options will appear in same order as in original text object
+    const targetWords = text.targetWordObjs.map(wordObj => {
       if (wordObj.isPlural) {
         return wordObj.singularForm;
       } else {
         return wordObj.word;
       }
     });
-    setAnswers(answers);
+    setTargetWords(targetWords);
+    //create array of answers based on shuffled definitions to compare to on submit
+    const answerReference = shuffledTargetWordObjs.map(wordObj => {
+      if (wordObj.isPlural) {
+        return wordObj.singularForm;
+      } else {
+        return wordObj.word;
+      }
+    });
+    setAnswerReference(answerReference);
+    //create object to hold user's selected options
     let selectedOptionsObj = {};
     for (let i = 0; i < text.targetWordObjs.length; i++) {
       selectedOptionsObj[i] = null;
@@ -59,7 +66,7 @@ const MatchDefinitions = ({
 
     const resultsObj = {};
     for (let j = 0; j < userAnswerWords.length; j++) {
-      if (userAnswerWords[j] === answers[j]) {
+      if (userAnswerWords[j] === targetWords[j]) {
         resultsObj[j] = "Right";
         correctAnswers++;
       } else {
@@ -87,7 +94,7 @@ const MatchDefinitions = ({
                   {defIndex + 1}. {def}
                 </p>
                 <div className="matchDefinitions__options">
-                  {wordsForExercise.map((word, optionIndex) => (
+                  {targetWords.map((word, optionIndex) => (
                     <button
                       key={"option" + optionIndex}
                       onClick={() => handleSelectOption(defIndex, optionIndex)}
@@ -126,17 +133,17 @@ const MatchDefinitions = ({
                   {defIndex + 1}. {def}
                 </p>
                 <div className="matchDefinitions__options">
-                  {wordsForExercise.map((word, optionIndex) => (
+                  {targetWords.map((word, optionIndex) => (
                     <button
                       key={"option" + optionIndex}
                       onClick={() => handleSelectOption(defIndex, optionIndex)}
                       className={`matchDefinitions__button ${
-                        answers[defIndex] === word &&
+                        answerReference[defIndex] === word &&
                         selectedOptions[defIndex] === optionIndex
                           ? "matchDefinitions__option--right"
                           : ""
                       } ${
-                        answers[defIndex] !== word &&
+                        answerReference[defIndex] !== word &&
                         selectedOptions[defIndex] === optionIndex
                           ? "matchDefinitions__option--wrong"
                           : ""
@@ -146,9 +153,9 @@ const MatchDefinitions = ({
                           : ""
                       }`}
                       data-answer={
-                        answers[defIndex] !== word &&
+                        answerReference[defIndex] !== word &&
                         selectedOptions[defIndex] === optionIndex
-                          ? answers[defIndex]
+                          ? targetWords[defIndex]
                           : ""
                       }
                     >

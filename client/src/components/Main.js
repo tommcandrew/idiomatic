@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Dashboard from "./Dashboard";
 import Texts from "./Texts";
 import UploadText from "./UploadText";
@@ -112,6 +112,7 @@ const Main = () => {
 
   //functions to open/close components
   const handleShowDashboard = () => {
+    setCorrectAnswers(0);
     setShowTexts(false);
     setShowUploadText(false);
     setShowStartPage(false);
@@ -128,6 +129,7 @@ const Main = () => {
   };
 
   const handleShowTexts = () => {
+    setCorrectAnswers(0);
     setShowDashboard(false);
     setShowMyWords(false);
     setShowMyProfile(false);
@@ -143,6 +145,7 @@ const Main = () => {
   };
 
   const handleShowUploadText = () => {
+    setCorrectAnswers(0);
     setShowDashboard(false);
     setShowMyWords(false);
     setShowMyProfile(false);
@@ -163,6 +166,7 @@ const Main = () => {
   };
 
   const handleShowMyTexts = () => {
+    setCorrectAnswers(0);
     setShowDashboard(false);
     setShowTexts(false);
     setShowMyWords(false);
@@ -198,6 +202,7 @@ const Main = () => {
   };
 
   const handleShowMyWords = () => {
+    setCorrectAnswers(0);
     setShowDashboard(false);
     setShowTexts(false);
     setShowMyProfile(false);
@@ -212,6 +217,7 @@ const Main = () => {
   };
 
   const handleShowMyProfile = () => {
+    setCorrectAnswers(0);
     setShowDashboard(false);
     setShowTexts(false);
     setShowSpelling(false);
@@ -281,7 +287,7 @@ const Main = () => {
         <GapFill
           handleShowMatchDefinitions={handleShowMatchDefinitions}
           incrementCorrectAnswers={incrementCorrectAnswers}
-          targetWordObjs={selectedText.targetWordObjs}
+          text={selectedText}
         />
       )}
       {showMatchDefinitions && (

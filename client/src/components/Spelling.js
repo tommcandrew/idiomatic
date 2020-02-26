@@ -1,9 +1,17 @@
+//1. shuffle targetWordObjs
+//2. extract targetWords (to use as answer reference)
+//3. extract definitions
+//4. create object to hold selected options
+//5. in render, map definitions and map target words for their options
+//6. on submit, check answers by getting word from array using selected option index and comparing to word of same index in text.targetWordObjs
+
 import React, { useState, useEffect } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlay } from "@fortawesome/free-solid-svg-icons";
 import Alert from "./Alert";
 import correctSound from "../assets/audio/correct.mp3";
 import incorrectSound from "../assets/audio/incorrect.mp3";
+import shuffle from "../utils/shuffle";
 
 const Spelling = ({
   text,
@@ -13,17 +21,24 @@ const Spelling = ({
 }) => {
   const [questionIndex, setQuestionIndex] = useState(0);
   const [alertInfo, setAlertInfo] = useState("");
+  const [shuffledTargetWordObjs, setShuffledTargetWordObjs] = useState([]);
+  const [targetWords, setTargetWords] = useState([]);
 
-  const wordsForExercise = text.targetWordObjs.map(wordObj => {
-    if (wordObj.isPlural) {
-      return wordObj.singularForm;
-    } else {
-      return wordObj.word;
-    }
-  });
+  useEffect(() => {
+    const shuffledTargetWordObjs = shuffle(text.targetWordObjs);
+    setShuffledTargetWordObjs(shuffledTargetWordObjs);
+    const targetWords = shuffledTargetWordObjs.map(wordObj => {
+      if (wordObj.isPlural) {
+        return wordObj.singularForm;
+      } else {
+        return wordObj.word;
+      }
+    });
+    setTargetWords(targetWords);
+  }, []);
 
   const playAudio = () => {
-    const url = text.targetWordObjs[questionIndex].audio;
+    const url = shuffledTargetWordObjs[questionIndex].audio;
     const audio = new Audio(url);
     audio.play();
   };
@@ -31,7 +46,7 @@ const Spelling = ({
   useEffect(() => {
     const alertTimer = setTimeout(() => {
       setAlertInfo(null);
-    }, 5000);
+    }, 2500);
     return () => {
       clearTimeout(alertTimer);
     };
@@ -45,7 +60,7 @@ const Spelling = ({
       alert("Enter the word");
     }
     e.target.reset();
-    if (input === wordsForExercise[questionIndex]) {
+    if (input === targetWords[questionIndex]) {
       const audio = new Audio(correctSound);
       audio.play();
       setAlertInfo({ type: "success", text: "Right!" });
@@ -56,7 +71,7 @@ const Spelling = ({
       setAlertInfo({ type: "failure", text: "Wrong!" });
     }
     incrementCorrectAnswers(correctAnswers);
-    if (questionIndex === text.targetWordObjs.length - 1) {
+    if (questionIndex === shuffledTargetWordObjs.length - 1) {
       setTimeout(() => {
         markTextComplete();
         handleShowResults();
