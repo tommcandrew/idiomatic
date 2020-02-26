@@ -50,7 +50,7 @@ const UploadText = ({
     if (showUploadForm) {
       formData.append("file", e.target.elements.myfile.files[0]);
       axios
-        .post("/api/upload", formData, {
+        .post("/upload", formData, {
           headers: {
             "Content-Type": "multipart/form-data"
           }
@@ -125,19 +125,21 @@ const UploadText = ({
     }
     const set = new Set(targetSentences);
     const targetSentencesNoDuplicates = [...set];
-    const res = await axios.post("/api/getWordData", { selectedWords });
+    const res = await axios.post("/getWordData", { selectedWords });
     const targetWordObjects = res.data.targetWordObjects;
+
+    targetWordObjects.forEach((obj, index) => {
+      obj.sentence = targetSentencesNoDuplicates[index];
+    });
     const token = localStorage.getItem("idiomatic-token");
 
     axios
       .post(
-        "/api/saveText",
+        "/saveText",
         {
           title: uploadedFile.title,
           content: uploadedFile.content,
-          targetWordObjs: targetWordObjects,
-          targetWords: selectedWords,
-          targetSentences: targetSentencesNoDuplicates
+          targetWordObjs: targetWordObjects
         },
         {
           headers: {

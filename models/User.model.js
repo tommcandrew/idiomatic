@@ -11,9 +11,7 @@ const User = new Schema(
       {
         title: String,
         content: String,
-        targetWordObjs: [{}],
-        targetWords: [String],
-        targetSentences: [String]
+        targetWordObjs: [{}]
       }
     ]
   },

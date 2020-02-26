@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import shuffle from "../utils/shuffle";
 
 const MatchDefinitions = ({
   text,
@@ -38,11 +39,6 @@ const MatchDefinitions = ({
     //eslint-disable-next-line
   }, []);
 
-  const shuffle = array => {
-    array.sort(() => Math.random() - 0.5);
-    return array;
-  };
-
   const handleSelectOption = (defIndex, optionIndex) => {
     setSelectedOptions({ ...selectedOptions, [defIndex]: optionIndex });
   };
@@ -56,7 +52,7 @@ const MatchDefinitions = ({
 
     const userAnswerIndices = Object.values(selectedOptions);
     const userAnswerWords = userAnswerIndices.map(
-      index => text.targetWords[index]
+      index => text.targetWordObjs[index].word
     );
 
     let correctAnswers = 0;

@@ -5,18 +5,26 @@ const Reader = ({ text, handleShowGapFill }) => {
   const [textAsSpanElements, setTextAsSpanElements] = useState([]);
   const [selectedDef, setSelectedDef] = useState(null);
   const [selectedWord, setSelectedWord] = useState(null);
+  const [targetWords, setTargetWords] = useState([]);
 
   useEffect(() => {
-    createSpanArray();
+    const targetWords = text.targetWordObjs.map(obj => obj.word);
+    setTargetWords(targetWords);
     //eslint-disable-next-line
   }, []);
+
+  useEffect(() => {
+    if (targetWords && targetWords.length > 0) {
+      createSpanArray();
+    }
+  }, [targetWords]);
 
   const createSpanArray = () => {
     //change the text into an array of span elements with classNames and save to state
     const splitText = text.content.split(" ");
     const textAsSpanElements = splitText.map((word, index) => {
       if (
-        text.targetWords.includes(
+        targetWords.includes(
           word.replace(
             //eslint-disable-next-line
             /(~|`|!|@|#|$|%|^|&|\*|\(|\)|{|}|\[|\]|;|:|\"|'|<|,|\.|>|\?|\/|\\|\||-|_|\+|=)/g,

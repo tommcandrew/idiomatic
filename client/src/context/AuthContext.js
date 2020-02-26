@@ -16,7 +16,7 @@ export const AuthContextProvider = props => {
     const token = localStorage.getItem("idiomatic-token");
     if (token) {
       axios
-        .get("/api/checkAuth", {
+        .get("/checkAuth", {
           headers: {
             Authorization: "Bearer " + token
           }
@@ -43,7 +43,7 @@ export const AuthContextProvider = props => {
     const email = e.target.email.value;
     const password = e.target.password.value;
     axios
-      .post("/api/login", { email, password })
+      .post("/login", { email, password })
       .then(res => {
         const { token, userName, registerDate } = res.data;
         localStorage.setItem("idiomatic-token", token);
@@ -54,7 +54,7 @@ export const AuthContextProvider = props => {
       })
       .catch(err => {
         //for validation errors
-        if (err.status === 400 || err.status === 403) {
+        if (err.response.status === 400 || err.response.status === 403) {
           errorMessage = err.response.data;
           //for server errors
         } else {
@@ -71,7 +71,7 @@ export const AuthContextProvider = props => {
     const password2 = e.target.password2.value;
     let errorMessage;
     axios
-      .post("/api/register", { name, email, password, password2 })
+      .post("/register", { name, email, password, password2 })
       .then(res => {
         const { token, registerDate } = res.data;
         localStorage.setItem("idiomatic-token", token);
@@ -90,7 +90,7 @@ export const AuthContextProvider = props => {
     const token = localStorage.getItem("idiomatic-token");
     axios
       .post(
-        "/api/deleteAccount",
+        "/deleteAccount",
         { email: userEmail },
 
         {

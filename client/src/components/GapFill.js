@@ -1,16 +1,29 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 const GapFill = ({
-  targetWords,
-  targetSentences,
+  targetWordObjs,
   incrementCorrectAnswers,
   handleShowMatchDefinitions
 }) => {
-  const [gappedSentences] = useState(createGappedSentences());
-  const [answerObj] = useState(createAnswerObj());
-  const [sentencesWithAnswers, setSentencesWithAnswers] = useState();
+  const [gappedSentences, setGappedSentences] = useState([]);
+  const [answerObj, setAnswerObj] = useState({});
+  const [sentencesWithAnswers, setSentencesWithAnswers] = useState([]);
+  const [targetWords, setTargetWords] = useState([]);
+
+  useEffect(() => {
+    const targetWords = targetWordObjs.map(obj => obj.word);
+    setTargetWords(targetWords);
+  }, []);
+
+  useEffect(() => {
+    if (targetWords.length > 0) {
+      createAnswerObj();
+      createGappedSentences();
+    }
+  }, [targetWords]);
 
   function createGappedSentences() {
+    const targetSentences = targetWordObjs.map(obj => obj.sentence);
     const gappedSentenceArray = [];
     for (let i = 0; i < targetSentences.length; i++) {
       //remove all punctuation from sentence and split into individual words
@@ -41,7 +54,7 @@ const GapFill = ({
       });
       gappedSentenceArray.push(gappedSentence);
     }
-    return gappedSentenceArray;
+    setGappedSentences(gappedSentenceArray);
   }
 
   function createAnswerObj() {
@@ -49,7 +62,7 @@ const GapFill = ({
     for (let i = 0; i < targetWords.length; i++) {
       answerObj[i] = targetWords[i];
     }
-    return answerObj;
+    setAnswerObj(answerObj);
   }
 
   const handleSubmit = e => {
@@ -107,7 +120,7 @@ const GapFill = ({
   return (
     <div className="gapFill__wrapper">
       <form className="gapFill__content">
-        {!sentencesWithAnswers && (
+        {sentencesWithAnswers.length === 0 && (
           <>
             <h1 className="gapFill__title">Complete the sentences:</h1>
             <div className="gapFill__sentences">
@@ -130,7 +143,7 @@ const GapFill = ({
             </button>
           </>
         )}
-        {sentencesWithAnswers && (
+        {sentencesWithAnswers.length > 0 && (
           <>
             <h1 className="gapFill__title">
               Hover over the wrong answers to see the right answer:

@@ -40,7 +40,7 @@ const Main = () => {
   function fetchSavedTexts() {
     const token = localStorage.getItem("idiomatic-token");
     axios
-      .get("/api/savedtexts", {
+      .get("/savedtexts", {
         headers: {
           Authorization: "Bearer " + token
         }
@@ -55,7 +55,7 @@ const Main = () => {
     const token = localStorage.getItem("idiomatic-token");
     axios
       .put(
-        "/api/deleteText",
+        "/deleteText",
         { title },
         {
           headers: {
@@ -96,7 +96,7 @@ const Main = () => {
     setShowMyTexts(false);
     setShowStartPage(true);
     //used when giving final results
-    setNumQuestions(selectedText.targetWords.length * 3);
+    setNumQuestions(selectedText.targetWordObjs.length * 3);
   };
 
   const incrementCorrectAnswers = num => {
@@ -279,10 +279,9 @@ const Main = () => {
       )}
       {showGapFill && (
         <GapFill
-          targetSentences={selectedText.targetSentences}
-          targetWords={selectedText.targetWords}
           handleShowMatchDefinitions={handleShowMatchDefinitions}
           incrementCorrectAnswers={incrementCorrectAnswers}
+          targetWordObjs={selectedText.targetWordObjs}
         />
       )}
       {showMatchDefinitions && (

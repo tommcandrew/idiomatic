@@ -3,33 +3,33 @@ const texts = [
     title: "Greenland",
     level: "Upper-intermediate",
     tags: ["geography"],
-    targetSentences: [
-      "The warmest part of the island is on the south coast and that is where most Greenlanders live.",
-      "Erik's name might have come from the colour of his hair and beard, or possibly because of his fiery temper.",
-      "The old stories of Iceland say that Erik became bored and lonely and wanted to persuade other people to come and live on this freezing-cold island with him.",
-      "What happened to them is still a mystery."
-    ],
-    targetWords: ["coast", "beard", "persuade", "mystery"],
     targetWordObjs: [
       {
         word: "coast",
         def: "The land near the sea.",
-        audio: "https://media.merriam-webster.com/soundc11/c/coast001.wav"
+        audio: "https://media.merriam-webster.com/soundc11/c/coast001.wav",
+        sentence:
+          "The warmest part of the island is on the south coast and that is where most Greenlanders live."
       },
       {
         word: "beard",
         def: "The hair that grows on a man's face.",
-        audio: "https://media.merriam-webster.com/soundc11/b/beard001.wav"
+        audio: "https://media.merriam-webster.com/soundc11/b/beard001.wav",
+        sentence:
+          "Erik's name might have come from the colour of his hair and beard, or possibly because of his fiery temper."
       },
       {
         word: "persuade",
         def: "To make someone do something by talking.",
-        audio: "https://media.merriam-webster.com/soundc11/p/persua02.wav"
+        audio: "https://media.merriam-webster.com/soundc11/p/persua02.wav",
+        sentence:
+          "The old stories of Iceland say that Erik became bored and lonely and wanted to persuade other people to come and live on this freezing-cold island with him."
       },
       {
         word: "mystery",
         def: "Something that is impossible to explain.",
-        audio: "https://media.merriam-webster.com/soundc11/m/myster02.wav"
+        audio: "https://media.merriam-webster.com/soundc11/m/myster02.wav",
+        sentence: "What happened to them is still a mystery."
       }
     ],
     content:
