@@ -107,7 +107,7 @@ const Main = () => {
   const [completedTexts, setCompletedTexts] = useState([]);
   const [showMyWords, setShowMyWords] = useState(false);
   const [showMyProfile, setShowMyProfile] = useState(false);
-  const [errorMessages, setErrorMessages] = useState(null);
+  const [infoMessages, setInfoMessages] = useState([]);
 
   useEffect(() => {
     fetchSavedTexts();
@@ -174,6 +174,7 @@ const Main = () => {
       )
       .then(res => {
         fetchSavedTexts();
+        setInfoMessages(["Text deleted"]);
         console.log(res);
       });
   };
@@ -274,7 +275,7 @@ const Main = () => {
   };
 
   const closeAlert = () => {
-    setErrorMessages(null);
+    setInfoMessages([]);
   };
 
   return (
@@ -303,7 +304,10 @@ const Main = () => {
         <UploadText
           fetchSavedTexts={fetchSavedTexts}
           handleShowMyTexts={handleShowMyTexts}
-          setErrorMessages={setErrorMessages}
+          setInfoMessages={setInfoMessages}
+          infoMessages={infoMessages}
+          savedTexts={savedTexts}
+          closeAlert={closeAlert}
         />
       )}
       {showStartPage && (
@@ -357,8 +361,8 @@ const Main = () => {
         />
       )}
       {showMyProfile && <MyProfile />}
-      {errorMessages &&
-        errorMessages.map((message, index) => (
+      {infoMessages &&
+        infoMessages.map((message, index) => (
           <Alert
             alertInfo={{ type: "info", text: message }}
             closeAlert={closeAlert}

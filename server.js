@@ -180,7 +180,7 @@ app.post("/deleteAccount", verifyToken, (req, res) => {
 
 //why can't I see the req.body with axios.post?
 app.post("/getWordData", async (req, res) => {
-  const errorMessages = [];
+  const infoMessages = [];
   const { selectedWords } = req.body;
   const targetWordObjects = [];
   for (let i = 0; i < selectedWords.length; i++) {
@@ -198,7 +198,7 @@ app.post("/getWordData", async (req, res) => {
         dictionaryKey
     );
     if (!response.data[0].shortdef) {
-      errorMessages.push('"' + word + '"' + " was not found in the dictionary");
+      infoMessages.push('"' + word + '"' + " was not found in the dictionary");
       break;
     }
     const shortDef = response.data[0].shortdef[0];
@@ -230,7 +230,7 @@ app.post("/getWordData", async (req, res) => {
     });
     console.log(JSON.stringify(targetWordObjects));
   }
-  res.status(200).send({ targetWordObjects, errorMessages });
+  res.status(200).send({ targetWordObjects, infoMessages });
 });
 
 app.put("/deleteText", verifyToken, (req, res) => {

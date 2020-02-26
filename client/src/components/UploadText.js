@@ -1,10 +1,14 @@
 import React, { useState, useEffect, useRef } from "react";
 import axios from "axios";
+import Alert from "./Alert";
 
 const UploadText = ({
   handleShowMyTexts,
   fetchSavedTexts,
-  setErrorMessages
+  setInfoMessages,
+  infoMessages,
+  savedTexts,
+  closeAlert
 }) => {
   const [uploadedFile, setUploadedFile] = useState(null);
   const [splitText, setSplitText] = useState(null);
@@ -52,6 +56,16 @@ const UploadText = ({
             alert("The text must be at least 50 characters long");
             return;
           }
+          for (let i = 0; i < savedTexts.length; i++) {
+            if (savedTexts[i].title === res.data.title) {
+              setInfoMessages([
+                ...infoMessages,
+                "A text with that name already exists"
+              ]);
+              return;
+            }
+          }
+
           setShowUploadForm(false);
           setShowPasteForm(false);
           setUploadedFile(res.data);
@@ -62,11 +76,14 @@ const UploadText = ({
       const content = e.target.pasted.value;
       const title = e.target.title.value;
       if (!title) {
-        alert("You must add a title");
+        setInfoMessages([...infoMessages, "You must add a title"]);
         return;
       }
       if (content.length < 50) {
-        alert("The text must be at least 50 characters long");
+        setInfoMessages([
+          ...infoMessages,
+          "The text must be at least 50 characters long"
+        ]);
         return;
       }
       setShowUploadForm(false);
@@ -105,9 +122,9 @@ const UploadText = ({
     const set = new Set(targetSentences);
     const targetSentencesNoDuplicates = [...set];
     const res = await axios.post("/getWordData", { selectedWords });
-    let errorMessages;
-    if (res.data.errorMessages.length > 0) {
-      errorMessages = res.data.errorMessages;
+    let infoMessages;
+    if (res.data.infoMessages.length > 0) {
+      infoMessages = res.data.infoMessages;
     }
     const targetWordObjects = res.data.targetWordObjects;
     const token = localStorage.getItem("idiomatic-token");
@@ -129,7 +146,7 @@ const UploadText = ({
         }
       )
       .then(() => {
-        setErrorMessages(errorMessages);
+        setInfoMessages(["Your text has been saved to My Texts"]);
         handleShowMyTexts();
         fetchSavedTexts();
       });
@@ -223,6 +240,15 @@ const UploadText = ({
             <button onClick={handleSubmit}>Save</button>
           </>
         )}
+        {infoMessages &&
+          infoMessages.map((message, index) => (
+            <Alert
+              alertInfo={{ type: "info", text: message }}
+              closeAlert={closeAlert}
+              key={"alert" + index}
+              closeAlert={closeAlert}
+            />
+          ))}
       </div>
     </div>
   );
