@@ -1,11 +1,15 @@
 .spelling__wrapper {
-  height: 100vh;
+  flex-grow: 1;
 }
 
 .spelling__title {
   margin: 0.7rem 0;
   font-size: 1.6rem;
   text-align: center;
+}
+
+.spelling__play-icon {
+  cursor: pointer;
 }
 
 .spelling__content {

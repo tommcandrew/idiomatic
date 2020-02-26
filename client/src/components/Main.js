@@ -159,7 +159,6 @@ const Main = () => {
   };
 
   const deleteText = title => {
-    const textToDelete = savedTexts.filter(text => text.title === title)[0];
     const token = localStorage.getItem("idiomatic-token");
     axios
       .put(

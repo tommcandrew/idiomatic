@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import ResultsPage from "./ResultsPage";
 
 const GapFill = ({
   sentences,

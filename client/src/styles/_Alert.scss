@@ -1,0 +1,53 @@
+.alert {
+  animation: bounce-in 2500ms forwards;
+  border-radius: 6px;
+  display: flex;
+  flex-grow: 1;
+  font-size: 1.5rem;
+  left: 50%;
+  margin-bottom: 15px;
+  padding: 10px;
+  position: absolute;
+  top: 50px;
+  transform: translateX(-50%);
+  width: 20%;
+  z-index: 10;
+  &--success {
+    background: #2ecc71;
+  }
+  &--failure {
+    background: red;
+  }
+  &__icon-wrapper {
+    flex-grow: 1;
+    position: absolute;
+  }
+  &__text {
+    flex-grow: 5;
+    text-align: center;
+  }
+}
+
+@keyframes bounce-in {
+  0% {
+    top: -100px;
+  }
+  8% {
+    top: 50px;
+  }
+  10% {
+    top: 10px;
+  }
+  13% {
+    top: 40px;
+  }
+  17% {
+    top: 25px;
+  }
+  95% {
+    top: 25px;
+  }
+  100% {
+    top: -100px;
+  }
+}

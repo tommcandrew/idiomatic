@@ -76,6 +76,7 @@ const UploadText = ({ handleShowMyTexts, fetchSavedTexts }) => {
 
   const handleSubmit = async e => {
     e.preventDefault();
+    //eslint-disable-next-line
     const selectedWords = splitText.filter((word, index) => {
       if (selectedWordIndices.includes(index)) {
         return word;

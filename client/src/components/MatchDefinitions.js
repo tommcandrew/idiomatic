@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import ResultsPage from "./ResultsPage";
 
 const MatchDefinitions = ({
   text,
@@ -7,7 +6,7 @@ const MatchDefinitions = ({
   incrementCorrectAnswers
 }) => {
   const [definitions, setDefinitions] = useState([]);
-  const [selectedOptions, setSelectedOptions] = useState(null);
+  const [selectedOptions, setSelectedOptions] = useState();
   const [results, setResults] = useState({});
   const [answers, setAnswers] = useState(null);
 
@@ -36,6 +35,10 @@ const MatchDefinitions = ({
 
   const handleSubmit = e => {
     e.preventDefault();
+    if (Object.values(selectedOptions).includes(null)) {
+      alert("Answer all the questions");
+      return;
+    }
 
     const userAnswerIndices = Object.values(selectedOptions);
     const userAnswerWords = userAnswerIndices.map(
@@ -59,61 +62,99 @@ const MatchDefinitions = ({
 
   return (
     <div className="matchDefinitions__wrapper">
-      {!results ||
-        (Object.entries(results).length === 0 && (
-          <div className="matchDefinitions__content">
-            <h1 className="matchDefinitions__title">
-              Choose the word that matches the definition:
-            </h1>
-            {definitions.map((def, defIndef) => {
-              return (
-                <div
-                  className="matchDefinitions__field"
-                  key={"field" + defIndef}
+      {Object.entries(results).length === 0 && (
+        <div className="matchDefinitions__content">
+          <h1 className="matchDefinitions__title">
+            Choose the word that matches the definition:
+          </h1>
+          {definitions.map((def, defIndex) => {
+            return (
+              <div className="matchDefinitions__field" key={"field" + defIndex}>
+                <p
+                  key={"def" + defIndex}
+                  className="matchDefinitions__definition"
                 >
-                  <p
-                    key={"def" + defIndef}
-                    className="matchDefinitions__definition"
-                  >
-                    {def}
-                  </p>
-                  <div className="matchDefinitions__options">
-                    {text.targetWords.map((word, optionIndex) => (
-                      <button
-                        key={"option" + optionIndex}
-                        onClick={() =>
-                          handleSelectOption(defIndef, optionIndex)
-                        }
-                        className={
-                          selectedOptions[defIndef] === optionIndex
-                            ? "matchDefinitions__button--selected"
-                            : "matchDefinitions__button"
-                        }
-                      >
-                        {word}
-                      </button>
-                    ))}
-                  </div>
+                  {defIndex + 1}. {def}
+                </p>
+                <div className="matchDefinitions__options">
+                  {text.targetWords.map((word, optionIndex) => (
+                    <button
+                      key={"option" + optionIndex}
+                      onClick={() => handleSelectOption(defIndex, optionIndex)}
+                      className={
+                        selectedOptions[defIndex] === optionIndex
+                          ? "matchDefinitions__button--selected"
+                          : "matchDefinitions__button"
+                      }
+                    >
+                      {word}
+                    </button>
+                  ))}
                 </div>
-              );
-            })}
-            <button onClick={handleSubmit} className="matchDefinitions__submit">
-              Submit answers
-            </button>
-          </div>
-        ))}
-      {results && Object.entries(results).length > 0 && (
-        <div className="matchDefinitions__results">
-          {results && Object.entries(results).length > 0 && (
-            <div className="matching__results">
-              {results && Object.entries(results).length > 0 && (
-                <ResultsPage
-                  results={results}
-                  handleShowSpelling={handleShowSpelling}
-                />
-              )}
-            </div>
-          )}
+              </div>
+            );
+          })}
+
+          <button onClick={handleSubmit} className="matchDefinitions__submit">
+            Submit answers
+          </button>
+        </div>
+      )}
+
+      {Object.entries(results).length > 0 && (
+        <div className="matchDefinitions__content">
+          <h1 className="matchDefinitions__title">
+            Hover over the wrong answers to see the right answer:
+          </h1>
+          {definitions.map((def, defIndex) => {
+            return (
+              <div className="matchDefinitions__field" key={"field" + defIndex}>
+                <p
+                  key={"def" + defIndex}
+                  className="matchDefinitions__definition"
+                >
+                  {defIndex + 1}. {def}
+                </p>
+                <div className="matchDefinitions__options">
+                  {text.targetWords.map((word, optionIndex) => (
+                    <button
+                      key={"option" + optionIndex}
+                      onClick={() => handleSelectOption(defIndex, optionIndex)}
+                      className={`matchDefinitions__button ${
+                        answers[defIndex] === word &&
+                        selectedOptions[defIndex] === optionIndex
+                          ? "matchDefinitions__option--right"
+                          : ""
+                      } ${
+                        answers[defIndex] !== word &&
+                        selectedOptions[defIndex] === optionIndex
+                          ? "matchDefinitions__option--wrong"
+                          : ""
+                      }${
+                        word === "'" || word === "?"
+                          ? "uploadText__punctuation"
+                          : ""
+                      }`}
+                      data-answer={
+                        answers[defIndex] !== word &&
+                        selectedOptions[defIndex] === optionIndex
+                          ? answers[defIndex]
+                          : ""
+                      }
+                    >
+                      {word}
+                    </button>
+                  ))}
+                </div>
+              </div>
+            );
+          })}
+          <button
+            onClick={handleShowSpelling}
+            className="matchDefinitions__next-button"
+          >
+            Next Exercise
+          </button>
         </div>
       )}
     </div>

@@ -2,10 +2,11 @@ import React from "react";
 
 const Results = ({ correctAnswers, numQuestions }) => {
   return (
-    <div>
-      <h2 className="results__wrapper">
+    <div className="results__wrapper">
+      <h1>Your results:</h1>
+      <p>
         You got {correctAnswers} questions right out of {numQuestions}.
-      </h2>
+      </p>
     </div>
   );
 };
