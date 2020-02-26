@@ -21,7 +21,7 @@ const MyTexts = ({
             />
           ))
         ) : (
-          <h2>You don't have any saved texts.</h2>
+          <h2 className="myTexts__no-texts">You don't have any saved texts.</h2>
         )}
       </div>
       <div className="myTexts__upload-wrapper">

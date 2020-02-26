@@ -14,16 +14,20 @@ const MyAccount = () => {
     }
   };
   return (
-    <>
-      <h1 className="myAccount__title">MY ACCOUNT</h1>
-      <ul>
+    <div className="myProfile__wrapper">
+      <h1 className="myProfile__title">MY ACCOUNT</h1>
+      <ul className="myProfile__list">
         <li>Name: {userName}</li>
         <li>Email: {userEmail}</li>
         <li>Member since: {registerDate}</li>
-        <li>Number of texts studied: {}</li>
       </ul>
-      <button onClick={handleDeleteAccount}>Delete account</button>
-    </>
+      <button
+        onClick={handleDeleteAccount}
+        className="myProfile__delete-account"
+      >
+        Delete account
+      </button>
+    </div>
   );
 };
 

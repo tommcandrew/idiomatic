@@ -1,12 +1,13 @@
 .home__wrapper {
   height: 100vh;
-  background: #eee;
+  // background: #eee;
   display: flex;
   flex-direction: column;
 }
 
 .home__header {
-  background: #26547c;
+  // background: #26547c;
+  background: $mySeaBlue;
   height: 7vh;
   display: flex;
   position: relative;
@@ -29,13 +30,17 @@
   padding: 0.5rem;
   outline: none;
   border: 2px solid rgb(248, 253, 253);
-  background: #26547c;
-  color: #eee;
+  // background: #26547c;
+  background: $mySeaBlue;
+
+  // color: #eee;
+  color: white;
   font-size: 0.8rem;
   font-weight: bold;
   cursor: pointer;
   &:hover {
-    background: #eee;
+    // background: #eee;
+    background: white;
     color: #373277;
   }
 }

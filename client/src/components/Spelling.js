@@ -72,7 +72,9 @@ const Spelling = ({
         Listen to the word then write it in the box:
       </h1>
       <form className="spelling__content" onSubmit={handleSubmit}>
-        <p>Question: {questionIndex + 1}</p>
+        <p className="spelling__question-number">
+          Question: {questionIndex + 1}
+        </p>
         <FontAwesomeIcon
           icon={faPlay}
           onClick={playAudio}

@@ -1,7 +1,7 @@
 import React from "react";
 
 const MobileMenu = ({
-  setShowMenu,
+  setShowMobileMenu,
   handleShowDashboard,
   handleShowMyWords,
   handleShowMyTexts
@@ -10,7 +10,7 @@ const MobileMenu = ({
     <div className="mobile-menu">
       <span
         className="mobile-menu__close-button"
-        onClick={() => setShowMenu(false)}
+        onClick={() => setShowMobileMenu(false)}
       >
         &times;
       </span>

@@ -41,6 +41,10 @@ const UploadText = ({
 
   const handleUpload = e => {
     e.preventDefault();
+    if (!e.target.elements.myfile.files[0]) {
+      setInfoMessages(["Add a file"]);
+      return;
+    }
     const formData = new FormData();
     let splitText;
     if (showUploadForm) {
@@ -146,7 +150,7 @@ const UploadText = ({
         }
       )
       .then(() => {
-        setInfoMessages(["Your text has been saved to My Texts"]);
+        setInfoMessages(["Saved"]);
         handleShowMyTexts();
         fetchSavedTexts();
       });

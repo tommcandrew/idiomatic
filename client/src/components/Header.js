@@ -10,11 +10,12 @@ const Header = ({
   handleShowMyTexts,
   handleShowMyWords,
   handleShowTexts,
-  handleShowMyProfile
+  handleShowMyProfile,
+  showMobileMenu,
+  setShowMobileMenu
 }) => {
   const { device } = useContext(DeviceContext);
   const { logout } = useContext(AuthContext);
-  const [showMobileMenu, setShowMobileMenu] = useState(false);
   const [mouseOverIcon, setMouseOverIcon] = useState(false);
   const [mouseOverOptionsMenu, setMouseOverOptionsMenu] = useState(false);
 
@@ -30,7 +31,14 @@ const Header = ({
           <div></div>
         </div>
       )}
-      {showMobileMenu && <MobileMenu setShowMobileMenu={setShowMobileMenu} />}
+      {showMobileMenu && (
+        <MobileMenu
+          setShowMobileMenu={setShowMobileMenu}
+          handleShowDashboard={handleShowDashboard}
+          handleShowMyWords={handleShowMyWords}
+          handleShowMyTexts={handleShowMyTexts}
+        />
+      )}
       {device === "desktop" && (
         <>
           <div className="header__buttons--left">

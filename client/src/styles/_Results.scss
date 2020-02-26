@@ -1,7 +1,21 @@
 .results__wrapper {
   display: flex;
-  justify-content: center;
   flex-grow: 1;
-  padding-top: 20vh;
   text-align: center;
+  flex-direction: column;
+}
+
+.results__title {
+  margin-top: 3rem;
+}
+
+.results__info {
+  font-size: 2rem;
+}
+.results__button {
+  @include button($mySeaBlue, 1.3rem);
+  margin: 1rem 0;
+  &:hover {
+    background: $mySeaBlueDark;
+  }
 }

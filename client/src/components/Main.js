@@ -108,6 +108,7 @@ const Main = () => {
   const [showMyWords, setShowMyWords] = useState(false);
   const [showMyProfile, setShowMyProfile] = useState(false);
   const [infoMessages, setInfoMessages] = useState([]);
+  const [showMobileMenu, setShowMobileMenu] = useState(false);
 
   useEffect(() => {
     fetchSavedTexts();
@@ -137,6 +138,7 @@ const Main = () => {
     setShowMyTexts(false);
     setShowGapFill(false);
     setShowMatchDefinitions(false);
+    setShowMobileMenu(false);
     setShowTexts(true);
   };
 
@@ -144,9 +146,11 @@ const Main = () => {
     setShowDashboard(false);
     setShowMyTexts(false);
     setShowUploadText(true);
+    setShowMobileMenu(false);
   };
 
   const handleShowDashboard = () => {
+    console.log("show dashboard");
     setShowTexts(false);
     setShowUploadText(false);
     setShowStartPage(false);
@@ -157,6 +161,8 @@ const Main = () => {
     setShowSpelling(false);
     setShowGapFill(false);
     setShowMatchDefinitions(false);
+    setShowMyProfile(false);
+    setShowMobileMenu(false);
     setShowDashboard(true);
   };
 
@@ -180,6 +186,10 @@ const Main = () => {
   };
 
   const handleChooseText = (e, title) => {
+    if (title !== "Greenland") {
+      setInfoMessages(["Not available right now"]);
+      return;
+    }
     if (
       !e.target.classList.contains("textTile__content") &&
       !e.target.classList.contains("textTile__title")
@@ -215,6 +225,8 @@ const Main = () => {
     setShowUploadText(false);
     setShowGapFill(false);
     setShowMatchDefinitions(false);
+    setShowMobileMenu(false);
+
     setShowMyTexts(true);
   };
 
@@ -286,6 +298,8 @@ const Main = () => {
         handleShowMyWords={handleShowMyWords}
         handleShowTexts={handleShowTexts}
         handleShowMyProfile={handleShowMyProfile}
+        showMobileMenu={showMobileMenu}
+        setShowMobileMenu={setShowMobileMenu}
       />
       {showDashboard && (
         <Dashboard
@@ -351,7 +365,11 @@ const Main = () => {
         />
       )}
       {showResults && (
-        <Results correctAnswers={correctAnswers} numQuestions={numQuestions} />
+        <Results
+          correctAnswers={correctAnswers}
+          numQuestions={numQuestions}
+          handleShowDashboard={handleShowDashboard}
+        />
       )}
       {showMyWords && (
         <MyWords

@@ -1,0 +1,10 @@
+.myWords__wrapper {
+  display: flex;
+  flex-grow: 1;
+  flex-direction: column;
+  align-items: center;
+}
+
+.myWords__title {
+  margin: 2rem 0;
+}

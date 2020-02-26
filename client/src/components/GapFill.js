@@ -136,7 +136,7 @@ const GapFill = ({
           </form>
         ))}
       {results && Object.entries(results).length > 0 && (
-        <div className="gapFill__results">
+        <div className="gapFill__content">
           <h1 className="gapFill__title">
             Hover over the wrong answers to see the right answer:
           </h1>

@@ -11,7 +11,7 @@
   position: absolute;
   top: 50px;
   transform: translateX(-50%);
-  width: 20%;
+  min-width: 70%;
   z-index: 10;
   color: white;
   justify-content: center;
@@ -22,7 +22,7 @@
 }
 
 .alert--success {
-  background: #62f59f;
+  background: #51df8c;
 }
 .alert--failure {
   background: rgb(250, 66, 66);
@@ -44,6 +44,8 @@
   transform: translateX(-50%);
   z-index: 10;
   background: gold;
+  min-width: 70%;
+
   &__text {
     flex-grow: 5;
     text-align: center;
@@ -92,5 +94,11 @@
 
   to {
     opacity: 1;
+  }
+}
+
+@media only screen and (min-width: 1000px) {
+  .gapFill__content {
+    width: 20%;
   }
 }

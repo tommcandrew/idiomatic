@@ -19,7 +19,7 @@ const MyWords = ({ texts, savedTexts, completedTexts }) => {
 
   return (
     <div className="myWords__wrapper">
-      <h1>My Words</h1>
+      <h1 className="myWords__title">My Words</h1>
       <div className="myWords__content">
         {studiedWords.length > 0 ? (
           studiedWords.map((word, index) => (
