@@ -50,7 +50,7 @@ const UploadText = ({
     if (showUploadForm) {
       formData.append("file", e.target.elements.myfile.files[0]);
       axios
-        .post("/upload", formData, {
+        .post("/api/upload", formData, {
           headers: {
             "Content-Type": "multipart/form-data"
           }
@@ -125,7 +125,7 @@ const UploadText = ({
     }
     const set = new Set(targetSentences);
     const targetSentencesNoDuplicates = [...set];
-    const res = await axios.post("/getWordData", { selectedWords });
+    const res = await axios.post("/api/getWordData", { selectedWords });
     let infoMessages;
     if (res.data.infoMessages.length > 0) {
       infoMessages = res.data.infoMessages;
@@ -135,7 +135,7 @@ const UploadText = ({
 
     axios
       .post(
-        "/saveText",
+        "/api/saveText",
         {
           title: uploadedFile.title,
           content: uploadedFile.content,
