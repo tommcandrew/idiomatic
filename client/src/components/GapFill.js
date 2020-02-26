@@ -106,7 +106,7 @@ const GapFill = ({
 
   return (
     <div className="gapFill__wrapper">
-      <div className="gapFill__content">
+      <form className="gapFill__content">
         {!sentencesWithAnswers && (
           <>
             <h1 className="gapFill__title">Complete the sentences:</h1>
@@ -143,6 +143,7 @@ const GapFill = ({
               ))}
             </div>
             <button
+              type="button"
               onClick={handleShowMatchDefinitions}
               className="gapFill__next"
             >
@@ -150,7 +151,7 @@ const GapFill = ({
             </button>
           </>
         )}
-      </div>
+      </form>
     </div>
   );
 };
