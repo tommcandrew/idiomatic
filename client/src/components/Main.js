@@ -286,7 +286,6 @@ const Main = () => {
         handleShowTexts={handleShowTexts}
         handleShowMyProfile={handleShowMyProfile}
       />
-
       {showDashboard && (
         <Dashboard
           handleShowTexts={handleShowTexts}
@@ -362,12 +361,9 @@ const Main = () => {
         errorMessages.map((message, index) => (
           <Alert
             alertInfo={{ type: "info", text: message }}
-            alertInfo={{
-              type: "info",
-              text: "The word fathomless was not found in the dictionary"
-            }}
             closeAlert={closeAlert}
             key={"alert" + index}
+            closeAlert={closeAlert}
           />
         ))}
     </div>

@@ -10,11 +10,25 @@ const MatchDefinitions = ({
   const [results, setResults] = useState({});
   const [answers, setAnswers] = useState(null);
 
+  const wordsForExercise = text.targetWordObjs.map(wordObj => {
+    if (wordObj.isPlural) {
+      return wordObj.singularForm;
+    } else {
+      return wordObj.word;
+    }
+  });
+
   useEffect(() => {
     const shuffledTargetWordObjs = shuffle(text.targetWordObjs);
     const shuffledDefs = shuffledTargetWordObjs.map(obj => obj.def);
     setDefinitions(shuffledDefs);
-    const answers = shuffledTargetWordObjs.map(obj => obj.word);
+    const answers = shuffledTargetWordObjs.map(wordObj => {
+      if (wordObj.isPlural) {
+        return wordObj.singularForm;
+      } else {
+        return wordObj.word;
+      }
+    });
     setAnswers(answers);
     let selectedOptionsObj = {};
     for (let i = 0; i < text.targetWordObjs.length; i++) {
@@ -77,7 +91,7 @@ const MatchDefinitions = ({
                   {defIndex + 1}. {def}
                 </p>
                 <div className="matchDefinitions__options">
-                  {text.targetWords.map((word, optionIndex) => (
+                  {wordsForExercise.map((word, optionIndex) => (
                     <button
                       key={"option" + optionIndex}
                       onClick={() => handleSelectOption(defIndex, optionIndex)}
@@ -116,7 +130,7 @@ const MatchDefinitions = ({
                   {defIndex + 1}. {def}
                 </p>
                 <div className="matchDefinitions__options">
-                  {text.targetWords.map((word, optionIndex) => (
+                  {wordsForExercise.map((word, optionIndex) => (
                     <button
                       key={"option" + optionIndex}
                       onClick={() => handleSelectOption(defIndex, optionIndex)}

@@ -14,6 +14,14 @@ const Spelling = ({
   const [questionIndex, setQuestionIndex] = useState(0);
   const [alertInfo, setAlertInfo] = useState("");
 
+  const wordsForExercise = text.targetWordObjs.map(wordObj => {
+    if (wordObj.isPlural) {
+      return wordObj.singularForm;
+    } else {
+      return wordObj.word;
+    }
+  });
+
   const playAudio = () => {
     const url = text.targetWordObjs[questionIndex].audio;
     const audio = new Audio(url);
@@ -37,7 +45,7 @@ const Spelling = ({
       alert("Enter the word");
     }
     e.target.reset();
-    if (input === text.targetWordObjs[questionIndex].word) {
+    if (input === wordsForExercise[questionIndex]) {
       const audio = new Audio(correctSound);
       audio.play();
       setAlertInfo({ type: "success", text: "Right!" });
@@ -72,7 +80,6 @@ const Spelling = ({
         />
         <input type="text" name="text" />
         <button type="submit">Check</button>
-        {text.targetWordObjs[questionIndex].word}
       </form>
       {alertInfo && <Alert alertInfo={alertInfo} />}
     </div>

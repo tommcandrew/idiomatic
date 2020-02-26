@@ -13,7 +13,8 @@
   transform: translateX(-50%);
   width: 20%;
   z-index: 10;
-
+  color: white;
+  justify-content: center;
   &__text {
     flex-grow: 5;
     text-align: center;
@@ -21,10 +22,10 @@
 }
 
 .alert--success {
-  background: #2ecc71;
+  background: #62f59f;
 }
 .alert--failure {
-  background: red;
+  background: rgb(250, 66, 66);
 }
 
 .alert--info {
@@ -52,6 +53,7 @@
 .alert__icon-wrapper {
   position: absolute;
   flex-grow: 1;
+  left: 1rem;
 }
 
 .alert__close {

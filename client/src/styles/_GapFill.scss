@@ -55,10 +55,12 @@
 
 .gapFill__filled--right {
   color: green;
+  font-weight: bold;
 }
 
 .gapFill__filled--wrong {
   color: red;
+  font-weight: bold;
   position: relative;
   cursor: pointer;
   &:hover::after {

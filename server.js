@@ -7,6 +7,7 @@ const jwt = require("jsonwebtoken");
 const bcrypt = require("bcryptjs");
 const axios = require("axios");
 const dictionaryKey = "083cdcb6-cd9f-4856-a7b6-21c474d149c8";
+const pluralize = require("pluralize");
 
 mongoose.connect(
   "mongodb://localhost:27017/idiomatic",
@@ -183,16 +184,21 @@ app.post("/getWordData", async (req, res) => {
   const { selectedWords } = req.body;
   const targetWordObjects = [];
   for (let i = 0; i < selectedWords.length; i++) {
+    const isPlural = pluralize.isPlural(selectedWords[i]);
+    let word;
+    if (isPlural) {
+      word = pluralize.singular(selectedWords[i]);
+    } else {
+      word = selectedWords[i];
+    }
     const response = await axios.get(
       "https://dictionaryapi.com/api/v3/references/learners/json/" +
-        selectedWords[i] +
+        word +
         "?key=" +
         dictionaryKey
     );
     if (!response.data[0].shortdef) {
-      errorMessages.push(
-        '"' + selectedWords[i] + '"' + " was not found in the dictionary"
-      );
+      errorMessages.push('"' + word + '"' + " was not found in the dictionary");
       break;
     }
     const shortDef = response.data[0].shortdef[0];
@@ -208,10 +214,19 @@ app.post("/getWordData", async (req, res) => {
       audioUrl = null;
     }
 
+    let singularForm;
+    if (isPlural) {
+      singularForm = pluralize.singular(word);
+    } else {
+      singularForm = null;
+    }
+
     targetWordObjects.push({
       word: selectedWords[i],
       def: shortDef,
-      audio: audioUrl
+      audio: audioUrl,
+      isPlural: isPlural,
+      singularForm: singularForm
     });
     console.log(JSON.stringify(targetWordObjects));
   }
