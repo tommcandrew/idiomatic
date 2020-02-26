@@ -101,6 +101,7 @@ export const AuthContextProvider = props => {
       )
       .then(() => {
         setAuthenticated(false);
+        setErrorMessage("Your account has been deleted.");
         return (
           <Redirect
             to={{

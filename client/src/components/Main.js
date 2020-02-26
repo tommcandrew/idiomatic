@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import Dashboard from "./Dashboard";
 import Texts from "./Texts";
 import UploadText from "./UploadText";
@@ -144,9 +144,17 @@ const Main = () => {
 
   const handleShowUploadText = () => {
     setShowDashboard(false);
+    setShowMyWords(false);
+    setShowMyProfile(false);
+    setShowSpelling(false);
+    setShowResults(false);
+    setShowStartPage(false);
     setShowMyTexts(false);
-    setShowUploadText(true);
+    setShowGapFill(false);
+    setShowMatchDefinitions(false);
     setShowMobileMenu(false);
+    setShowTexts(false);
+    setShowUploadText(true);
   };
 
   const handleShowReader = () => {
@@ -313,7 +321,6 @@ const Main = () => {
             alertInfo={{ type: "info", text: message }}
             closeAlert={closeAlert}
             key={"alert" + index}
-            closeAlert={closeAlert}
           />
         ))}
     </div>

@@ -126,10 +126,6 @@ const UploadText = ({
     const set = new Set(targetSentences);
     const targetSentencesNoDuplicates = [...set];
     const res = await axios.post("/api/getWordData", { selectedWords });
-    let infoMessages;
-    if (res.data.infoMessages.length > 0) {
-      infoMessages = res.data.infoMessages;
-    }
     const targetWordObjects = res.data.targetWordObjects;
     const token = localStorage.getItem("idiomatic-token");
 
@@ -250,7 +246,6 @@ const UploadText = ({
               alertInfo={{ type: "info", text: message }}
               closeAlert={closeAlert}
               key={"alert" + index}
-              closeAlert={closeAlert}
             />
           ))}
       </div>

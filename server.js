@@ -106,23 +106,18 @@ app.get("/checkAuth", verifyToken, (req, res) => {
 });
 
 app.post("/upload", async (req, res) => {
-  console.log("upload request received");
   if (req.files === null) {
     return res.status(400).json({ msg: "No file uploaded" });
   }
   const file = req.files.file;
-  console.log(file);
   let content;
   if (file.mimetype === "application/pdf") {
-    console.log("file is pdf");
     const data = await pdf(file.data);
     content = data.text;
   } else {
-    console.log("file is not pdf");
     content = file.data.toString("utf8");
   }
   const title = file.name.substr(0, file.name.length - 4);
-  console.log(title);
   res.status(200).send({ title, content });
 });
 
