@@ -35,9 +35,13 @@ const Main = () => {
   const [correctAnswers, setCorrectAnswers] = useState(0);
   const [numQuestions, setNumQuestions] = useState(null);
   const [completedTexts, setCompletedTexts] = useState([]);
-  const [savedTexts] = useState(fetchSavedTexts() || []);
+  const [savedTexts, setSavedTexts] = useState([]);
 
-  function fetchSavedTexts() {
+  useEffect(() => {
+    fetchSavedTexts();
+  }, []);
+
+  const fetchSavedTexts = () => {
     const token = localStorage.getItem("idiomatic-token");
     axios
       .get("/savedtexts", {
@@ -46,9 +50,9 @@ const Main = () => {
         }
       })
       .then(res => {
-        return res.data;
+        setSavedTexts(res.data);
       });
-  }
+  };
 
   //would id be better?
   const deleteText = title => {
@@ -70,11 +74,6 @@ const Main = () => {
   };
 
   const handleChooseText = (e, title) => {
-    //until I add data for other texts
-    if (title !== "Greenland") {
-      setInfoMessages(["Not available right now"]);
-      return;
-    }
     //better way to do this?
     if (
       !e.target.classList.contains("textTile__content") &&

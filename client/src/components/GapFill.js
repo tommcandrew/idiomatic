@@ -36,11 +36,11 @@ const GapFill = ({
 
   const createGappedSentences = () => {
     //create gapped sentences based on shuffled sentences
-    const targetSentences = shuffledTargetWordObjs.map(obj => obj.sentence);
+    // const targetSentences = shuffledTargetWordObjs.map(obj => obj.sentence);
     const gappedSentenceArray = [];
-    for (let i = 0; i < targetSentences.length; i++) {
+    for (let i = 0; i < shuffledTargetWordObjs.length; i++) {
       //remove all punctuation from sentence and split into individual words
-      const splitSentence = targetSentences[i]
+      const splitSentence = shuffledTargetWordObjs[i].sentence
         .replace(
           //eslint-disable-next-line
           /(~|`|!|@|#|$|%|^|&|\*|\(|\)|{|}|\[|\]|;|:|\"|'|<|,|\.|>|\?|\/|\\|\||-|_|\+|=)/g,
@@ -49,7 +49,7 @@ const GapFill = ({
         .split(" ");
       //replace words in sentence with elements - input for a gap or span for a word
       const gappedSentence = splitSentence.map((word, index) => {
-        if (targetWords.includes(word)) {
+        if (word === shuffledTargetWordObjs[i].word) {
           return (
             <input
               key={"word" + index}
