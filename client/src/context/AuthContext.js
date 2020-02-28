@@ -131,7 +131,7 @@ export const AuthContextProvider = props => {
       .post("/api/login", { email, password })
       .then(res => {
         const { token, userName } = res.data;
-        localStorage.setItem("my-token", token);
+        localStorage.setItem("idiomatic-token", token);
         setAuthenticated(true);
         setUserEmail(email);
         setUserName(userName);

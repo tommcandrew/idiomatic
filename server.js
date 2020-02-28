@@ -9,7 +9,8 @@ const axios = require("axios");
 const dictionaryKey = "083cdcb6-cd9f-4856-a7b6-21c474d149c8";
 const pluralize = require("pluralize");
 const fs = require("fs");
-const logger = require("./services/logger_service");
+const Logger = require("./services/logger_service");
+const logger = new Logger("app");
 
 mongoose.connect(
   "mongodb://localhost:27017/idiomatic",
@@ -28,9 +29,13 @@ app.use(express.json());
 app.use(fileUpload());
 
 const verifyToken = (req, res, next) => {
+  console.log("verify");
   const bearer = req.headers["authorization"];
+  console.log(bearer);
   const bearerHeader = bearer.split(" ");
+  console.log(bearerHeader);
   const token = bearerHeader[1];
+  console.log(token);
   if (token) {
     jwt.verify(token, "secretkey", (err, tokenData) => {
       if (err) {
@@ -46,7 +51,7 @@ const verifyToken = (req, res, next) => {
 app.post("/login", (req, res) => {
   const { email, password } = req.body;
   if (email === "anna@gmail.com" && password === "anna12345") {
-    logger.info("Demo user has logged in");
+    logger.info("Demo user has logged in", { key: "value" });
   }
   User.findOne({ email }).then(user => {
     if (!user) {
@@ -147,10 +152,7 @@ app.post("/saveText", verifyToken, (req, res) => {
     .then(user => {
       user.texts.push(text);
       user.save().then(() => {
-        // res.status(200).send("Text saved");
-        fs.writeFile("text.txt", JSON.stringify(text), () =>
-          console.log("text written")
-        );
+        res.status(200).send("Text saved");
       });
     })
     .catch(err => {

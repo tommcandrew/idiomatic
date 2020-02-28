@@ -123,8 +123,6 @@ const UploadText = ({
         }
       }
     }
-    // const set = new Set(targetSentences);
-    // const targetSentencesNoDuplicates = [...set];
     const res = await axios.post("/api/getWordData", { selectedWords });
     const targetWordObjects = res.data.targetWordObjects;
 
@@ -132,7 +130,6 @@ const UploadText = ({
       obj.sentence = targetSentences[index];
     });
     const token = localStorage.getItem("idiomatic-token");
-
     axios
       .post(
         "/api/saveText",
