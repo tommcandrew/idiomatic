@@ -45,7 +45,7 @@ const verifyToken = (req, res, next) => {
 
 app.post("/login", (req, res) => {
   const { email, password } = req.body;
-  if (email === "anna@gmail.com" && passwprd === "anna12345") {
+  if (email === "anna@gmail.com" && password === "anna12345") {
     logger.info("Demo user has logged in");
   }
   User.findOne({ email }).then(user => {
