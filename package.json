@@ -21,6 +21,7 @@
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^5.9.2",
     "pdf-parse": "^1.1.1",
-    "pluralize": "^8.0.0"
+    "pluralize": "^8.0.0",
+    "winston": "^3.2.1"
   }
 }

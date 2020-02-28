@@ -9,6 +9,7 @@ const axios = require("axios");
 const dictionaryKey = "083cdcb6-cd9f-4856-a7b6-21c474d149c8";
 const pluralize = require("pluralize");
 const fs = require("fs");
+const logger = require("./services/logger_service");
 
 mongoose.connect(
   "mongodb://localhost:27017/idiomatic",
@@ -44,6 +45,9 @@ const verifyToken = (req, res, next) => {
 
 app.post("/login", (req, res) => {
   const { email, password } = req.body;
+  if (email === "anna@gmail.com" && passwprd === "anna12345") {
+    logger.info("Demo user has logged in");
+  }
   User.findOne({ email }).then(user => {
     if (!user) {
       res.status(403).send("That email is not registered");
