@@ -41,8 +41,8 @@ const UploadText = ({
 
   const handleUpload = e => {
     e.preventDefault();
-    if (!e.target.elements.myfile.files[0]) {
-      setInfoMessages(["Add a file"]);
+    if (!e.target.elements.myfile && !e.target.pasted.value) {
+      setInfoMessages(["Either choose a file or paste some text"]);
       return;
     }
     const formData = new FormData();
@@ -112,30 +112,30 @@ const UploadText = ({
     allSentences = uploadedFile.content.split(".");
     const allSentencesSplit = [];
     for (let i = 0; i < allSentences.length; i++) {
-      const splitSentence = allSentences[i].split(" ");
+      const splitSentence = allSentences[i].match(/\w+|\s+|[^\s\w]+/g);
       allSentencesSplit.push(splitSentence);
     }
     for (let i = 0; i < selectedWords.length; i++) {
       for (let j = 0; j < allSentencesSplit.length; j++) {
         if (allSentencesSplit[j].includes(selectedWords[i])) {
-          targetSentences.push(allSentences[j]);
+          targetSentences.push(allSentences[j].trim());
           break;
         }
       }
     }
-    const set = new Set(targetSentences);
-    const targetSentencesNoDuplicates = [...set];
-    const res = await axios.post("/getWordData", { selectedWords });
+    // const set = new Set(targetSentences);
+    // const targetSentencesNoDuplicates = [...set];
+    const res = await axios.post("/api/getWordData", { selectedWords });
     const targetWordObjects = res.data.targetWordObjects;
 
     targetWordObjects.forEach((obj, index) => {
-      obj.sentence = targetSentencesNoDuplicates[index];
+      obj.sentence = targetSentences[index];
     });
     const token = localStorage.getItem("idiomatic-token");
 
     axios
       .post(
-        "/saveText",
+        "/api/saveText",
         {
           title: uploadedFile.title,
           content: uploadedFile.content,

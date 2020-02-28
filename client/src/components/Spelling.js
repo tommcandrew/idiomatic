@@ -27,9 +27,11 @@ const Spelling = ({
   useEffect(() => {
     const shuffledTargetWordObjs = shuffle(text.targetWordObjs);
     setShuffledTargetWordObjs(shuffledTargetWordObjs);
-    const targetWords = shuffledTargetWordObjs.map(wordObj => {
+    const targetWords = text.targetWordObjs.map(wordObj => {
       if (wordObj.isPlural) {
         return wordObj.singularForm;
+      } else if (wordObj.wordType === "verb") {
+        return wordObj.infinitiveForm;
       } else {
         return wordObj.word;
       }

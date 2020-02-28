@@ -6,6 +6,7 @@ const Reader = ({ text, handleShowGapFill }) => {
   const [selectedDef, setSelectedDef] = useState(null);
   const [selectedWord, setSelectedWord] = useState(null);
   const [targetWords, setTargetWords] = useState([]);
+  const [selectedTargetWordObj, setSelectedTargetWordObj] = useState(null);
 
   useEffect(() => {
     const targetWords = text.targetWordObjs.map(obj => obj.word);
@@ -54,7 +55,7 @@ const Reader = ({ text, handleShowGapFill }) => {
   };
 
   const handleSingleClick = e => {
-    const selectedWord = e.target.innerText.replace(
+    let selectedWord = e.target.innerText.replace(
       //eslint-disable-next-line
       /(~|`|!|@|#|$|%|^|&|\*|\(|\)|{|}|\[|\]|;|:|\"|'|<|,|\.|>|\?|\/|\\|\||-|_|\+|=)/g,
       ""
@@ -62,9 +63,13 @@ const Reader = ({ text, handleShowGapFill }) => {
     const selectedTargetWordObj = text.targetWordObjs.filter(
       obj => obj.word === selectedWord
     )[0];
+    if (selectedTargetWordObj.wordType === "verb") {
+      selectedWord = selectedTargetWordObj.infinitiveForm;
+    }
     const def = selectedTargetWordObj.def;
     setSelectedDef(def);
     setSelectedWord(selectedWord);
+    setSelectedTargetWordObj(selectedTargetWordObj);
   };
 
   const closeModal = e => {
@@ -83,8 +88,7 @@ const Reader = ({ text, handleShowGapFill }) => {
           <DefinitionModal
             definition={selectedDef}
             closeModal={closeModal}
-            word={selectedWord}
-            text={text}
+            selectedTargetWordObj={selectedTargetWordObj}
           />
         )}
         <h1 className="reader__title">{text.title}</h1>

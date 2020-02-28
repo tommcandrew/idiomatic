@@ -44,7 +44,7 @@ const Main = () => {
   const fetchSavedTexts = () => {
     const token = localStorage.getItem("idiomatic-token");
     axios
-      .get("/savedtexts", {
+      .get("/api/savedtexts", {
         headers: {
           Authorization: "Bearer " + token
         }
@@ -59,7 +59,7 @@ const Main = () => {
     const token = localStorage.getItem("idiomatic-token");
     axios
       .put(
-        "/deleteText",
+        "/api/deleteText",
         { title },
         {
           headers: {
@@ -140,6 +140,7 @@ const Main = () => {
     setShowGapFill(false);
     setShowMatchDefinitions(false);
     setShowMobileMenu(false);
+    setShowReader(false);
     setShowTexts(true);
   };
 
@@ -156,6 +157,7 @@ const Main = () => {
     setShowMatchDefinitions(false);
     setShowMobileMenu(false);
     setShowTexts(false);
+    setShowReader(false);
     setShowUploadText(true);
   };
 
@@ -177,6 +179,7 @@ const Main = () => {
     setShowGapFill(false);
     setShowMatchDefinitions(false);
     setShowMobileMenu(false);
+    setShowReader(false);
     setShowMyTexts(true);
   };
 
@@ -212,6 +215,7 @@ const Main = () => {
     setShowMyTexts(false);
     setShowGapFill(false);
     setShowMatchDefinitions(false);
+    setShowReader(false);
     setShowMyWords(true);
   };
 
@@ -227,6 +231,7 @@ const Main = () => {
     setShowGapFill(false);
     setShowMatchDefinitions(false);
     setShowMyWords(false);
+    setShowReader(false);
     setShowMyProfile(true);
   };
 

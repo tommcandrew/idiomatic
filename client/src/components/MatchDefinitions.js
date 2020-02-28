@@ -23,6 +23,8 @@ const MatchDefinitions = ({
     const targetWords = text.targetWordObjs.map(wordObj => {
       if (wordObj.isPlural) {
         return wordObj.singularForm;
+      } else if (wordObj.wordType === "verb") {
+        return wordObj.infinitiveForm;
       } else {
         return wordObj.word;
       }
@@ -32,6 +34,8 @@ const MatchDefinitions = ({
     const answerReference = shuffledTargetWordObjs.map(wordObj => {
       if (wordObj.isPlural) {
         return wordObj.singularForm;
+      } else if (wordObj.wordType === "verb") {
+        return wordObj.infinitiveForm;
       } else {
         return wordObj.word;
       }
@@ -58,15 +62,12 @@ const MatchDefinitions = ({
     }
 
     const userAnswerIndices = Object.values(selectedOptions);
-    const userAnswerWords = userAnswerIndices.map(
-      index => text.targetWordObjs[index].word
-    );
+    const userAnswerWords = userAnswerIndices.map(index => targetWords[index]);
 
     let correctAnswers = 0;
-
     const resultsObj = {};
     for (let j = 0; j < userAnswerWords.length; j++) {
-      if (userAnswerWords[j] === targetWords[j]) {
+      if (userAnswerWords[j] === answerReference[j]) {
         resultsObj[j] = "Right";
         correctAnswers++;
       } else {

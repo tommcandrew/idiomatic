@@ -8,6 +8,7 @@ const bcrypt = require("bcryptjs");
 const axios = require("axios");
 const dictionaryKey = "083cdcb6-cd9f-4856-a7b6-21c474d149c8";
 const pluralize = require("pluralize");
+const fs = require("fs");
 
 mongoose.connect(
   "mongodb://localhost:27017/idiomatic",
@@ -197,6 +198,11 @@ app.post("/getWordData", async (req, res) => {
       break;
     }
     const shortDef = response.data[0].shortdef[0];
+    const wordType = response.data[0].hwi.fl;
+    let infinitiveForm;
+    if (wordType === "verb") {
+      infinitiveForm = response.data[0].hwi.hw;
+    }
     let audioUrl;
     if (response.data[0].hwi.prs) {
       audioUrl =
@@ -221,7 +227,9 @@ app.post("/getWordData", async (req, res) => {
       def: shortDef,
       audio: audioUrl,
       isPlural: isPlural,
-      singularForm: singularForm
+      singularForm: singularForm,
+      wordType: wordType,
+      infinitiveForm: infinitiveForm
     });
     console.log(JSON.stringify(targetWordObjects));
   }
