@@ -36,7 +36,7 @@ const texts = [
         isPlural: false,
         singularForm: null,
         wordType: "verb",
-        infinitiveForm: null
+        infinitiveForm: "persuade"
       },
       {
         word: "mystery",
