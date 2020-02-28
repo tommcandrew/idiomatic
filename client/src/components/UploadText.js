@@ -50,7 +50,7 @@ const UploadText = ({
     if (showUploadForm) {
       formData.append("file", e.target.elements.myfile.files[0]);
       axios
-        .post("/upload", formData, {
+        .post("/api/upload", formData, {
           headers: {
             "Content-Type": "multipart/form-data"
           }

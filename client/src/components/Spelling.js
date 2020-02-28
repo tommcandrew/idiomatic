@@ -23,11 +23,15 @@ const Spelling = ({
   const [alertInfo, setAlertInfo] = useState("");
   const [shuffledTargetWordObjs, setShuffledTargetWordObjs] = useState([]);
   const [targetWords, setTargetWords] = useState([]);
+  const [finished, setFinished] = useState(false);
 
   useEffect(() => {
-    const shuffledTargetWordObjs = shuffle(text.targetWordObjs);
+    const filteredTargetWordObjs = text.targetWordObjs.filter(
+      obj => obj.audio !== null
+    );
+    const shuffledTargetWordObjs = shuffle(filteredTargetWordObjs);
     setShuffledTargetWordObjs(shuffledTargetWordObjs);
-    const targetWords = text.targetWordObjs.map(wordObj => {
+    const targetWords = filteredTargetWordObjs.map(wordObj => {
       if (wordObj.isPlural) {
         return wordObj.singularForm;
       } else if (wordObj.wordType === "verb") {
@@ -40,6 +44,9 @@ const Spelling = ({
   }, []);
 
   const playAudio = () => {
+    if (finished) {
+      return;
+    }
     const url = shuffledTargetWordObjs[questionIndex].audio;
     const audio = new Audio(url);
     audio.play();
@@ -55,6 +62,7 @@ const Spelling = ({
   }, [alertInfo]);
 
   const handleSubmit = e => {
+    //check if finished questions in which caser don't play audio
     e.preventDefault();
     let correctAnswers = 0;
     const input = e.target.text.value.toLowerCase();
@@ -74,6 +82,7 @@ const Spelling = ({
     }
     incrementCorrectAnswers(correctAnswers);
     if (questionIndex === shuffledTargetWordObjs.length - 1) {
+      setFinished(true);
       setTimeout(() => {
         markTextComplete();
         handleShowResults();

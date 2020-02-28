@@ -51,18 +51,25 @@ const MatchDefinitions = ({
   }, []);
 
   const handleSelectOption = (defIndex, optionIndex) => {
+    //check if already submitted in which case do nothing
+    if (Object.entries(results).length > 0) {
+      return;
+    }
     setSelectedOptions({ ...selectedOptions, [defIndex]: optionIndex });
   };
 
   const handleSubmit = e => {
     e.preventDefault();
-    if (Object.values(selectedOptions).includes(null)) {
-      alert("Answer all the questions");
-      return;
-    }
 
     const userAnswerIndices = Object.values(selectedOptions);
-    const userAnswerWords = userAnswerIndices.map(index => targetWords[index]);
+    const userAnswerWords = userAnswerIndices.map(index => {
+      if (index !== null) {
+        return targetWords[index];
+      } else {
+        return "";
+      }
+    });
+    console.log(userAnswerWords);
 
     let correctAnswers = 0;
     const resultsObj = {};
@@ -74,6 +81,7 @@ const MatchDefinitions = ({
         resultsObj[j] = "Wrong";
       }
     }
+    console.log(resultsObj);
     incrementCorrectAnswers(correctAnswers);
     setResults(resultsObj);
   };

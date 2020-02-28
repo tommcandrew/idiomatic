@@ -124,6 +124,23 @@ export const AuthContextProvider = props => {
     return <Redirect to="/" />;
   };
 
+  const loginDemo = () => {
+    const email = "anna@gmail.com";
+    const password = "anna12345";
+    axios
+      .post("/api/login", { email, password })
+      .then(res => {
+        const { token, userName } = res.data;
+        localStorage.setItem("my-token", token);
+        setAuthenticated(true);
+        setUserEmail(email);
+        setUserName(userName);
+      })
+      .catch(err => {
+        console.log(err);
+      });
+  };
+
   return (
     <AuthContext.Provider
       value={{
@@ -138,7 +155,8 @@ export const AuthContextProvider = props => {
         userName,
         registerDate,
         deleteAccount,
-        logout
+        logout,
+        loginDemo
       }}
     >
       {props.children}

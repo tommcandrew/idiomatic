@@ -189,6 +189,8 @@ const texts = [
         audio: "https://media.merriam-webster.com/soundc11/o/obey0001.wav",
         isPlural: false,
         singularForm: null,
+        wordType: "verb",
+        infinitiveForm: "obey",
         sentence:
           "Guide dogs must learn not to obey any command that might put their owner in danger"
       },
@@ -199,6 +201,8 @@ const texts = [
         audio: "https://media.merriam-webster.com/soundc11/c/curb0001.wav",
         isPlural: false,
         singularForm: null,
+        wordType: "noun",
+        infinitiveForm: null,
         sentence:
           "When they reach the curb, the dog stops and signals to the owner that they have reached a crossing"
       },
@@ -208,6 +212,8 @@ const texts = [
         audio: "https://media.merriam-webster.com/soundc11/o/obstac01.wav",
         isPlural: true,
         singularForm: "obstacle",
+        wordType: "noun",
+        infinitiveForm: null,
         sentence:
           "The owner can’t see obstacles so the guide dog must help the owner to avoid them"
       },
@@ -217,6 +223,8 @@ const texts = [
         audio: "https://media.merriam-webster.com/soundc11/p/puppy001.wav",
         isPlural: true,
         singularForm: "Puppy",
+        wordType: "noun",
+        infinitiveForm: null,
         sentence:
           "Puppies born to be guide dogs have to be intelligent and good- natured; it is important that they aren’t nervous of crowds or frightened by sudden noises"
       },
@@ -227,6 +235,8 @@ const texts = [
         audio: "https://media.merriam-webster.com/soundc11/n/nervou01.wav",
         isPlural: true,
         singularForm: "nervous",
+        wordType: "adjective",
+        infinitiveForm: null,
         sentence:
           "Puppies born to be guide dogs have to be intelligent and good- natured; it is important that they aren’t nervous of crowds or frightened by sudden noises"
       },
@@ -237,6 +247,8 @@ const texts = [
         audio: "https://media.merriam-webster.com/soundc11/t/train01v.wav",
         isPlural: false,
         singularForm: null,
+        wordType: "noun",
+        infinitiveForm: null,
         sentence:
           "When the puppy is about a year old, it returns to the guide dog centre for the next part of its training"
       }
@@ -246,7 +258,7 @@ const texts = [
   {
     title: "All About Potatoes",
     level: "Intermediate",
-    tags: ["food", "science"],
+    tags: ["food", "history"],
     content:
       "Potatoes were first grown for food in South America thousands of years ago. People found a way to preserve them by leaving them out at night in the cold and then warming them in the sun the following day. During the day, the potatoes were crushed by stamping on them. After doing this for five days, a potato pulp was made which could be stored and kept for up to ten years in case crops failed. In 1532 Spanish traders, who had been searching for gold, brought potatoes back from South America and used them on board ships as food. It was not long before farmers in Spain began to grow them as crops and the potato spread across the rest of Europe. They were regarded with suspicion, however, and many people thought they weren’t suitable for humans to eat, partly because of their odd shape. In some places, they were grown just as food for animals. There are different opinions about how the potato came to Britain in the late 1500s. One view is that Spanish fishermen ate potatoes on their fishing trips to the North Sea. On their way home, they would land in Ireland to put salt on fish they had caught to stop it rotting. It is believed that the sailors gave some of their potatoes to the farmers who grew them in the rich Irish soil. Another view is that Sir Walter Raleigh, a British explorer who went to the Americas many times, brought potatoes back to his Irish farm and planted them there. It is said that he gave a potato plant to Queen Elizabeth I of England as a gift, and to celebrate, a royal feast was held to eat the potatoes. Legend has it that the cooks threw away the potatoes and instead served up the boiled stems and leaves (which are poisonous). This made everyone very ill and potatoes were then banned from the royal menu. Potatoes are very popular today and, despite what some people think, they are also good for you. A baked potato contains a surprisingly large amount of vitamin C – and more fibre than two slices of wholemeal bread. Potatoes also provide carbohydrates and other important nutrients like vitamin B6. They are low in fat too, provided you don’t fry them or add lots of butter! Potatoes are easy to grow. This makes them a perfect crop for farmers in the developing world, who can grow a nutritious food in poor soil. There are plenty of different varieties to choose from and they usually produce a good harvest.",
     targetWordObjs: [
@@ -256,6 +268,8 @@ const texts = [
         audio: "https://media.merriam-webster.com/soundc11/p/preser03.wav",
         isPlural: false,
         singularForm: null,
+        wordType: "verb",
+        infinitiveForm: "preserve",
         sentence:
           "People found a way to preserve them by leaving them out at night in the cold and then warming them in the sun the following day"
       },
@@ -266,6 +280,8 @@ const texts = [
         audio: "https://media.merriam-webster.com/soundc11/c/crush001.wav",
         isPlural: false,
         singularForm: null,
+        wordType: "verb",
+        infinitiveForm: "crush",
         sentence:
           "During the day, the potatoes were crushed by stamping on them"
       },
@@ -275,8 +291,10 @@ const texts = [
         audio: null,
         isPlural: false,
         singularForm: null,
+        wordType: "verb",
+        infinitiveForm: "stamp",
         sentence:
-          "After doing this for five days, a potato pulp was made which could be stored and kept for up to ten years in case crops failed"
+          "During the day, the potatoes were crushed by stamping on them"
       },
       {
         word: "pulp",
@@ -284,8 +302,10 @@ const texts = [
         audio: "https://media.merriam-webster.com/soundc11/p/pulp0001.wav",
         isPlural: false,
         singularForm: null,
+        wordType: "noun",
+        infinitiveForm: null,
         sentence:
-          "On their way home, they would land in Ireland to put salt on fish they had caught to stop it rotting"
+          "After doing this for five days, a potato pulp was made which could be stored and kept for up to ten years in case crops failed"
       },
       {
         word: "crops",
@@ -294,8 +314,10 @@ const texts = [
         audio: "https://media.merriam-webster.com/soundc11/c/crop0001.wav",
         isPlural: true,
         singularForm: "crop",
+        wordType: "noun",
+        infinitiveForm: null,
         sentence:
-          "It is believed that the sailors gave some of their potatoes to the farmers who grew them in the rich Irish soil"
+          "After doing this for five days, a potato pulp was made which could be stored and kept for up to ten years in case crops failed"
       },
       {
         word: "suspicion",
@@ -304,8 +326,10 @@ const texts = [
         audio: "https://media.merriam-webster.com/soundc11/s/suspic01.wav",
         isPlural: false,
         singularForm: null,
+        wordType: "noun",
+        infinitiveForm: null,
         sentence:
-          "It is said that he gave a potato plant to Queen Elizabeth I of England as a gift, and to celebrate, a royal feast was held to eat the potatoes"
+          "They were regarded with suspicion, however, and many people thought they weren’t suitable for humans to eat, partly because of their odd shape"
       },
       {
         word: "rotting",
@@ -314,8 +338,10 @@ const texts = [
         audio: "https://media.merriam-webster.com/soundc11/r/rot00001.wav",
         isPlural: false,
         singularForm: null,
+        wordType: "verb",
+        infinitiveForm: "rot",
         sentence:
-          "This made everyone very ill and potatoes were then banned from the royal menu"
+          "On their way home, they would land in Ireland to put salt on fish they had caught to stop it rotting"
       },
       {
         word: "soil",
@@ -323,8 +349,10 @@ const texts = [
         audio: "https://media.merriam-webster.com/soundc11/s/soil0001.wav",
         isPlural: false,
         singularForm: null,
+        wordType: "noun",
+        infinitiveForm: null,
         sentence:
-          "A baked potato contains a surprisingly large amount of vitamin C – and more fibre than two slices of wholemeal bread"
+          "It is believed that the sailors gave some of their potatoes to the farmers who grew them in the rich Irish soil"
       },
       {
         word: "feast",
@@ -333,8 +361,10 @@ const texts = [
         audio: "https://media.merriam-webster.com/soundc11/f/feast001.wav",
         isPlural: false,
         singularForm: null,
+        wordType: "noun",
+        infinitiveForm: null,
         sentence:
-          "This makes them a perfect crop for farmers in the developing world, who can grow a nutritious food in poor soil"
+          "It is said that he gave a potato plant to Queen Elizabeth I of England as a gift, and to celebrate, a royal feast was held to eat the potatoes"
       },
       {
         word: "banned",
@@ -343,8 +373,10 @@ const texts = [
         audio: "https://media.merriam-webster.com/soundc11/b/ban00001.wav",
         isPlural: false,
         singularForm: null,
+        wordType: "verb",
+        infinitiveForm: "ban",
         sentence:
-          "There are plenty of different varieties to choose from and they usually produce a good harvest"
+          "This made everyone very ill and potatoes were then banned from the royal menu"
       },
       {
         word: "fibre",
@@ -352,7 +384,11 @@ const texts = [
           "plant material that cannot be digested but that helps you to digest other food",
         audio: null,
         isPlural: false,
-        singularForm: null
+        singularForm: null,
+        wordType: "noun",
+        infinitiveForm: null,
+        sentence:
+          "A baked potato contains a surprisingly large amount of vitamin C – and more fibre than two slices of wholemeal bread"
       },
       {
         word: "nutritious",
@@ -360,7 +396,11 @@ const texts = [
           "having substances that a person or animal needs to be healthy and grow properly : promoting good health and growth",
         audio: "https://media.merriam-webster.com/soundc11/n/nutrit05.wav",
         isPlural: true,
-        singularForm: "nutritious"
+        singularForm: "nutritious",
+        wordType: "adjective",
+        infinitiveForm: null,
+        sentence:
+          "This makes them a perfect crop for farmers in the developing world, who can grow a nutritious food in poor soil"
       },
       {
         word: "harvest",
@@ -368,7 +408,11 @@ const texts = [
           "the season when crops are gathered from the fields or the activity of gathering crops",
         audio: "https://media.merriam-webster.com/soundc11/h/harves01.wav",
         isPlural: false,
-        singularForm: null
+        singularForm: null,
+        wordType: "noun",
+        infinitiveForm: null,
+        sentence:
+          "There are plenty of different varieties to choose from and they usually produce a good harvest"
       }
     ]
   },
@@ -386,6 +430,8 @@ const texts = [
         audio: "https://media.merriam-webster.com/soundc11/f/festiv01.wav",
         isPlural: false,
         singularForm: null,
+        wordType: "noun",
+        infinitiveForm: null,
         sentence: "Diwali is an important Indian festival"
       },
       {
@@ -395,6 +441,8 @@ const texts = [
         audio: "https://media.merriam-webster.com/soundc11/p/pray0001.wav",
         isPlural: false,
         singularForm: null,
+        wordType: "verb",
+        infinitiveForm: "pray",
         sentence:
           "During Diwali, people light lamps and pray for good health, peace and wisdom"
       },
@@ -405,6 +453,8 @@ const texts = [
         audio: "https://media.merriam-webster.com/soundc11/d/decora01.wav",
         isPlural: false,
         singularForm: null,
+        wordType: "verb",
+        infinitiveForm: "decorate",
         sentence:
           "They clean their homes, and decorate their doorways with pictures made with painted rice, called rangoli"
       },
@@ -414,6 +464,8 @@ const texts = [
         audio: "https://media.merriam-webster.com/soundc11/p/prospe08.wav",
         isPlural: false,
         singularForm: null,
+        wordType: "noun",
+        infinitiveForm: null,
         sentence:
           "People pray to Lakshmi, the Hindu goddess of wealth for prosperity in the coming year"
       }
@@ -422,7 +474,7 @@ const texts = [
   {
     title: "The Story of Coffee",
     level: "Intermediate",
-    tags: ["food"],
+    tags: ["food", "history"],
     content:
       "Many people enjoy a cup of coffee at their local coffee shop, but few people know the story of coffee and how it is produced. Coffee growing is a global industry. Research shows that as many as a third of the world's population are coffee drinkers. Some people enjoy drinking coffee for its rich smell and taste. Others like the awakening effect of caffeine, a chemical in coffee. Coffee trees are native to eastern Africa and areas of the Arabian Peninsula. Coffee was first grown and traded in the 15th century. Back then, most coffee came from the country we now know as Yemen. Before long, coffee was in high demand all over the Middle East. By the seventeenth century coffee had been introduced to Europe. European traders started bringing coffee plants to other parts of the world. The Dutch brought coffee to the islands of Indonesia. By the 20th century, most of the world's production came from Central and South America. Today, Brazil is the largest producer of coffee in the world. Most people know what a coffee bean looks like, but what about the plant? Coffee trees can grow up to nine metres high, but they are cut short for production. These trees have shiny dark green leaves that grow on opposite sides of each other on a stem. The plant produces a fruit that is called a coffee cherry. When the coffee cherries are ripe and ready to pick, they are bright, red and firm. Inside the fruits are the green coffee beans. After these beans are roasted at high temperatures they are ready to be made into a drink. The two most important kinds of coffee plants are arabica and robusta. Arabica coffee makes up around 70% of the world's production. These trees produce a fine and mild coffee with a rich smell. Robusta has more caffeine than arabica. It is usually mixed with other coffee beans or used for instant coffee. Most of the world's robusta is grown in Central and Western Africa. It can also be found in parts of Southeast Asia and Brazil. Robusta is less costly to grow because it is more resistant to diseases than the arabica plant. Also, robusta plants can survive in a warmer climate. There may only be two main kinds of coffee plants, but geography and climate differences have a big effect on how coffee tastes. For example, coffee grown in Ethiopia is known for its lively, sharp taste and its flowery smell. Coffee from the island of Sumatra is full bodied, with an earthy and intense taste. Coffee roasters combine beans from different areas to make coffees with different tastes and qualities. One popular story about the discovery of coffee long ago is about Kaldi, a goat keeper. Kaldi was looking after his goats in the highlands of Ethiopia where coffee trees have grown for centuries. He noticed that his goats became very excited and active after eating small fruits from a tree. Kaldi reported this discovery to a group of religious workers. When they made a drink out of the fruit, the religious workers realized they could stay awake for long hours of prayer. This knowledge about coffee soon spread all over the world. In the USA, the number of specialty coffee shops has increased greatly over the years. In 1995 there were around 5000 shops and sellers specializing in coffee. By 2006, there were almost 24,000 coffee shops in the United States. It is hard to walk down a street in an American city without coming across a coffee shop. The Specialty Coffee Association of America holds a yearly competition for the people who prepare coffee drinks, known as baristas. The best baristas from different areas of the country gather to make three coffee drinks. A group of coffee experts judges them. The baristas take their job very seriously. They have fifteen minutes to make three kinds of coffee drinks: an espresso, a cappuccino, and a specialty drink of their own invention. The best baristas in the country then compete for the national award. Coffee is the second most heavily traded product in the world after oil. A coffee bean goes from a series of producers, exporters, importers, roasters and sellers. This long chain of production has major social and political effects. For example, some coffee producers and drinkers are concerned about the Fair Trade movement. The aim of this movement is to make sure that coffee farmers around the world get a fair price for their harvest. Poor farmers are organized into groups called cooperatives. They are guaranteed money under this system. Even if the market price for coffee drops, these farmers can earn enough money to live on. Some critics of the Fair Trade movement argue that coffee farmers still do not receive a fair amount of money for their work. And some economists argue that Fair Trade creates too large a supply of coffee. There are also environmental concerns within the coffee industry. Industrial coffee production can have a bad effect on nature. The chemicals used on large coffee farms can hurt soil and water sources. These large farms also cut down many trees to make room for coffee plants. This threatens native plants and birds. Environmental organizations have worked to create rules for producing coffee in environmentally friendly ways. Many coffee drinkers buy this coffee to support their efforts. So, the next time you enjoy your morning coffee, you can think about its rich history and wide popularity. And you can imagine the long distances it travelled to end up in your cup.",
     targetWordObjs: [
@@ -432,6 +484,8 @@ const texts = [
         audio: "https://media.merriam-webster.com/soundc11/i/indust09.wav",
         isPlural: false,
         singularForm: null,
+        wordType: "noun",
+        infinitiveForm: null,
         sentence: "Coffee growing is a global industry"
       },
       {
@@ -441,6 +495,8 @@ const texts = [
         audio: null,
         isPlural: false,
         singularForm: null,
+        wordType: "verb",
+        infinitiveForm: "trade",
         sentence: "Coffee was first grown and traded in the 15th century"
       },
       {
@@ -450,6 +506,8 @@ const texts = [
         audio: "https://media.merriam-webster.com/soundc11/b/bean0001.wav",
         isPlural: false,
         singularForm: null,
+        wordType: "noun",
+        infinitiveForm: null,
         sentence:
           "Most people know what a coffee bean looks like, but what about the plant? Coffee trees can grow up to nine metres high, but they are cut short for production"
       },
@@ -460,6 +518,8 @@ const texts = [
         audio: "https://media.merriam-webster.com/soundc11/s/stem0001.wav",
         isPlural: false,
         singularForm: null,
+        wordType: "noun",
+        infinitiveForm: null,
         sentence:
           "These trees have shiny dark green leaves that grow on opposite sides of each other on a stem"
       },
@@ -470,6 +530,8 @@ const texts = [
         audio: "https://media.merriam-webster.com/soundc11/r/roast001.wav",
         isPlural: false,
         singularForm: null,
+        wordType: "verb",
+        infinitiveForm: "roast",
         sentence:
           "After these beans are roasted at high temperatures they are ready to be made into a drink"
       },
@@ -479,6 +541,8 @@ const texts = [
         audio: "https://media.merriam-webster.com/soundc11/m/mild0001.wav",
         isPlural: false,
         singularForm: null,
+        wordType: "adjective",
+        infinitiveForm: null,
         sentence: "These trees produce a fine and mild coffee with a rich smell"
       },
       {
@@ -487,6 +551,8 @@ const texts = [
         audio: "https://media.merriam-webster.com/soundc11/i/intens01.wav",
         isPlural: false,
         singularForm: null,
+        wordType: "adjective",
+        infinitiveForm: null,
         sentence:
           "Coffee from the island of Sumatra is full bodied, with an earthy and intense taste"
       },
@@ -496,6 +562,8 @@ const texts = [
         audio: "https://media.merriam-webster.com/soundc11/g/goat0001.wav",
         isPlural: false,
         singularForm: null,
+        wordType: "noun",
+        infinitiveForm: null,
         sentence:
           "One popular story about the discovery of coffee long ago is about Kaldi, a goat keeper"
       },
@@ -506,6 +574,8 @@ const texts = [
         audio: "https://media.merriam-webster.com/soundc11/s/spread01.wav",
         isPlural: false,
         singularForm: null,
+        wordType: "verb",
+        infinitiveForm: "spread",
         sentence: "This knowledge about coffee soon spread all over the world"
       },
       {
@@ -515,6 +585,8 @@ const texts = [
         audio: "https://media.merriam-webster.com/soundc11/c/compet01.wav",
         isPlural: false,
         singularForm: null,
+        wordType: "verb",
+        infinitiveForm: "compete",
         sentence:
           "The best baristas in the country then compete for the national award"
       },
@@ -524,6 +596,8 @@ const texts = [
         audio: "https://media.merriam-webster.com/soundc11/c/concer01.wav",
         isPlural: true,
         singularForm: "concern",
+        wordType: "noun",
+        infinitiveForm: null,
         sentence:
           "There are also environmental concerns within the coffee industry"
       }

@@ -143,7 +143,10 @@ app.post("/saveText", verifyToken, (req, res) => {
     .then(user => {
       user.texts.push(text);
       user.save().then(() => {
-        res.status(200).send("Text saved");
+        // res.status(200).send("Text saved");
+        fs.writeFile("text.txt", JSON.stringify(text), () =>
+          console.log("text written")
+        );
       });
     })
     .catch(err => {
@@ -198,10 +201,16 @@ app.post("/getWordData", async (req, res) => {
       break;
     }
     const shortDef = response.data[0].shortdef[0];
-    const wordType = response.data[0].hwi.fl;
+    const wordType = response.data[0].fl;
     let infinitiveForm;
     if (wordType === "verb") {
-      infinitiveForm = response.data[0].hwi.hw;
+      infinitiveForm = response.data[0].hwi.hw.replace(
+        //eslint-disable-next-line
+        /(~|`|!|@|#|$|%|^|&|\*|\(|\)|{|}|\[|\]|;|:|\"|'|<|,|\.|>|\?|\/|\\|\||-|_|\+|=)/g,
+        ""
+      );
+    } else {
+      infinitiveForm = null;
     }
     let audioUrl;
     if (response.data[0].hwi.prs) {
@@ -231,7 +240,6 @@ app.post("/getWordData", async (req, res) => {
       wordType: wordType,
       infinitiveForm: infinitiveForm
     });
-    console.log(JSON.stringify(targetWordObjects));
   }
   res.status(200).send({ targetWordObjects, infoMessages });
 });

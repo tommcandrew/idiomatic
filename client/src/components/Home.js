@@ -3,7 +3,7 @@ import AuthContext from "../context/AuthContext";
 import { Redirect, Link } from "react-router-dom";
 
 const Home = () => {
-  const { authenticated, loading } = useContext(AuthContext);
+  const { authenticated, loading, loginDemo } = useContext(AuthContext);
 
   if (loading) {
     return <div className="loader"></div>;
@@ -11,10 +11,20 @@ const Home = () => {
   if (authenticated) {
     return <Redirect to="/main" />;
   }
+
+  const handleLoginDemo = () => {
+    loginDemo();
+  };
+
   return (
     <div className="home__wrapper">
       <div className="home__content">
         <div className="home__header">
+          <div className="home__demo-wrapper">
+            <button className="home__button" onClick={handleLoginDemo}>
+              Log in as demo user
+            </button>
+          </div>
           <div className="home__buttons">
             <Link to="/login">
               <button className="home__button">Log in</button>

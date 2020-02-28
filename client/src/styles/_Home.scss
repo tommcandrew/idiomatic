@@ -19,7 +19,18 @@
   right: 0;
   top: 0;
   bottom: 0;
-  width: 60%;
+  width: 45%;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.home__demo-wrapper {
+  display: flex;
+  position: absolute;
+  left: 1rem;
+  top: 0;
+  bottom: 0;
   display: flex;
   justify-content: space-around;
   align-items: center;
