@@ -1,20 +1,10 @@
-//1. shuffle targetWordObjs
-//2. extract targetWords (to use as answer reference)
-//3. extract sentences and convert into gapped sentences
-//4. render these sentences
-//5. on submit, create new array of filled sentences and check whether input is correcy by comparing to words array
-
 import React, { useState, useEffect } from "react";
 import shuffle from "../utils/shuffle";
 
-const GapFill = ({
-  text,
-  incrementCorrectAnswers,
-  handleShowMatchDefinitions
-}) => {
+const GapFill = ({ text, incrementCorrectAnswers, setCurrentComponent }) => {
   const [gappedSentences, setGappedSentences] = useState([]);
   const [sentencesWithAnswers, setSentencesWithAnswers] = useState([]);
-  const [targetWords, setTargetWords] = useState([]);
+  const [splitTargetSentences, setSplitTargetSentences] = useState([]);
   const [shuffledTargetWordObjs, setShuffledTargetWordObjs] = useState([]);
 
   useEffect(() => {
@@ -23,33 +13,34 @@ const GapFill = ({
     //sentences will appear in random order
     const shuffledTargetWordObjs = shuffle(targetWordObjsCopy);
     setShuffledTargetWordObjs(shuffledTargetWordObjs);
-    const targetWords = targetWordObjsCopy.map(obj => obj.word);
-    setTargetWords(targetWords);
+    const sentences = text.content.split(/(?<=[.?!])\s+/);
+    const targetSentences = [];
+    for (let i = 0; i < shuffledTargetWordObjs.length; i++) {
+      targetSentences.push(sentences[shuffledTargetWordObjs[i].sentence]);
+    }
+    const splitTargetSentences = targetSentences.map(sentence =>
+      sentence.match(/[\w']+|[.,!?;]/g)
+    );
+    setSplitTargetSentences(splitTargetSentences);
+    //eslint-disable-next-line
   }, []);
 
   useEffect(() => {
     //wait for above functions to finish before creating gapped sentences
-    if (targetWords.length > 0) {
+    if (splitTargetSentences.length > 0) {
       createGappedSentences();
     }
-  }, [targetWords]);
+    //eslint-disable-next-line
+  }, [splitTargetSentences]);
 
   const createGappedSentences = () => {
     //create gapped sentences based on shuffled sentences
-    // const targetSentences = shuffledTargetWordObjs.map(obj => obj.sentence);
     const gappedSentenceArray = [];
-    for (let i = 0; i < shuffledTargetWordObjs.length; i++) {
-      //remove all punctuation from sentence and split into individual words
-      const splitSentence = shuffledTargetWordObjs[i].sentence
-        .replace(
-          //eslint-disable-next-line
-          /(~|`|!|@|#|$|%|^|&|\*|\(|\)|{|}|\[|\]|;|:|\"|'|<|,|\.|>|\?|\/|\\|\||-|_|\+|=)/g,
-          ""
-        )
-        .split(" ");
+    const nonWordElements = [",", ",", "'", "?", "!", ".", ":", ";"];
+    for (let i = 0; i < splitTargetSentences.length; i++) {
       //replace words in sentence with elements - input for a gap or span for a word
-      const gappedSentence = splitSentence.map((word, index) => {
-        if (word === shuffledTargetWordObjs[i].word) {
+      const gappedSentence = splitTargetSentences[i].map((word, index) => {
+        if (index === shuffledTargetWordObjs[i].element) {
           return (
             <input
               key={"word" + index}
@@ -59,7 +50,14 @@ const GapFill = ({
           );
         } else {
           return (
-            <span key={"word" + index} className="gapFill__word">
+            <span
+              key={"word" + index}
+              className={
+                nonWordElements.includes(word)
+                  ? "gapFill__punctuation"
+                  : "gapFill__word"
+              }
+            >
               {word}
             </span>
           );
@@ -73,7 +71,9 @@ const GapFill = ({
   const handleSubmit = e => {
     e.preventDefault();
     //get all user answers
-    const inputs = e.target.form.elements;
+    const formElements = e.target.form.elements;
+    //don't include button element
+    const inputs = [...formElements].filter(el => el.nodeName === "INPUT");
     const inputValues = [];
     for (let i = 0; i < inputs.length; i++) {
       inputValues.push(inputs[i].value);
@@ -82,9 +82,13 @@ const GapFill = ({
     const sentencesWithAnswers = [];
     let correctAnswers = 0;
     for (let i = 0; i < gappedSentences.length; i++) {
+      //eslint-disable-next-line
       const newSentence = gappedSentences[i].map((el, index) => {
         if (el.props.className === "gapFill__input") {
-          if (inputValues[i] === targetWords[i]) {
+          if (
+            inputValues[i].toLowerCase() ===
+            shuffledTargetWordObjs[i].word.toLowerCase()
+          ) {
             correctAnswers++;
             el = (
               <span key={"filled" + index} className="gapFill__filled--right">
@@ -97,7 +101,7 @@ const GapFill = ({
               <span
                 key={"filled" + index}
                 className="gapFill__filled--wrong"
-                data-answer={targetWords[i]}
+                data-answer={shuffledTargetWordObjs[i].word}
               >
                 (blank)
               </span>
@@ -107,7 +111,7 @@ const GapFill = ({
               <span
                 key={"filled" + index}
                 className="gapFill__filled--wrong"
-                data-answer={targetWords[i]}
+                data-answer={shuffledTargetWordObjs[i].word}
               >
                 {inputValues[i]}
               </span>
@@ -135,7 +139,7 @@ const GapFill = ({
                   className="gapFill__sentence"
                   onSubmit={handleSubmit}
                 >
-                  {index + 1}.{sentence}.
+                  {index + 1}.{sentence}
                 </div>
               ))}
             </div>
@@ -156,13 +160,13 @@ const GapFill = ({
             <div className="gapFill__sentences">
               {sentencesWithAnswers.map((sentence, index) => (
                 <div key={"sentence" + index} className="gapFill__sentence">
-                  {index + 1}. {sentence}.
+                  {index + 1}. {sentence}
                 </div>
               ))}
             </div>
             <button
               type="button"
-              onClick={handleShowMatchDefinitions}
+              onClick={() => setCurrentComponent("MatchDefinitions")}
               className="gapFill__next"
             >
               Next Exercise

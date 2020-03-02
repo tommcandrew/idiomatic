@@ -3,176 +3,193 @@ const texts = [
     title: "Greenland",
     level: "Intermediate",
     tags: ["geography"],
+    content:
+      "Greenland is a huge island in the far, far north of the world. The weather there is very harsh and cold. Even the hottest summer day in Greenland is like a cool winter's day in England. In the summer months, the sun never sets; it is light all through the night. The warmest part of the island is on the south coast and that is where most Greenlanders live. However, it is still a very hard place to live because of the cold. Over the years, different groups of people have tried to live in Greenland, but most found it too difficult. One man who did live there, and one of the most famous Greenlanders, was 'Erik the Red'. Erik's name might have come from the colour of his hair and beard, or possibly because of his fiery temper. About 1000 years ago, Erik was sent away from his home in Iceland. He sailed away from this small ice-covered island to a great big ice-covered island. This island had no name yet and no one lived there, so Erik made it his home. The old stories of Iceland say that Erik became bored and lonely and wanted to persuade other people to come and live on this freezing-cold island with him. Erik had an idea. He called the island ”Greenland” and pretended that it was lovely, warm and ... green. His trick worked. When the people from Iceland heard about this perfect place called ”Greenland”, many of them decided to join Erik. About 300 of them packed up their belongings and set off to join him. Although life was hard, these people lived on Greenland for many years and it became their home. They built houses that were snug and strong from stone, wood and turf. They planted crops and kept cows, goats and sheep that they had brought with them all the way from Iceland. However, 500 years later, there was nothing left of Erik and his friends in Greenland. What happened to them is still a mystery.",
     targetWordObjs: [
       {
         word: "coast",
-        def: "The land near the sea.",
+        sentence: 4,
+        element: 10,
+        def: "the land along or near a sea or ocean",
         audio: "https://media.merriam-webster.com/soundc11/c/coast001.wav",
-        sentence:
-          "The warmest part of the island is on the south coast and that is where most Greenlanders live.",
         isPlural: false,
         singularForm: null,
         wordType: "noun",
-        infinitiveForm: null
+        infinitiveForm: null,
+        positiveForm: null
       },
-
       {
         word: "beard",
-        def: "The hair that grows on a man's face.",
+        sentence: 8,
+        element: 12,
+        def: "the hair that grows on a man's cheeks and chin",
         audio: "https://media.merriam-webster.com/soundc11/b/beard001.wav",
-        sentence:
-          "Erik's name might have come from the colour of his hair and beard, or possibly because of his fiery temper.",
         isPlural: false,
         singularForm: null,
         wordType: "noun",
-        infinitiveForm: null
+        infinitiveForm: null,
+        positiveForm: null
       },
       {
         word: "persuade",
-        def: "To make someone do something by talking.",
+        sentence: 12,
+        element: 15,
+        def:
+          "to cause (someone) to do something by asking, arguing, or giving reasons",
         audio: "https://media.merriam-webster.com/soundc11/p/persua02.wav",
-        sentence:
-          "The old stories of Iceland say that Erik became bored and lonely and wanted to persuade other people to come and live on this freezing-cold island with him.",
         isPlural: false,
         singularForm: null,
         wordType: "verb",
-        infinitiveForm: "persuade"
+        infinitiveForm: "persuade",
+        positiveForm: null
       },
       {
         word: "mystery",
-        def: "Something that is impossible to explain.",
+        sentence: 23,
+        element: 7,
+        def:
+          "something that is not known : something that is difficult to understand or explain",
         audio: "https://media.merriam-webster.com/soundc11/m/myster02.wav",
-        sentence: "What happened to them is still a mystery.",
         isPlural: false,
         singularForm: null,
         wordType: "noun",
-        infinitiveForm: null
+        infinitiveForm: null,
+        positiveForm: null
       }
-    ],
-    content:
-      "Greenland is a huge island in the far, far north of the world. The weather there is very harsh and cold. Even the hottest summer day in Greenland is like a cool winter's day in England. In the summer months, the sun never sets; it is light all through the night. The warmest part of the island is on the south coast and that is where most Greenlanders live. However, it is still a very hard place to live because of the cold. Over the years, different groups of people have tried to live in Greenland, but most found it too difficult. One man who did live there, and one of the most famous Greenlanders, was 'Erik the Red'. Erik's name might have come from the colour of his hair and beard, or possibly because of his fiery temper. About 1000 years ago, Erik was sent away from his home in Iceland. He sailed away from this small ice-covered island to a great big ice-covered island. This island had no name yet and no one lived there, so Erik made it his home. The old stories of Iceland say that Erik became bored and lonely and wanted to persuade other people to come and live on this freezing-cold island with him. Erik had an idea. He called the island ”Greenland” and pretended that it was lovely, warm and ... green. His trick worked. When the people from Iceland heard about this perfect place called ”Greenland”, many of them decided to join Erik. About 300 of them packed up their belongings and set off to join him. Although life was hard, these people lived on Greenland for many years and it became their home. They built houses that were snug and strong from stone, wood and turf. They planted crops and kept cows, goats and sheep that they had brought with them all the way from Iceland. However, 500 years later, there was nothing left of Erik and his friends in Greenland. What happened to them is still a mystery."
+    ]
   },
   {
-    title: "Plastic and the environment",
+    title: "Plastic and the Environment",
     level: "Intermediate",
     tags: ["environment"],
+    content:
+      "Plastic is a material we use every day.  The first plastics were made more than 100 years ago from parts of plants. Plastics are now made from oil, coal and natural gas. We are using up these things so fast that the Earth’s supplies may run out. Because of this, scientists are investigating new ideas for making plastics from plants such as sweet potato, bamboo and flax. Things made from plastic can be useful for people but bad for the planet. Some plastics can last for a long time without wearing out, and can be difficult to get rid of when they are not needed. They can remain in rubbish dumps called landfill sites for hundreds of years. Landfills can be smelly, ugly, and harmful to our planet. Recycling is a good way to get rid of unwanted plastics. Recycled waste materials can be used again to make new products. This can be difficult as different types of plastic need to be recycled in different ways. Some kinds of plastics can be melted down and used to make new things such as bags and bottles. Others can be made into fibres (strands of material) for clothing. Another way to protect the environment is to use canvas bags for shopping rather than plastic ones. A lot of plastic objects can also be reused. Plastic bottles can be refilled many times, rather than throwing them away once they are empty. Unwanted plastic goods such as CDs and toys can be sold or given away to charity shops.",
     targetWordObjs: [
       {
         word: "investigating",
+        sentence: 4,
+        element: 6,
         def:
           "to try to find out the facts about (something, such as a crime or an accident) in order to learn how it happened, who did it, etc.",
         audio: "https://media.merriam-webster.com/soundc11/i/invest04.wav",
-        sentence:
-          "Because of this, scientists are investigating new ideas for making plastics from plants such as sweet potato, bamboo and flax.",
         isPlural: false,
         singularForm: null,
         wordType: "verb",
-        infinitiveForm: "investigate"
+        infinitiveForm: "investigate",
+        positiveForm: null
       },
       {
         word: "landfill",
+        sentence: 7,
+        element: 7,
         def: "a system in which waste materials are buried under the ground",
         audio: "https://media.merriam-webster.com/soundc11/l/landfi01.wav",
-        sentence:
-          "They can remain in rubbish dumps called landfill sites for hundreds of years.",
         isPlural: false,
         singularForm: null,
         wordType: "noun",
-        infinitiveForm: null
+        infinitiveForm: null,
+        positiveForm: null
       },
       {
         word: "melted",
+        sentence: 12,
+        element: 6,
         def:
           "to change or to cause (something) to change from a solid to a liquid usually because of heat",
         audio: "https://media.merriam-webster.com/soundc11/m/melt0001.wav",
-        sentence:
-          "Some kinds of plastics can be melted down and used to make new things such as bags and bottles.",
         isPlural: false,
         singularForm: null,
         wordType: "verb",
-        infinitiveForm: "melt"
+        infinitiveForm: "melt",
+        positiveForm: null
       },
       {
         word: "charity",
+        sentence: 17,
+        element: 15,
         def:
-          "the act of giving money, food, or other kinds of help to people who are poor, sick, etc.",
+          "the act of giving money, food, or other kinds of help to people who are poor, sick, etc.; also : something (such as money or food) that is given to people who are poor, sick, etc.",
         audio: "https://media.merriam-webster.com/soundc11/c/charit03.wav",
-        sentence:
-          "Unwanted plastic goods such as CDs and toys can be sold or given away to charity shops.",
         isPlural: false,
         singularForm: null,
         wordType: "noun",
-        infinitiveForm: null
+        infinitiveForm: null,
+        positiveForm: null
       }
-    ],
-    content:
-      "Plastic is a material we use every day.  The first plastics were made more than 100 years ago from parts of plants. Plastics are now made from oil, coal and natural gas. We are using up these things so fast that the Earth’s supplies may run out. Because of this, scientists are investigating new ideas for making plastics from plants such as sweet potato, bamboo and flax. Things made from plastic can be useful for people but bad for the planet. Some plastics can last for a long time without wearing out, and can be difficult to get rid of when they are not needed. They can remain in rubbish dumps called landfill sites for hundreds of years. Landfills can be smelly, ugly, and harmful to our planet. Recycling is a good way to get rid of unwanted plastics. Recycled waste materials can be used again to make new products. This can be difficult as different types of plastic need to be recycled in different ways. Some kinds of plastics can be melted down and used to make new things such as bags and bottles. Others can be made into fibres (strands of material) for clothing. Another way to protect the environment is to use canvas bags for shopping rather than plastic ones. A lot of plastic objects can also be reused. Plastic bottles can be refilled many times, rather than throwing them away once they are empty. Unwanted plastic goods such as CDs and toys can be sold or given away to charity shops."
+    ]
   },
   {
-    title: "Bats in your garden",
+    title: "Bats in your Garden",
     level: "Intermediate",
     tags: ["animals"],
+    content:
+      "Bats are flying mammals. They are warm blooded creatures that hibernate in winter. Growing warmth from the sun wakes them from sleep in March or April. In many British gardens, they can  be seen at dusk – and occasionally even in daytime – right through to October or even later. Their diet consists entirely of insects which they detect by echo-location, usually in flight. The sound waves issued through their mouths or noses help them to navigate, as well as to find food. Britain has 17 different species of bat. A lot of these have been recorded in gardens and several species may roost in houses. In many parts of the world, bat populations have declined dramatically. British bats are under threat and many species are now much less common than they used to be. Some species of British bat are very rare and a few species are close to extinction. Bats normally remain hidden during the day and their small, black droppings in your roof space often provide the only evidence of their presence. Mice droppings are hard but those of bats consist of insect skeletons and crumble to dust if rubbed between finger and thumb. All bat species and their roosts are protected by law because they are so vulnerable. British bats are quite harmless to humans and should not be disturbed.",
     targetWordObjs: [
       {
         word: "hibernate",
+        sentence: 1,
+        element: 6,
         def: "to spend the winter sleeping or resting",
         audio: "https://media.merriam-webster.com/soundc11/h/hibern04.wav",
-        sentence: "They are warm blooded creatures that hibernate in winter.",
         isPlural: false,
         singularForm: null,
         wordType: "verb",
-        infinitiveForm: "hibernate"
+        infinitiveForm: "hibernate",
+        positiveForm: null
       },
       {
         word: "dusk",
+        sentence: 3,
+        element: 10,
         def:
           "the time when day changes into night and the sky begins to get darker",
         audio: "https://media.merriam-webster.com/soundc11/d/dusk0001.wav",
-        sentence:
-          "In many British gardens, they can  be seen at dusk – and occasionally even in daytime – right through to October or even later.",
         isPlural: false,
         singularForm: null,
         wordType: "noun",
-        infinitiveForm: null
+        infinitiveForm: null,
+        positiveForm: null
       },
       {
         word: "navigate",
+        sentence: 5,
+        element: 12,
         def:
-          "to find the way to get to a place when you are traveling in a ship, airplane, car, etc.",
+          "to find the way to get to a place when you are traveling in a ship, airplane, car, etc. —often used figuratively",
         audio: "https://media.merriam-webster.com/soundc11/n/naviga04.wav",
-        sentence:
-          "The sound waves issued through their mouths or noses help them to navigate, as well as to find food.",
         isPlural: false,
         singularForm: null,
         wordType: "verb",
-        infinitiveForm: "navigate"
+        infinitiveForm: "navigate",
+        positiveForm: null
       },
       {
         word: "species",
+        sentence: 6,
+        element: 4,
         def:
           "a group of animals or plants that are similar and can produce young animals or plants : a group of related animals or plants that is smaller than a genus",
         audio: "https://media.merriam-webster.com/soundc11/s/specie02.wav",
-        sentence: "Britain has 17 different species of bat.",
         isPlural: true,
         singularForm: "species",
         wordType: "noun",
-        infinitiveForm: null
+        infinitiveForm: null,
+        positiveForm: null
       },
       {
         word: "extinction",
+        sentence: 10,
+        element: 15,
         def:
           "the state or situation that results when something (such as a plant or animal species) has died out completely",
         audio: "https://media.merriam-webster.com/soundc11/e/extinc03.wav",
-        sentence:
-          "Some species of British bat are very rare and a few species are close to extinction.",
         isPlural: false,
         singularForm: null,
         wordType: "noun",
-        infinitiveForm: null
+        infinitiveForm: null,
+        positiveForm: null
       }
-    ],
-    content:
-      "Bats are flying mammals. They are warm blooded creatures that hibernate in winter. Growing warmth from the sun wakes them from sleep in March or April. In many British gardens, they can  be seen at dusk – and occasionally even in daytime – right through to October or even later. Their diet consists entirely of insects which they detect by echo-location, usually in flight. The sound waves issued through their mouths or noses help them to navigate, as well as to find food. Britain has 17 different species of bat. A lot of these have been recorded in gardens and several species may roost in houses. In many parts of the world, bat populations have declined dramatically. British bats are under threat and many species are now much less common than they used to be. Some species of British bat are very rare and a few species are close to extinction. Bats normally remain hidden during the day and their small, black droppings in your roof space often provide the only evidence of their presence. Mice droppings are hard but those of bats consist of insect skeletons and crumble to dust if rubbed between finger and thumb. All bat species and their roosts are protected by law because they are so vulnerable. British bats are quite harmless to humans and should not be disturbed."
+    ]
   },
 
   {
@@ -184,6 +201,8 @@ const texts = [
     targetWordObjs: [
       {
         word: "obey",
+        sentence: 3,
+        element: 6,
         def:
           "to do what someone tells you to do or what a rule, law, etc., says you must do",
         audio: "https://media.merriam-webster.com/soundc11/o/obey0001.wav",
@@ -191,11 +210,12 @@ const texts = [
         singularForm: null,
         wordType: "verb",
         infinitiveForm: "obey",
-        sentence:
-          "Guide dogs must learn not to obey any command that might put their owner in danger"
+        positiveForm: null
       },
       {
         word: "curb",
+        sentence: 6,
+        element: 4,
         def:
           "a short border along the edge of a street that is usually made of stone or concrete",
         audio: "https://media.merriam-webster.com/soundc11/c/curb0001.wav",
@@ -203,33 +223,36 @@ const texts = [
         singularForm: null,
         wordType: "noun",
         infinitiveForm: null,
-        sentence:
-          "When they reach the curb, the dog stops and signals to the owner that they have reached a crossing"
+        positiveForm: null
       },
       {
         word: "obstacles",
+        sentence: 12,
+        element: 5,
         def: "something that makes it difficult to do something",
         audio: "https://media.merriam-webster.com/soundc11/o/obstac01.wav",
         isPlural: true,
         singularForm: "obstacle",
         wordType: "noun",
         infinitiveForm: null,
-        sentence:
-          "The owner can’t see obstacles so the guide dog must help the owner to avoid them"
+        positiveForm: null
       },
       {
         word: "Puppies",
+        sentence: 14,
+        element: 0,
         def: "a young dog",
         audio: "https://media.merriam-webster.com/soundc11/p/puppy001.wav",
         isPlural: true,
         singularForm: "Puppy",
         wordType: "noun",
         infinitiveForm: null,
-        sentence:
-          "Puppies born to be guide dogs have to be intelligent and good- natured; it is important that they aren’t nervous of crowds or frightened by sudden noises"
+        positiveForm: null
       },
       {
         word: "nervous",
+        sentence: 14,
+        element: 21,
         def:
           "having or showing feelings of being worried and afraid about what might happen",
         audio: "https://media.merriam-webster.com/soundc11/n/nervou01.wav",
@@ -237,11 +260,12 @@ const texts = [
         singularForm: "nervous",
         wordType: "adjective",
         infinitiveForm: null,
-        sentence:
-          "Puppies born to be guide dogs have to be intelligent and good- natured; it is important that they aren’t nervous of crowds or frightened by sudden noises"
+        positiveForm: null
       },
       {
         word: "training",
+        sentence: 19,
+        element: 22,
         def:
           "a process by which someone is taught the skills that are needed for an art, profession, or job",
         audio: "https://media.merriam-webster.com/soundc11/t/train01v.wav",
@@ -249,8 +273,7 @@ const texts = [
         singularForm: null,
         wordType: "noun",
         infinitiveForm: null,
-        sentence:
-          "When the puppy is about a year old, it returns to the guide dog centre for the next part of its training"
+        positiveForm: null
       }
     ]
   },
@@ -264,17 +287,20 @@ const texts = [
     targetWordObjs: [
       {
         word: "preserve",
+        sentence: 1,
+        element: 5,
         def: "to keep (something) in its original state or in good condition",
         audio: "https://media.merriam-webster.com/soundc11/p/preser03.wav",
         isPlural: false,
         singularForm: null,
         wordType: "verb",
         infinitiveForm: "preserve",
-        sentence:
-          "People found a way to preserve them by leaving them out at night in the cold and then warming them in the sun the following day"
+        positiveForm: null
       },
       {
         word: "crushed",
+        sentence: 2,
+        element: 7,
         def:
           "to press or squeeze (something) so hard that it breaks or loses its shape",
         audio: "https://media.merriam-webster.com/soundc11/c/crush001.wav",
@@ -282,33 +308,36 @@ const texts = [
         singularForm: null,
         wordType: "verb",
         infinitiveForm: "crush",
-        sentence:
-          "During the day, the potatoes were crushed by stamping on them"
+        positiveForm: null
       },
       {
         word: "stamping",
+        sentence: 2,
+        element: 9,
         def: "to bring (your foot) down heavily and noisily",
         audio: null,
         isPlural: false,
         singularForm: null,
         wordType: "verb",
         infinitiveForm: "stamp",
-        sentence:
-          "During the day, the potatoes were crushed by stamping on them"
+        positiveForm: null
       },
       {
         word: "pulp",
+        sentence: 3,
+        element: 9,
         def: "the inner, juicy part of a fruit or vegetable",
         audio: "https://media.merriam-webster.com/soundc11/p/pulp0001.wav",
         isPlural: false,
         singularForm: null,
         wordType: "noun",
         infinitiveForm: null,
-        sentence:
-          "After doing this for five days, a potato pulp was made which could be stored and kept for up to ten years in case crops failed"
+        positiveForm: null
       },
       {
         word: "crops",
+        sentence: 3,
+        element: 25,
         def:
           "a plant or plant product that is grown by farmers —sometimes used before another noun",
         audio: "https://media.merriam-webster.com/soundc11/c/crop0001.wav",
@@ -316,11 +345,12 @@ const texts = [
         singularForm: "crop",
         wordType: "noun",
         infinitiveForm: null,
-        sentence:
-          "After doing this for five days, a potato pulp was made which could be stored and kept for up to ten years in case crops failed"
+        positiveForm: null
       },
       {
         word: "suspicion",
+        sentence: 6,
+        element: 4,
         def:
           "a feeling that someone is possibly guilty of a crime or of doing something wrong",
         audio: "https://media.merriam-webster.com/soundc11/s/suspic01.wav",
@@ -328,11 +358,12 @@ const texts = [
         singularForm: null,
         wordType: "noun",
         infinitiveForm: null,
-        sentence:
-          "They were regarded with suspicion, however, and many people thought they weren’t suitable for humans to eat, partly because of their odd shape"
+        positiveForm: null
       },
       {
         word: "rotting",
+        sentence: 10,
+        element: 21,
         def:
           "to slowly decay or cause (something) to decay —often used figuratively —sometimes used figuratively",
         audio: "https://media.merriam-webster.com/soundc11/r/rot00001.wav",
@@ -340,22 +371,24 @@ const texts = [
         singularForm: null,
         wordType: "verb",
         infinitiveForm: "rot",
-        sentence:
-          "On their way home, they would land in Ireland to put salt on fish they had caught to stop it rotting"
+        positiveForm: null
       },
       {
         word: "soil",
+        sentence: 11,
+        element: 21,
         def: "the top layer of earth in which plants grow",
         audio: "https://media.merriam-webster.com/soundc11/s/soil0001.wav",
         isPlural: false,
         singularForm: null,
         wordType: "noun",
         infinitiveForm: null,
-        sentence:
-          "It is believed that the sailors gave some of their potatoes to the farmers who grew them in the rich Irish soil"
+        positiveForm: null
       },
       {
         word: "feast",
+        sentence: 13,
+        element: 25,
         def:
           "a special meal with large amounts of food and drink : a large formal dinner —often used figuratively",
         audio: "https://media.merriam-webster.com/soundc11/f/feast001.wav",
@@ -363,11 +396,12 @@ const texts = [
         singularForm: null,
         wordType: "noun",
         infinitiveForm: null,
-        sentence:
-          "It is said that he gave a potato plant to Queen Elizabeth I of England as a gift, and to celebrate, a royal feast was held to eat the potatoes"
+        positiveForm: null
       },
       {
         word: "banned",
+        sentence: 15,
+        element: 9,
         def:
           "to forbid people from using (something) : to say that something cannot be used or done",
         audio: "https://media.merriam-webster.com/soundc11/b/ban00001.wav",
@@ -375,11 +409,12 @@ const texts = [
         singularForm: null,
         wordType: "verb",
         infinitiveForm: "ban",
-        sentence:
-          "This made everyone very ill and potatoes were then banned from the royal menu"
+        positiveForm: null
       },
       {
         word: "fibre",
+        sentence: 17,
+        element: 13,
         def:
           "plant material that cannot be digested but that helps you to digest other food",
         audio: null,
@@ -387,11 +422,12 @@ const texts = [
         singularForm: null,
         wordType: "noun",
         infinitiveForm: null,
-        sentence:
-          "A baked potato contains a surprisingly large amount of vitamin C – and more fibre than two slices of wholemeal bread"
+        positiveForm: null
       },
       {
         word: "nutritious",
+        sentence: 21,
+        element: 17,
         def:
           "having substances that a person or animal needs to be healthy and grow properly : promoting good health and growth",
         audio: "https://media.merriam-webster.com/soundc11/n/nutrit05.wav",
@@ -399,11 +435,12 @@ const texts = [
         singularForm: "nutritious",
         wordType: "adjective",
         infinitiveForm: null,
-        sentence:
-          "This makes them a perfect crop for farmers in the developing world, who can grow a nutritious food in poor soil"
+        positiveForm: null
       },
       {
         word: "harvest",
+        sentence: 22,
+        element: 15,
         def:
           "the season when crops are gathered from the fields or the activity of gathering crops",
         audio: "https://media.merriam-webster.com/soundc11/h/harves01.wav",
@@ -411,8 +448,7 @@ const texts = [
         singularForm: null,
         wordType: "noun",
         infinitiveForm: null,
-        sentence:
-          "There are plenty of different varieties to choose from and they usually produce a good harvest"
+        positiveForm: null
       }
     ]
   },
@@ -425,6 +461,8 @@ const texts = [
     targetWordObjs: [
       {
         word: "festival",
+        sentence: 0,
+        element: 5,
         def:
           "a special time or event when people gather to celebrate something",
         audio: "https://media.merriam-webster.com/soundc11/f/festiv01.wav",
@@ -432,10 +470,12 @@ const texts = [
         singularForm: null,
         wordType: "noun",
         infinitiveForm: null,
-        sentence: "Diwali is an important Indian festival"
+        positiveForm: null
       },
       {
         word: "pray",
+        sentence: 6,
+        element: 7,
         def:
           "to speak to God especially in order to give thanks or to ask for something —often + for",
         audio: "https://media.merriam-webster.com/soundc11/p/pray0001.wav",
@@ -443,11 +483,12 @@ const texts = [
         singularForm: null,
         wordType: "verb",
         infinitiveForm: "pray",
-        sentence:
-          "During Diwali, people light lamps and pray for good health, peace and wisdom"
+        positiveForm: null
       },
       {
         word: "decorate",
+        sentence: 7,
+        element: 6,
         def:
           "to make (something) more attractive usually by putting something on it —often + with",
         audio: "https://media.merriam-webster.com/soundc11/d/decora01.wav",
@@ -455,19 +496,19 @@ const texts = [
         singularForm: null,
         wordType: "verb",
         infinitiveForm: "decorate",
-        sentence:
-          "They clean their homes, and decorate their doorways with pictures made with painted rice, called rangoli"
+        positiveForm: null
       },
       {
         word: "prosperity",
+        sentence: 10,
+        element: 11,
         def: "the state of being successful usually by making a lot of money",
         audio: "https://media.merriam-webster.com/soundc11/p/prospe08.wav",
         isPlural: false,
         singularForm: null,
         wordType: "noun",
         infinitiveForm: null,
-        sentence:
-          "People pray to Lakshmi, the Hindu goddess of wealth for prosperity in the coming year"
+        positiveForm: null
       }
     ]
   },
@@ -480,16 +521,20 @@ const texts = [
     targetWordObjs: [
       {
         word: "industry",
+        sentence: 1,
+        element: 5,
         def: "the process of making products by using machinery and factories",
         audio: "https://media.merriam-webster.com/soundc11/i/indust09.wav",
         isPlural: false,
         singularForm: null,
         wordType: "noun",
         infinitiveForm: null,
-        sentence: "Coffee growing is a global industry"
+        positiveForm: null
       },
       {
         word: "traded",
+        sentence: 6,
+        element: 5,
         def:
           "to give something to someone and receive something in return : to give something in exchange for something else",
         audio: null,
@@ -497,10 +542,12 @@ const texts = [
         singularForm: null,
         wordType: "verb",
         infinitiveForm: "trade",
-        sentence: "Coffee was first grown and traded in the 15th century"
+        positiveForm: null
       },
       {
         word: "bean",
+        sentence: 14,
+        element: 6,
         def:
           "a seed that is eaten as a vegetable and that comes from any one of many different kinds of climbing plants",
         audio: "https://media.merriam-webster.com/soundc11/b/bean0001.wav",
@@ -508,11 +555,12 @@ const texts = [
         singularForm: null,
         wordType: "noun",
         infinitiveForm: null,
-        sentence:
-          "Most people know what a coffee bean looks like, but what about the plant? Coffee trees can grow up to nine metres high, but they are cut short for production"
+        positiveForm: null
       },
       {
         word: "stem",
+        sentence: 16,
+        element: 17,
         def:
           "the main long and thin part of a plant that rises above the soil and supports the leaves and flowers",
         audio: "https://media.merriam-webster.com/soundc11/s/stem0001.wav",
@@ -520,11 +568,12 @@ const texts = [
         singularForm: null,
         wordType: "noun",
         infinitiveForm: null,
-        sentence:
-          "These trees have shiny dark green leaves that grow on opposite sides of each other on a stem"
+        positiveForm: null
       },
       {
         word: "roasted",
+        sentence: 20,
+        element: 4,
         def:
           "to cook (food such as chicken, potatoes, or beef) with dry heat in an oven or over a fire",
         audio: "https://media.merriam-webster.com/soundc11/r/roast001.wav",
@@ -532,43 +581,48 @@ const texts = [
         singularForm: null,
         wordType: "verb",
         infinitiveForm: "roast",
-        sentence:
-          "After these beans are roasted at high temperatures they are ready to be made into a drink"
+        positiveForm: null
       },
       {
         word: "mild",
+        sentence: 23,
+        element: 6,
         def: "gentle in nature or behavior",
         audio: "https://media.merriam-webster.com/soundc11/m/mild0001.wav",
         isPlural: false,
         singularForm: null,
         wordType: "adjective",
         infinitiveForm: null,
-        sentence: "These trees produce a fine and mild coffee with a rich smell"
+        positiveForm: null
       },
       {
         word: "intense",
+        sentence: 32,
+        element: 14,
         def: "very great in degree : very strong",
         audio: "https://media.merriam-webster.com/soundc11/i/intens01.wav",
         isPlural: false,
         singularForm: null,
         wordType: "adjective",
         infinitiveForm: null,
-        sentence:
-          "Coffee from the island of Sumatra is full bodied, with an earthy and intense taste"
+        positiveForm: null
       },
       {
         word: "goat",
+        sentence: 34,
+        element: 15,
         def: "a small animal that is related to the sheep",
         audio: "https://media.merriam-webster.com/soundc11/g/goat0001.wav",
         isPlural: false,
         singularForm: null,
         wordType: "noun",
         infinitiveForm: null,
-        sentence:
-          "One popular story about the discovery of coffee long ago is about Kaldi, a goat keeper"
+        positiveForm: null
       },
       {
         word: "spread",
+        sentence: 39,
+        element: 5,
         def:
           "to open, arrange, or place (something) over a large area —often + out",
         audio: "https://media.merriam-webster.com/soundc11/s/spread01.wav",
@@ -576,10 +630,12 @@ const texts = [
         singularForm: null,
         wordType: "verb",
         infinitiveForm: "spread",
-        sentence: "This knowledge about coffee soon spread all over the world"
+        positiveForm: null
       },
       {
         word: "compete",
+        sentence: 49,
+        element: 7,
         def:
           "to try to get or win something (such as a prize or reward) that someone else is also trying to win : to try to be better or more successful than someone or something else",
         audio: "https://media.merriam-webster.com/soundc11/c/compet01.wav",
@@ -587,19 +643,19 @@ const texts = [
         singularForm: null,
         wordType: "verb",
         infinitiveForm: "compete",
-        sentence:
-          "The best baristas in the country then compete for the national award"
+        positiveForm: null
       },
       {
         word: "concerns",
+        sentence: 60,
+        element: 4,
         def: "a feeling of worry usually shared by many people",
         audio: "https://media.merriam-webster.com/soundc11/c/concer01.wav",
         isPlural: true,
         singularForm: "concern",
         wordType: "noun",
         infinitiveForm: null,
-        sentence:
-          "There are also environmental concerns within the coffee industry"
+        positiveForm: null
       }
     ]
   }

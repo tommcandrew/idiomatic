@@ -1,5 +1,5 @@
-.word {
-  margin: 0 0.2em;
+.reader__word {
+  margin: 0 0 0 1em;
 }
 
 .reader__content {
@@ -16,7 +16,7 @@
   margin: 0 auto;
 }
 
-.word--target {
+.reader__word--target {
   font-weight: bold;
   cursor: pointer;
   &:hover {
@@ -33,7 +33,7 @@
 
 .reader__exercises-button {
   @include button($mySeaBlue, 1.3rem);
-  margin: 1rem 0;
+  margin: 1rem 0 5rem 0;
   &:hover {
     background: $mySeaBlueDark;
   }

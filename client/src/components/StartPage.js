@@ -1,6 +1,6 @@
 import React from "react";
 
-const StartPage = ({ selectedText, handleShowReader }) => {
+const StartPage = ({ selectedText, setCurrentComponent }) => {
   return (
     <div className="startPage__wrapper">
       {selectedText.title && (
@@ -16,7 +16,10 @@ const StartPage = ({ selectedText, handleShowReader }) => {
             <p>Click to see the definition and listen to the pronunciation.</p>
             <p>When you're finished reading, do the exercises.</p>
           </div>
-          <button onClick={handleShowReader} className="startPage__button">
+          <button
+            onClick={() => setCurrentComponent("Reader")}
+            className="startPage__button"
+          >
             Start
           </button>
         </div>

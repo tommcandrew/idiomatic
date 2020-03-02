@@ -1,26 +1,20 @@
-//1. shuffle targetWordObjs
-//2. extract targetWords (to use as answer reference)
-//3. extract definitions
-//4. create object to hold selected options
-//5. in render, map definitions and map target words for their options
-//6. on submit, check answers by getting word from array using selected option index and comparing to word of same index in text.targetWordObjs
-
 import React, { useState, useEffect } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlay } from "@fortawesome/free-solid-svg-icons";
-import Alert from "./Alert";
+import AlertWrapper from "./AlertWrapper";
 import correctSound from "../assets/audio/correct.mp3";
 import incorrectSound from "../assets/audio/incorrect.mp3";
 import shuffle from "../utils/shuffle";
 
 const Spelling = ({
   text,
-  handleShowResults,
+  setCurrentComponent,
   incrementCorrectAnswers,
-  markTextComplete
+  markTextComplete,
+  infoMessages,
+  setInfoMessages
 }) => {
   const [questionIndex, setQuestionIndex] = useState(0);
-  const [alertInfo, setAlertInfo] = useState("");
   const [shuffledTargetWordObjs, setShuffledTargetWordObjs] = useState([]);
   const [targetWords, setTargetWords] = useState([]);
   const [finished, setFinished] = useState(false);
@@ -32,15 +26,18 @@ const Spelling = ({
     const shuffledTargetWordObjs = shuffle(filteredTargetWordObjs);
     setShuffledTargetWordObjs(shuffledTargetWordObjs);
     const targetWords = filteredTargetWordObjs.map(wordObj => {
-      if (wordObj.isPlural) {
+      if (wordObj.singularForm) {
         return wordObj.singularForm;
-      } else if (wordObj.wordType === "verb") {
+      } else if (wordObj.infinitiveForm) {
         return wordObj.infinitiveForm;
+      } else if (wordObj.positiveForm) {
+        return wordObj.positiveForm;
       } else {
         return wordObj.word;
       }
     });
     setTargetWords(targetWords);
+    //eslint-disable-next-line
   }, []);
 
   const playAudio = () => {
@@ -52,40 +49,31 @@ const Spelling = ({
     audio.play();
   };
 
-  useEffect(() => {
-    const alertTimer = setTimeout(() => {
-      setAlertInfo(null);
-    }, 2500);
-    return () => {
-      clearTimeout(alertTimer);
-    };
-  }, [alertInfo]);
-
   const handleSubmit = e => {
     //check if finished questions in which caser don't play audio
     e.preventDefault();
     let correctAnswers = 0;
     const input = e.target.text.value.toLowerCase();
     if (input === "") {
-      alert("Enter the word");
+      setInfoMessages([{ text: "Enter some text", type: "warning" }]);
     }
     e.target.reset();
     if (input === targetWords[questionIndex]) {
       const audio = new Audio(correctSound);
       audio.play();
-      setAlertInfo({ type: "success", text: "Right!" });
+      setInfoMessages([{ type: "success", text: "Right!" }]);
       correctAnswers++;
     } else {
       const audio = new Audio(incorrectSound);
       audio.play();
-      setAlertInfo({ type: "failure", text: "Wrong!" });
+      setInfoMessages([{ type: "failure", text: "Wrong!" }]);
     }
     incrementCorrectAnswers(correctAnswers);
     if (questionIndex === shuffledTargetWordObjs.length - 1) {
       setFinished(true);
       setTimeout(() => {
         markTextComplete();
-        handleShowResults();
+        setCurrentComponent("Results");
       }, 3000);
     } else {
       setQuestionIndex(questionIndex + 1);
@@ -109,7 +97,7 @@ const Spelling = ({
         <input type="text" name="text" />
         <button type="submit">Check</button>
       </form>
-      {alertInfo && <Alert alertInfo={alertInfo} />}
+      {infoMessages.length > 0 && <AlertWrapper messages={infoMessages} />}
     </div>
   );
 };

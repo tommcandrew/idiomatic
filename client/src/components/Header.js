@@ -6,16 +6,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUserCircle } from "@fortawesome/free-solid-svg-icons";
 import OptionsMenu from "./OptionsMenu";
 
-const Header = ({
-  handleShowDashboard,
-  handleShowMyTexts,
-  handleShowMyWords,
-  handleShowTexts,
-  handleShowMyProfile,
-  showMobileMenu,
-  setShowMobileMenu,
-  handleShowUploadText
-}) => {
+const Header = ({ showMobileMenu, setShowMobileMenu, setCurrentComponent }) => {
   const { device } = useContext(DeviceContext);
   const { logout } = useContext(AuthContext);
   const [mouseOverIcon, setMouseOverIcon] = useState(false);
@@ -36,19 +27,30 @@ const Header = ({
       {showMobileMenu && (
         <MobileMenu
           setShowMobileMenu={setShowMobileMenu}
-          handleShowDashboard={handleShowDashboard}
-          handleShowMyWords={handleShowMyWords}
-          handleShowMyTexts={handleShowMyTexts}
+          // handleShowDashboard={handleShowDashboard}
+          // handleShowMyWords={handleShowMyWords}
+          // handleShowMyTexts={handleShowMyTexts}
+          setCurrentComponent={setCurrentComponent}
         />
       )}
       {device === "desktop" && (
         <>
           <div className="header__buttons--left">
-            <button onClick={handleShowDashboard}>Dashboard</button>
-            <button onClick={handleShowTexts}>Choose Text</button>
-            <button onClick={handleShowUploadText}>Upload Text</button>
-            <button onClick={handleShowMyWords}>My Words</button>
-            <button onClick={handleShowMyTexts}>My Texts</button>
+            <button onClick={() => setCurrentComponent("Dashboard")}>
+              Dashboard
+            </button>
+            <button onClick={() => setCurrentComponent("Texts")}>
+              Choose Text
+            </button>
+            <button onClick={() => setCurrentComponent("UploadText")}>
+              Upload Text
+            </button>
+            <button onClick={() => setCurrentComponent("MyWords")}>
+              My Words
+            </button>
+            <button onClick={() => setCurrentComponent("MyTexts")}>
+              My Texts
+            </button>
           </div>
           <div className="header__buttons--right">
             <FontAwesomeIcon
@@ -60,7 +62,8 @@ const Header = ({
             {mouseOverIcon || mouseOverOptionsMenu ? (
               <OptionsMenu
                 logout={logout}
-                handleShowMyProfile={handleShowMyProfile}
+                // handleShowMyProfile={handleShowMyProfile}
+                setCurrentComponent={setCurrentComponent}
                 setMouseOverOptionsMenu={setMouseOverOptionsMenu}
               />
             ) : null}

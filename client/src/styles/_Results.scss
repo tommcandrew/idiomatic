@@ -13,12 +13,19 @@
 
 .results__info {
   font-size: 2rem;
+  margin: 0 1rem;
 }
 .results__button {
   @include button($mySeaBlue, 1.3rem);
   margin: 1rem 0;
-  width: 10vw;
+  width: 50vw;
   &:hover {
     background: $mySeaBlueDark;
+  }
+}
+
+@media only screen and (min-width: 1000px) {
+  .results__button {
+    width: 10vw;
   }
 }

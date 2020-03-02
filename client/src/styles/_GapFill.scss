@@ -20,8 +20,8 @@
   margin: 0 auto;
   input {
     font-size: 1.5rem;
+    width: 15vw;
   }
-  // flex-grow: 1;
   flex-direction: column;
   display: flex;
   flex-wrap: wrap;
@@ -61,12 +61,14 @@
 .gapFill__filled--right {
   color: green;
   font-weight: bold;
+  min-width: 15vw;
 }
 
 .gapFill__filled--wrong {
   color: red;
   font-weight: bold;
   position: relative;
+  min-width: 15vw;
   cursor: pointer;
   &:hover::after {
     display: block;

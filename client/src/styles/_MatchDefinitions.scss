@@ -6,10 +6,12 @@
   font-style: italic;
 }
 
-.matchDefinitions__button {
+.matchDefinitions__button,
+.matchDefinitions__button--selected {
   background: yellow;
   cursor: pointer;
   user-select: none;
+  min-width: 8vw;
 }
 
 .matchDefinitions__button--selected {

@@ -5,13 +5,13 @@ const MyTexts = ({
   texts,
   handleChooseText,
   deleteText,
-  handleShowUploadText
+  setCurrentComponent
 }) => {
   return (
     <div className="myTexts__wrapper">
-      <div className="myTexts__texts">
-        {texts.length > 0 ? (
-          texts.map((text, index) => (
+      {texts.length > 0 ? (
+        <div className="myTexts__texts">
+          {texts.map((text, index) => (
             <TextTile
               title={text.title}
               key={"saved-text" + index}
@@ -19,13 +19,15 @@ const MyTexts = ({
               edit="true"
               deleteText={deleteText}
             />
-          ))
-        ) : (
-          <h2 className="myTexts__no-texts">You don't have any saved texts.</h2>
-        )}
-      </div>
+          ))}
+        </div>
+      ) : (
+        <h2 className="myTexts__no-texts">You don't have any saved texts.</h2>
+      )}
       <div className="myTexts__upload-wrapper">
-        <button onClick={handleShowUploadText}>Upload Text</button>
+        <button onClick={() => setCurrentComponent("UploadText")}>
+          Upload Text
+        </button>
       </div>
     </div>
   );

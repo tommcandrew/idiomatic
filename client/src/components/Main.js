@@ -13,23 +13,12 @@ import Spelling from "./Spelling";
 import Results from "./Results";
 import MyWords from "./MyWords";
 import MyProfile from "./MyProfile";
-import Alert from "./Alert";
+import AlertWrapper from "./AlertWrapper";
 import texts from "../assets/texts.js";
 
 const Main = () => {
-  const [showDashboard, setShowDashboard] = useState(true);
-  const [showTexts, setShowTexts] = useState(false);
-  const [showUploadText, setShowUploadText] = useState(false);
-  const [showStartPage, setShowStartPage] = useState(false);
-  const [showReader, setShowReader] = useState(false);
-  const [showMyTexts, setShowMyTexts] = useState(false);
-  const [showGapFill, setShowGapFill] = useState(false);
-  const [showMatchDefinitions, setShowMatchDefinitions] = useState(false);
-  const [showSpelling, setShowSpelling] = useState(false);
-  const [showResults, setShowResults] = useState(false);
-  const [showMyWords, setShowMyWords] = useState(false);
-  const [showMyProfile, setShowMyProfile] = useState(false);
   const [showMobileMenu, setShowMobileMenu] = useState(false);
+  const [currentComponent, setCurrentComponent] = useState("Dashboard");
   const [selectedText, setSelectedText] = useState(null);
   const [infoMessages, setInfoMessages] = useState([]);
   const [correctAnswers, setCorrectAnswers] = useState(0);
@@ -40,6 +29,15 @@ const Main = () => {
   useEffect(() => {
     fetchSavedTexts();
   }, []);
+
+  useEffect(() => {
+    const alertTimer = setTimeout(() => {
+      setInfoMessages([]);
+    }, 2500);
+    return () => {
+      clearTimeout(alertTimer);
+    };
+  }, [infoMessages]);
 
   const fetchSavedTexts = () => {
     const token = localStorage.getItem("idiomatic-token");
@@ -69,7 +67,7 @@ const Main = () => {
       )
       .then(() => {
         fetchSavedTexts();
-        setInfoMessages(["Text deleted"]);
+        setInfoMessages([{ text: "Text deleted", type: "success" }]);
       });
   };
 
@@ -84,16 +82,14 @@ const Main = () => {
     }
     let selectedText;
     //if user is looking at own uploaded texts
-    if (showMyTexts) {
+    if (currentComponent === "MyTexts") {
       selectedText = savedTexts.filter(text => text.title === title)[0];
     } else {
       //or site's texts
       selectedText = texts.filter(text => text.title === title)[0];
     }
     setSelectedText(selectedText);
-    setShowTexts(false);
-    setShowMyTexts(false);
-    setShowStartPage(true);
+    setCurrentComponent("StartPage");
     //used when giving final results
     setNumQuestions(selectedText.targetWordObjs.length * 3);
   };
@@ -105,233 +101,91 @@ const Main = () => {
   const markTextComplete = () => {
     setCompletedTexts([...completedTexts, selectedText.title]);
   };
-  const closeAlert = () => {
-    setInfoMessages([]);
-  };
-
-  //functions to open/close components
-  const handleShowDashboard = () => {
-    setCorrectAnswers(0);
-    setShowTexts(false);
-    setShowUploadText(false);
-    setShowStartPage(false);
-    setShowReader(false);
-    setShowMyTexts(false);
-    setShowMyWords(false);
-    setShowResults(false);
-    setShowSpelling(false);
-    setShowGapFill(false);
-    setShowMatchDefinitions(false);
-    setShowMyProfile(false);
-    setShowMobileMenu(false);
-    setShowDashboard(true);
-  };
-
-  const handleShowTexts = () => {
-    setCorrectAnswers(0);
-    setShowDashboard(false);
-    setShowMyWords(false);
-    setShowMyProfile(false);
-    setShowSpelling(false);
-    setShowResults(false);
-    setShowStartPage(false);
-    setShowUploadText(false);
-    setShowMyTexts(false);
-    setShowGapFill(false);
-    setShowMatchDefinitions(false);
-    setShowMobileMenu(false);
-    setShowReader(false);
-    setShowTexts(true);
-  };
-
-  const handleShowUploadText = () => {
-    setCorrectAnswers(0);
-    setShowDashboard(false);
-    setShowMyWords(false);
-    setShowMyProfile(false);
-    setShowSpelling(false);
-    setShowResults(false);
-    setShowStartPage(false);
-    setShowMyTexts(false);
-    setShowGapFill(false);
-    setShowMatchDefinitions(false);
-    setShowMobileMenu(false);
-    setShowTexts(false);
-    setShowReader(false);
-    setShowUploadText(true);
-  };
-
-  const handleShowReader = () => {
-    setShowStartPage(false);
-    setShowReader(true);
-  };
-
-  const handleShowMyTexts = () => {
-    setCorrectAnswers(0);
-    setShowDashboard(false);
-    setShowTexts(false);
-    setShowMyWords(false);
-    setShowMyProfile(false);
-    setShowSpelling(false);
-    setShowResults(false);
-    setShowStartPage(false);
-    setShowUploadText(false);
-    setShowGapFill(false);
-    setShowMatchDefinitions(false);
-    setShowMobileMenu(false);
-    setShowReader(false);
-    setShowMyTexts(true);
-  };
-
-  const handleShowGapFill = () => {
-    setShowReader(false);
-    setShowGapFill(true);
-  };
-
-  const handleShowMatchDefinitions = () => {
-    setShowGapFill(false);
-    setShowMatchDefinitions(true);
-  };
-
-  const handleShowResults = () => {
-    setShowSpelling(false);
-    setShowResults(true);
-  };
-
-  const handleShowSpelling = () => {
-    setShowMatchDefinitions(false);
-    setShowSpelling(true);
-  };
-
-  const handleShowMyWords = () => {
-    setCorrectAnswers(0);
-    setShowDashboard(false);
-    setShowTexts(false);
-    setShowMyProfile(false);
-    setShowSpelling(false);
-    setShowResults(false);
-    setShowStartPage(false);
-    setShowUploadText(false);
-    setShowMyTexts(false);
-    setShowGapFill(false);
-    setShowMatchDefinitions(false);
-    setShowReader(false);
-    setShowMyWords(true);
-  };
-
-  const handleShowMyProfile = () => {
-    setCorrectAnswers(0);
-    setShowDashboard(false);
-    setShowTexts(false);
-    setShowSpelling(false);
-    setShowResults(false);
-    setShowStartPage(false);
-    setShowUploadText(false);
-    setShowMyTexts(false);
-    setShowGapFill(false);
-    setShowMatchDefinitions(false);
-    setShowMyWords(false);
-    setShowReader(false);
-    setShowMyProfile(true);
-  };
 
   return (
     <div className="main__wrapper">
       <Header
-        handleShowDashboard={handleShowDashboard}
-        handleShowMyTexts={handleShowMyTexts}
-        handleShowMyWords={handleShowMyWords}
-        handleShowTexts={handleShowTexts}
-        handleShowMyProfile={handleShowMyProfile}
         showMobileMenu={showMobileMenu}
         setShowMobileMenu={setShowMobileMenu}
-        handleShowUploadText={handleShowUploadText}
+        currentComponent={currentComponent}
+        setCurrentComponent={setCurrentComponent}
       />
-      {showDashboard && (
-        <Dashboard
-          handleShowTexts={handleShowTexts}
-          handleShowUploadText={handleShowUploadText}
-        />
+      {currentComponent === "Dashboard" && (
+        <Dashboard setCurrentComponent={setCurrentComponent} />
       )}
-      {showTexts && (
+      {currentComponent === "Texts" && (
         <Texts
           setSelectedText={setSelectedText}
           texts={texts}
           handleChooseText={handleChooseText}
         />
       )}
-      {showUploadText && (
+      {currentComponent === "UploadText" && (
         <UploadText
           fetchSavedTexts={fetchSavedTexts}
-          handleShowMyTexts={handleShowMyTexts}
+          setCurrentComponent={setCurrentComponent}
           setInfoMessages={setInfoMessages}
           infoMessages={infoMessages}
           savedTexts={savedTexts}
-          closeAlert={closeAlert}
         />
       )}
-      {showStartPage && (
+      {currentComponent === "StartPage" && (
         <StartPage
           selectedText={selectedText}
-          handleShowReader={handleShowReader}
+          setCurrentComponent={setCurrentComponent}
         />
       )}
-      {showReader && (
-        <Reader text={selectedText} handleShowGapFill={handleShowGapFill} />
+      {currentComponent === "Reader" && (
+        <Reader text={selectedText} setCurrentComponent={setCurrentComponent} />
       )}
-      {showMyTexts && (
+      {currentComponent === "MyTexts" && (
         <MyTexts
           texts={savedTexts}
           handleChooseText={handleChooseText}
           deleteText={deleteText}
-          handleShowUploadText={handleShowUploadText}
+          setCurrentComponent={setCurrentComponent}
         />
       )}
-      {showGapFill && (
+      {currentComponent === "GapFill" && (
         <GapFill
-          handleShowMatchDefinitions={handleShowMatchDefinitions}
+          setCurrentComponent={setCurrentComponent}
           incrementCorrectAnswers={incrementCorrectAnswers}
           text={selectedText}
         />
       )}
-      {showMatchDefinitions && (
+      {currentComponent === "MatchDefinitions" && (
         <MatchDefinitions
           text={selectedText}
-          handleShowSpelling={handleShowSpelling}
+          setCurrentComponent={setCurrentComponent}
           incrementCorrectAnswers={incrementCorrectAnswers}
         />
       )}
-      {showSpelling && (
+      {currentComponent === "Spelling" && (
         <Spelling
           text={selectedText}
-          handleShowResults={handleShowResults}
+          setCurrentComponent={setCurrentComponent}
           incrementCorrectAnswers={incrementCorrectAnswers}
           markTextComplete={markTextComplete}
+          infoMessages={infoMessages}
+          setInfoMessages={setInfoMessages}
         />
       )}
-      {showResults && (
+      {currentComponent === "Results" && (
         <Results
           correctAnswers={correctAnswers}
           numQuestions={numQuestions}
-          handleShowDashboard={handleShowDashboard}
+          setCurrentComponent={setCurrentComponent}
         />
       )}
-      {showMyWords && (
+      {currentComponent === "MyWords" && (
         <MyWords
           texts={texts}
           savedTexts={savedTexts}
           completedTexts={completedTexts}
         />
       )}
-      {showMyProfile && <MyProfile />}
-      {infoMessages &&
-        infoMessages.map((message, index) => (
-          <Alert
-            alertInfo={{ type: "info", text: message }}
-            closeAlert={closeAlert}
-            key={"alert" + index}
-          />
-        ))}
+      {currentComponent === "MyProfile" && <MyProfile />}
+      {infoMessages.length > 0 && <AlertWrapper messages={infoMessages} />}
     </div>
   );
 };

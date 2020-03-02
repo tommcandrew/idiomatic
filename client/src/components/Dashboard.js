@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import AuthContext from "../context/AuthContext";
 
-const Dashboard = ({ handleShowTexts, handleShowUploadText }) => {
+const Dashboard = ({ setCurrentComponent }) => {
   const { userName } = useContext(AuthContext);
 
   return (
@@ -14,8 +14,12 @@ const Dashboard = ({ handleShowTexts, handleShowUploadText }) => {
         </h1>
       </div>
       <div className="dashboard__buttons">
-        <button onClick={handleShowTexts}>Choose a text</button>
-        <button onClick={handleShowUploadText}>Upload a text</button>
+        <button onClick={() => setCurrentComponent("Texts")}>
+          Choose a text
+        </button>
+        <button onClick={() => setCurrentComponent("UploadTexts")}>
+          Upload a text
+        </button>
       </div>
     </div>
   );

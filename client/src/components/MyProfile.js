@@ -3,9 +3,7 @@ import AuthContext from "../context/AuthContext";
 import ConfirmModal from "../components/ConfirmModal";
 
 const MyAccount = () => {
-  const { userEmail, userName, registerDate, deleteAccount } = useContext(
-    AuthContext
-  );
+  const { userEmail, userName, deleteAccount } = useContext(AuthContext);
   const [showConfirmModal, setShowConfirmModal] = useState(false);
 
   const handleDeleteAccount = () => {
@@ -13,11 +11,10 @@ const MyAccount = () => {
   };
   return (
     <div className="myProfile__wrapper">
-      <h1 className="myProfile__title">MY ACCOUNT</h1>
+      <h1 className="myProfile__title">MY PROFILE</h1>
       <ul className="myProfile__list">
         <li>Name: {userName}</li>
         <li>Email: {userEmail}</li>
-        <li>Member since: {registerDate}</li>
       </ul>
       <button
         onClick={handleDeleteAccount}

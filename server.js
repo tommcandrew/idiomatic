@@ -29,13 +29,9 @@ app.use(express.json());
 app.use(fileUpload());
 
 const verifyToken = (req, res, next) => {
-  console.log("verify");
   const bearer = req.headers["authorization"];
-  console.log(bearer);
   const bearerHeader = bearer.split(" ");
-  console.log(bearerHeader);
   const token = bearerHeader[1];
-  console.log(token);
   if (token) {
     jwt.verify(token, "secretkey", (err, tokenData) => {
       if (err) {
@@ -67,8 +63,7 @@ app.post("/login", (req, res) => {
             jwt.sign({ user }, "secretkey", (err, token) => {
               res.status(200).send({
                 token: token,
-                userName: user.name,
-                registerDate: user.createdAt
+                userName: user.name
               });
             });
           }
@@ -104,7 +99,7 @@ app.post("/register", (req, res) => {
       user.password = hash;
       user.save().then(user => {
         jwt.sign({ user }, "secretkey", (err, token) => {
-          res.send({ token, registerDate: user.createdAt });
+          res.send({ toke });
         });
       });
     });
@@ -131,35 +126,6 @@ app.post("/upload", async (req, res) => {
   res.status(200).send({ title, content });
 });
 
-app.post("/saveText", verifyToken, (req, res) => {
-  const {
-    title,
-    content,
-    targetWords,
-    targetWordObjs,
-    targetSentences
-  } = req.body;
-  const text = {
-    title,
-    content,
-    targetWords,
-    targetWordObjs,
-    targetSentences
-  };
-  const email = req.tokenData.user.email;
-
-  User.findOne({ email })
-    .then(user => {
-      user.texts.push(text);
-      user.save().then(() => {
-        res.status(200).send("Text saved");
-      });
-    })
-    .catch(err => {
-      console.log(err);
-    });
-});
-
 app.get("/savedTexts", verifyToken, (req, res) => {
   const email = req.tokenData.user.email;
   User.findOne({ email })
@@ -184,29 +150,37 @@ app.post("/deleteAccount", verifyToken, (req, res) => {
 });
 
 //why can't I see the req.body with axios.post?
-app.post("/getWordData", async (req, res) => {
+app.post("/saveText", verifyToken, async (req, res) => {
   const infoMessages = [];
-  const { selectedWords } = req.body;
-  const targetWordObjects = [];
+  const { title, selectedWords, content } = req.body;
+  const targetWordObjs = [];
   for (let i = 0; i < selectedWords.length; i++) {
-    const isPlural = pluralize.isPlural(selectedWords[i]);
-    let word;
+    const isPlural = pluralize.isPlural(selectedWords[i].element);
+    let wordToSearch;
     if (isPlural) {
-      word = pluralize.singular(selectedWords[i]);
+      wordToSearch = pluralize.singular(selectedWords[i].element);
     } else {
-      word = selectedWords[i];
+      wordToSearch = selectedWords[i].element;
     }
     const response = await axios.get(
       "https://dictionaryapi.com/api/v3/references/learners/json/" +
-        word +
+        wordToSearch +
         "?key=" +
         dictionaryKey
     );
+    //definition
     if (!response.data[0].shortdef) {
-      infoMessages.push('"' + word + '"' + " was not found in the dictionary");
+      infoMessages.push({
+        text:
+          '"' +
+          selectedWords[i].element +
+          '"' +
+          " was not found in the dictionary",
+        type: "warning"
+      });
       break;
     }
-    const shortDef = response.data[0].shortdef[0];
+    const definition = response.data[0].shortdef[0];
     const wordType = response.data[0].fl;
     let infinitiveForm;
     if (wordType === "verb") {
@@ -218,8 +192,17 @@ app.post("/getWordData", async (req, res) => {
     } else {
       infinitiveForm = null;
     }
+    let positiveForm;
+    if (
+      wordType === "adjective" &&
+      response.data[0].meta.id !== selectedWords[i].element
+    ) {
+      positiveForm = response.data[0].meta.stems[0];
+    } else {
+      positiveForm = null;
+    }
     let audioUrl;
-    if (response.data[0].hwi.prs) {
+    if (response.data[0].hwi.prs && response.data[0].hwi.prs[0].sound) {
       audioUrl =
         "https://media.merriam-webster.com/soundc11/" +
         response.data[0].hwi.prs[0].sound.audio.toString().charAt(0) +
@@ -229,25 +212,43 @@ app.post("/getWordData", async (req, res) => {
     } else {
       audioUrl = null;
     }
-
     let singularForm;
     if (isPlural) {
-      singularForm = pluralize.singular(word);
+      singularForm = pluralize.singular(selectedWords[i].element);
     } else {
       singularForm = null;
     }
-
-    targetWordObjects.push({
-      word: selectedWords[i],
-      def: shortDef,
+    targetWordObjs.push({
+      word: selectedWords[i].element,
+      sentence: selectedWords[i].sentenceIndex,
+      element: selectedWords[i].elementIndex,
+      def: definition,
       audio: audioUrl,
       isPlural: isPlural,
       singularForm: singularForm,
       wordType: wordType,
-      infinitiveForm: infinitiveForm
+      infinitiveForm: infinitiveForm,
+      positiveForm
     });
   }
-  res.status(200).send({ targetWordObjects, infoMessages });
+  const text = {
+    title,
+    content,
+    targetWordObjs
+  };
+  const email = req.tokenData.user.email;
+
+  User.findOne({ email })
+    .then(user => {
+      user.texts.push(text);
+      user.save().then(() => {
+        infoMessages.push({ text: "Text saved", type: "success" });
+        res.status(200).send(infoMessages);
+      });
+    })
+    .catch(err => {
+      console.log(err);
+    });
 });
 
 app.put("/deleteText", verifyToken, (req, res) => {

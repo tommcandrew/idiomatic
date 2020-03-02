@@ -26,16 +26,25 @@
     justify-content: center;
     span {
       user-select: none;
-      &:hover {
-        background: yellow;
-        cursor: pointer;
-      }
     }
   }
 }
 
+.uploadText__save {
+  @include button($mySeaBlue, 1.3rem);
+  margin: 1rem 0;
+  &:hover {
+    background: $mySeaBlueDark;
+  }
+  width: 50vw;
+}
+
 .uploadText__word {
-  margin: 0 0.2em;
+  margin: 0 0 0 1em;
+  &:hover {
+    background: yellow;
+    cursor: pointer;
+  }
 }
 
 .uploadText__punctuation {
@@ -47,12 +56,31 @@
 }
 
 .uploadText__wrapper {
+  form {
+    .uploadText__go,
+    .uploadText__back {
+      @include button($mySeaBlue, 1.3rem);
+      margin: 1rem 0;
+      &:hover {
+        background: $mySeaBlueDark;
+      }
+      width: 50vw;
+    }
+  }
+}
+
+.uploadText__title-input {
+  margin-bottom: 1rem;
+}
+
+.uploadText__text-content {
   button {
     @include button($mySeaBlue, 1.3rem);
     margin: 1rem 0;
     &:hover {
       background: $mySeaBlueDark;
     }
+    width: 50vw;
   }
 }
 
@@ -77,8 +105,41 @@
 
 .uploadText__option-buttons {
   margin-top: 5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   button {
     margin-left: 2rem;
     margin-right: 2rem;
+    @include button($mySeaBlue, 1.3rem);
+    margin: 1rem 0;
+    &:hover {
+      background: $mySeaBlueDark;
+    }
+    width: 50vw;
+  }
+}
+
+@media only screen and (min-width: 1000px) {
+  .uploadText__option-buttons {
+    margin-top: 5rem;
+    display: flex;
+    flex-direction: row;
+    button {
+      margin-left: 2rem;
+      margin-right: 2rem;
+    }
+    width: 40vw;
+  }
+  .uploadText__wrapper {
+    form {
+      .uploadText__go,
+      .uploadText__back {
+        width: 10vw;
+      }
+    }
+  }
+  .uploadText__save {
+    width: 10vw;
   }
 }

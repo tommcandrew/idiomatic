@@ -1,9 +1,9 @@
 import React, { useState, useEffect, useRef } from "react";
 import axios from "axios";
-import Alert from "./Alert";
+import AlertWrapper from "./AlertWrapper";
 
 const UploadText = ({
-  handleShowMyTexts,
+  setCurrentComponent,
   fetchSavedTexts,
   setInfoMessages,
   infoMessages,
@@ -11,16 +11,16 @@ const UploadText = ({
   closeAlert
 }) => {
   const [uploadedFile, setUploadedFile] = useState(null);
-  const [splitText, setSplitText] = useState(null);
-  const [selectedWordIndices, setSelectedWordIndices] = useState([]);
   const [showOptionButtons, setShowOptionButtons] = useState(true);
   const [showUploadForm, setShowUploadForm] = useState(false);
   const [showPasteForm, setShowPasteForm] = useState(false);
+  const [splitSentencesWithObjs, setSplitSentencesWithObjs] = useState([]);
+  const [selectedWords, setSelectedWords] = useState([]);
 
   //necessary to avoid handleSelectWord using stale state
-  const refValue = useRef(selectedWordIndices);
+  const refValue = useRef(selectedWords);
   useEffect(() => {
-    refValue.current = selectedWordIndices;
+    refValue.current = selectedWords;
   });
 
   const goBack = () => {
@@ -42,11 +42,13 @@ const UploadText = ({
   const handleUpload = e => {
     e.preventDefault();
     if (!e.target.elements.myfile && !e.target.pasted.value) {
-      setInfoMessages(["Either choose a file or paste some text"]);
+      setInfoMessages([
+        { text: "Either choose a file or paste some text", type: "warning" }
+      ]);
       return;
     }
     const formData = new FormData();
-    let splitText;
+    let allSentences;
     if (showUploadForm) {
       formData.append("file", e.target.elements.myfile.files[0]);
       axios
@@ -64,7 +66,10 @@ const UploadText = ({
             if (savedTexts[i].title === res.data.title) {
               setInfoMessages([
                 ...infoMessages,
-                "A text with that name already exists"
+                {
+                  text: "A text with that name already exists",
+                  type: "warning"
+                }
               ]);
               return;
             }
@@ -73,70 +78,57 @@ const UploadText = ({
           setShowUploadForm(false);
           setShowPasteForm(false);
           setUploadedFile(res.data);
-          splitText = res.data.content.match(/\w+|\s+|[^\s\w]+/g);
-          setSplitText(splitText);
+          allSentences = res.data.content.split(/(?<=[.?!])\s+/);
         });
     } else {
       const content = e.target.pasted.value;
       const title = e.target.title.value;
       if (!title) {
-        setInfoMessages([...infoMessages, "You must add a title"]);
+        setInfoMessages([
+          ...infoMessages,
+          { text: "You must add a title", type: "warning" }
+        ]);
         return;
       }
       if (content.length < 50) {
         setInfoMessages([
           ...infoMessages,
-          "The text must be at least 50 characters long"
+          {
+            text: "The text must be at least 50 characters long",
+            type: "warning"
+          }
         ]);
         return;
       }
       setShowUploadForm(false);
       setShowPasteForm(false);
       setUploadedFile({ content, title });
-      splitText = content.match(/\w+|\s+|[^\s\w]+/g);
-      setSplitText(splitText);
+      const trimmed = content.trim();
+      allSentences = trimmed.split(/(?<=[.?!])\s+/);
     }
+    const splitSentences = allSentences.map(sentence => {
+      return sentence.match(/[\w']+|[.,!?;]/g);
+    });
+    const splitSentencesWithObjs = splitSentences.map(
+      (sentence, sentenceIndex) => {
+        return sentence.map((el, elIndex) => {
+          return { element: el, sentenceIndex, elIndex };
+        });
+      }
+    );
+    setSplitSentencesWithObjs(splitSentencesWithObjs);
   };
 
-  const handleSubmit = async e => {
+  const handleSubmit = e => {
     e.preventDefault();
-    //eslint-disable-next-line
-    const selectedWords = splitText.filter((word, index) => {
-      if (selectedWordIndices.includes(index)) {
-        return word;
-      }
-    });
-
-    const targetSentences = [];
-    let allSentences;
-    allSentences = uploadedFile.content.split(".");
-    const allSentencesSplit = [];
-    for (let i = 0; i < allSentences.length; i++) {
-      const splitSentence = allSentences[i].match(/\w+|\s+|[^\s\w]+/g);
-      allSentencesSplit.push(splitSentence);
-    }
-    for (let i = 0; i < selectedWords.length; i++) {
-      for (let j = 0; j < allSentencesSplit.length; j++) {
-        if (allSentencesSplit[j].includes(selectedWords[i])) {
-          targetSentences.push(allSentences[j].trim());
-          break;
-        }
-      }
-    }
-    const res = await axios.post("/api/getWordData", { selectedWords });
-    const targetWordObjects = res.data.targetWordObjects;
-
-    targetWordObjects.forEach((obj, index) => {
-      obj.sentence = targetSentences[index];
-    });
     const token = localStorage.getItem("idiomatic-token");
     axios
       .post(
         "/api/saveText",
         {
           title: uploadedFile.title,
-          content: uploadedFile.content,
-          targetWordObjs: targetWordObjects
+          selectedWords,
+          content: uploadedFile.content
         },
         {
           headers: {
@@ -144,33 +136,57 @@ const UploadText = ({
           }
         }
       )
-      .then(() => {
-        setInfoMessages(["Saved"]);
-        handleShowMyTexts();
+      .then(res => {
+        setInfoMessages(res.data);
+        setCurrentComponent("MyTexts");
         fetchSavedTexts();
       });
   };
 
   const handleSelectWord = e => {
-    const selectedIndex = parseInt(e.target.dataset.index);
+    const sentenceIndex = parseInt(e.target.dataset.sentenceIndex);
+    const elementIndex = parseInt(e.target.dataset.elementIndex);
+    const element = e.target.innerText;
     if (e.target.classList.contains("uploadText__word--selected")) {
-      const updatedSelectedWordIndices = selectedWordIndices.filter(
-        index => index !== selectedIndex
+      const updatedSelectedWords = selectedWords.filter(
+        obj =>
+          obj.sentenceIndex !== sentenceIndex &&
+          obj.elementIndex !== elementIndex
       );
-      setSelectedWordIndices([...updatedSelectedWordIndices]);
+      setSelectedWords([...updatedSelectedWords]);
       return;
     }
 
-    setSelectedWordIndices([...refValue.current, selectedIndex]);
+    setSelectedWords([
+      ...refValue.current,
+      { element, sentenceIndex, elementIndex }
+    ]);
+  };
+
+  const getElementClassNames = (sentenceIndex, elementIndex, element) => {
+    const classNames = ["uploadText__element"];
+    for (let i = 0; i < selectedWords.length; i++) {
+      if (
+        selectedWords[i].sentenceIndex === sentenceIndex &&
+        selectedWords[i].elementIndex === elementIndex
+      ) {
+        classNames.push("uploadText__word--selected");
+      }
+    }
+    const nonWordElements = [",", ",", "'", "?", "!", "."];
+    if (nonWordElements.includes(element)) {
+      classNames.push("uploadText__punctuation");
+    } else {
+      classNames.push("uploadText__word");
+    }
+    return classNames.join(" ");
   };
 
   return (
     <div className="uploadText__wrapper">
       {showOptionButtons && (
         <div className="uploadText__option-buttons">
-          <button onClick={handleShowUploadForm}>
-            Upload file from computer
-          </button>
+          <button onClick={handleShowUploadForm}>Upload file</button>
           <button onClick={handleShowPasteForm}>Paste text</button>
         </div>
       )}
@@ -183,8 +199,10 @@ const UploadText = ({
             name="myfile"
             className="uploadText__choose-file"
           ></input>
-          <button type="submit">Go</button>
-          <button type="button" onClick={goBack}>
+          <button type="submit" className="uploadText__go">
+            Go
+          </button>
+          <button type="button" onClick={goBack} className="uploadText__back">
             Back
           </button>
         </form>
@@ -192,16 +210,23 @@ const UploadText = ({
       {showPasteForm && (
         <form onSubmit={handleUpload}>
           <label htmlFor="title">Title</label>
-          <input type="text" id="title" />
-          <textarea name="pasted" cols="150" rows="20"></textarea>
-          <button type="submit">Go</button>
-          <button type="button" onClick={goBack}>
+          <input type="text" id="title" className="uploadText__title-input" />
+          <textarea
+            name="pasted"
+            cols="150"
+            rows="20"
+            className="uploadText__text-input"
+          ></textarea>
+          <button type="submit" className="uploadText__go">
+            Go
+          </button>
+          <button type="button" onClick={goBack} className="uploadText__back">
             Back
           </button>
         </form>
       )}
       <div className="uploadText__text">
-        {uploadedFile && splitText && (
+        {uploadedFile && splitSentencesWithObjs && (
           <>
             <div className="uploadText__text-wrapper">
               <h2 className="uploadText__instruction">
@@ -213,40 +238,33 @@ const UploadText = ({
             <div className="uploadText__text-content">
               <h1>{uploadedFile.fileName}</h1>
               <div>
-                {splitText.map((word, index) => (
-                  <span
-                    key={"span" + index}
-                    onClick={handleSelectWord}
-                    data-index={index}
-                    className={`uploadText__word ${
-                      selectedWordIndices.includes(index)
-                        ? "uploadText__word--selected"
-                        : ""
-                    } ${
-                      word === "." ||
-                      word === "," ||
-                      word === "'" ||
-                      word === "?"
-                        ? "uploadText__punctuation"
-                        : ""
-                    }`}
-                  >
-                    {word}
-                  </span>
-                ))}
+                {splitSentencesWithObjs.map((sentence, sentenceIndex) =>
+                  sentence.map((obj, elementIndex) => (
+                    <span
+                      data-sentence-index={sentenceIndex}
+                      data-element-index={elementIndex}
+                      key={"span" + (sentenceIndex + elementIndex)}
+                      onClick={handleSelectWord}
+                      className={getElementClassNames(
+                        sentenceIndex,
+                        elementIndex,
+                        obj.element
+                      )}
+                    >
+                      {obj.element}
+                    </span>
+                  ))
+                )}
               </div>
             </div>
-            <button onClick={handleSubmit}>Save</button>
+            <button onClick={handleSubmit} className="uploadText__save">
+              Save
+            </button>
           </>
         )}
-        {infoMessages &&
-          infoMessages.map((message, index) => (
-            <Alert
-              alertInfo={{ type: "info", text: message }}
-              closeAlert={closeAlert}
-              key={"alert" + index}
-            />
-          ))}
+        {infoMessages.length > 0 && (
+          <AlertWrapper messages={infoMessages} closeAlert={closeAlert} />
+        )}
       </div>
     </div>
   );

@@ -1,8 +1,8 @@
 import React from "react";
 
 const OptionsMenu = ({
-  handleShowMyProfile,
   logout,
+  setCurrentComponent,
   setMouseOverOptionsMenu
 }) => {
   return (
@@ -13,7 +13,7 @@ const OptionsMenu = ({
     >
       <ul>
         <li>Settings</li>
-        <li onClick={handleShowMyProfile}>Profile</li>
+        <li onClick={() => setCurrentComponent("MyProfile")}>Profile</li>
       </ul>
       <button onClick={logout}>Log out</button>
     </div>

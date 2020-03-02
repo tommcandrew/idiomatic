@@ -7,6 +7,7 @@ const DefinitionModal = ({ definition, closeModal, selectedTargetWordObj }) => {
 
   useEffect(() => {
     setAudioUrl(selectedTargetWordObj.audio);
+    //eslint-disable-next-line
   }, []);
   const handlePlayAudio = () => {
     if (audioUrl !== null) {
@@ -16,10 +17,12 @@ const DefinitionModal = ({ definition, closeModal, selectedTargetWordObj }) => {
   };
 
   let displayedWord;
-  if (selectedTargetWordObj.isPlural) {
+  if (selectedTargetWordObj.singularForm) {
     displayedWord = selectedTargetWordObj.singularForm;
-  } else if (selectedTargetWordObj.wordType === "verb") {
+  } else if (selectedTargetWordObj.infinitiveForm) {
     displayedWord = selectedTargetWordObj.infinitiveForm;
+  } else if (selectedTargetWordObj.positiveForm) {
+    displayedWord = selectedTargetWordObj.positiveForm;
   } else {
     displayedWord = selectedTargetWordObj.word;
   }
@@ -27,7 +30,7 @@ const DefinitionModal = ({ definition, closeModal, selectedTargetWordObj }) => {
   return (
     <div className="definitionModal__wrapper" onClick={closeModal}>
       <div className="definitionModal__content">
-        <h3>{displayedWord}</h3>
+        <h3>{displayedWord.toLowerCase()}</h3>
         <p>{definition}</p>
         {audioUrl && (
           <FontAwesomeIcon
