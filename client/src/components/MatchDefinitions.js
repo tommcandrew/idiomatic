@@ -132,6 +132,7 @@ const MatchDefinitions = ({
                           ? "uploadText__punctuation"
                           : ""
                       }`}
+                      data-answer={questionObj.answer}
                     >
                       {word}
                     </button>

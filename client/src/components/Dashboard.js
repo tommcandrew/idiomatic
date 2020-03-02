@@ -17,7 +17,7 @@ const Dashboard = ({ setCurrentComponent }) => {
         <button onClick={() => setCurrentComponent("Texts")}>
           Choose a text
         </button>
-        <button onClick={() => setCurrentComponent("UploadTexts")}>
+        <button onClick={() => setCurrentComponent("UploadText")}>
           Upload a text
         </button>
       </div>

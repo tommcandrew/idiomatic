@@ -16,6 +16,7 @@ const UploadText = ({
   const [showPasteForm, setShowPasteForm] = useState(false);
   const [splitSentencesWithObjs, setSplitSentencesWithObjs] = useState([]);
   const [selectedWords, setSelectedWords] = useState([]);
+  const [allSentences, setAllSentences] = useState([]);
 
   //necessary to avoid handleSelectWord using stale state
   const refValue = useRef(selectedWords);
@@ -47,8 +48,8 @@ const UploadText = ({
       ]);
       return;
     }
+    let allSentences = [];
     const formData = new FormData();
-    let allSentences;
     if (showUploadForm) {
       formData.append("file", e.target.elements.myfile.files[0]);
       axios
@@ -79,6 +80,9 @@ const UploadText = ({
           setShowPasteForm(false);
           setUploadedFile(res.data);
           allSentences = res.data.content.split(/(?<=[.?!])\s+/);
+          console.log(allSentences);
+          //for some reason this variable is not accessible in the final part of this function so am saving to state
+          setAllSentences(allSentences);
         });
     } else {
       const content = e.target.pasted.value;
@@ -105,10 +109,16 @@ const UploadText = ({
       setUploadedFile({ content, title });
       const trimmed = content.trim();
       allSentences = trimmed.split(/(?<=[.?!])\s+/);
+      setAllSentences(allSentences);
     }
+  };
+
+  useEffect(() => {
+    //wait for code above to finish before doing the rest
     const splitSentences = allSentences.map(sentence => {
       return sentence.match(/[\w']+|[.,!?;]/g);
     });
+    console.log({ splitSentences });
     const splitSentencesWithObjs = splitSentences.map(
       (sentence, sentenceIndex) => {
         return sentence.map((el, elIndex) => {
@@ -116,8 +126,9 @@ const UploadText = ({
         });
       }
     );
+    console.log({ splitSentencesWithObjs });
     setSplitSentencesWithObjs(splitSentencesWithObjs);
-  };
+  }, [allSentences]);
 
   const handleSubmit = e => {
     e.preventDefault();
