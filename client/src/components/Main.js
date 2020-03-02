@@ -42,7 +42,7 @@ const Main = () => {
   const fetchSavedTexts = () => {
     const token = localStorage.getItem("idiomatic-token");
     axios
-      .get("/api/savedtexts", {
+      .get("/savedtexts", {
         headers: {
           Authorization: "Bearer " + token
         }
@@ -57,7 +57,7 @@ const Main = () => {
     const token = localStorage.getItem("idiomatic-token");
     axios
       .put(
-        "/api/deleteText",
+        "/deleteText",
         { title },
         {
           headers: {
@@ -100,6 +100,7 @@ const Main = () => {
 
   const markTextComplete = () => {
     setCompletedTexts([...completedTexts, selectedText.title]);
+    setInfoMessages([{text: "New words added to My Words!", type: "info"}])
   };
 
   return (
@@ -151,6 +152,7 @@ const Main = () => {
           setCurrentComponent={setCurrentComponent}
           incrementCorrectAnswers={incrementCorrectAnswers}
           text={selectedText}
+          setInfoMessages={setInfoMessages}
         />
       )}
       {currentComponent === "MatchDefinitions" && (
@@ -158,6 +160,7 @@ const Main = () => {
           text={selectedText}
           setCurrentComponent={setCurrentComponent}
           incrementCorrectAnswers={incrementCorrectAnswers}
+          setInfoMessages={setInfoMessages}
         />
       )}
       {currentComponent === "Spelling" && (

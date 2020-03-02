@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import shuffle from "../utils/shuffle";
 
-const GapFill = ({ text, incrementCorrectAnswers, setCurrentComponent }) => {
+const GapFill = ({ text, incrementCorrectAnswers, setCurrentComponent, setInfoMessages }) => {
   const [gappedSentences, setGappedSentences] = useState([]);
   const [sentencesWithAnswers, setSentencesWithAnswers] = useState([]);
   const [splitTargetSentences, setSplitTargetSentences] = useState([]);
@@ -122,6 +122,7 @@ const GapFill = ({ text, incrementCorrectAnswers, setCurrentComponent }) => {
       });
       sentencesWithAnswers.push(newSentence);
     }
+    setInfoMessages([{text: correctAnswers + " out of " + gappedSentences.length + "!", type: "success"}])
     setSentencesWithAnswers(sentencesWithAnswers);
     incrementCorrectAnswers(correctAnswers);
   };
@@ -139,7 +140,7 @@ const GapFill = ({ text, incrementCorrectAnswers, setCurrentComponent }) => {
                   className="gapFill__sentence"
                   onSubmit={handleSubmit}
                 >
-                  {index + 1}.{sentence}
+                  <span className="gapFill__sentence-num">{index + 1}</span>.{sentence}
                 </div>
               ))}
             </div>
@@ -160,7 +161,7 @@ const GapFill = ({ text, incrementCorrectAnswers, setCurrentComponent }) => {
             <div className="gapFill__sentences">
               {sentencesWithAnswers.map((sentence, index) => (
                 <div key={"sentence" + index} className="gapFill__sentence">
-                  {index + 1}. {sentence}
+                  <span className="gapFill__sentence-num">{index + 1}</span>. {sentence}
                 </div>
               ))}
             </div>

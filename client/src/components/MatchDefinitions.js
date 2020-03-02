@@ -5,7 +5,8 @@ import createMultipleChoiceQuestions from "../utils/createMultipleChoiceQuestion
 const MatchDefinitions = ({
   text,
   setCurrentComponent,
-  incrementCorrectAnswers
+  incrementCorrectAnswers,
+  setInfoMessages
 }) => {
   const [selectedOptions, setSelectedOptions] = useState();
   const [multipleChoiceQuestions, setMultipleChoiceQuestions] = useState([]);
@@ -54,6 +55,7 @@ const MatchDefinitions = ({
         correctAnswers++;
       }
     }
+    setInfoMessages([{text: correctAnswers + " out of " + multipleChoiceQuestions.length + "!", type: "success"}])
     incrementCorrectAnswers(correctAnswers);
   };
 

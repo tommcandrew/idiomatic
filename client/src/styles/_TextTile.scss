@@ -22,7 +22,7 @@
 }
 
 .textTile__title {
-  font-size: 1.5rem;
+  font-size: 1.2rem;
   color: white;
   user-select: none;
 }
@@ -81,4 +81,8 @@
       }
     }
   }
+  .textTile__title {
+    font-size: 1.5rem;
+  }
+  
 }

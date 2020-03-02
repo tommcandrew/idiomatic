@@ -4,8 +4,12 @@
 }
 
 .gapFill__title {
-  margin: 0.7rem 0;
+  margin: 2rem 0 0 0;
   font-size: 1.6rem;
+}
+
+.gapFill__sentence-num {
+  font-weight: bold;
 }
 
 .gapFill__filled--right,
@@ -20,7 +24,8 @@
   margin: 0 auto;
   input {
     font-size: 1.5rem;
-    width: 15vw;
+    width: 60vw;
+    border: 1px solid #333;
   }
   flex-direction: column;
   display: flex;
@@ -30,14 +35,22 @@
 
 .gapFill__sentence,
 .gapFill__result-sentence {
-  font-size: 1.5rem;
+  font-size: 1.3rem;
   display: flex;
   flex-wrap: wrap;
   margin: 2rem 0;
+  line-height: 1.5em;
 }
 .gapFill__word {
-  margin: 0 0.2em;
   user-select: none;
+}
+
+.gapFill__word, .gapFill__input {
+  margin-left: 0.8rem;
+}
+
+.gapFill__input {
+  padding: 0 0.5rem;
 }
 
 //so there isn't a space before the full stop
@@ -94,8 +107,23 @@
 
 .gapFill__next {
   @include button($mySeaBlue, 1.3rem);
-  margin: 1rem 0;
+  margin: 1rem 0 3rem 0;
   &:hover {
     background: $mySeaBlueDark;
   }
+
+}
+
+@media only screen and (min-width: 1000px) {
+  .gapFill__content,
+.gapFill__results {
+  input {
+    font-size: 1.5rem;
+    width: 15vw;
+  }
+}
+.gapFill__sentence,
+.gapFill__result-sentence {
+  font-size: 1.5rem;
+}
 }

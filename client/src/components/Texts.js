@@ -5,7 +5,7 @@ const Texts = ({ handleChooseText, texts }) => {
   const [filteredTexts, setFilteredTexts] = useState(texts);
   const [filters, setFilters] = useState([]);
 
-  const handleClick = e => {
+  const handleFilter = e => {
     const selectedFilter = e.target.innerText;
     if (filters.includes(selectedFilter)) {
       const updatetedFilters = filters.filter(
@@ -17,11 +17,6 @@ const Texts = ({ handleChooseText, texts }) => {
     setFilters([...filters, selectedFilter]);
   };
 
-  const clearFilters = () => {
-    const emptyArray = [];
-    setFilters(emptyArray);
-  };
-
   useEffect(() => {
     let filteredTexts = [];
     if (filters.length === 0) {
@@ -30,7 +25,7 @@ const Texts = ({ handleChooseText, texts }) => {
       if (texts && filters && filters.length > 0) {
         for (let i = 0; i < texts.length; i++) {
           for (let j = 0; j < filters.length; j++) {
-            if (texts[i].tags.includes(filters[j].toLowerCase())) {
+            if (texts[i].tags.includes(filters[j].toLowerCase()) || texts[i].level === filters[j]) {
               filteredTexts.push(texts[i]);
             }
           }
@@ -51,11 +46,34 @@ const Texts = ({ handleChooseText, texts }) => {
     "Festivals"
   ];
 
+  const levels = [
+    "Beginner",
+    "Intermediate",
+    "Advanced"
+  ];
+
   return (
     <div className="texts__wrapper">
       <div className="texts__filter">
+      <div className="texts__level-filters">
+      <span className="texts__filter-label">Filter by level:</span>
+        <ul className="texts__level-list" onClick={handleFilter}>
+          {levels.map((level, index) => (
+            <li
+              key={"level" + index}
+              className={`texts__filter-item ${
+                filters.includes(level) ? "texts__filter-item--selected" : ""
+              }`}
+            >
+              {level}
+            </li>
+          ))}
+        </ul>
+        </div> 
+        <div className="texts__topic-filters">
+
         <span className="texts__filter-label">Filter by topic:</span>
-        <ul className="texts__topic-list" onClick={handleClick}>
+        <ul className="texts__topic-list" onClick={handleFilter}>
           {topics.map((topic, index) => (
             <li
               key={"topic" + index}
@@ -67,11 +85,9 @@ const Texts = ({ handleChooseText, texts }) => {
             </li>
           ))}
         </ul>
-        <span onClick={clearFilters} className="texts__clear-filters">
-          Clear filters
-        </span>
+        </div>
+  
       </div>
-
       <div className="texts__texts">
         {filteredTexts.map((text, index) => (
           <TextTile

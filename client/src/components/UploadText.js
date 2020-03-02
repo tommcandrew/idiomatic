@@ -53,7 +53,7 @@ const UploadText = ({
     if (showUploadForm) {
       formData.append("file", e.target.elements.myfile.files[0]);
       axios
-        .post("/api/upload", formData, {
+        .post("/upload", formData, {
           headers: {
             "Content-Type": "multipart/form-data"
           }
@@ -135,7 +135,7 @@ const UploadText = ({
     const token = localStorage.getItem("idiomatic-token");
     axios
       .post(
-        "/api/saveText",
+        "/saveText",
         {
           title: uploadedFile.title,
           selectedWords,

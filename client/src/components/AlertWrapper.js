@@ -3,7 +3,8 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faCheckCircle,
   faTimesCircle,
-  faExclamationCircle
+  faExclamationCircle,
+  faLightbulb
 } from "@fortawesome/free-solid-svg-icons";
 
 const AlertWrapper = ({ messages }) => {
@@ -15,6 +16,8 @@ const AlertWrapper = ({ messages }) => {
           icon = faCheckCircle;
         } else if (message.type === "failure") {
           icon = faTimesCircle;
+        } else if (message.type === "info") {
+          icon = faLightbulb;
         } else {
           icon = faExclamationCircle;
         }
