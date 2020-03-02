@@ -4,8 +4,8 @@
   align-items: center;
   flex-grow: 1;
   label {
-    margin: 1rem 0;
-    font-size: 1.5rem;
+    margin: 1rem 0 0.5rem 0;
+    font-size: 1.2rem;
   }
   form {
     display: flex;
@@ -14,16 +14,29 @@
   }
 }
 
+.uploadText__text-input {
+  width: 80%;
+  flex-grow: 1;
+  border: 1px solid #333;
+  padding: 1rem;
+  border-radius: 6px;
+  font-size: 1rem;
+
+}
+
 .uploadText__text-content {
-  width: 60%;
-  margin: 3rem auto;
+  width: 100%;
   text-align: center;
+  display: flex;
+  margin-left: 0.5rem;
   div {
+    text-align: center;
     margin-top: 2rem;
     font-size: 1.4rem;
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
+    width: 90%;
     span {
       user-select: none;
     }
@@ -32,7 +45,7 @@
 
 .uploadText__save {
   @include button($mySeaBlue, 1.3rem);
-  margin: 1rem 0;
+  margin: 1rem 0 5rem 0;
   &:hover {
     background: $mySeaBlueDark;
   }
@@ -57,6 +70,11 @@
 
 .uploadText__wrapper {
   form {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
     .uploadText__go,
     .uploadText__back {
       @include button($mySeaBlue, 1.3rem);
@@ -70,7 +88,11 @@
 }
 
 .uploadText__title-input {
-  margin-bottom: 1rem;
+  border: 1px solid #333;
+  border-radius: 6px;
+  padding: 0.3rem;
+  font-size: 1rem;
+
 }
 
 .uploadText__text-content {
@@ -94,7 +116,7 @@
 
 .uploadText__instruction {
   text-align: center;
-  font-size: 1.2rem;
+  font-size: 1rem;
 }
 
 .uploadText__text {
@@ -141,5 +163,11 @@
   }
   .uploadText__save {
     width: 10vw;
+  }
+  .uploadText__instruction {
+    font-size: 1.2rem;
+  }
+  .uploadText__text-content {
+    width: 60%;
   }
 }

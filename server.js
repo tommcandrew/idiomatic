@@ -153,6 +153,7 @@ app.post("/deleteAccount", verifyToken, (req, res) => {
 app.post("/saveText", verifyToken, async (req, res) => {
   const infoMessages = [];
   const { title, selectedWords, content } = req.body;
+  console.log({selectedWords})
   const targetWordObjs = [];
   for (let i = 0; i < selectedWords.length; i++) {
     const isPlural = pluralize.isPlural(selectedWords[i].element);

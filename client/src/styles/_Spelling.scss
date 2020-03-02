@@ -4,7 +4,7 @@
 
 .spelling__title {
   margin: 0.7rem 0;
-  font-size: 1.6rem;
+  font-size: 1.3rem;
   text-align: center;
 }
 
@@ -19,6 +19,7 @@
   margin: 0 auto;
   input {
     font-size: 1.5rem;
+    border: 1px solid #333;
   }
   display: flex;
   flex-direction: column;
@@ -62,13 +63,17 @@
     background: $mySeaBlueDark;
   }
 }
+.spelling__question-number {
+  font-size: 2rem;
+}
+
 
 @media only screen and (min-width: 1000px) {
   .spelling__wrapper {
     padding-top: 10vh;
   }
+  .spelling__title {
+    font-size: 1.6rem;
+  }
 }
 
-.spelling__question-number {
-  font-size: 2rem;
-}

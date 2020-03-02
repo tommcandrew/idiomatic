@@ -21,7 +21,6 @@
 }
 
 .matchDefinitions__content {
-  width: 90%;
   margin: 0 auto;
   text-align: center;
 }
@@ -38,7 +37,7 @@
 
 .matchDefinitions__options {
   display: flex;
-  justify-content: space-between;
+  justify-content: space-around;
   margin-top: 0.5rem;
   button {
     font-size: 1rem;
@@ -119,5 +118,6 @@
   .matchDefinitions__definition {
     font-size: 1.5rem;
     margin: 1rem 0;
+    width: 90%;
   }
 }

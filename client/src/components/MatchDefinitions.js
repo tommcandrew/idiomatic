@@ -86,7 +86,7 @@ const MatchDefinitions = ({
                           : "matchDefinitions__button"
                       }
                     >
-                      {word}
+                      {word.toLowerCase()}
                     </button>
                   ))}
                 </div>
@@ -136,7 +136,7 @@ const MatchDefinitions = ({
                       }`}
                       data-answer={questionObj.answer}
                     >
-                      {word}
+                      {word.toLowerCase()}
                     </button>
                   ))}
                 </div>

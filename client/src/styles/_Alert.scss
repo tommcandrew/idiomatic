@@ -19,6 +19,7 @@
   z-index: 10;
   color: white;
   justify-content: center;
+  align-items: center;
   margin: 0.5rem 0;
   min-width: 65vw;
 }
@@ -26,6 +27,7 @@
 .alert__text {
   flex-grow: 5;
   text-align: center;
+  font-size: 1.2rem;
 }
 
 .alert--success {

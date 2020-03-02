@@ -12,14 +12,14 @@
 
 .myProfile__list {
   list-style: none;
-  width: 40vw;
+  width: 100%;
   height: 30vh;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: space-around;
   li {
-    font-size: 2em;
+    font-size: 1.5em;
   }
 }
 .myProfile__delete-account {
@@ -29,3 +29,13 @@
     background: rgb(218, 8, 8);
   }
 }
+
+@media only screen and (min-width: 1000px) {
+  .myProfile__list {
+    width: 40vw;
+    li {
+      font-size: 2em;
+    }
+  }
+}
+

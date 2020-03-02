@@ -38,6 +38,15 @@ const MobileMenu = ({ setShowMobileMenu, setCurrentComponent }) => {
         >
           My Texts
         </div>
+        <div
+          className="mobile-menu__my-profile-button"
+          onClick={() => {
+            setCurrentComponent("MyProfile");
+            setShowMobileMenu(false);
+          }}
+        >
+          My Profile
+        </div>
       </div>
     </div>
   );
