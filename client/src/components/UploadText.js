@@ -17,6 +17,7 @@ const UploadText = ({
   const [splitSentencesWithObjs, setSplitSentencesWithObjs] = useState([]);
   const [selectedWords, setSelectedWords] = useState([]);
   const [allSentences, setAllSentences] = useState([]);
+  const [loading, setLoading] = useState(false)
 
   //necessary to avoid handleSelectWord using stale state
   const refValue = useRef(selectedWords);
@@ -131,6 +132,7 @@ const UploadText = ({
   }, [allSentences]);
 
   const handleSubmit = e => {
+    setLoading(true)
     e.preventDefault();
     const token = localStorage.getItem("idiomatic-token");
     axios
@@ -192,6 +194,11 @@ const UploadText = ({
     }
     return classNames.join(" ");
   };
+
+  
+  if (loading) {
+    return <div className="loader"></div>;
+  }
 
   return (
     <div className="uploadText__wrapper">

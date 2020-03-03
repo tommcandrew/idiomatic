@@ -13,7 +13,7 @@ const Home = () => {
   }
 
   const handleLoginDemo = () => {
-    loginDemo();
+    loginDemo();  
   };
 
   return (
