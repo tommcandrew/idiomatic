@@ -25,7 +25,8 @@ const MyAccount = () => {
       {showConfirmModal && (
         <ConfirmModal
           setShowConfirmModal={setShowConfirmModal}
-          deleteAccount={deleteAccount}
+          actionOnConfirm={deleteAccount}
+          thingToDelete="your account"
         />
       )}
     </div>

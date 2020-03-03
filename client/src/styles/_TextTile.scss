@@ -21,6 +21,7 @@
   position: relative;
 }
 
+
 .textTile__title {
   font-size: 1.2rem;
   color: white;
@@ -41,15 +42,15 @@
   left: 0;
   right: 0;
   justify-content: space-around;
-  width: 60%;
+  width: 90%;
   margin: 0 auto;
   margin-top: 5%;
 }
 
 .textTile__delete,
 .textTile__edit {
-  font-size: 1.5rem;
-  color: #4a98f8;
+  font-size: 1.2rem;
+  color: black;
 }
 
 @media only screen and (min-width: 1000px) {
@@ -81,8 +82,15 @@
       }
     }
   }
+  .textTile__delete,
+.textTile__edit {
+  color: #4a98f8;
+  font-size: 1.5rem;
+}
   .textTile__title {
     font-size: 1.5rem;
   }
-  
+  .textTile__edit-buttons {
+    width: 60%;
+  }
 }
