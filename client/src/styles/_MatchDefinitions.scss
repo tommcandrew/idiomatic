@@ -11,7 +11,6 @@
   background: yellow;
   cursor: pointer;
   user-select: none;
-  min-width: 8vw;
 }
 
 .matchDefinitions__button--selected {
@@ -32,7 +31,7 @@
 
 .matchDefinitions__field {
   text-align: center;
-  margin: 1rem 0;
+  margin: 2rem 0;
 }
 
 .matchDefinitions__options {
@@ -46,7 +45,11 @@
     border: 1px solid black;
     border-radius: 2rem;
     padding: 0.2rem 0.5rem;
+    min-width: 15vw;
   }
+}
+.matchDefinitions__punctuation {
+  margin: 0;
 }
 
 .matchDefinitions__option--right {
@@ -60,6 +63,14 @@
   position: relative;
   &:hover::after {
     display: block;
+  }
+}
+
+.matchDefinitions__correct-answer {
+  font-weight: bold;
+  margin: 0.8rem 0;
+  span {
+    color: green;
   }
 }
 
@@ -113,9 +124,11 @@
       border: 1px solid black;
       border-radius: 2rem;
       padding: 0.2rem 0.5rem;
+      min-width: 8vw;
     }
   }
-  .matchDefinitions__definition {
+  .matchDefinitions__definition,
+  .matchDefinitions__correct-answer {
     font-size: 1.5rem;
     margin: 1rem 0;
     width: 90%;

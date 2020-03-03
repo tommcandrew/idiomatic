@@ -102,9 +102,6 @@ const MatchDefinitions = ({
 
       {completed && (
         <div className="matchDefinitions__content">
-          <h1 className="matchDefinitions__title">
-            Hover over the wrong answers to see the right answer:
-          </h1>
           {multipleChoiceQuestions.map((questionObj, defIndex) => {
             return (
               <div className="matchDefinitions__field" key={"field" + defIndex}>
@@ -114,6 +111,7 @@ const MatchDefinitions = ({
                 >
                   {defIndex + 1}. {questionObj.definition}
                 </p>
+            <p className="matchDefinitions__correct-answer">Answer: <span>{questionObj.answer}</span></p>
                 <div className="matchDefinitions__options">
                   {questionObj.options.map((word, optionIndex) => (
                     <button
@@ -131,9 +129,9 @@ const MatchDefinitions = ({
                           : ""
                       }${
                         word === "'" || word === "?"
-                          ? "uploadText__punctuation"
+                          ? "matchDefinitions__punctuation"
                           : ""
-                      }`}
+                      } ${selectedOptions[defIndex] === null ? "matchDefinitions__unanswered" : ""}`}
                       data-answer={questionObj.answer}
                     >
                       {word.toLowerCase()}

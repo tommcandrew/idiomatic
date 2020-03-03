@@ -17,7 +17,7 @@ const UploadText = ({
   const [splitSentencesWithObjs, setSplitSentencesWithObjs] = useState([]);
   const [selectedWords, setSelectedWords] = useState([]);
   const [allSentences, setAllSentences] = useState([]);
-  const [loading, setLoading] = useState(false)
+  const [loading, setLoading] = useState(false);
 
   //necessary to avoid handleSelectWord using stale state
   const refValue = useRef(selectedWords);
@@ -54,7 +54,7 @@ const UploadText = ({
     if (showUploadForm) {
       formData.append("file", e.target.elements.myfile.files[0]);
       axios
-        .post("upload", formData, {
+        .post("/api/upload", formData, {
           headers: {
             "Content-Type": "multipart/form-data"
           }
@@ -132,12 +132,12 @@ const UploadText = ({
   }, [allSentences]);
 
   const handleSubmit = e => {
-    setLoading(true)
+    setLoading(true);
     e.preventDefault();
     const token = localStorage.getItem("idiomatic-token");
     axios
       .post(
-        "/saveText",
+        "/api//saveText",
         {
           title: uploadedFile.title,
           selectedWords,
@@ -195,7 +195,6 @@ const UploadText = ({
     return classNames.join(" ");
   };
 
-  
   if (loading) {
     return <div className="loader"></div>;
   }
@@ -217,12 +216,14 @@ const UploadText = ({
             name="myfile"
             className="uploadText__choose-file"
           ></input>
-          <button type="submit" className="uploadText__go">
-            Go
-          </button>
-          <button type="button" onClick={goBack} className="uploadText__back">
-            Back
-          </button>
+          <div className="uploadText__submit-buttons">
+            <button type="submit" className="uploadText__go">
+              Go
+            </button>
+            <button type="button" onClick={goBack} className="uploadText__back">
+              Back
+            </button>
+          </div>
         </form>
       )}
       {showPasteForm && (

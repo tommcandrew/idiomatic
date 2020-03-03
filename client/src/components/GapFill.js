@@ -1,7 +1,12 @@
 import React, { useState, useEffect } from "react";
 import shuffle from "../utils/shuffle";
 
-const GapFill = ({ text, incrementCorrectAnswers, setCurrentComponent, setInfoMessages }) => {
+const GapFill = ({
+  text,
+  incrementCorrectAnswers,
+  setCurrentComponent,
+  setInfoMessages
+}) => {
   const [gappedSentences, setGappedSentences] = useState([]);
   const [sentencesWithAnswers, setSentencesWithAnswers] = useState([]);
   const [splitTargetSentences, setSplitTargetSentences] = useState([]);
@@ -102,9 +107,7 @@ const GapFill = ({ text, incrementCorrectAnswers, setCurrentComponent, setInfoMe
                 key={"filled" + index}
                 className="gapFill__filled--wrong"
                 data-answer={shuffledTargetWordObjs[i].word}
-              >
-                (blank)
-              </span>
+              ></span>
             );
           } else {
             el = (
@@ -122,7 +125,12 @@ const GapFill = ({ text, incrementCorrectAnswers, setCurrentComponent, setInfoMe
       });
       sentencesWithAnswers.push(newSentence);
     }
-    setInfoMessages([{text: correctAnswers + " out of " + gappedSentences.length + "!", type: "success"}])
+    setInfoMessages([
+      {
+        text: correctAnswers + " out of " + gappedSentences.length + "!",
+        type: "success"
+      }
+    ]);
     setSentencesWithAnswers(sentencesWithAnswers);
     incrementCorrectAnswers(correctAnswers);
   };
@@ -135,12 +143,11 @@ const GapFill = ({ text, incrementCorrectAnswers, setCurrentComponent, setInfoMe
             <h1 className="gapFill__title">Complete the sentences:</h1>
             <div className="gapFill__sentences">
               {gappedSentences.map((sentence, index) => (
-                <div
-                  key={"sentence" + index}
-                  className="gapFill__sentence"
-                  onSubmit={handleSubmit}
-                >
-                  <span className="gapFill__sentence-num">{index + 1}</span>.{sentence}
+                <div className="gapFill__field" key={"field" + index}>
+                  <div className="gapFill__sentence" onSubmit={handleSubmit}>
+                    <span className="gapFill__sentence-num">{index + 1}</span>.
+                    {sentence}
+                  </div>
                 </div>
               ))}
             </div>
@@ -155,13 +162,16 @@ const GapFill = ({ text, incrementCorrectAnswers, setCurrentComponent, setInfoMe
         )}
         {sentencesWithAnswers.length > 0 && (
           <>
-            <h1 className="gapFill__title">
-              Hover over the wrong answers to see the right answer:
-            </h1>
             <div className="gapFill__sentences">
               {sentencesWithAnswers.map((sentence, index) => (
-                <div key={"sentence" + index} className="gapFill__sentence">
-                  <span className="gapFill__sentence-num">{index + 1}</span>. {sentence}
+                <div className="gapFill__field" key={"field" + index}>
+                  <div className="gapFill__sentence">
+                    <span className="gapFill__sentence-num">{index + 1}</span>.{" "}
+                    {sentence}
+                  </div>
+                  <p className="gapFill__correct-answer">
+                    Answer: <span>{shuffledTargetWordObjs[index].word}</span>
+                  </p>
                 </div>
               ))}
             </div>

@@ -5,6 +5,7 @@ import AlertWrapper from "./AlertWrapper";
 import correctSound from "../assets/audio/correct.mp3";
 import incorrectSound from "../assets/audio/incorrect.mp3";
 import shuffle from "../utils/shuffle";
+import AnswerModal from "./AnswerModal";
 
 const Spelling = ({
   text,
@@ -18,6 +19,7 @@ const Spelling = ({
   const [shuffledTargetWordObjs, setShuffledTargetWordObjs] = useState([]);
   const [targetWords, setTargetWords] = useState([]);
   const [finished, setFinished] = useState(false);
+  const [showAnswerModal, setShowAnswerModal] = useState(false);
 
   useEffect(() => {
     const filteredTargetWordObjs = text.targetWordObjs.filter(
@@ -63,12 +65,19 @@ const Spelling = ({
       audio.play();
       setInfoMessages([{ type: "success", text: "Right!" }]);
       correctAnswers++;
+      gotToNextQuestion(correctAnswers);
     } else {
       const audio = new Audio(incorrectSound);
       audio.play();
       setInfoMessages([{ type: "failure", text: "Wrong!" }]);
+      setShowAnswerModal(true);
     }
-    incrementCorrectAnswers(correctAnswers);
+  };
+
+  const gotToNextQuestion = correctAnswers => {
+    if (correctAnswers) {
+      incrementCorrectAnswers(correctAnswers);
+    }
     if (questionIndex === shuffledTargetWordObjs.length - 1) {
       setFinished(true);
       setTimeout(() => {
@@ -85,19 +94,28 @@ const Spelling = ({
       <h1 className="spelling__title">
         Listen to the word then write it in the box:
       </h1>
-      <form className="spelling__content" onSubmit={handleSubmit}>
-        <p className="spelling__question-number">
-          Question: {questionIndex + 1}
-        </p>
-        <FontAwesomeIcon
-          icon={faPlay}
-          onClick={playAudio}
-          className="spelling__play-icon"
-        />
-        <input type="text" name="text" />
-        <button type="submit">Check</button>
-      </form>
+      {!finished && (
+        <form className="spelling__content" onSubmit={handleSubmit}>
+          <p className="spelling__question-number">
+            Question: {questionIndex + 1}
+          </p>
+          <FontAwesomeIcon
+            icon={faPlay}
+            onClick={playAudio}
+            className="spelling__play-icon"
+          />
+          <input type="text" name="text" />
+          <button type="submit">Check</button>
+        </form>
+      )}
       {infoMessages.length > 0 && <AlertWrapper messages={infoMessages} />}
+      {showAnswerModal && (
+        <AnswerModal
+          setShowAnswerModal={setShowAnswerModal}
+          answer={targetWords[questionIndex]}
+          gotToNextQuestion={gotToNextQuestion}
+        />
+      )}
     </div>
   );
 };
