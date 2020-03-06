@@ -18,7 +18,8 @@ const GapFill = ({
     //sentences will appear in random order
     const shuffledTargetWordObjs = shuffle(targetWordObjsCopy);
     setShuffledTargetWordObjs(shuffledTargetWordObjs);
-    const sentences = text.content.split(/(?<=[.?!])\s+/);
+    // const sentences = text.content.split(/(?<=[.?!])\s+/);
+    const sentences = text.content.match(/[^.!?]+[.!?]+/g);
     const targetSentences = [];
     for (let i = 0; i < shuffledTargetWordObjs.length; i++) {
       targetSentences.push(sentences[shuffledTargetWordObjs[i].sentence]);

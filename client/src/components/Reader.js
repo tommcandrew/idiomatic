@@ -12,7 +12,7 @@ const Reader = ({ text, setCurrentComponent }) => {
   }, []);
 
   const createSpanArray = () => {
-    const sentences = text.content.split(/(?<=[.?!])\s+/);
+    const sentences = text.content.match(/[^.!?]+[.!?]+/g);
     const splitSentences = sentences.map(sentence =>
       sentence.match(/[\w']+|[.,!?;]/g)
     );

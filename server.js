@@ -8,7 +8,6 @@ const bcrypt = require("bcryptjs");
 const axios = require("axios");
 const dictionaryKey = "083cdcb6-cd9f-4856-a7b6-21c474d149c8";
 const pluralize = require("pluralize");
-const fs = require("fs");
 const Logger = require("./services/logger_service");
 const logger = new Logger("app");
 
@@ -153,7 +152,6 @@ app.post("/deleteAccount", verifyToken, (req, res) => {
 app.post("/saveText", verifyToken, async (req, res) => {
   const infoMessages = [];
   const { title, selectedWords, content } = req.body;
-  console.log({selectedWords})
   const targetWordObjs = [];
   for (let i = 0; i < selectedWords.length; i++) {
     const isPlural = pluralize.isPlural(selectedWords[i].element);

@@ -42,7 +42,7 @@ const Main = () => {
   const fetchSavedTexts = () => {
     const token = localStorage.getItem("idiomatic-token");
     axios
-      .get("/api//savedtexts", {
+      .get("/api/savedtexts", {
         headers: {
           Authorization: "Bearer " + token
         }
@@ -57,7 +57,7 @@ const Main = () => {
     const token = localStorage.getItem("idiomatic-token");
     axios
       .put(
-        "/api//deleteText",
+        "/api/deleteText",
         { title },
         {
           headers: {

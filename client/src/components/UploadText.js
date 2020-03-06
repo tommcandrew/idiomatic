@@ -80,8 +80,7 @@ const UploadText = ({
           setShowUploadForm(false);
           setShowPasteForm(false);
           setUploadedFile(res.data);
-          allSentences = res.data.content.split(/(?<=[.?!])\s+/);
-          console.log(allSentences);
+          allSentences = res.data.content.match(/[^.!?]+[.!?]+/g);
           //for some reason this variable is not accessible in the final part of this function so am saving to state
           setAllSentences(allSentences);
         });
@@ -109,7 +108,7 @@ const UploadText = ({
       setShowPasteForm(false);
       setUploadedFile({ content, title });
       const trimmed = content.trim();
-      allSentences = trimmed.split(/(?<=[.?!])\s+/);
+      allSentences = trimmed.match(/[^.!?]+[.!?]+/g);
       setAllSentences(allSentences);
     }
   };
@@ -119,7 +118,6 @@ const UploadText = ({
     const splitSentences = allSentences.map(sentence => {
       return sentence.match(/[\w']+|[.,!?;]/g);
     });
-    console.log({ splitSentences });
     const splitSentencesWithObjs = splitSentences.map(
       (sentence, sentenceIndex) => {
         return sentence.map((el, elIndex) => {
@@ -127,7 +125,6 @@ const UploadText = ({
         });
       }
     );
-    console.log({ splitSentencesWithObjs });
     setSplitSentencesWithObjs(splitSentencesWithObjs);
   }, [allSentences]);
 
@@ -137,7 +134,7 @@ const UploadText = ({
     const token = localStorage.getItem("idiomatic-token");
     axios
       .post(
-        "/api//saveText",
+        "/api/saveText",
         {
           title: uploadedFile.title,
           selectedWords,
