@@ -8,8 +8,10 @@ const bcrypt = require("bcryptjs");
 const axios = require("axios");
 const dictionaryKey = "083cdcb6-cd9f-4856-a7b6-21c474d149c8";
 const pluralize = require("pluralize");
-const Logger = require("./services/logger_service");
-const logger = new Logger("app");
+const winston = require("winston");
+const logger = winston.createLogger({
+  transports: [new winston.transports.File({ filename: "logs.txt" })]
+});
 
 mongoose.connect(
   "mongodb://localhost:27017/idiomatic",
@@ -45,9 +47,7 @@ const verifyToken = (req, res, next) => {
 
 app.post("/login", (req, res) => {
   const { email, password } = req.body;
-  if (email === "anna@gmail.com" && password === "anna12345") {
-    logger.info("Demo user has logged in", { key: "value" });
-  }
+  const time = new Date(Date.now()).toUTCString();
   User.findOne({ email }).then(user => {
     if (!user) {
       res.status(403).send("That email is not registered");
@@ -59,6 +59,7 @@ app.post("/login", (req, res) => {
           if (!isSame) {
             res.status(403).send("Wrong password");
           } else {
+            logger.info("User logging in: " + email + ", " + time);
             jwt.sign({ user }, "secretkey", (err, token) => {
               res.status(200).send({
                 token: token,
@@ -74,6 +75,7 @@ app.post("/login", (req, res) => {
 
 app.post("/register", (req, res) => {
   const { name, email, password, password2 } = req.body;
+  const time = new Date(Date.now()).toUTCString();
   if (password.length < 8) {
     res.status(500).send();
     return;
@@ -97,8 +99,9 @@ app.post("/register", (req, res) => {
     bcrypt.hash(user.password, salt, (err, hash) => {
       user.password = hash;
       user.save().then(user => {
+        logger.info("New user registering: " + email + ", " + time);
         jwt.sign({ user }, "secretkey", (err, token) => {
-          res.send({ toke });
+          res.send({ token });
         });
       });
     });
