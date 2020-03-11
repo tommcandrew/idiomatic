@@ -9,7 +9,8 @@ const TextTile = ({
   handleChooseText,
   edit,
   deleteText,
-  isCompleted
+  isCompleted,
+  added
 }) => {
   const [showConfirmDelete, setShowConfirmDelete] = useState(false);
   const handleShowDeleteModal = () => {
@@ -19,6 +20,14 @@ const TextTile = ({
   const handleDelete = () => {
     deleteText(title);
   };
+
+  let addedFormatted;
+  if (added) {
+    const day = added.substr(8, 2);
+    const month = added.substr(5, 2);
+    const year = added.substr(0, 4);
+    addedFormatted = day + "/" + month + "/" + year;
+  }
 
   return (
     <div className="textTile__wrapper">
@@ -43,6 +52,7 @@ const TextTile = ({
         <p className="textTile__title">{title}</p>
         {level && <p className="textTile__level">{level}</p>}
         {isCompleted && <p className="textTile__completed">Completed</p>}
+        {addedFormatted && <p className="textTile__added">{addedFormatted}</p>}
       </div>
       {showConfirmDelete && (
         <ConfirmModal

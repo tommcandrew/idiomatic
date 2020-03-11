@@ -10,6 +10,7 @@ const User = new Schema(
     texts: [
       {
         title: String,
+        added: Date,
         content: String,
         targetWordObjs: [{}]
       }

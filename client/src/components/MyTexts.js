@@ -18,6 +18,7 @@ const MyTexts = ({
               handleChooseText={handleChooseText}
               edit="true"
               deleteText={deleteText}
+              added={text.added}
             />
           ))}
         </div>

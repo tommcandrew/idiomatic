@@ -177,6 +177,7 @@ app.post("/deleteAccount", verifyToken, (req, res) => {
 
 //why can't I see the req.body with axios.post?
 app.post("/saveText", verifyToken, async (req, res) => {
+  const date = new Date();
   const infoMessages = [];
   const { title, selectedWords, content } = req.body;
   const targetWordObjs = [];
@@ -259,6 +260,7 @@ app.post("/saveText", verifyToken, async (req, res) => {
   }
   const text = {
     title,
+    added: date,
     content,
     targetWordObjs
   };
