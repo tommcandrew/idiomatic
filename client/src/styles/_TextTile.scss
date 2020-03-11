@@ -13,14 +13,13 @@
   text-align: center;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: space-around;
   align-items: center;
   border-radius: 8px;
   padding: 8% 0;
   cursor: pointer;
   position: relative;
 }
-
 
 .textTile__title {
   font-size: 1.2rem;
@@ -33,6 +32,10 @@
   color: gold;
   font-weight: bold;
   user-select: none;
+}
+
+.textTile__completed {
+  font-style: italic;
 }
 
 .textTile__edit-buttons {
@@ -83,10 +86,10 @@
     }
   }
   .textTile__delete,
-.textTile__edit {
-  color: #4a98f8;
-  font-size: 1.5rem;
-}
+  .textTile__edit {
+    color: #4a98f8;
+    font-size: 1.5rem;
+  }
   .textTile__title {
     font-size: 1.5rem;
   }

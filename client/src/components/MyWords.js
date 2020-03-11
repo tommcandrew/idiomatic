@@ -9,7 +9,7 @@ const MyWords = ({ texts, savedTexts, completedTexts }) => {
         const targetWordObjsCopy = JSON.parse(
           JSON.stringify(texts[i].targetWordObjs)
         );
-        wordsFromTexts.push(targetWordObjsCopy);
+        wordsFromTexts = [...wordsFromTexts, ...targetWordObjsCopy];
       }
     }
 
@@ -19,7 +19,7 @@ const MyWords = ({ texts, savedTexts, completedTexts }) => {
         const targetWordObjsCopy = JSON.parse(
           JSON.stringify(savedTexts[i].targetWordObjs)
         );
-        wordsFromTexts.push(targetWordObjsCopy);
+        wordsFromSavedTexts = [...wordsFromSavedTexts, ...targetWordObjsCopy];
       }
     }
     const studiedWords = [];
@@ -30,7 +30,6 @@ const MyWords = ({ texts, savedTexts, completedTexts }) => {
       studiedWords.push(wordsFromSavedTexts[i]);
     }
     setStudiedWords(studiedWords);
-    //why does this method of combining the arrays result in an array inside an array?
     //eslint-disable-next-line
   }, []);
 
@@ -39,7 +38,7 @@ const MyWords = ({ texts, savedTexts, completedTexts }) => {
       <h1 className="myWords__title">My Words</h1>
       <div className="myWords__content">
         {studiedWords.length > 0 ? (
-          studiedWords[0].map((obj, index) => (
+          studiedWords.map((obj, index) => (
             <div key={"word" + index}>{obj.word}</div>
           ))
         ) : (

@@ -13,7 +13,8 @@ const User = new Schema(
         content: String,
         targetWordObjs: [{}]
       }
-    ]
+    ],
+    completedTexts: [String]
   },
   {
     timestamps: true

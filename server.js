@@ -132,7 +132,31 @@ app.get("/savedTexts", verifyToken, (req, res) => {
   const email = req.tokenData.user.email;
   User.findOne({ email })
     .then(user => {
-      res.status(200).send(user.texts);
+      res
+        .status(200)
+        .send({ texts: user.texts, completedTexts: user.completedTexts });
+    })
+    .catch(err => {
+      console.log(err);
+    });
+});
+
+app.post("/complete", verifyToken, (req, res) => {
+  const email = req.tokenData.user.email;
+  const title = req.body.title;
+  User.findOneAndUpdate({ email })
+    .then(user => {
+      user.completedTexts.push(title);
+      user
+        .save()
+        .then(() => {
+          res
+            .status(200)
+            .send({ texts: user.texts, completedTexts: user.completedTexts });
+        })
+        .catch(err => {
+          console.log(err);
+        });
     })
     .catch(err => {
       console.log(err);

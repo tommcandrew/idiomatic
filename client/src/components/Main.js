@@ -40,15 +40,17 @@ const Main = () => {
   }, [infoMessages]);
 
   const fetchSavedTexts = () => {
+    console.log("fetching saved texts");
     const token = localStorage.getItem("idiomatic-token");
     axios
-      .get("/api/savedtexts", {
+      .get("/savedtexts", {
         headers: {
           Authorization: "Bearer " + token
         }
       })
       .then(res => {
-        setSavedTexts(res.data);
+        setSavedTexts(res.data.texts);
+        setCompletedTexts(res.data.completedTexts);
       });
   };
 
@@ -57,7 +59,7 @@ const Main = () => {
     const token = localStorage.getItem("idiomatic-token");
     axios
       .put(
-        "/api/deleteText",
+        "/deleteText",
         { title },
         {
           headers: {
@@ -99,8 +101,24 @@ const Main = () => {
   };
 
   const markTextComplete = () => {
-    setCompletedTexts([...completedTexts, selectedText.title]);
-    setInfoMessages([{ text: "New words added to My Words!", type: "info" }]);
+    const token = localStorage.getItem("idiomatic-token");
+    axios
+      .post(
+        "/complete",
+        { title: selectedText.title },
+        {
+          headers: {
+            Authorization: "Bearer " + token
+          }
+        }
+      )
+      //probably not very efficient to fetch all texts again
+      .then(() => {
+        fetchSavedTexts();
+        setInfoMessages([
+          { text: "New words added to My Words!", type: "info" }
+        ]);
+      });
   };
 
   return (
@@ -119,6 +137,7 @@ const Main = () => {
           setSelectedText={setSelectedText}
           texts={texts}
           handleChooseText={handleChooseText}
+          completedTexts={completedTexts}
         />
       )}
       {currentComponent === "UploadText" && (
