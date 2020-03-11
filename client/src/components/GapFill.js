@@ -107,16 +107,11 @@ const GapFill = ({
               <span
                 key={"filled" + index}
                 className="gapFill__filled--wrong"
-                data-answer={shuffledTargetWordObjs[i].word}
               ></span>
             );
           } else {
             el = (
-              <span
-                key={"filled" + index}
-                className="gapFill__filled--wrong"
-                data-answer={shuffledTargetWordObjs[i].word}
-              >
+              <span key={"filled" + index} className="gapFill__filled--wrong">
                 {inputValues[i]}
               </span>
             );

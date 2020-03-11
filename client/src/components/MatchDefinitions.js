@@ -55,7 +55,13 @@ const MatchDefinitions = ({
         correctAnswers++;
       }
     }
-    setInfoMessages([{text: correctAnswers + " out of " + multipleChoiceQuestions.length + "!", type: "success"}])
+    setInfoMessages([
+      {
+        text:
+          correctAnswers + " out of " + multipleChoiceQuestions.length + "!",
+        type: "success"
+      }
+    ]);
     incrementCorrectAnswers(correctAnswers);
   };
 
@@ -111,7 +117,9 @@ const MatchDefinitions = ({
                 >
                   {defIndex + 1}. {questionObj.definition}
                 </p>
-            <p className="matchDefinitions__correct-answer">Answer: <span>{questionObj.answer}</span></p>
+                <p className="matchDefinitions__correct-answer">
+                  Answer: <span>{questionObj.answer}</span>
+                </p>
                 <div className="matchDefinitions__options">
                   {questionObj.options.map((word, optionIndex) => (
                     <button
@@ -131,8 +139,11 @@ const MatchDefinitions = ({
                         word === "'" || word === "?"
                           ? "matchDefinitions__punctuation"
                           : ""
-                      } ${selectedOptions[defIndex] === null ? "matchDefinitions__unanswered" : ""}`}
-                      data-answer={questionObj.answer}
+                      } ${
+                        selectedOptions[defIndex] === null
+                          ? "matchDefinitions__unanswered"
+                          : ""
+                      }`}
                     >
                       {word.toLowerCase()}
                     </button>

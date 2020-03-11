@@ -74,23 +74,6 @@
   }
 }
 
-.matchDefinitions__option--wrong::after {
-  position: absolute;
-  content: attr(data-answer);
-  background: white;
-  font-size: 1.2rem;
-  border: 1px solid black;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  border-radius: 6px;
-  top: -150%;
-  right: 0;
-  display: none;
-  color: green;
-  padding: 0.5rem;
-}
-
 .matchDefinitions__submit {
   @include button($mySeaBlue, 1.3rem);
   margin: 1rem 0;
