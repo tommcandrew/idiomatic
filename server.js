@@ -258,6 +258,14 @@ app.post("/saveText", verifyToken, async (req, res) => {
       positiveForm
     });
   }
+  if (targetWordObjs.length < 3) {
+    infoMessages.push({
+      text: "Not saved - text must contain at least 3 target words",
+      type: "failure"
+    });
+    res.status(200).send(infoMessages);
+    return;
+  }
   const text = {
     title,
     added: date,
