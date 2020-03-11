@@ -11,6 +11,7 @@ const GapFill = ({
   const [sentencesWithAnswers, setSentencesWithAnswers] = useState([]);
   const [splitTargetSentences, setSplitTargetSentences] = useState([]);
   const [shuffledTargetWordObjs, setShuffledTargetWordObjs] = useState([]);
+  const [inputValues, setInputValues] = useState([]);
 
   useEffect(() => {
     //make copy to avoid passing by reference
@@ -84,6 +85,7 @@ const GapFill = ({
     for (let i = 0; i < inputs.length; i++) {
       inputValues.push(inputs[i].value);
     }
+    setInputValues(inputValues);
     //reconstruct sentences with just span elements with classnames for gap words - right/wrong
     const sentencesWithAnswers = [];
     let correctAnswers = 0;
@@ -162,12 +164,15 @@ const GapFill = ({
               {sentencesWithAnswers.map((sentence, index) => (
                 <div className="gapFill__field" key={"field" + index}>
                   <div className="gapFill__sentence">
-                    <span className="gapFill__sentence-num">{index + 1}</span>.{" "}
+                    <span className="gapFill__sentence-num">{index + 1}</span>.
                     {sentence}
                   </div>
-                  <p className="gapFill__correct-answer">
-                    Answer: <span>{shuffledTargetWordObjs[index].word}</span>
-                  </p>
+                  {inputValues[index].toLowerCase() !==
+                    shuffledTargetWordObjs[index].word.toLowerCase() && (
+                    <p className="gapFill__correct-answer">
+                      Answer: <span>{shuffledTargetWordObjs[index].word}</span>
+                    </p>
+                  )}
                 </div>
               ))}
             </div>

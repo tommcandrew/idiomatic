@@ -11,6 +11,7 @@ const MatchDefinitions = ({
   const [selectedOptions, setSelectedOptions] = useState();
   const [multipleChoiceQuestions, setMultipleChoiceQuestions] = useState([]);
   const [completed, setCompleted] = useState(false);
+  const [userAnswerWords, setUserAnswerWords] = useState([]);
 
   useEffect(() => {
     //make copy to avoid passing by reference
@@ -49,6 +50,7 @@ const MatchDefinitions = ({
         return "";
       }
     });
+    setUserAnswerWords(userAnswerWords);
     let correctAnswers = 0;
     for (let i = 0; i < userAnswerWords.length; i++) {
       if (userAnswerWords[i] === multipleChoiceQuestions[i].answer) {
@@ -117,9 +119,6 @@ const MatchDefinitions = ({
                 >
                   {defIndex + 1}. {questionObj.definition}
                 </p>
-                <p className="matchDefinitions__correct-answer">
-                  Answer: <span>{questionObj.answer}</span>
-                </p>
                 <div className="matchDefinitions__options">
                   {questionObj.options.map((word, optionIndex) => (
                     <button
@@ -149,6 +148,11 @@ const MatchDefinitions = ({
                     </button>
                   ))}
                 </div>
+                {questionObj.answer !== userAnswerWords[defIndex] && (
+                  <p className="matchDefinitions__correct-answer">
+                    Answer: <span>{questionObj.answer}</span>
+                  </p>
+                )}
               </div>
             );
           })}
