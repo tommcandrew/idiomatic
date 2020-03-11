@@ -273,9 +273,17 @@ const UploadText = ({
                 )}
               </div>
             </div>
-            <button onClick={handleSubmit} className="uploadText__save">
-              Save
-            </button>
+            <div className="uploadText__buttons">
+              <button onClick={handleSubmit} className="uploadText__save">
+                Save
+              </button>
+              <button
+                onClick={() => setCurrentComponent("Dashboard")}
+                className="uploadText__cancel"
+              >
+                Cancel
+              </button>
+            </div>
           </>
         )}
         {infoMessages.length > 0 && (
