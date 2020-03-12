@@ -175,6 +175,75 @@ app.post("/deleteAccount", verifyToken, (req, res) => {
     });
 });
 
+//same as code in /saveText so should be separated
+app.post("/getWordData", async (req, res) => {
+  const { word } = req.body;
+  const isPlural = pluralize.isPlural(word);
+  let wordToSearch;
+  if (isPlural) {
+    wordToSearch = pluralize.singular(word);
+  } else {
+    wordToSearch = word;
+  }
+  const response = await axios.get(
+    "https://dictionaryapi.com/api/v3/references/learners/json/" +
+      word +
+      "?key=" +
+      dictionaryKey
+  );
+  let definition;
+  if (!response.data[0].shortdef) {
+    definition = null;
+  } else {
+    definition = response.data[0].shortdef[0];
+  }
+
+  const wordType = response.data[0].fl;
+  let infinitiveForm;
+  if (wordType === "verb") {
+    infinitiveForm = response.data[0].hwi.hw.replace(
+      //eslint-disable-next-line
+      /(~|`|!|@|#|$|%|^|&|\*|\(|\)|{|}|\[|\]|;|:|\"|'|<|,|\.|>|\?|\/|\\|\||-|_|\+|=)/g,
+      ""
+    );
+  } else {
+    infinitiveForm = null;
+  }
+  let positiveForm;
+  if (wordType === "adjective" && response.data[0].meta.id !== word) {
+    positiveForm = response.data[0].meta.stems[0];
+  } else {
+    positiveForm = null;
+  }
+  let audioUrl;
+  if (response.data[0].hwi.prs && response.data[0].hwi.prs[0].sound) {
+    audioUrl =
+      "https://media.merriam-webster.com/soundc11/" +
+      response.data[0].hwi.prs[0].sound.audio.toString().charAt(0) +
+      "/" +
+      response.data[0].hwi.prs[0].sound.audio +
+      ".wav";
+  } else {
+    audioUrl = null;
+  }
+  let singularForm;
+  if (isPlural) {
+    singularForm = pluralize.singular(word);
+  } else {
+    singularForm = null;
+  }
+  const wordData = {
+    definition: definition,
+    audio: audioUrl,
+    isPlural: isPlural,
+    singularForm: singularForm,
+    wordType: wordType,
+    infinitiveForm: infinitiveForm,
+    positiveForm
+  };
+  res.status(200).send(wordData);
+});
+
 //why can't I see the req.body with axios.post?
 app.post("/saveText", verifyToken, async (req, res) => {
   const date = new Date();
@@ -246,10 +315,11 @@ app.post("/saveText", verifyToken, async (req, res) => {
       singularForm = null;
     }
     targetWordObjs.push({
+      _id: mongoose.Types.ObjectId(),
       word: selectedWords[i].element,
       sentence: selectedWords[i].sentenceIndex,
       element: selectedWords[i].elementIndex,
-      def: definition,
+      definition: definition,
       audio: audioUrl,
       isPlural: isPlural,
       singularForm: singularForm,
@@ -270,7 +340,8 @@ app.post("/saveText", verifyToken, async (req, res) => {
     title,
     added: date,
     content,
-    targetWordObjs
+    targetWordObjs,
+    _id: mongoose.Types.ObjectId()
   };
   const email = req.tokenData.user.email;
 
@@ -297,6 +368,32 @@ app.put("/deleteText", verifyToken, (req, res) => {
   )
     .then(() => {
       res.status(200).send("Text deleted");
+    })
+    .catch(err => {
+      console.log(err);
+    });
+});
+
+app.put("/updateText", verifyToken, (req, res) => {
+  const email = req.tokenData.user.email;
+  const { updatedText } = req.body;
+  User.findOne({ email })
+    .then(user => {
+      for (let i = 0; i < user.texts.length; i++) {
+        //not using strict equality because id on document in db will be object while updatedText._id will be string
+        if (user.texts[i]._id == updatedText._id) {
+          user.texts[i] = updatedText;
+        }
+      }
+      user.markModified("texts");
+      user
+        .save()
+        .then(() => {
+          res.status(200).send("Text updated");
+        })
+        .catch(err => {
+          console.log(err);
+        });
     })
     .catch(err => {
       console.log(err);

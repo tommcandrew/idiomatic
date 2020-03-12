@@ -5,7 +5,8 @@ const MyTexts = ({
   texts,
   handleChooseText,
   deleteText,
-  setCurrentComponent
+  setCurrentComponent,
+  handleEditText
 }) => {
   return (
     <div className="myTexts__wrapper">
@@ -19,6 +20,7 @@ const MyTexts = ({
               edit="true"
               deleteText={deleteText}
               added={text.added}
+              handleEditText={handleEditText}
             />
           ))}
         </div>

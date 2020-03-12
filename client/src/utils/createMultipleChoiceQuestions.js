@@ -15,7 +15,7 @@ const createMultipleChoiceQuestions = arr => {
   });
   for (let i = 0; i < arr.length; i++) {
     const question = {};
-    question.definition = arr[i].def;
+    question.definition = arr[i].definition;
     question.answer = words[i];
     const options = [];
     options.push(words[i]);

@@ -16,8 +16,10 @@ const MatchDefinitions = ({
   useEffect(() => {
     //make copy to avoid passing by reference
     const targetWordObjsCopy = JSON.parse(JSON.stringify(text.targetWordObjs));
+    console.log(targetWordObjsCopy);
     //definitions will appear in random order
     const shuffledTargetWordObjs = shuffle(targetWordObjsCopy);
+    console.log(shuffledTargetWordObjs);
     const multipleChoiceQuestions = createMultipleChoiceQuestions(
       shuffledTargetWordObjs
     );

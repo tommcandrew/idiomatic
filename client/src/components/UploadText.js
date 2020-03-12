@@ -116,7 +116,7 @@ const UploadText = ({
   useEffect(() => {
     //wait for code above to finish before doing the rest
     const splitSentences = allSentences.map(sentence => {
-      return sentence.match(/[\w']+|[.,!?;]/g);
+      return sentence.match(/[\w'’]+|[.,!?;]/g);
     });
     const splitSentencesWithObjs = splitSentences.map(
       (sentence, sentenceIndex) => {

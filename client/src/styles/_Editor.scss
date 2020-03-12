@@ -1,0 +1,122 @@
+.editor__wrapper {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+
+.editor__instruction1,
+.editor__instruction2 {
+  font-size: 1.5rem;
+  text-align: center;
+  font-weight: bold;
+}
+
+.editor__word {
+  margin: 0 0 0 1em;
+  cursor: pointer;
+  &:hover {
+    background: yellow;
+  }
+}
+
+.editor__text {
+  width: 90%;
+  display: flex;
+  flex-wrap: wrap;
+  font-size: 1.3rem;
+  border-radius: 6px;
+  justify-content: center;
+  margin: 0 auto;
+}
+
+.editor__word--target {
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.editor__table {
+  display: flex;
+  flex-direction: column;
+  width: 90%;
+  margin: 0 auto;
+}
+
+.editor__table > div {
+  display: flex;
+  justify-content: space-around;
+}
+
+.editor__table div > * {
+  outline: 1px solid black;
+  text-align: center;
+  flex-grow: 1;
+  font-size: 1.2rem;
+  background: rgb(60, 182, 60);
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.editor__table input {
+  border: none;
+  background: white;
+  color: black;
+}
+
+.editor__table div > *:nth-child(1),
+.editor__table div > *:nth-child(2) {
+  width: 2%;
+}
+
+.editor__table div > *:nth-child(4),
+.editor__table div > *:nth-child(5) {
+  width: 5%;
+}
+
+.editor__table div > *:nth-child(3) {
+  width: 15%;
+  font-weight: bold;
+}
+.editor__table div > *:nth-child(6),
+.editor__table div > *:nth-child(7),
+.editor__table div > *:nth-child(8) {
+  width: 10%;
+}
+
+.editor__table div > *:nth-child(9) {
+  width: 30%;
+}
+
+.editor__dic {
+  cursor: pointer;
+}
+
+.editor__table-header > span {
+  font-weight: bold;
+}
+
+.editor__table .editor__delete {
+  cursor: pointer;
+  font-size: 1.7rem;
+  &:hover {
+    color: red;
+  }
+}
+
+.editor__buttons {
+  display: flex;
+  width: 20%;
+  justify-content: space-around;
+  margin: 0 auto;
+  button {
+    margin-left: 3rem;
+    margin-right: 3rem;
+    @include button($mySeaBlue, 1.3rem);
+    margin: 1rem 0;
+    &:hover {
+      background: $mySeaBlueDark;
+    }
+  }
+}

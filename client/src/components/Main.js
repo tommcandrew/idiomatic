@@ -14,6 +14,7 @@ import Results from "./Results";
 import MyWords from "./MyWords";
 import MyProfile from "./MyProfile";
 import AlertWrapper from "./AlertWrapper";
+import Editor from "./Editor";
 import texts from "../assets/texts.js";
 
 const Main = () => {
@@ -40,7 +41,6 @@ const Main = () => {
   }, [infoMessages]);
 
   const fetchSavedTexts = () => {
-    console.log("fetching saved texts");
     const token = localStorage.getItem("idiomatic-token");
     axios
       .get("/savedtexts", {
@@ -121,6 +121,30 @@ const Main = () => {
       });
   };
 
+  const handleEditText = title => {
+    const selectedText = savedTexts.find(text => text.title === title);
+    setSelectedText(selectedText);
+    setCurrentComponent("Editor");
+  };
+
+  const updateText = updatedText => {
+    const token = localStorage.getItem("idiomatic-token");
+    axios
+      .put(
+        "/updateText",
+        { updatedText },
+        {
+          headers: {
+            Authorization: "Bearer " + token
+          }
+        }
+      )
+      .then(res => {
+        console.log(res);
+        fetchSavedTexts();
+      });
+  };
+
   return (
     <div className="main__wrapper">
       <Header
@@ -164,6 +188,7 @@ const Main = () => {
           handleChooseText={handleChooseText}
           deleteText={deleteText}
           setCurrentComponent={setCurrentComponent}
+          handleEditText={handleEditText}
         />
       )}
       {currentComponent === "GapFill" && (
@@ -204,6 +229,14 @@ const Main = () => {
           texts={texts}
           savedTexts={savedTexts}
           completedTexts={completedTexts}
+        />
+      )}
+      {currentComponent === "Editor" && selectedText && (
+        <Editor
+          text={selectedText}
+          setCurrentComponent={setCurrentComponent}
+          updateText={updateText}
+          setInfoMessages={setInfoMessages}
         />
       )}
       {currentComponent === "MyProfile" && <MyProfile />}

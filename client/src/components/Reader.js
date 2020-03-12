@@ -14,7 +14,7 @@ const Reader = ({ text, setCurrentComponent }) => {
   const createSpanArray = () => {
     const sentences = text.content.match(/[^.!?]+[.!?]+/g);
     const splitSentences = sentences.map(sentence =>
-      sentence.match(/[\w']+|[.,!?;]/g)
+      sentence.match(/[\w'’]+|[.,!?;]/g)
     );
     const sentencesOfSpanElements = splitSentences.map(
       (sentence, sentenceIndex) =>
@@ -64,7 +64,7 @@ const Reader = ({ text, setCurrentComponent }) => {
     if (selectedTargetWordObj.wordType === "verb") {
       selectedWord = selectedTargetWordObj.infinitiveForm;
     }
-    const def = selectedTargetWordObj.def;
+    const def = selectedTargetWordObj.definition;
     setSelectedDef(def);
     setSelectedTargetWordObj(selectedTargetWordObj);
   };
