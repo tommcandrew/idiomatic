@@ -1,13 +1,18 @@
-import React, { useState, useEffect } from "react";
-import ConfirmModal from "./ConfirmModal";
+import React, { useState, useEffect, useRef } from "react";
 import axios from "axios";
 
 const Editor = ({ text, setCurrentComponent, updateText, setInfoMessages }) => {
   const [sentencesOfSpanElements, setSentencesOfSpanElements] = useState([]);
   const [tableRows, setTableRows] = useState([]);
-  const [showConfirmModal, setShowConfirmModal] = useState(false);
-  const [selectedWord, setSelectedWord] = useState(null);
   const [selectedText, setSelectedText] = useState(null);
+  const [deleting, setDeleting] = useState(false)
+
+  const myForm = useRef()
+
+  useEffect(() => {
+    console.log('table rows changed')
+    console.log(tableRows)
+  }, [tableRows])
 
   useEffect(() => {
     setSelectedText(text);
@@ -73,15 +78,27 @@ const Editor = ({ text, setCurrentComponent, updateText, setInfoMessages }) => {
     const sentenceIndex = parseInt(e.target.dataset.sentenceIndex);
     const elementIndex = parseInt(e.target.dataset.elementIndex);
     const element = e.target.innerText;
-    const updatedWordArr = [
-      ...selectedText.targetWordObjs,
-      {
-        word: element,
-        sentence: sentenceIndex,
-        element: elementIndex
+    let updatedWordArr
+    //if word has already been selected, remove it from array
+    if (selectedText.targetWordObjs.some(obj => {
+      if (obj.sentence === sentenceIndex && obj.element === elementIndex) {
+        return true
       }
-    ];
-
+    })) {
+      updatedWordArr = selectedText.targetWordObjs.filter(obj => obj.sentence !== sentenceIndex || obj.element !== elementIndex)
+      setDeleting(true)
+      //otherwise add it to array
+    } else {
+      updatedWordArr = [
+        ...selectedText.targetWordObjs,
+        {
+          word: element,
+          sentence: sentenceIndex,
+          element: elementIndex
+        }
+      ];
+    }
+    //(in either case) update array
     const updatedText = {
       ...selectedText,
       targetWordObjs: updatedWordArr
@@ -90,60 +107,52 @@ const Editor = ({ text, setCurrentComponent, updateText, setInfoMessages }) => {
   };
 
   const createTableRows = () => {
+    //reset inputs if deleting word, otherwise values don't update
+    if (deleting) {
+      myForm.current.reset()
+      setDeleting(false)
+    }
     const rows = selectedText.targetWordObjs.map((obj, index) => {
       return (
         <div key={"row" + index}>
           <span
             className="editor__dic"
             onClick={() => handleDictionaryClick(obj.word)}
-            title="Get word data from dictionary"
+            title="Get word info from dictionary"
           >
             &#128366;
           </span>
-          <span
-            className="editor__delete"
-            onClick={() => handleDeleteClick(obj.word)}
-          >
-            &times;
-          </span>
-          <span>{obj.word}</span>
-
+          <input defaultValue={obj.word} />
           <input
-            defaultValue={obj.wordType}
             onChange={e => handleInputChange(e, obj._id, "wordType")}
+            className={!obj.wordType ? "greyedOut" : undefined}
+            defaultValue={obj.wordType}
           />
           <input
-            defaultValue={
-              obj.isPlural ? "true" : obj.isPlural === false ? "false" : "-"
-            }
-            onChange={e => handleInputChange(e, obj._id, "isPlural")}
-          />
-          <input
-            defaultValue={obj.singularForm ? obj.singularForm : "-"}
             onChange={e => handleInputChange(e, obj._id, "singularForm")}
+            className={!obj.singularForm ? "greyedOut" : undefined}
+            defaultValue={obj.singularForm}
           />
           <input
-            defaultValue={obj.infinitiveForm ? obj.infinitiveForm : "-"}
             onChange={e => handleInputChange(e, obj._id, "infinitiveForm")}
+            className={!obj.infinitiveForm ? "greyedOut" : undefined}
+            defaultValue={obj.infinitiveForm}
           />
           <input
-            defaultValue={obj.positiveForm ? obj.positiveForm : "-"}
             onChange={e => handleInputChange(e, obj._id, "positiveForm")}
+            className={!obj.positiveForm ? "greyedOut" : undefined}
+            defaultValue={obj.positiveForm}
           />
           <input
-            defaultValue={obj.definition}
-            className="editor__def"
+            className={`editor__def ${!obj.definition ? "greyedOut" : undefined}`}
             onChange={e => handleInputChange(e, obj._id, "definition")}
+            defaultValue={obj.definition}
           />
+
         </div>
       );
     });
     setTableRows(rows);
-  };
-
-  const handleDeleteClick = word => {
-    setSelectedWord(word);
-    setShowConfirmModal(true);
   };
 
   const handleDictionaryClick = word => {
@@ -151,7 +160,6 @@ const Editor = ({ text, setCurrentComponent, updateText, setInfoMessages }) => {
       const {
         definition,
         audio,
-        isPlural,
         singularForm,
         wordType,
         infinitiveForm,
@@ -164,7 +172,6 @@ const Editor = ({ text, setCurrentComponent, updateText, setInfoMessages }) => {
             ...updatedText.targetWordObjs[i],
             definition,
             audio,
-            isPlural,
             singularForm,
             wordType,
             infinitiveForm,
@@ -174,19 +181,6 @@ const Editor = ({ text, setCurrentComponent, updateText, setInfoMessages }) => {
       }
       setSelectedText(updatedText);
     });
-  };
-
-  const handleDeleteWord = () => {
-    //maybe wait until user clicks save at the end before updating database
-    const updatedText = {
-      ...selectedText,
-      targetWordObjs: selectedText.targetWordObjs.filter(
-        obj => obj.word !== selectedWord
-      )
-    };
-    setSelectedText(updatedText);
-    setSelectedWord(null);
-    setShowConfirmModal(false);
   };
 
   const handleInputChange = (e, id, type) => {
@@ -215,6 +209,15 @@ const Editor = ({ text, setCurrentComponent, updateText, setInfoMessages }) => {
       ]);
       return;
     }
+    if (selectedText.targetWordObjs.some(obj => !obj.definition)) {
+      setInfoMessages([
+        {
+          text: "All words must have a definition",
+          type: "warning"
+        }
+      ]);
+      return;
+    }
     updateText(selectedText);
     setCurrentComponent("Dashboard");
     setInfoMessages([{ text: "Text updated!", type: "success" }]);
@@ -223,36 +226,27 @@ const Editor = ({ text, setCurrentComponent, updateText, setInfoMessages }) => {
   return (
     <div className="editor__wrapper">
       <p className="editor__instruction1">
-        Click on words in the text to add to the target word list.
+        Click on words in the text to add/remove them
       </p>
       <div className="editor__text-wrapper">
         <div className="editor__text">{sentencesOfSpanElements}</div>
       </div>
       <p className="editor__instruction2">
-        Here you can add/edit word data and get data from the dictionary by
+        Add/edit word info and get info from the dictionary by
         clicking on the button on the left
       </p>
-      <div className="editor__table">
+      <form className="editor__table" ref={myForm}>
         <div className="editor__table-header">
           <span className="editor__dic-header"></span>
-          <span className="editor__delete-header"></span>
           <span>Word</span>
           <span>Type</span>
-          <span>Plural?</span>
           <span>Singular</span>
           <span>Infinitive</span>
-          <span>Positive</span>
+          <span>Main adj.</span>
           <span className="editor__def-header">Definition</span>
         </div>
         {tableRows}
-      </div>
-      {showConfirmModal && (
-        <ConfirmModal
-          setShowConfirmModal={setShowConfirmModal}
-          actionOnConfirm={handleDeleteWord}
-          thingToDelete="this word"
-        />
-      )}
+      </form>
       <div className="editor__buttons">
         <button onClick={handleSubmit} className="editor__save">
           Save

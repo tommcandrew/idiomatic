@@ -187,9 +187,9 @@ app.post("/getWordData", async (req, res) => {
   }
   const response = await axios.get(
     "https://dictionaryapi.com/api/v3/references/learners/json/" +
-      word +
-      "?key=" +
-      dictionaryKey
+    word +
+    "?key=" +
+    dictionaryKey
   );
   let definition;
   if (!response.data[0].shortdef) {
@@ -235,7 +235,6 @@ app.post("/getWordData", async (req, res) => {
   const wordData = {
     definition: definition,
     audio: audioUrl,
-    isPlural: isPlural,
     singularForm: singularForm,
     wordType: wordType,
     infinitiveForm: infinitiveForm,
@@ -244,13 +243,13 @@ app.post("/getWordData", async (req, res) => {
   res.status(200).send(wordData);
 });
 
-//why can't I see the req.body with axios.post?
 app.post("/saveText", verifyToken, async (req, res) => {
   const date = new Date();
   const infoMessages = [];
   const { title, selectedWords, content } = req.body;
   const targetWordObjs = [];
   for (let i = 0; i < selectedWords.length; i++) {
+    //const element = selectedWords[i]
     const isPlural = pluralize.isPlural(selectedWords[i].element);
     let wordToSearch;
     if (isPlural) {
@@ -260,9 +259,9 @@ app.post("/saveText", verifyToken, async (req, res) => {
     }
     const response = await axios.get(
       "https://dictionaryapi.com/api/v3/references/learners/json/" +
-        wordToSearch +
-        "?key=" +
-        dictionaryKey
+      wordToSearch +
+      "?key=" +
+      dictionaryKey
     );
     //definition
     if (!response.data[0].shortdef) {
@@ -321,7 +320,6 @@ app.post("/saveText", verifyToken, async (req, res) => {
       element: selectedWords[i].elementIndex,
       definition: definition,
       audio: audioUrl,
-      isPlural: isPlural,
       singularForm: singularForm,
       wordType: wordType,
       infinitiveForm: infinitiveForm,

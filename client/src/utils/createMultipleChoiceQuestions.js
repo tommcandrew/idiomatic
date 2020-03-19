@@ -5,7 +5,7 @@ const createMultipleChoiceQuestions = arr => {
   const words = arr.map(obj => {
     if (obj.wordType === "verb") {
       return obj.infinitiveForm;
-    } else if (obj.isPlural) {
+    } else if (obj.singularForm) {
       return obj.singularForm;
     } else if (obj.positiveForm) {
       return obj.positiveForm;

@@ -14,7 +14,8 @@ const TextTile = ({
   handleEditText
 }) => {
   const [showConfirmDelete, setShowConfirmDelete] = useState(false);
-  const handleShowDeleteModal = () => {
+  const handleShowDeleteModal = e => {
+    e.stopPropagation();
     setShowConfirmDelete(true);
   };
 
@@ -49,7 +50,7 @@ const TextTile = ({
               <FontAwesomeIcon
                 icon={faPen}
                 className="textTile__edit"
-                onClick={() => handleEditText(title)}
+                onClick={e => handleEditText(e, title)}
               />
             </span>
           </div>

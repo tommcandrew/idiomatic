@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from "react";
+import axios from "axios";
+
 import Dashboard from "./Dashboard";
 import Texts from "./Texts";
 import UploadText from "./UploadText";
 import Header from "./Header";
 import StartPage from "./StartPage";
 import Reader from "./Reader";
-import axios from "axios";
 import MyTexts from "./MyTexts";
 import GapFill from "./GapFill";
 import MatchDefinitions from "./MatchDefinitions";
@@ -15,6 +16,7 @@ import MyWords from "./MyWords";
 import MyProfile from "./MyProfile";
 import AlertWrapper from "./AlertWrapper";
 import Editor from "./Editor";
+
 import texts from "../assets/texts.js";
 
 const Main = () => {
@@ -74,14 +76,6 @@ const Main = () => {
   };
 
   const handleChooseText = (e, title) => {
-    //better way to do this?
-    if (
-      !e.target.classList.contains("textTile__content") &&
-      !e.target.classList.contains("textTile__title") &&
-      !e.target.classList.contains("textTile__level")
-    ) {
-      return;
-    }
     let selectedText;
     //if user is looking at own uploaded texts
     if (currentComponent === "MyTexts") {
@@ -121,7 +115,8 @@ const Main = () => {
       });
   };
 
-  const handleEditText = title => {
+  const handleEditText = (e, title) => {
+    e.stopPropagation();
     const selectedText = savedTexts.find(text => text.title === title);
     setSelectedText(selectedText);
     setCurrentComponent("Editor");

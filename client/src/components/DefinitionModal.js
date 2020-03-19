@@ -7,8 +7,8 @@ const DefinitionModal = ({ definition, closeModal, selectedTargetWordObj }) => {
 
   useEffect(() => {
     setAudioUrl(selectedTargetWordObj.audio);
-    //eslint-disable-next-line
-  }, []);
+  }, [selectedTargetWordObj]);
+
   const handlePlayAudio = () => {
     if (audioUrl !== null) {
       const audio = new Audio(audioUrl);
