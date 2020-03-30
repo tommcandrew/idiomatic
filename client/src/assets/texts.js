@@ -10,7 +10,7 @@ const texts = [
         word: "coast",
         sentence: 4,
         element: 10,
-        def: "the land along or near a sea or ocean",
+        definition: "the land along or near a sea or ocean",
         audio: "https://media.merriam-webster.com/soundc11/c/coast001.wav",
         isPlural: false,
         singularForm: null,
@@ -22,7 +22,7 @@ const texts = [
         word: "beard",
         sentence: 8,
         element: 12,
-        def: "the hair that grows on a man's cheeks and chin",
+        definition: "the hair that grows on a man's cheeks and chin",
         audio: "https://media.merriam-webster.com/soundc11/b/beard001.wav",
         isPlural: false,
         singularForm: null,
@@ -34,7 +34,7 @@ const texts = [
         word: "persuade",
         sentence: 12,
         element: 15,
-        def:
+        definition:
           "to cause (someone) to do something by asking, arguing, or giving reasons",
         audio: "https://media.merriam-webster.com/soundc11/p/persua02.wav",
         isPlural: false,
@@ -47,7 +47,7 @@ const texts = [
         word: "mystery",
         sentence: 23,
         element: 7,
-        def:
+        definition:
           "something that is not known : something that is difficult to understand or explain",
         audio: "https://media.merriam-webster.com/soundc11/m/myster02.wav",
         isPlural: false,
@@ -69,7 +69,7 @@ const texts = [
         word: "investigating",
         sentence: 4,
         element: 6,
-        def:
+        definition:
           "to try to find out the facts about (something, such as a crime or an accident) in order to learn how it happened, who did it, etc.",
         audio: "https://media.merriam-webster.com/soundc11/i/invest04.wav",
         isPlural: false,
@@ -82,7 +82,7 @@ const texts = [
         word: "landfill",
         sentence: 7,
         element: 7,
-        def: "a system in which waste materials are buried under the ground",
+        definition: "a system in which waste materials are buried under the ground",
         audio: "https://media.merriam-webster.com/soundc11/l/landfi01.wav",
         isPlural: false,
         singularForm: null,
@@ -94,7 +94,7 @@ const texts = [
         word: "melted",
         sentence: 12,
         element: 6,
-        def:
+        definition:
           "to change or to cause (something) to change from a solid to a liquid usually because of heat",
         audio: "https://media.merriam-webster.com/soundc11/m/melt0001.wav",
         isPlural: false,
@@ -107,7 +107,7 @@ const texts = [
         word: "charity",
         sentence: 17,
         element: 15,
-        def:
+        definition:
           "the act of giving money, food, or other kinds of help to people who are poor, sick, etc.; also : something (such as money or food) that is given to people who are poor, sick, etc.",
         audio: "https://media.merriam-webster.com/soundc11/c/charit03.wav",
         isPlural: false,
@@ -129,7 +129,7 @@ const texts = [
         word: "hibernate",
         sentence: 1,
         element: 6,
-        def: "to spend the winter sleeping or resting",
+        definition: "to spend the winter sleeping or resting",
         audio: "https://media.merriam-webster.com/soundc11/h/hibern04.wav",
         isPlural: false,
         singularForm: null,
@@ -141,7 +141,7 @@ const texts = [
         word: "dusk",
         sentence: 3,
         element: 10,
-        def:
+        definition:
           "the time when day changes into night and the sky begins to get darker",
         audio: "https://media.merriam-webster.com/soundc11/d/dusk0001.wav",
         isPlural: false,
@@ -154,7 +154,7 @@ const texts = [
         word: "navigate",
         sentence: 5,
         element: 12,
-        def:
+        definition:
           "to find the way to get to a place when you are traveling in a ship, airplane, car, etc. —often used figuratively",
         audio: "https://media.merriam-webster.com/soundc11/n/naviga04.wav",
         isPlural: false,
@@ -167,7 +167,7 @@ const texts = [
         word: "species",
         sentence: 6,
         element: 4,
-        def:
+        definition:
           "a group of animals or plants that are similar and can produce young animals or plants : a group of related animals or plants that is smaller than a genus",
         audio: "https://media.merriam-webster.com/soundc11/s/specie02.wav",
         isPlural: true,
@@ -180,7 +180,7 @@ const texts = [
         word: "extinction",
         sentence: 10,
         element: 15,
-        def:
+        definition:
           "the state or situation that results when something (such as a plant or animal species) has died out completely",
         audio: "https://media.merriam-webster.com/soundc11/e/extinc03.wav",
         isPlural: false,
@@ -203,7 +203,7 @@ const texts = [
         word: "obey",
         sentence: 3,
         element: 6,
-        def:
+        definition:
           "to do what someone tells you to do or what a rule, law, etc., says you must do",
         audio: "https://media.merriam-webster.com/soundc11/o/obey0001.wav",
         isPlural: false,
@@ -216,7 +216,7 @@ const texts = [
         word: "curb",
         sentence: 6,
         element: 4,
-        def:
+        definition:
           "a short border along the edge of a street that is usually made of stone or concrete",
         audio: "https://media.merriam-webster.com/soundc11/c/curb0001.wav",
         isPlural: false,
@@ -229,7 +229,7 @@ const texts = [
         word: "obstacles",
         sentence: 12,
         element: 5,
-        def: "something that makes it difficult to do something",
+        definition: "something that makes it difficult to do something",
         audio: "https://media.merriam-webster.com/soundc11/o/obstac01.wav",
         isPlural: true,
         singularForm: "obstacle",
@@ -241,7 +241,7 @@ const texts = [
         word: "Puppies",
         sentence: 14,
         element: 0,
-        def: "a young dog",
+        definition: "a young dog",
         audio: "https://media.merriam-webster.com/soundc11/p/puppy001.wav",
         isPlural: true,
         singularForm: "Puppy",
@@ -253,7 +253,7 @@ const texts = [
         word: "nervous",
         sentence: 14,
         element: 21,
-        def:
+        definition:
           "having or showing feelings of being worried and afraid about what might happen",
         audio: "https://media.merriam-webster.com/soundc11/n/nervou01.wav",
         isPlural: true,
@@ -266,7 +266,7 @@ const texts = [
         word: "training",
         sentence: 19,
         element: 22,
-        def:
+        definition:
           "a process by which someone is taught the skills that are needed for an art, profession, or job",
         audio: "https://media.merriam-webster.com/soundc11/t/train01v.wav",
         isPlural: false,
@@ -289,7 +289,7 @@ const texts = [
         word: "preserve",
         sentence: 1,
         element: 5,
-        def: "to keep (something) in its original state or in good condition",
+        definition: "to keep (something) in its original state or in good condition",
         audio: "https://media.merriam-webster.com/soundc11/p/preser03.wav",
         isPlural: false,
         singularForm: null,
@@ -301,7 +301,7 @@ const texts = [
         word: "crushed",
         sentence: 2,
         element: 7,
-        def:
+        definition:
           "to press or squeeze (something) so hard that it breaks or loses its shape",
         audio: "https://media.merriam-webster.com/soundc11/c/crush001.wav",
         isPlural: false,
@@ -314,7 +314,7 @@ const texts = [
         word: "stamping",
         sentence: 2,
         element: 9,
-        def: "to bring (your foot) down heavily and noisily",
+        definition: "to bring (your foot) down heavily and noisily",
         audio: null,
         isPlural: false,
         singularForm: null,
@@ -326,7 +326,7 @@ const texts = [
         word: "pulp",
         sentence: 3,
         element: 9,
-        def: "the inner, juicy part of a fruit or vegetable",
+        definition: "the inner, juicy part of a fruit or vegetable",
         audio: "https://media.merriam-webster.com/soundc11/p/pulp0001.wav",
         isPlural: false,
         singularForm: null,
@@ -338,7 +338,7 @@ const texts = [
         word: "crops",
         sentence: 3,
         element: 25,
-        def:
+        definition:
           "a plant or plant product that is grown by farmers —sometimes used before another noun",
         audio: "https://media.merriam-webster.com/soundc11/c/crop0001.wav",
         isPlural: true,
@@ -351,7 +351,7 @@ const texts = [
         word: "suspicion",
         sentence: 6,
         element: 4,
-        def:
+        definition:
           "a feeling that someone is possibly guilty of a crime or of doing something wrong",
         audio: "https://media.merriam-webster.com/soundc11/s/suspic01.wav",
         isPlural: false,
@@ -364,7 +364,7 @@ const texts = [
         word: "rotting",
         sentence: 10,
         element: 21,
-        def:
+        definition:
           "to slowly decay or cause (something) to decay —often used figuratively —sometimes used figuratively",
         audio: "https://media.merriam-webster.com/soundc11/r/rot00001.wav",
         isPlural: false,
@@ -377,7 +377,7 @@ const texts = [
         word: "soil",
         sentence: 11,
         element: 21,
-        def: "the top layer of earth in which plants grow",
+        definition: "the top layer of earth in which plants grow",
         audio: "https://media.merriam-webster.com/soundc11/s/soil0001.wav",
         isPlural: false,
         singularForm: null,
@@ -389,7 +389,7 @@ const texts = [
         word: "feast",
         sentence: 13,
         element: 25,
-        def:
+        definition:
           "a special meal with large amounts of food and drink : a large formal dinner —often used figuratively",
         audio: "https://media.merriam-webster.com/soundc11/f/feast001.wav",
         isPlural: false,
@@ -402,7 +402,7 @@ const texts = [
         word: "banned",
         sentence: 15,
         element: 9,
-        def:
+        definition:
           "to forbid people from using (something) : to say that something cannot be used or done",
         audio: "https://media.merriam-webster.com/soundc11/b/ban00001.wav",
         isPlural: false,
@@ -415,7 +415,7 @@ const texts = [
         word: "fibre",
         sentence: 17,
         element: 13,
-        def:
+        definition:
           "plant material that cannot be digested but that helps you to digest other food",
         audio: null,
         isPlural: false,
@@ -428,7 +428,7 @@ const texts = [
         word: "nutritious",
         sentence: 21,
         element: 17,
-        def:
+        definition:
           "having substances that a person or animal needs to be healthy and grow properly : promoting good health and growth",
         audio: "https://media.merriam-webster.com/soundc11/n/nutrit05.wav",
         isPlural: true,
@@ -441,7 +441,7 @@ const texts = [
         word: "harvest",
         sentence: 22,
         element: 15,
-        def:
+        definition:
           "the season when crops are gathered from the fields or the activity of gathering crops",
         audio: "https://media.merriam-webster.com/soundc11/h/harves01.wav",
         isPlural: false,
@@ -463,7 +463,7 @@ const texts = [
         word: "festival",
         sentence: 0,
         element: 5,
-        def:
+        definition:
           "a special time or event when people gather to celebrate something",
         audio: "https://media.merriam-webster.com/soundc11/f/festiv01.wav",
         isPlural: false,
@@ -476,7 +476,7 @@ const texts = [
         word: "pray",
         sentence: 6,
         element: 7,
-        def:
+        definition:
           "to speak to God especially in order to give thanks or to ask for something —often + for",
         audio: "https://media.merriam-webster.com/soundc11/p/pray0001.wav",
         isPlural: false,
@@ -489,7 +489,7 @@ const texts = [
         word: "decorate",
         sentence: 7,
         element: 6,
-        def:
+        definition:
           "to make (something) more attractive usually by putting something on it —often + with",
         audio: "https://media.merriam-webster.com/soundc11/d/decora01.wav",
         isPlural: false,
@@ -502,7 +502,7 @@ const texts = [
         word: "prosperity",
         sentence: 10,
         element: 11,
-        def: "the state of being successful usually by making a lot of money",
+        definition: "the state of being successful usually by making a lot of money",
         audio: "https://media.merriam-webster.com/soundc11/p/prospe08.wav",
         isPlural: false,
         singularForm: null,
@@ -523,7 +523,7 @@ const texts = [
         word: "industry",
         sentence: 1,
         element: 5,
-        def: "the process of making products by using machinery and factories",
+        definition: "the process of making products by using machinery and factories",
         audio: "https://media.merriam-webster.com/soundc11/i/indust09.wav",
         isPlural: false,
         singularForm: null,
@@ -535,7 +535,7 @@ const texts = [
         word: "traded",
         sentence: 6,
         element: 5,
-        def:
+        definition:
           "to give something to someone and receive something in return : to give something in exchange for something else",
         audio: null,
         isPlural: false,
@@ -548,7 +548,7 @@ const texts = [
         word: "bean",
         sentence: 14,
         element: 6,
-        def:
+        definition:
           "a seed that is eaten as a vegetable and that comes from any one of many different kinds of climbing plants",
         audio: "https://media.merriam-webster.com/soundc11/b/bean0001.wav",
         isPlural: false,
@@ -561,7 +561,7 @@ const texts = [
         word: "stem",
         sentence: 16,
         element: 17,
-        def:
+        definition:
           "the main long and thin part of a plant that rises above the soil and supports the leaves and flowers",
         audio: "https://media.merriam-webster.com/soundc11/s/stem0001.wav",
         isPlural: false,
@@ -574,7 +574,7 @@ const texts = [
         word: "roasted",
         sentence: 20,
         element: 4,
-        def:
+        definition:
           "to cook (food such as chicken, potatoes, or beef) with dry heat in an oven or over a fire",
         audio: "https://media.merriam-webster.com/soundc11/r/roast001.wav",
         isPlural: false,
@@ -587,7 +587,7 @@ const texts = [
         word: "mild",
         sentence: 23,
         element: 6,
-        def: "gentle in nature or behavior",
+        definition: "gentle in nature or behavior",
         audio: "https://media.merriam-webster.com/soundc11/m/mild0001.wav",
         isPlural: false,
         singularForm: null,
@@ -599,7 +599,7 @@ const texts = [
         word: "intense",
         sentence: 32,
         element: 14,
-        def: "very great in degree : very strong",
+        definition: "very great in degree : very strong",
         audio: "https://media.merriam-webster.com/soundc11/i/intens01.wav",
         isPlural: false,
         singularForm: null,
@@ -611,7 +611,7 @@ const texts = [
         word: "goat",
         sentence: 34,
         element: 15,
-        def: "a small animal that is related to the sheep",
+        definition: "a small animal that is related to the sheep",
         audio: "https://media.merriam-webster.com/soundc11/g/goat0001.wav",
         isPlural: false,
         singularForm: null,
@@ -623,7 +623,7 @@ const texts = [
         word: "spread",
         sentence: 39,
         element: 5,
-        def:
+        definition:
           "to open, arrange, or place (something) over a large area —often + out",
         audio: "https://media.merriam-webster.com/soundc11/s/spread01.wav",
         isPlural: false,
@@ -636,7 +636,7 @@ const texts = [
         word: "compete",
         sentence: 49,
         element: 7,
-        def:
+        definition:
           "to try to get or win something (such as a prize or reward) that someone else is also trying to win : to try to be better or more successful than someone or something else",
         audio: "https://media.merriam-webster.com/soundc11/c/compet01.wav",
         isPlural: false,
@@ -649,7 +649,7 @@ const texts = [
         word: "concerns",
         sentence: 60,
         element: 4,
-        def: "a feeling of worry usually shared by many people",
+        definition: "a feeling of worry usually shared by many people",
         audio: "https://media.merriam-webster.com/soundc11/c/concer01.wav",
         isPlural: true,
         singularForm: "concern",

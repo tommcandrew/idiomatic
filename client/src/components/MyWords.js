@@ -38,9 +38,19 @@ const MyWords = ({ texts, savedTexts, completedTexts }) => {
       <h1 className="myWords__title">My Words</h1>
       <div className="myWords__content">
         {studiedWords.length > 0 ? (
-          studiedWords.map((obj, index) => (
-            <div key={"word" + index}>{obj.word}</div>
-          ))
+          <table className="myWords__table">
+            <tr>
+              <th>Word</th>
+              <th>Definition</th>
+            </tr>
+            {studiedWords.map(wordObj => (
+              <tr>
+                <td>{wordObj.word}</td>
+                <td>{wordObj.definition}</td>
+
+              </tr>
+            ))}
+          </table>
         ) : (
           <h2>You don't have any studied words.</h2>
         )}

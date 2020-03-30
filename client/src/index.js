@@ -7,7 +7,7 @@ import { DeviceContextProvider } from "./context/DeviceContext";
 ReactDOM.render(
   <DeviceContextProvider>
     <AuthContextProvider>
-      <App />{" "}
+      <App />
     </AuthContextProvider>
   </DeviceContextProvider>,
   document.getElementById("root")

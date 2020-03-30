@@ -27,9 +27,6 @@ const Header = ({ showMobileMenu, setShowMobileMenu, setCurrentComponent }) => {
       {showMobileMenu && (
         <MobileMenu
           setShowMobileMenu={setShowMobileMenu}
-          // handleShowDashboard={handleShowDashboard}
-          // handleShowMyWords={handleShowMyWords}
-          // handleShowMyTexts={handleShowMyTexts}
           setCurrentComponent={setCurrentComponent}
         />
       )}
@@ -62,7 +59,6 @@ const Header = ({ showMobileMenu, setShowMobileMenu, setCurrentComponent }) => {
             {mouseOverIcon || mouseOverOptionsMenu ? (
               <OptionsMenu
                 logout={logout}
-                // handleShowMyProfile={handleShowMyProfile}
                 setCurrentComponent={setCurrentComponent}
                 setMouseOverOptionsMenu={setMouseOverOptionsMenu}
               />
