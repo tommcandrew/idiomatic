@@ -169,10 +169,16 @@ const GapFill = ({
                   </div>
                   {inputValues[index].toLowerCase() !==
                     shuffledTargetWordObjs[index].word.toLowerCase() && (
-                    <p className="gapFill__correct-answer">
-                      Answer: <span>{shuffledTargetWordObjs[index].word}</span>
-                    </p>
-                  )}
+                      <p className="gapFill__correct-answer">
+                        Wrong! The answer is: <span>{shuffledTargetWordObjs[index].word}</span>.
+                      </p>
+                    )}
+                  {inputValues[index].toLowerCase() ===
+                    shuffledTargetWordObjs[index].word.toLowerCase() && (
+                      <p className="gapFill__correct-message">
+                        Right!
+                      </p>
+                    )}
                 </div>
               ))}
             </div>

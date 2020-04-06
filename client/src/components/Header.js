@@ -24,12 +24,13 @@ const Header = ({ showMobileMenu, setShowMobileMenu, setCurrentComponent }) => {
           <div></div>
         </div>
       )}
-      {showMobileMenu && (
-        <MobileMenu
-          setShowMobileMenu={setShowMobileMenu}
-          setCurrentComponent={setCurrentComponent}
-        />
-      )}
+      {device !== "desktop" && <MobileMenu
+        showMobileMenu={showMobileMenu}
+        setShowMobileMenu={setShowMobileMenu}
+        setCurrentComponent={setCurrentComponent}
+      />}
+
+
       {device === "desktop" && (
         <>
           <div className="header__buttons--left">

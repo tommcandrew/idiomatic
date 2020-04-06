@@ -150,7 +150,12 @@ const MatchDefinitions = ({
                 </div>
                 {questionObj.answer !== userAnswerWords[defIndex] && (
                   <p className="matchDefinitions__correct-answer">
-                    Answer: <span>{questionObj.answer}</span>
+                    Wrong! The answer is: <span>{questionObj.answer}</span>.
+                  </p>
+                )}
+                {questionObj.answer === userAnswerWords[defIndex] && (
+                  <p className="matchDefinitions__correct-message">
+                    Right!
                   </p>
                 )}
               </div>

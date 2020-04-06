@@ -78,26 +78,37 @@
 }
 
 .gapFill__filled--right {
-  color: green;
+  // color: green;
   font-weight: bold;
   min-width: 15vw;
 }
 
 .gapFill__filled--wrong {
-  color: red;
+  // color: red;
   font-weight: bold;
   position: relative;
   min-width: 15vw;
   cursor: pointer;
 }
 
-.gapFill__correct-answer {
+.gapFill__correct-answer, .gapFill__correct-message {
   font-size: 1.5rem;
-  font-weight: bold;
-  margin: 0.8rem 0;
+  margin: 0.8rem auto;
+  border: 1px solid black;
+  border-radius: 6px;
+  width: 90%;
+}
+
+.gapFill__correct-answer {
+  background: rgb(243, 93, 93);
   span {
-    color: green;
+    font-style: italic;
+    font-weight: bold;
   }
+}
+
+.gapFill__correct-message {
+  background: rgb(98, 196, 98);
 }
 
 .gapFill__next {

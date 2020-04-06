@@ -1,8 +1,8 @@
 import React from "react";
 
-const MobileMenu = ({ setShowMobileMenu, setCurrentComponent }) => {
+const MobileMenu = ({ showMobileMenu, setShowMobileMenu, setCurrentComponent }) => {
   return (
-    <div className="mobile-menu">
+    <div className={`mobile-menu ${showMobileMenu ? 'mobile-menu__show' : 'mobile-menu__hide'}`}>
       <span
         className="mobile-menu__close-button"
         onClick={() => setShowMobileMenu(false)}

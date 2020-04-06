@@ -1,5 +1,4 @@
 .mobile-menu {
-  animation: expand 300ms ease-out;
   background: rgba($color: $mySeaBlueDark, $alpha: 1);
   bottom: 0;
   display: flex;
@@ -10,8 +9,14 @@
   right: 0;
   top: 0;
   z-index: 100;
-  clip-path: circle(360px at 100% 0%);
-
+  &__show {
+    clip-path: circle(360px at 100% 0%);
+    animation: expand 300ms ease-out forwards;
+  }
+  &__hide {
+    clip-path: circle(0px at 100% -10%);
+    animation: shrink 300ms ease-out forwards;
+  }
   &__close-button {
     color: white;
     font-size: 4rem;
@@ -36,9 +41,18 @@
 
 @keyframes expand {
   from {
-    clip-path: circle(100px at 100% -10%);
+    clip-path: circle(0px at 100% -10%);
   }
   to {
     clip-path: circle(360px at 100% 0%);
+  }
+}
+
+@keyframes shrink {
+  from {
+    clip-path: circle(360px at 100% 0%);
+  }
+  to {
+    clip-path: circle(0px at 100% -10%);
   }
 }
