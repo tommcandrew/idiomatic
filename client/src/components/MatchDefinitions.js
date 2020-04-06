@@ -16,10 +16,8 @@ const MatchDefinitions = ({
   useEffect(() => {
     //make copy to avoid passing by reference
     const targetWordObjsCopy = JSON.parse(JSON.stringify(text.targetWordObjs));
-    console.log(targetWordObjsCopy);
     //definitions will appear in random order
     const shuffledTargetWordObjs = shuffle(targetWordObjsCopy);
-    console.log(shuffledTargetWordObjs);
     const multipleChoiceQuestions = createMultipleChoiceQuestions(
       shuffledTargetWordObjs
     );
@@ -128,23 +126,23 @@ const MatchDefinitions = ({
                       onClick={() => handleSelectOption(defIndex, optionIndex)}
                       className={`matchDefinitions__button ${
                         questionObj.answer === word &&
-                        selectedOptions[defIndex] === optionIndex
+                          selectedOptions[defIndex] === optionIndex
                           ? "matchDefinitions__option--right"
                           : ""
-                      } ${
+                        } ${
                         questionObj.answer !== word &&
-                        selectedOptions[defIndex] === optionIndex
+                          selectedOptions[defIndex] === optionIndex
                           ? "matchDefinitions__option--wrong"
                           : ""
-                      }${
+                        }${
                         word === "'" || word === "?"
                           ? "matchDefinitions__punctuation"
                           : ""
-                      } ${
+                        } ${
                         selectedOptions[defIndex] === null
                           ? "matchDefinitions__unanswered"
                           : ""
-                      }`}
+                        }`}
                     >
                       {word.toLowerCase()}
                     </button>

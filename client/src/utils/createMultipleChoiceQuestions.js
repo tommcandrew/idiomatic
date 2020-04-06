@@ -1,18 +1,9 @@
 import shuffle from "./shuffle";
+import getRootWords from './getRootWords'
 
 const createMultipleChoiceQuestions = arr => {
   const questions = [];
-  const words = arr.map(obj => {
-    if (obj.wordType === "verb") {
-      return obj.infinitiveForm;
-    } else if (obj.singularForm) {
-      return obj.singularForm;
-    } else if (obj.positiveForm) {
-      return obj.positiveForm;
-    } else {
-      return obj.word;
-    }
-  });
+  const words = getRootWords(arr)
   for (let i = 0; i < arr.length; i++) {
     const question = {};
     question.definition = arr[i].definition;

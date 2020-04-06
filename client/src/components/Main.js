@@ -16,6 +16,7 @@ import MyWords from "./MyWords";
 import MyProfile from "./MyProfile";
 import AlertWrapper from "./AlertWrapper";
 import Editor from "./Editor";
+import FlashcardContainer from "./FlashcardContainer";
 
 import texts from "../assets/texts.js";
 
@@ -28,6 +29,7 @@ const Main = () => {
   const [numQuestions, setNumQuestions] = useState(null);
   const [completedTexts, setCompletedTexts] = useState([]);
   const [savedTexts, setSavedTexts] = useState([]);
+  const [studiedWords, setStudiedWords] = useState([])
 
   useEffect(() => {
     fetchSavedTexts();
@@ -140,6 +142,11 @@ const Main = () => {
       });
   };
 
+  const handleStartFlashcardStudy = studiedWords => {
+    setStudiedWords(studiedWords)
+    setCurrentComponent("FlashcardContainer");
+  }
+
   return (
     <div className="main__wrapper">
       <Header
@@ -224,6 +231,7 @@ const Main = () => {
           texts={texts}
           savedTexts={savedTexts}
           completedTexts={completedTexts}
+          handleStartFlashcardStudy={handleStartFlashcardStudy}
         />
       )}
       {currentComponent === "Editor" && selectedText && (
@@ -233,6 +241,9 @@ const Main = () => {
           updateText={updateText}
           setInfoMessages={setInfoMessages}
         />
+      )}
+      {currentComponent === "FlashcardContainer" && (
+        <FlashcardContainer studiedWords={studiedWords} setCurrentComponent={setCurrentComponent} />
       )}
       {currentComponent === "MyProfile" && <MyProfile />}
       {infoMessages.length > 0 && <AlertWrapper messages={infoMessages} />}

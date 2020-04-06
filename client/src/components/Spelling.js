@@ -6,6 +6,7 @@ import correctSound from "../assets/audio/correct.mp3";
 import incorrectSound from "../assets/audio/incorrect.mp3";
 import shuffle from "../utils/shuffle";
 import AnswerModal from "./AnswerModal";
+import getRootWords from '../utils/getRootWords'
 
 const Spelling = ({
   text,
@@ -27,17 +28,7 @@ const Spelling = ({
     );
     const shuffledTargetWordObjs = shuffle(filteredTargetWordObjs);
     setShuffledTargetWordObjs(shuffledTargetWordObjs);
-    const targetWords = filteredTargetWordObjs.map(wordObj => {
-      if (wordObj.singularForm) {
-        return wordObj.singularForm;
-      } else if (wordObj.infinitiveForm) {
-        return wordObj.infinitiveForm;
-      } else if (wordObj.positiveForm) {
-        return wordObj.positiveForm;
-      } else {
-        return wordObj.word;
-      }
-    });
+    const targetWords = getRootWords(shuffledTargetWordObjs)
     setTargetWords(targetWords);
     //eslint-disable-next-line
   }, []);

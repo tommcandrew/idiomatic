@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 
-const MyWords = ({ texts, savedTexts, completedTexts }) => {
+const MyWords = ({ texts, savedTexts, completedTexts, handleStartFlashcardStudy }) => {
   const [studiedWords, setStudiedWords] = useState([]);
   useEffect(() => {
     let wordsFromTexts = [];
@@ -36,20 +36,25 @@ const MyWords = ({ texts, savedTexts, completedTexts }) => {
   return (
     <div className="myWords__wrapper">
       <h1 className="myWords__title">My Words</h1>
+      <button onClick={() => handleStartFlashcardStudy(studiedWords)}>Flashcard Study</button>
       <div className="myWords__content">
         {studiedWords.length > 0 ? (
           <table className="myWords__table">
+            <thead>
             <tr>
               <th>Word</th>
               <th>Definition</th>
             </tr>
-            {studiedWords.map(wordObj => (
-              <tr>
+            </thead>
+            <tbody>
+            {studiedWords.map((wordObj, index) => (
+              <tr key={"row" + index}>
                 <td>{wordObj.word}</td>
                 <td>{wordObj.definition}</td>
 
               </tr>
             ))}
+            </tbody>
           </table>
         ) : (
           <h2>You don't have any studied words.</h2>
