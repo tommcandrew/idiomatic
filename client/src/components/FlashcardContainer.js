@@ -14,7 +14,7 @@ const FlashcardContainer = ({ studiedWords, setCurrentComponent }) => {
     }
 
     return (
-        <div>
+        <div className="flashcardContainer__wrapper">
             {component === "FlashcardStart" && <FlashcardStart handleStart={handleStart} />}
             {component === "FlashcardTest" && <FlashcardTest mode={mode} numberCards={numberCards} studiedWords={studiedWords} setCurrentComponent={setCurrentComponent} />}
 

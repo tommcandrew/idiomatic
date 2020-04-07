@@ -19,16 +19,20 @@ const FlashcardStart = ({ handleStart }) => {
     }
 
     return (
-        <div>
-            <h2>Flashcards</h2>
-            <div>
-                <label>Number of cards:</label>
-                <input type="number" name="numberCards" onChange={handleNumberChange} />
-                <label>Mode:</label>
-                <select onChange={handleModeChange} defaultValue="Definition - Word">
-                    <option value="Definition - Word">Definition - Word</option>
-                    <option value="Word - Definition">Word - Definition</option>
-                </select>
+        <div className="flashcardStart__wrapper">
+            <div className="flashcardStart__content">
+                <div className="flashcardStart__field">
+                    <label>Number of cards:</label>
+                    <input type="number" name="numberCards" onChange={handleNumberChange} />
+                </div>
+                <div className="flashcardStart__field">
+
+                    <label>Mode:</label>
+                    <select onChange={handleModeChange} defaultValue="Definition - Word">
+                        <option value="Definition - Word">Definition - Word</option>
+                        <option value="Word - Definition">Word - Definition</option>
+                    </select>
+                </div>
                 <button onClick={handleSubmit}>Go</button>
             </div>
         </div>

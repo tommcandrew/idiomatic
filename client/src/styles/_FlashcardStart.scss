@@ -1,0 +1,40 @@
+.flashcardStart__wrapper {
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.flashcardStart__content {
+    width: 40%;
+    display: flex;
+    flex-direction: column;
+    border: 1px solid black;
+    border-radius: 8px;
+    text-align: center;
+    height: 40%;
+    justify-content: space-around;
+    button {
+        width: 20%;
+        margin: 0 auto;
+    }
+}
+
+.flashcardStart__field {
+    font-size: 1.5rem;
+    display: flex;
+    justify-content: space-around;
+    width: 70%;
+    margin: 0 auto;
+    select {
+        font-size: 1.2rem;
+
+    }
+    input[type="number"] {
+        width: 60px;
+        font-size: 1.2rem;
+
+      }
+}
+
