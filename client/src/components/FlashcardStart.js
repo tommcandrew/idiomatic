@@ -26,7 +26,6 @@ const FlashcardStart = ({ handleStart }) => {
                     <input type="number" name="numberCards" onChange={handleNumberChange} />
                 </div>
                 <div className="flashcardStart__field">
-
                     <label>Mode:</label>
                     <select onChange={handleModeChange} defaultValue="Definition - Word">
                         <option value="Definition - Word">Definition - Word</option>

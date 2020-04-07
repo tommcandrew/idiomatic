@@ -84,13 +84,13 @@ const FlashcardTest = ({ mode, numberCards, studiedWords, setCurrentComponent })
     }
 
     return (
-        <div>
+        <div className="flashcardTest__wrapper">
             {testWords && testWords.length > 0 && !isFinished && testWord && testDef && (
-                <div className="FlashcardTest__card">
-                    {showCardFront ? <h1>{testWord}</h1> : <h1>{testDef}</h1>}
+                <div className="flashcardTest__card">
+                    {showCardFront ? <p>{testWord}</p> : <p>{testDef}</p>}
                     {!showAnswer ? <button onClick={checkAnswer}>Check</button> : <button onClick={nextQuestion}>Next</button>}
                 </div>)}
-            {isFinished && <><h1>You are finished</h1><button onClick={() => setCurrentComponent("MyWords")}>Back to My Words</button></>}
+            {isFinished && <><h1>Cards completed</h1><button onClick={() => setCurrentComponent("MyWords")} className="flashcardTest__button--back">Back to My Words</button></>}
         </div>
     )
 }
