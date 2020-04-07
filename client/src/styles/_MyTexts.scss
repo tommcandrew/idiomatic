@@ -20,7 +20,7 @@
   padding-bottom: 2rem;
   button {
     @include button($mySeaBlue, 1.3rem);
-    margin: 1rem 0;
+    margin: 2rem 0 0 0;
     &:hover {
       background: $mySeaBlueDark;
     }

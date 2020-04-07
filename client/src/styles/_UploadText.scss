@@ -44,7 +44,7 @@
 
 .uploadText__buttons {
   display: flex;
-  width: 30%;
+  width: 90%;
   justify-content: space-around;
 }
 
@@ -55,7 +55,7 @@
   &:hover {
     background: $mySeaBlueDark;
   }
-  width: 10vw;
+  width: 30vw;
 }
 
 .uploadText__word {
@@ -187,4 +187,14 @@
   .uploadText__text-content {
     width: 60%;
   }
+  
+.uploadText__buttons {
+  width: 30%;
+
+}
+
+.uploadText__save,
+.uploadText__cancel {
+  width: 10vw;
+}
 }

@@ -47,7 +47,7 @@ const Main = () => {
   const fetchSavedTexts = () => {
     const token = localStorage.getItem("idiomatic-token");
     axios
-      .get("/savedtexts", {
+      .get("/api/savedtexts", {
         headers: {
           Authorization: "Bearer " + token
         }
@@ -63,7 +63,7 @@ const Main = () => {
     const token = localStorage.getItem("idiomatic-token");
     axios
       .put(
-        "/deleteText",
+        "/api/deleteText",
         { title },
         {
           headers: {
@@ -100,7 +100,7 @@ const Main = () => {
     const token = localStorage.getItem("idiomatic-token");
     axios
       .post(
-        "/complete",
+        "/api/complete",
         { title: selectedText.title },
         {
           headers: {
@@ -128,7 +128,7 @@ const Main = () => {
     const token = localStorage.getItem("idiomatic-token");
     axios
       .put(
-        "/updateText",
+        "/api/updateText",
         { updatedText },
         {
           headers: {
@@ -243,7 +243,7 @@ const Main = () => {
         />
       )}
       {currentComponent === "FlashcardContainer" && (
-        <FlashcardContainer studiedWords={studiedWords} setCurrentComponent={setCurrentComponent} />
+        <FlashcardContainer studiedWords={studiedWords} setCurrentComponent={setCurrentComponent} infoMessages={infoMessages} setInfoMessages={setInfoMessages} />
       )}
       {currentComponent === "MyProfile" && <MyProfile />}
       {infoMessages.length > 0 && <AlertWrapper messages={infoMessages} />}

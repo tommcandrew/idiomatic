@@ -2,12 +2,22 @@ import React, { useState } from 'react';
 import FlashcardStart from './FlashcardStart'
 import FlashcardTest from './FlashcardTest'
 
-const FlashcardContainer = ({ studiedWords, setCurrentComponent }) => {
+const FlashcardContainer = ({ studiedWords, setCurrentComponent, infoMessages, setInfoMessages }) => {
     const [component, setComponent] = useState("FlashcardStart")
     const [mode, setMode] = useState(null)
     const [numberCards, setNumberCards] = useState(null)
 
     const handleStart = (mode, numberCards) => {
+        if (!numberCards) {
+            setInfoMessages([
+                ...infoMessages,
+                {
+                    text: "Enter a number",
+                    type: "warning"
+                }
+            ]);
+            return;
+        }
         setComponent("FlashcardTest")
         setNumberCards(numberCards)
         setMode(mode)

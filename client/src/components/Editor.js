@@ -156,7 +156,7 @@ const Editor = ({ text, setCurrentComponent, updateText, setInfoMessages }) => {
   };
 
   const handleDictionaryClick = word => {
-    axios.post("/getWordData", { word }).then(res => {
+    axios.post("/api/getWordData", { word }).then(res => {
       const {
         definition,
         audio,

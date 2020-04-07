@@ -3,20 +3,20 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  max-height: 25vh;
+  height: 25vh;
 }
 
 .textTile__content {
-  width: 80%;
+  width: 85%;
   background: #4a98f8;
-  height: 80%;
+  height: 85%;
   text-align: center;
   display: flex;
   flex-direction: column;
   justify-content: space-around;
   align-items: center;
   border-radius: 8px;
-  padding: 8% 0;
+  padding: 8%;
   cursor: pointer;
   position: relative;
 }
@@ -25,6 +25,7 @@
   font-size: 1.2rem;
   color: white;
   user-select: none;
+  margin-top: 1rem;
 }
 
 .textTile__level {
@@ -48,6 +49,7 @@
   width: 90%;
   margin: 0 auto;
   margin-top: 5%;
+  
 }
 
 .textTile__delete,
@@ -59,9 +61,10 @@
 @media only screen and (min-width: 1000px) {
   .textTile__wrapper {
     flex-basis: calc(100% / 5);
-    max-height: 35vh;
+    height: 35vh;
   }
   .textTile__content {
+    width: 80%;
     &:hover {
       background: #4084d8;
       .textTile__delete,
@@ -97,3 +100,4 @@
     width: 60%;
   }
 }
+

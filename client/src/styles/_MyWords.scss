@@ -5,6 +5,12 @@
   align-items: center;
   width: 90%;
   margin: 0 auto;
+  button {
+    @include button($mySeaBlue, 1.1rem);
+    &:hover {
+      background: $mySeaBlueDark;
+    }
+  }
 }
 
 .myWords__title {
@@ -40,9 +46,3 @@ tr:nth-child(odd) {
   background-color: white;
 }
 
-button {
-  @include button($mySeaBlue, 1.1rem);
-  &:hover {
-    background: $mySeaBlueDark;
-  }
-}
