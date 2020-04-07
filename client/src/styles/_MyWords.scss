@@ -3,18 +3,46 @@
   flex-grow: 1;
   flex-direction: column;
   align-items: center;
+  width: 90%;
+  margin: 0 auto;
 }
 
 .myWords__title {
   margin: 2rem 0;
+  font-size: 2.5rem;
 }
 
 .myWords__content {
-  font-size: 1.5rem;
+  font-size: 1.1rem;
+  // border: 1px solid rgba(0, 0, 0, 0.3);
+  border-radius: 6px;
+
+}
+
+.myWords__word {
+  font-weight: bold;
 }
 
 table, th, td {
-  border: 1px solid black;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.3);
   border-collapse: collapse;
 }
 
+td {
+  padding: 10px;
+}
+
+tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+
+tr:nth-child(odd) {
+  background-color: white;
+}
+
+button {
+  @include button($mySeaBlue, 1.1rem);
+  &:hover {
+    background: $mySeaBlueDark;
+  }
+}

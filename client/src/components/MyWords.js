@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+//get the root words
 
 const MyWords = ({ texts, savedTexts, completedTexts, handleStartFlashcardStudy }) => {
   const [studiedWords, setStudiedWords] = useState([]);
@@ -40,16 +41,16 @@ const MyWords = ({ texts, savedTexts, completedTexts, handleStartFlashcardStudy 
       <div className="myWords__content">
         {studiedWords.length > 0 ? (
           <table className="myWords__table">
-            <thead>
+            {/* <thead>
             <tr>
               <th>Word</th>
               <th>Definition</th>
             </tr>
-            </thead>
+            </thead> */}
             <tbody>
             {studiedWords.map((wordObj, index) => (
               <tr key={"row" + index}>
-                <td>{wordObj.word}</td>
+                <td className="myWords__word">{wordObj.word}</td>
                 <td>{wordObj.definition}</td>
 
               </tr>
