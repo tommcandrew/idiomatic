@@ -114,49 +114,81 @@ const Editor = ({ text, setCurrentComponent, updateText, setInfoMessages }) => {
     }
     const rows = selectedText.targetWordObjs.map((obj, index) => {
       return (
-        <div key={"row" + index}>
-          <span
-            className="editor__dic"
-            onClick={() => handleDictionaryClick(obj.word)}
-            title="Get word info from dictionary"
-          >
-            &#128366;
+        <div key={"row" + index} className="editor__table-row">
+
+          <div className="editor__table-cell">
+            <span className="editor__table-label">
+
+            </span>
+            <span
+              className="editor__dic"
+              onClick={() => handleDictionaryClick(obj.word)}
+              title="Get word info from dictionary"
+            >
+              &#128366;
           </span>
-          <input defaultValue={obj.word} />
-          <input
-            onChange={e => handleInputChange(e, obj._id, "wordType")}
-            className={!obj.wordType ? "greyedOut" : undefined}
-            defaultValue={obj.wordType}
-          />
-          <input
-            onChange={e => handleInputChange(e, obj._id, "singularForm")}
-            className={!obj.singularForm ? "greyedOut" : undefined}
-            defaultValue={obj.singularForm}
-          />
-          <input
-            onChange={e => handleInputChange(e, obj._id, "infinitiveForm")}
-            className={!obj.infinitiveForm ? "greyedOut" : undefined}
-            defaultValue={obj.infinitiveForm}
-          />
-          <input
-            onChange={e => handleInputChange(e, obj._id, "positiveForm")}
-            className={!obj.positiveForm ? "greyedOut" : undefined}
-            defaultValue={obj.positiveForm}
-          />
-          <input
-            className={`editor__def ${!obj.definition ? "greyedOut" : undefined}`}
-            onChange={e => handleInputChange(e, obj._id, "definition")}
-            defaultValue={obj.definition}
-          />
+          </div>
+
+          <div className="editor__table-cell">
+            <span className="editor__table-label">Word</span>
+            <input defaultValue={obj.word} />
+          </div>
+
+          <div className="editor__table-cell">
+            <span className="editor__table-label">Word Type</span>
+            <input
+              onChange={e => handleInputChange(e, obj._id, "wordType")}
+              className={!obj.wordType ? "greyedOut" : undefined}
+              defaultValue={obj.wordType}
+            />
+          </div>
+
+          <div className="editor__table-cell">
+            <span className="editor__table-label">Singular</span>
+            <input
+              onChange={e => handleInputChange(e, obj._id, "singularForm")}
+              className={!obj.singularForm ? "greyedOut" : undefined}
+              defaultValue={obj.singularForm}
+            />
+          </div>
+
+          <div className="editor__table-cell">
+            <span className="editor__table-label">Infinitive</span>
+            <input
+              onChange={e => handleInputChange(e, obj._id, "infinitiveForm")}
+              className={!obj.infinitiveForm ? "greyedOut" : undefined}
+              defaultValue={obj.infinitiveForm}
+            />
+          </div>
+
+          <div className="editor__table-cell">
+            <span className="editor__table-label">Main Adj.</span>
+            <input
+              onChange={e => handleInputChange(e, obj._id, "positiveForm")}
+              className={!obj.positiveForm ? "greyedOut" : undefined}
+              defaultValue={obj.positiveForm}
+            />
+          </div>
+
+          <div className="editor__table-cell">
+            <span className="editor__table-label">Definition</span>
+            <input
+              className={`editor__def ${!obj.definition ? "greyedOut" : undefined}`}
+              onChange={e => handleInputChange(e, obj._id, "definition")}
+              defaultValue={obj.definition}
+            />
+          </div>
 
         </div>
       );
     });
+    myForm.current.reset()
     setTableRows(rows);
   };
 
   const handleDictionaryClick = word => {
     axios.post("/api/getWordData", { word }).then(res => {
+      console.log(res)
       const {
         definition,
         audio,
@@ -233,7 +265,7 @@ const Editor = ({ text, setCurrentComponent, updateText, setInfoMessages }) => {
       </div>
       <p className="editor__instruction2">
         Add/edit word info and get info from the dictionary by
-        clicking on the button on the left
+        clicking book image
       </p>
       <form className="editor__table" ref={myForm}>
         <div className="editor__table-header">

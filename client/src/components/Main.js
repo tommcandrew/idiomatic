@@ -87,6 +87,7 @@ const Main = () => {
       selectedText = texts.filter(text => text.title === title)[0];
     }
     setSelectedText(selectedText);
+    setCorrectAnswers(0)
     setCurrentComponent("StartPage");
     //used when giving final results
     setNumQuestions(selectedText.targetWordObjs.length * 3);
