@@ -21,3 +21,9 @@
 {"message":"New user registering: user2@gmail.com, Thu, 23 Apr 2020 20:13:53 GMT","level":"info"}
 {"message":"User logging in: user1@gmail.com, Thu, 23 Apr 2020 20:15:22 GMT","level":"info"}
 {"message":"User logging in: user2@gmail.com, Thu, 23 Apr 2020 20:16:01 GMT","level":"info"}
+{"message":"New user registering: user1@gmail.com, Thu, 23 Apr 2020 20:45:27 GMT","level":"info"}
+{"message":"New user registering: user2@gmail.com, Thu, 23 Apr 2020 20:46:22 GMT","level":"info"}
+{"message":"New user registering: user1@gmail.com, Thu, 23 Apr 2020 20:54:42 GMT","level":"info"}
+{"message":"New user registering: user2@gmail.com, Thu, 23 Apr 2020 20:56:22 GMT","level":"info"}
+{"message":"New user registering: anna@gmail.com, Thu, 23 Apr 2020 22:05:47 GMT","level":"info"}
+{"message":"New user registering: barry@gmail.com, Thu, 23 Apr 2020 22:06:49 GMT","level":"info"}

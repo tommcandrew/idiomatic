@@ -155,8 +155,8 @@ app.post("/complete", verifyToken, (req, res) => {
         .save()
         .then(() => {
           res
-            .status(200)
-            .send({ texts: user.texts, completedTexts: user.completedTexts });
+            .status(200).send("User's completed texts updated")
+          // .send({ texts: user.texts, completedTexts: user.completedTexts });
         })
         .catch(err => {
           console.log(err);
