@@ -12,6 +12,7 @@ const winston = require("winston");
 const logger = winston.createLogger({
   transports: [new winston.transports.File({ filename: "logs.txt" })]
 });
+const path = require("path");
 
 mongoose.connect(
   "mongodb://localhost:27017/idiomatic",
@@ -28,6 +29,8 @@ const app = express();
 app.use(express.json());
 
 app.use(fileUpload());
+
+app.use(express.static(path.join(__dirname, "client/build")));
 
 const verifyToken = (req, res, next) => {
   const bearer = req.headers["authorization"];
@@ -142,10 +145,13 @@ app.get("/savedTexts", verifyToken, (req, res) => {
 });
 
 app.post("/complete", verifyToken, (req, res) => {
+  console.log('marking text complete in db')
   const email = req.tokenData.user.email;
+  console.log(email)
   const title = req.body.title;
-  User.findOneAndUpdate({ email })
+  User.findOne({ email })
     .then(user => {
+      console.log(user)
       user.completedTexts.push(title);
       user
         .save()

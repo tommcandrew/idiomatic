@@ -3,3 +3,12 @@
 {"message":"New user registering: abby@gmail.com, Wed, 11 Mar 2020 14:17:39 GMT","level":"info"}
 {"message":"New user registering: abby@gmail.com, Wed, 11 Mar 2020 15:13:15 GMT","level":"info"}
 {"message":"New user registering: abby@gmail.com, Wed, 11 Mar 2020 20:04:01 GMT","level":"info"}
+{"message":"New user registering: david@gmail.com, Wed, 22 Apr 2020 22:23:13 GMT","level":"info"}
+{"message":"New user registering: zeynep@gmail.com, Wed, 22 Apr 2020 22:25:53 GMT","level":"info"}
+{"message":"New user registering: nino@gmail.com, Wed, 22 Apr 2020 22:30:17 GMT","level":"info"}
+{"message":"New user registering: hamid@gmail.com, Wed, 22 Apr 2020 22:56:05 GMT","level":"info"}
+{"message":"New user registering: ayse@gmail.com, Wed, 22 Apr 2020 22:58:47 GMT","level":"info"}
+{"message":"New user registering: april@gmail.com, Wed, 22 Apr 2020 23:01:33 GMT","level":"info"}
+{"message":"New user registering: brian@gmail.com, Wed, 22 Apr 2020 23:03:19 GMT","level":"info"}
+{"message":"New user registering: cilian@gmail.com, Wed, 22 Apr 2020 23:09:14 GMT","level":"info"}
+{"message":"New user registering: dara@gmail.com, Wed, 22 Apr 2020 23:13:02 GMT","level":"info"}
