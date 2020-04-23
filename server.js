@@ -145,9 +145,7 @@ app.get("/savedTexts", verifyToken, (req, res) => {
 });
 
 app.post("/complete", verifyToken, (req, res) => {
-  console.log('marking text complete in db')
   const email = req.tokenData.user.email;
-  console.log(email)
   const title = req.body.title;
   User.findOne({ email })
     .then(user => {
