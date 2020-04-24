@@ -147,7 +147,7 @@ app.get("/savedTexts", verifyToken, (req, res) => {
 app.post("/complete", verifyToken, (req, res) => {
   const email = req.tokenData.user.email;
   const title = req.body.title;
-  User.find({ email: email })
+  User.findOne({ email: email })
     .then(user => {
       user.completedTexts.push(title);
       user
