@@ -11,6 +11,7 @@ export const AuthContextProvider = props => {
   const [loading, setLoading] = useState(true);
   const [errorMessage, setErrorMessage] = useState();
   const [registerDate, setRegisterDate] = useState();
+  const [isNewUser, setIsNewUser] = useState()
 
   useEffect(() => {
     const token = localStorage.getItem("idiomatic-token");
@@ -76,6 +77,7 @@ export const AuthContextProvider = props => {
         const { token, registerDate } = res.data;
         localStorage.setItem("idiomatic-token", token);
         setAuthenticated(true);
+        setIsNewUser(true)
         setUserEmail(email);
         setUserName(name);
         setRegisterDate(registerDate);
@@ -133,6 +135,7 @@ export const AuthContextProvider = props => {
         const { token, userName } = res.data;
         localStorage.setItem("idiomatic-token", token);
         setAuthenticated(true);
+        setIsNewUser(true)
         setUserEmail(email);
         setUserName(userName);
       })
@@ -140,6 +143,7 @@ export const AuthContextProvider = props => {
         console.log(err);
       });
   };
+
 
   return (
     <AuthContext.Provider
@@ -156,7 +160,9 @@ export const AuthContextProvider = props => {
         registerDate,
         deleteAccount,
         logout,
-        loginDemo
+        loginDemo,
+        isNewUser,
+        setIsNewUser
       }}
     >
       {props.children}

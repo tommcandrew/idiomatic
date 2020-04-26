@@ -31,3 +31,6 @@
 {"message":"New user registering: benji@gmail.com, Thu, 23 Apr 2020 23:53:44 GMT","level":"info"}
 {"message":"New user registering: carol@gmail.com, Thu, 23 Apr 2020 23:54:42 GMT","level":"info"}
 {"message":"New user registering: sean@gmail.com, Sun, 26 Apr 2020 11:03:29 GMT","level":"info"}
+{"message":"New user registering: olga@gmail.com, Sun, 26 Apr 2020 13:17:29 GMT","level":"info"}
+{"message":"New user registering: julia@gmail.com, Sun, 26 Apr 2020 13:51:10 GMT","level":"info"}
+{"message":"User logging in: julia@gmail.com, Sun, 26 Apr 2020 16:10:38 GMT","level":"info"}

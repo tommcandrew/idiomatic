@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import axios from "axios";
 
 import Dashboard from "./Dashboard";
@@ -17,8 +17,11 @@ import MyProfile from "./MyProfile";
 import AlertWrapper from "./AlertWrapper";
 import Editor from "./Editor";
 import FlashcardContainer from "./FlashcardContainer";
+import Wizard from "./Wizard";
 
 import texts from "../assets/texts.js";
+
+import AuthContext from "../context/AuthContext";
 
 const Main = () => {
   const [showMobileMenu, setShowMobileMenu] = useState(false);
@@ -29,7 +32,10 @@ const Main = () => {
   const [numQuestions, setNumQuestions] = useState(null);
   const [completedTexts, setCompletedTexts] = useState([]);
   const [savedTexts, setSavedTexts] = useState([]);
-  const [studiedWords, setStudiedWords] = useState([])
+  const [studiedWords, setStudiedWords] = useState([]);
+
+  const { isNewUser, setIsNewUser } = useContext(AuthContext)
+
 
   useEffect(() => {
     fetchSavedTexts();
@@ -255,6 +261,7 @@ const Main = () => {
       )}
       {currentComponent === "MyProfile" && <MyProfile />}
       {infoMessages.length > 0 && <AlertWrapper messages={infoMessages} />}
+      {isNewUser && <Wizard setIsNewUser={setIsNewUser} />}
     </div>
   );
 };

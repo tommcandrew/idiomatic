@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 
 const FlashcardStart = ({ handleStart, studiedWords }) => {
     const [mode, setMode] = useState(null)
-    const [numberCards, setNumberCards] = useState(null)
+    const [numberCards, setNumberCards] = useState(5)
 
     const handleNumberChange = e => {
         let selectedNum = e.target.value

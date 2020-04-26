@@ -10,12 +10,9 @@ const Editor = ({ text, setCurrentComponent, updateText, setInfoMessages }) => {
   const myForm = useRef()
 
   useEffect(() => {
-    console.log('table rows changed')
-    console.log(tableRows)
-  }, [tableRows])
-
-  useEffect(() => {
-    setSelectedText(text);
+    //make copy otherwise original is modified
+    const textCopy = JSON.parse(JSON.stringify(text))
+    setSelectedText(textCopy);
     //eslint-disable-next-line
   }, []);
 
@@ -216,6 +213,14 @@ const Editor = ({ text, setCurrentComponent, updateText, setInfoMessages }) => {
   };
 
   const handleInputChange = (e, id, type) => {
+    //prevent cursor from jumping to front of input field
+    const caret = e.target.selectionStart
+    const element = e.target
+    window.requestAnimationFrame(() => {
+      element.selectionStart = caret
+      element.selectionEnd = caret
+    })
+
     const newValue = e.target.value;
     const updatedWordArr = selectedText.targetWordObjs.map(obj => {
       if (obj._id === id) {
@@ -255,6 +260,10 @@ const Editor = ({ text, setCurrentComponent, updateText, setInfoMessages }) => {
     setInfoMessages([{ text: "Text updated!", type: "success" }]);
   };
 
+  const handleCancel = () => {
+    setCurrentComponent("Dashboard")
+  }
+
   return (
     <div className="editor__wrapper">
       <p className="editor__instruction1">
@@ -284,7 +293,7 @@ const Editor = ({ text, setCurrentComponent, updateText, setInfoMessages }) => {
           Save
         </button>
         <button
-          onClick={() => setCurrentComponent("Dashboard")}
+          onClick={handleCancel}
           className="editor__cancel"
         >
           Cancel
