@@ -31,6 +31,11 @@ const TextTile = ({
     addedFormatted = day + "/" + month + "/" + year;
   }
 
+  let shortenedTitle
+  if (title.length > 50) {
+    shortenedTitle = title.substr(0, 50) + "..."
+  }
+
   return (
     <div className="textTile__wrapper">
       <div
@@ -55,7 +60,7 @@ const TextTile = ({
             </span>
           </div>
         )}
-        <p className="textTile__title">{title}</p>
+        <p className="textTile__title">{shortenedTitle ? shortenedTitle : title}</p>
         {level && <p className="textTile__level">{level}</p>}
         {isCompleted && <p className="textTile__completed">Completed</p>}
         {addedFormatted && <p className="textTile__added">{addedFormatted}</p>}

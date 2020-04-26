@@ -160,7 +160,7 @@ const UploadText = ({
     if (e.target.classList.contains("uploadText__word--selected")) {
       const updatedSelectedWords = selectedWords.filter(
         obj =>
-          obj.sentenceIndex !== sentenceIndex &&
+          obj.sentenceIndex !== sentenceIndex ||
           obj.elementIndex !== elementIndex
       );
       setSelectedWords([...updatedSelectedWords]);

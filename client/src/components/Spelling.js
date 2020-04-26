@@ -21,6 +21,7 @@ const Spelling = ({
   const [targetWords, setTargetWords] = useState([]);
   const [finished, setFinished] = useState(false);
   const [showAnswerModal, setShowAnswerModal] = useState(false);
+  const [isLoading, setIsLoading] = useState(false)
 
   useEffect(() => {
     const filteredTargetWordObjs = text.targetWordObjs.filter(
@@ -71,7 +72,9 @@ const Spelling = ({
     }
     if (questionIndex === shuffledTargetWordObjs.length - 1) {
       setFinished(true);
+      setIsLoading(true)
       setTimeout(() => {
+        setIsLoading(false)
         markTextComplete();
         setCurrentComponent("Results");
       }, 3000);
@@ -82,9 +85,9 @@ const Spelling = ({
 
   return (
     <div className="spelling__wrapper">
-      <h1 className="spelling__title">
+      {!finished && <h1 className="spelling__title">
         Listen to the word then write it in the box:
-      </h1>
+      </h1>}
       {!finished && (
         <form className="spelling__content" onSubmit={handleSubmit}>
           <p className="spelling__question-number">
@@ -99,6 +102,8 @@ const Spelling = ({
           <button type="submit">Check</button>
         </form>
       )}
+      {isLoading && <div className="loader"></div>
+      }}
       {infoMessages.length > 0 && <AlertWrapper messages={infoMessages} />}
       {showAnswerModal && (
         <AnswerModal

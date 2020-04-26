@@ -34,6 +34,10 @@
   align-items: center;
 }
 
+.answerModal__correct-answer {
+  margin-bottom: 1rem;
+}
+
 .answerModal__buttons {
   button {
     @include button($mySeaBlue, 1.3rem);
