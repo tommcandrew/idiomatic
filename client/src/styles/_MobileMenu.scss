@@ -9,9 +9,12 @@
   right: 0;
   top: 0;
   z-index: 100;
+  //start with opacity at 0 as otherwise you can see the menu apparently shrinking when changing to mobile view
+  opacity: 0;
   &__show {
     clip-path: circle(360px at 100% 0%);
     animation: expand 300ms ease-out forwards;
+    opacity: 1;
   }
   &__hide {
     clip-path: circle(0px at 100% -10%);
