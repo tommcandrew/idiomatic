@@ -18,6 +18,16 @@ const FlashcardContainer = ({ studiedWords, setCurrentComponent, infoMessages, s
             ]);
             return;
         }
+        if (numberCards > studiedWords.length) {
+            numberCards = studiedWords.length
+            setInfoMessages([
+                ...infoMessages,
+                {
+                    text: "You only have " + studiedWords.length + " cards.",
+                    type: "info"
+                }
+            ]);
+        }
         setComponent("FlashcardTest")
         setNumberCards(numberCards)
         setMode(mode)
@@ -25,7 +35,7 @@ const FlashcardContainer = ({ studiedWords, setCurrentComponent, infoMessages, s
 
     return (
         <div className="flashcardContainer__wrapper">
-            {component === "FlashcardStart" && <FlashcardStart handleStart={handleStart} />}
+            {component === "FlashcardStart" && <FlashcardStart handleStart={handleStart} studiedWords={studiedWords} />}
             {component === "FlashcardTest" && <FlashcardTest mode={mode} numberCards={numberCards} studiedWords={studiedWords} setCurrentComponent={setCurrentComponent} />}
 
         </div>

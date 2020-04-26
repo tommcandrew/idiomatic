@@ -37,7 +37,7 @@ const MyWords = ({ texts, savedTexts, completedTexts, handleStartFlashcardStudy 
   return (
     <div className="myWords__wrapper">
       <h1 className="myWords__title">My Words</h1>
-      <button onClick={() => handleStartFlashcardStudy(studiedWords)}>Flashcard Study</button>
+      <button className="myWords__flashcard" onClick={() => handleStartFlashcardStudy(studiedWords)}>Flashcard Study</button>
       <div className="myWords__content">
         {studiedWords.length > 0 ? (
           <table className="myWords__table">
@@ -58,7 +58,7 @@ const MyWords = ({ texts, savedTexts, completedTexts, handleStartFlashcardStudy 
             </tbody>
           </table>
         ) : (
-          <h2>You don't have any studied words.</h2>
+          <h2 className="myWords__message">You don't have any studied words.</h2>
         )}
       </div>
     </div>

@@ -76,15 +76,15 @@ const FlashcardTest = ({ mode, numberCards, studiedWords, setCurrentComponent })
         } else {
             testWord = currentWordObj.word;
         }
-        console.log('extracted and set word and def')
-        console.log(testWord)
-        console.log(currentWordObj.definition)
         setTestWord(testWord)
         setTestDef(currentWordObj.definition)
     }
 
     return (
         <div className="flashcardTest__wrapper">
+            {!isFinished && <div className="flashcardTest__progress">
+                {questionNum + 1}/{numberCards}
+            </div>}
             {testWords && testWords.length > 0 && !isFinished && testWord && testDef && (
                 <>
                     <div className="flashcardTest__card">
