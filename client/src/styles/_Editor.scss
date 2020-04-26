@@ -16,7 +16,11 @@
 .editor__word {
   margin: 0 0 0 1em;
   cursor: pointer;
-  &:hover {
+}
+
+//adding hover style like this so only applied on desktop (avoid 'sticky hover' problem on mobile)
+@media (hover: hover) {
+  .editor__word:hover {
     background: yellow;
   }
 }
@@ -31,7 +35,7 @@
   margin: 0 auto;
   background: rgb(238, 237, 237);
   border-radius: 5px;
-  padding: 10px;
+  padding: 10px 25px 10px 10px;
 }
 
 .editor__word--target {

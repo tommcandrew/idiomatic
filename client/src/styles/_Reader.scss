@@ -14,6 +14,8 @@
   border-radius: 6px;
   justify-content: center;
   margin: 0 auto;
+  //for some reason there's a bit of a margin down the left side of the text so need padding right to center text
+  padding-right: 15px;
 }
 
 .reader__word--target {
