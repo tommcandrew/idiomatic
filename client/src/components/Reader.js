@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import DefinitionModal from "./DefinitionModal";
+import createSpanArray from '../utils/createSpanArray'
 
 const Reader = ({ text, setCurrentComponent }) => {
   const [sentencesOfSpanElements, setSentencesOfSpanElements] = useState([]);
@@ -7,47 +8,11 @@ const Reader = ({ text, setCurrentComponent }) => {
   const [selectedTargetWordObj, setSelectedTargetWordObj] = useState(null);
 
   useEffect(() => {
-    createSpanArray();
+    const sentencesOfSpanElements = createSpanArray(text, handleClick);
+    setSentencesOfSpanElements(sentencesOfSpanElements)
     //eslint-disable-next-line
   }, []);
 
-  const createSpanArray = () => {
-    const sentences = text.content.match(/[^.!?]+[.!?]+/g);
-    const splitSentences = sentences.map(sentence =>
-      sentence.match(/[\w'’]+|[.,!?;]/g)
-    );
-    const sentencesOfSpanElements = splitSentences.map(
-      (sentence, sentenceIndex) =>
-        sentence.map((word, elementIndex) => {
-          const nonWordElements = [",", ",", "'", "?", "!", ".", ":", ";"];
-          let classNames = [];
-          for (let i = 0; i < text.targetWordObjs.length; i++) {
-            if (
-              sentenceIndex === text.targetWordObjs[i].sentence &&
-              elementIndex === text.targetWordObjs[i].element
-            ) {
-              classNames.push("reader__word--target");
-            }
-          }
-          if (nonWordElements.includes(word)) {
-            classNames.push("reader__punctuation");
-          } else {
-            classNames.push("reader__word");
-          }
-          classNames = classNames.join(" ");
-          return (
-            <span
-              key={"word" + (sentenceIndex + elementIndex)}
-              className={classNames}
-              onClick={handleClick}
-            >
-              {word}
-            </span>
-          );
-        })
-    );
-    setSentencesOfSpanElements(sentencesOfSpanElements);
-  };
 
   const handleClick = e => {
     if (!e.target.classList.contains("reader__word--target")) {

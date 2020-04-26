@@ -1,11 +1,15 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef, useContext } from "react";
 import axios from "axios";
+import DeviceContext from '../context/DeviceContext'
+import createSpanArray from '../utils/createSpanArray'
 
 const Editor = ({ text, setCurrentComponent, updateText, setInfoMessages }) => {
   const [sentencesOfSpanElements, setSentencesOfSpanElements] = useState([]);
   const [tableRows, setTableRows] = useState([]);
   const [selectedText, setSelectedText] = useState(null);
   const [deleting, setDeleting] = useState(false)
+
+  const { device } = useContext(DeviceContext)
 
   const myForm = useRef()
 
@@ -18,7 +22,8 @@ const Editor = ({ text, setCurrentComponent, updateText, setInfoMessages }) => {
 
   useEffect(() => {
     if (selectedText) {
-      createSpanArray();
+      const sentencesOfSpanElements = createSpanArray(selectedText, handleWordClick);
+      setSentencesOfSpanElements(sentencesOfSpanElements)
     }
     //eslint-disable-next-line
   }, [selectedText]);
@@ -30,46 +35,6 @@ const Editor = ({ text, setCurrentComponent, updateText, setInfoMessages }) => {
     //eslint-disable-next-line
   }, [sentencesOfSpanElements]);
 
-  //copied from Reader - maybe put in Utils?
-  const createSpanArray = () => {
-    const sentences = selectedText.content.match(/[^.!?]+[.!?]+/g);
-    const splitSentences = sentences.map(sentence =>
-      sentence.match(/[\w'’]+|[.,!?;]/g)
-    );
-    const sentencesOfSpanElements = splitSentences.map(
-      (sentence, sentenceIndex) =>
-        sentence.map((word, elementIndex) => {
-          const nonWordElements = [",", ",", "'", "?", "!", ".", ":", ";"];
-          let classNames = [];
-          for (let i = 0; i < selectedText.targetWordObjs.length; i++) {
-            if (
-              sentenceIndex === selectedText.targetWordObjs[i].sentence &&
-              elementIndex === selectedText.targetWordObjs[i].element
-            ) {
-              classNames.push("editor__word--target");
-            }
-          }
-          if (nonWordElements.includes(word)) {
-            classNames.push("editor__punctuation");
-          } else {
-            classNames.push("editor__word");
-          }
-          classNames = classNames.join(" ");
-          return (
-            <span
-              key={"word" + (sentenceIndex + elementIndex)}
-              className={classNames}
-              onClick={handleWordClick}
-              data-sentence-index={sentenceIndex}
-              data-element-index={elementIndex}
-            >
-              {word}
-            </span>
-          );
-        })
-    );
-    setSentencesOfSpanElements(sentencesOfSpanElements);
-  };
 
   const handleWordClick = e => {
     const sentenceIndex = parseInt(e.target.dataset.sentenceIndex);
@@ -127,12 +92,10 @@ const Editor = ({ text, setCurrentComponent, updateText, setInfoMessages }) => {
           </div>
 
           <div className="editor__table-cell">
-            <span className="editor__table-label">Word</span>
-            <input defaultValue={obj.word} />
+            <span>{obj.word}</span>
           </div>
 
           <div className="editor__table-cell">
-            <span className="editor__table-label">Word Type</span>
             <input
               onChange={e => handleInputChange(e, obj._id, "wordType")}
               className={!obj.wordType ? "greyedOut" : undefined}
@@ -141,7 +104,6 @@ const Editor = ({ text, setCurrentComponent, updateText, setInfoMessages }) => {
           </div>
 
           <div className="editor__table-cell">
-            <span className="editor__table-label">Singular</span>
             <input
               onChange={e => handleInputChange(e, obj._id, "singularForm")}
               className={!obj.singularForm ? "greyedOut" : undefined}
@@ -150,7 +112,6 @@ const Editor = ({ text, setCurrentComponent, updateText, setInfoMessages }) => {
           </div>
 
           <div className="editor__table-cell">
-            <span className="editor__table-label">Infinitive</span>
             <input
               onChange={e => handleInputChange(e, obj._id, "infinitiveForm")}
               className={!obj.infinitiveForm ? "greyedOut" : undefined}
@@ -159,7 +120,6 @@ const Editor = ({ text, setCurrentComponent, updateText, setInfoMessages }) => {
           </div>
 
           <div className="editor__table-cell">
-            <span className="editor__table-label">Main Adj.</span>
             <input
               onChange={e => handleInputChange(e, obj._id, "positiveForm")}
               className={!obj.positiveForm ? "greyedOut" : undefined}
@@ -168,7 +128,6 @@ const Editor = ({ text, setCurrentComponent, updateText, setInfoMessages }) => {
           </div>
 
           <div className="editor__table-cell">
-            <span className="editor__table-label">Definition</span>
             <input
               className={`editor__def ${!obj.definition ? "greyedOut" : undefined}`}
               onChange={e => handleInputChange(e, obj._id, "definition")}
@@ -184,7 +143,7 @@ const Editor = ({ text, setCurrentComponent, updateText, setInfoMessages }) => {
   };
 
   const handleDictionaryClick = word => {
-    axios.post("/getWordData", { word }).then(res => {
+    axios.post("/api/getWordData", { word }).then(res => {
       console.log(res)
       const {
         definition,

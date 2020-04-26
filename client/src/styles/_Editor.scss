@@ -69,6 +69,12 @@
   flex: 1;
 }
 
+.editor__table-cell span {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .editor__table .editor__dic, .editor__table .editor__table-cell input {
   flex: 3;
 }
@@ -144,7 +150,6 @@
 }
 
 
-@media only screen and (min-width: 1000px) {
   .editor__table .editor__table-header {
    display: flex;
  }
@@ -179,4 +184,4 @@
 .editor__table .editor__table-label {
   display: none;
 }
-}
+

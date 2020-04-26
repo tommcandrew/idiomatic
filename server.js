@@ -30,7 +30,7 @@ app.use(express.json());
 
 app.use(fileUpload());
 
-// app.use(express.static(path.join(__dirname, "client/build")));
+app.use(express.static(path.join(__dirname, "client/build")));
 
 const verifyToken = (req, res, next) => {
   const bearer = req.headers["authorization"];
