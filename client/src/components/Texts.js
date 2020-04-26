@@ -3,41 +3,74 @@ import TextTile from "./TextTile";
 
 const Texts = ({ handleChooseText, texts, completedTexts }) => {
   const [filteredTexts, setFilteredTexts] = useState(texts);
-  const [filters, setFilters] = useState([]);
+  const [levelFilters, setLevelFilters] = useState([]);
+  const [topicFilters, setTopicFilters] = useState([]);
 
-  const handleFilter = e => {
+  const handleLevelFilter = e => {
     const selectedFilter = e.target.innerText;
-    if (filters.includes(selectedFilter)) {
-      const updatetedFilters = filters.filter(
+    console.log('selected filter is ' + selectedFilter)
+    if (levelFilters.includes(selectedFilter)) {
+      console.log('filter is being deselected ')
+      const updatedLevelFilters = levelFilters.filter(
         filter => filter !== selectedFilter
       );
-      setFilters([...updatetedFilters]);
+      console.log('updatedLevelFilters:')
+      console.log(updatedLevelFilters)
+      setLevelFilters([...updatedLevelFilters]);
       return;
     }
-    setFilters([...filters, selectedFilter]);
+    setLevelFilters([...levelFilters, selectedFilter]);
+  };
+
+  const handleTopicFilter = e => {
+    const selectedFilter = e.target.innerText;
+    if (topicFilters.includes(selectedFilter)) {
+      const updatetedTopicFilters = topicFilters.filter(
+        filter => filter !== selectedFilter
+      );
+      setTopicFilters([...updatetedTopicFilters]);
+      return;
+    }
+    setTopicFilters([...topicFilters, selectedFilter]);
   };
 
   useEffect(() => {
-    let filteredTexts = [];
-    if (filters.length === 0) {
-      filteredTexts = [...texts];
-    } else {
-      if (texts && filters && filters.length > 0) {
-        for (let i = 0; i < texts.length; i++) {
-          for (let j = 0; j < filters.length; j++) {
-            if (
-              texts[i].tags.includes(filters[j].toLowerCase()) ||
-              texts[i].level === filters[j]
-            ) {
-              filteredTexts.push(texts[i]);
-            }
+    //start with all texts
+    let filteredTexts = [...texts];
+    //filter for level if level filter applied
+    if (levelFilters.length > 0) {
+      let filteredByLevel = []
+      for (let i = 0; i < texts.length; i++) {
+        for (let j = 0; j < levelFilters.length; j++) {
+          if (
+            texts[i].level === levelFilters[j]
+          ) {
+            filteredByLevel.push(texts[i]);
           }
         }
       }
+      filteredTexts = [...filteredByLevel]
+    }
+    //filter for topic if topic filter applied
+    if (topicFilters.length > 0) {
+      let filteredByTopic = []
+      for (let i = 0; i < filteredTexts.length; i++) {
+        for (let j = 0; j < topicFilters.length; j++) {
+          if (
+            filteredTexts[i].tags.includes(topicFilters[j].toLowerCase())
+          ) {
+            filteredByTopic.push(filteredTexts[i])
+          }
+        }
+      }
+      filteredTexts = [...filteredByTopic]
     }
     setFilteredTexts(filteredTexts);
     //eslint-disable-next-line
-  }, [filters]);
+  }, [levelFilters, topicFilters]);
+
+
+
 
   const topics = [
     "Animals",
@@ -56,13 +89,13 @@ const Texts = ({ handleChooseText, texts, completedTexts }) => {
       <div className="texts__filter">
         <div className="texts__level-filters">
           <span className="texts__filter-label">Filter by level:</span>
-          <ul className="texts__level-list" onClick={handleFilter}>
+          <ul className="texts__level-list" onClick={handleLevelFilter}>
             {levels.map((level, index) => (
               <li
                 key={"level" + index}
                 className={`texts__filter-item ${
-                  filters.includes(level) ? "texts__filter-item--selected" : ""
-                }`}
+                  levelFilters.includes(level) ? "texts__filter-item--selected" : ""
+                  }`}
               >
                 {level}
               </li>
@@ -71,13 +104,13 @@ const Texts = ({ handleChooseText, texts, completedTexts }) => {
         </div>
         <div className="texts__topic-filters">
           <span className="texts__filter-label">Filter by topic:</span>
-          <ul className="texts__topic-list" onClick={handleFilter}>
+          <ul className="texts__topic-list" onClick={handleTopicFilter}>
             {topics.map((topic, index) => (
               <li
                 key={"topic" + index}
                 className={`texts__filter-item ${
-                  filters.includes(topic) ? "texts__filter-item--selected" : ""
-                }`}
+                  topicFilters.includes(topic) ? "texts__filter-item--selected" : ""
+                  }`}
               >
                 {topic}
               </li>
