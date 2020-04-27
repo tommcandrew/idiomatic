@@ -22,7 +22,6 @@ const getIcon = message => {
 };
 
 const AlertWrapper = ({ messages }) => {
-  console.log('alert')
   return (
     <div className="alerts__wrapper">
       {messages.map((message, index) => (

@@ -12,14 +12,10 @@ const Texts = ({ handleChooseText, texts, completedTexts }) => {
       return
     }
     const selectedFilter = e.target.innerText;
-    console.log('selected filter is ' + selectedFilter)
     if (levelFilters.includes(selectedFilter)) {
-      console.log('filter is being deselected ')
       const updatedLevelFilters = levelFilters.filter(
         filter => filter !== selectedFilter
       );
-      console.log('updatedLevelFilters:')
-      console.log(updatedLevelFilters)
       setLevelFilters([...updatedLevelFilters]);
       return;
     }

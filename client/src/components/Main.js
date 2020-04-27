@@ -144,13 +144,11 @@ const Main = () => {
         }
       )
       .then(res => {
-        console.log(res);
         fetchSavedTexts();
       });
   };
 
   const handleStartFlashcardStudy = studiedWords => {
-    console.log(studiedWords)
     if (studiedWords.length === 0) {
       setInfoMessages([
         { text: "You don't have any studied words yet.", type: "warning" }

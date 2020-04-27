@@ -13,29 +13,23 @@ const FlashcardTest = ({ mode, numberCards, studiedWords, setCurrentComponent })
 
     useEffect(() => {
         if (mode === 'Word - Definition') {
-            console.log('mode is word-def so setting showcardfront to true')
             setShowCardFront(true)
         } else if (mode === 'Definition - Word') {
-            console.log('mode is def-word so setting showcardfront to false')
             setShowCardFront(false)
         }
         const copiedStudiedWords = JSON.parse(JSON.stringify(studiedWords))
         const shuffledWords = shuffle(copiedStudiedWords)
         const testWords = shuffledWords.splice(0, numberCards)
-        console.log('setting words for test')
-        console.log(testWords)
         setTestWords(testWords)
     }, [])
 
     useEffect(() => {
         if (testWords && testWords.length > 0) {
-            console.log('testWords have been set so calling setTestWordAndDef()')
             setTestWordAndDef()
         }
     }, [testWords])
 
     const checkAnswer = () => {
-        console.log('checkanswer - setting showcardfront to' + !showCardFront)
         setShowCardFront(!showCardFront)
         setShowAnswer(true)
     }
