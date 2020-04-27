@@ -44,7 +44,6 @@
     width: 90%;
     border: 1px solid black;
     margin: 1rem 0;
-
 }
 
 .wizard__buttons {
@@ -59,3 +58,21 @@
         }
     }
 }
+
+@media only screen and (max-width: 1000px) { 
+    
+.wizard__content {
+    width: 90%;
+    min-height: 90%;
+}
+.wizard__gif {
+    width: 95%;
+}
+.wizard__text {
+    font-size: 1.3rem;
+}
+
+.wizard__buttons {
+    width: 100%;
+}
+  }
