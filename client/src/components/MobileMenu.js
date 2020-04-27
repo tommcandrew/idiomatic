@@ -39,13 +39,13 @@ const MobileMenu = ({ showMobileMenu, setShowMobileMenu, setCurrentComponent }) 
           My Texts
         </div>
         <div
-          className="mobile-menu__my-profile-button"
+          className="mobile-menu__my-account-button"
           onClick={() => {
-            setCurrentComponent("MyProfile");
+            setCurrentComponent("MyAccount");
             setShowMobileMenu(false);
           }}
         >
-          My Profile
+          My Account
         </div>
       </div>
     </div>

@@ -1,4 +1,4 @@
-.myProfile__wrapper {
+.myAccount__wrapper {
   flex-grow: 1;
   display: flex;
   flex-direction: column;
@@ -6,11 +6,11 @@
   flex-direction: column;
 }
 
-.myProfile__title {
+.myAccount__title {
   margin-top: 3rem;
 }
 
-.myProfile__list {
+.myAccount__list {
   list-style: none;
   width: 100%;
   height: 30vh;
@@ -22,7 +22,7 @@
     font-size: 1.5em;
   }
 }
-.myProfile__delete-account {
+.myAccount__delete-account {
   @include button(red, 1.3rem);
   margin: 1rem 0;
   &:hover {
@@ -30,8 +30,16 @@
   }
 }
 
+.myAccount__logout {
+  @include button($mySeaBlue, 1.3rem);
+  margin: 1rem 0;
+  &:hover {
+    background: $mySeaBlueDark;
+  }
+}
+
 @media only screen and (min-width: 1000px) {
-  .myProfile__list {
+  .myAccount__list {
     width: 40vw;
     li {
       font-size: 2em;

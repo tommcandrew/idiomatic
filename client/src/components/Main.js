@@ -13,7 +13,7 @@ import MatchDefinitions from "./MatchDefinitions";
 import Spelling from "./Spelling";
 import Results from "./Results";
 import MyWords from "./MyWords";
-import MyProfile from "./MyProfile";
+import MyAccount from "./MyAccount";
 import AlertWrapper from "./AlertWrapper";
 import Editor from "./Editor";
 import FlashcardContainer from "./FlashcardContainer";
@@ -257,7 +257,7 @@ const Main = () => {
       {currentComponent === "FlashcardContainer" && (
         <FlashcardContainer studiedWords={studiedWords} setCurrentComponent={setCurrentComponent} infoMessages={infoMessages} setInfoMessages={setInfoMessages} />
       )}
-      {currentComponent === "MyProfile" && <MyProfile />}
+      {currentComponent === "MyAccount" && <MyAccount />}
       {infoMessages.length > 0 && <AlertWrapper messages={infoMessages} />}
       {isNewUser && <Wizard setIsNewUser={setIsNewUser} />}
     </div>

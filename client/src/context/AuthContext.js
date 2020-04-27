@@ -11,7 +11,7 @@ export const AuthContextProvider = props => {
   const [loading, setLoading] = useState(true);
   const [errorMessage, setErrorMessage] = useState();
   const [registerDate, setRegisterDate] = useState();
-  const [isNewUser, setIsNewUser] = useState(true)
+  const [isNewUser, setIsNewUser] = useState(false)
 
   useEffect(() => {
     const token = localStorage.getItem("idiomatic-token");
