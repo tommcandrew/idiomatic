@@ -30,7 +30,7 @@ app.use(express.json());
 
 app.use(fileUpload());
 
-app.use(express.static(path.join(__dirname, "client/build")));
+// app.use(express.static(path.join(__dirname, "client/build")));
 
 const verifyToken = (req, res, next) => {
   const bearer = req.headers["authorization"];
@@ -179,6 +179,7 @@ app.post("/deleteAccount", verifyToken, (req, res) => {
 
 //same as code in /saveText so should be separated
 app.post("/getWordData", async (req, res) => {
+  console.log('received dictionary data request')
   const { word } = req.body;
   const isPlural = pluralize.isPlural(word);
   let wordToSearch;
@@ -187,12 +188,15 @@ app.post("/getWordData", async (req, res) => {
   } else {
     wordToSearch = word;
   }
+  console.log('making API call')
   const response = await axios.get(
     "https://dictionaryapi.com/api/v3/references/learners/json/" +
     word +
     "?key=" +
     dictionaryKey
   );
+  console.log('response:')
+  console.log(response)
   let definition;
   if (!response.data[0].shortdef) {
     definition = null;
@@ -375,8 +379,11 @@ app.put("/deleteText", verifyToken, (req, res) => {
 });
 
 app.put("/updateText", verifyToken, (req, res) => {
+  console.log('updating text in database')
   const email = req.tokenData.user.email;
   const { updatedText } = req.body;
+  console.log('updatedText:')
+  console.log(updatedText)
   User.findOne({ email })
     .then(user => {
       for (let i = 0; i < user.texts.length; i++) {

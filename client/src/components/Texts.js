@@ -7,6 +7,10 @@ const Texts = ({ handleChooseText, texts, completedTexts }) => {
   const [topicFilters, setTopicFilters] = useState([]);
 
   const handleLevelFilter = e => {
+    //make sure user has clicked on LI button rather than parent UL element
+    if (e.target.tagName !== "LI") {
+      return
+    }
     const selectedFilter = e.target.innerText;
     console.log('selected filter is ' + selectedFilter)
     if (levelFilters.includes(selectedFilter)) {

@@ -8,7 +8,7 @@ const Reader = ({ text, setCurrentComponent }) => {
   const [selectedTargetWordObj, setSelectedTargetWordObj] = useState(null);
 
   useEffect(() => {
-    const sentencesOfSpanElements = createSpanArray(text, handleClick);
+    const sentencesOfSpanElements = createSpanArray(text, handleClick, "reader__word", "reader__word--target", "reader__punctuation");
     setSentencesOfSpanElements(sentencesOfSpanElements)
     //eslint-disable-next-line
   }, []);

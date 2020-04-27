@@ -1,6 +1,6 @@
 import React from 'react'
 
-const createSpanArray = (selectedText, handleWordClick) => {
+const createSpanArray = (selectedText, handleWordClick, classNameStandard, classNameTarget, classNamePunctuation) => {
     const sentences = selectedText.content.match(/[^.!?]+[.!?]+/g);
     const splitSentences = sentences.map(sentence =>
         sentence.match(/[\w'’]+|[.,!?;]/g)
@@ -15,13 +15,13 @@ const createSpanArray = (selectedText, handleWordClick) => {
                         sentenceIndex === selectedText.targetWordObjs[i].sentence &&
                         elementIndex === selectedText.targetWordObjs[i].element
                     ) {
-                        classNames.push("editor__word--target");
+                        classNames.push(classNameTarget);
                     }
                 }
                 if (nonWordElements.includes(word)) {
-                    classNames.push("editor__punctuation");
+                    classNames.push(classNamePunctuation);
                 } else {
-                    classNames.push("editor__word");
+                    classNames.push(classNameStandard);
                 }
                 classNames = classNames.join(" ");
                 return (

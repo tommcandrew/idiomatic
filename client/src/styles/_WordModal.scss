@@ -1,0 +1,82 @@
+.wordModal__wrapper {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background: rgba($color: #000000, $alpha: 0.7);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.wordModal__content {
+    width: 35%;
+    top: 20vh;
+    background: white;
+    font-size: 1.6rem;
+    padding: 0.7rem;
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    align-items: center;
+}
+
+.wordModal__form {
+    // border: 1px solid purple;
+    width: 80%;
+}
+
+
+
+.wordModal__field {
+    display: flex;
+    justify-content: space-between;
+    margin: 0.5rem 0;
+}
+
+.wordModal__field--definition {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+}
+
+.wordModal__wrapper input {
+    width: 200px;
+    font-size: 1.3rem;
+} 
+
+.wordModal__wrapper textarea {
+    font-size: 1.3rem;
+    margin-top: 0.5rem;
+    padding: 0.5rem;
+
+}
+
+.wordModal__buttons {
+    margin: 1rem 0;
+    display: flex;
+    flex-direction: column;
+    // border: 1px solid green;
+    align-items: center;
+    button {
+
+      @include button($mySeaBlue, 1.3rem);
+      &:hover {
+        background: $mySeaBlueDark;
+      }
+    }
+  }
+  
+  .wordModal__word {
+      margin: 1rem 0;
+  }
+
+  .wordModal__main-buttons {
+    //   border: 1px solid red;
+      width: 100%;
+      display: flex;
+      justify-content: space-around;
+      margin-top: 0.5rem;
+  }
