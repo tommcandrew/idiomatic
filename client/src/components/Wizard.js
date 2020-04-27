@@ -11,7 +11,7 @@ const Wizard = ({ setIsNewUser }) => {
                 <span className="wizard__close" onClick={() => setIsNewUser(false)}>&times;</span>
                 <div className="wizard__slide">
                     <p className="wizard__text">{data.text[0][slideNum]}</p>
-                    <img className="wizard__gif" src={data.gifs[0][slideNum]} />
+                    <img className="wizard__gif" src={data.gifs[0][slideNum]} alt="gif" />
                     <div className="wizard__buttons">
                         {slideNum > 0 && <button onClick={() => setSlideNum(slideNum - 1)}>Previous</button>}
                         {slideNum < 8 && <button onClick={() => setSlideNum(slideNum + 1)}>Next</button>}

@@ -50,14 +50,12 @@ const Editor = ({ text, updateText, setInfoMessages }) => {
   }
 
   async function handleSubmit(e) {
-    debugger
     e.preventDefault()
     e.persist()
     //get audio for word from dictionary API (should be added to word without user explicitly requesting)
     //is this inefficient?
     const res = await axios.post("/getWordData", { word: selectedWordObj.word })
     const audio = res.data.audio
-
     //create object for word with updated data from modal form
     const updatedWordObj = {
       word: selectedWordObj.word,
@@ -70,7 +68,6 @@ const Editor = ({ text, updateText, setInfoMessages }) => {
       positiveForm: e.target.positiveForm.value,
       definition: e.target.definition.value
     }
-    console.log(updatedWordObj)
     let updatedWordArr
     //copied from handleWordClick
     //if word was already a target word

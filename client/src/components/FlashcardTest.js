@@ -21,12 +21,14 @@ const FlashcardTest = ({ mode, numberCards, studiedWords, setCurrentComponent })
         const shuffledWords = shuffle(copiedStudiedWords)
         const testWords = shuffledWords.splice(0, numberCards)
         setTestWords(testWords)
+        //eslint-disable-next-line
     }, [])
 
     useEffect(() => {
         if (testWords && testWords.length > 0) {
             setTestWordAndDef()
         }
+        //eslint-disable-next-line
     }, [testWords])
 
     const checkAnswer = () => {
@@ -48,6 +50,7 @@ const FlashcardTest = ({ mode, numberCards, studiedWords, setCurrentComponent })
 
             setShowCardFront(!showCardFront)
         }
+        //eslint-disable-next-line
     }, [questionNum])
 
     useEffect(() => {
@@ -55,6 +58,7 @@ const FlashcardTest = ({ mode, numberCards, studiedWords, setCurrentComponent })
             setTestWordAndDef()
 
         }
+        //eslint-disable-next-line
     }, [questionNum])
 
 

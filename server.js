@@ -252,7 +252,6 @@ app.post("/saveText", verifyToken, async (req, res) => {
   const { title, selectedWords, content } = req.body;
   const targetWordObjs = [];
   for (let i = 0; i < selectedWords.length; i++) {
-    //const element = selectedWords[i]
     const isPlural = pluralize.isPlural(selectedWords[i].element);
     let wordToSearch;
     if (isPlural) {

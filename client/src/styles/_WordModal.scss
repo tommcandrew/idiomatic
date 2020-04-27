@@ -24,11 +24,8 @@
 }
 
 .wordModal__form {
-    // border: 1px solid purple;
     width: 80%;
 }
-
-
 
 .wordModal__field {
     display: flex;
@@ -51,17 +48,14 @@
     font-size: 1.3rem;
     margin-top: 0.5rem;
     padding: 0.5rem;
-
 }
 
 .wordModal__buttons {
     margin: 1rem 0;
     display: flex;
     flex-direction: column;
-    // border: 1px solid green;
     align-items: center;
     button {
-
       @include button($mySeaBlue, 1.3rem);
       &:hover {
         background: $mySeaBlueDark;
@@ -74,9 +68,34 @@
   }
 
   .wordModal__main-buttons {
-    //   border: 1px solid red;
       width: 100%;
       display: flex;
       justify-content: space-around;
       margin-top: 0.5rem;
+  }
+
+  @media only screen and (max-width: 1000px) { 
+    .wordModal__content {
+        width: 90%;
+        font-size: 1.2rem;
+    }
+    .wordModal__form {
+        width: 100%;
+    }
+    .wordModal__wrapper input, .wordModal__wrapper textarea {
+        font-size: 1.3rem;
+        padding: 0rem;
+    }
+    .wordModal__field {
+        align-items: center;
+    }
+    .wordModal__label {
+        white-space: nowrap;
+    }
+    .wordModal__wrapper input {
+        width: 150px;
+    } 
+    .wordModal__wrapper textarea {
+        width: 100%;
+    }
   }
