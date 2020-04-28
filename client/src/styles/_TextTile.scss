@@ -9,14 +9,13 @@
 .textTile__content {
   width: 85%;
   background: #4a98f8;
-  height: 85%;
   text-align: center;
   display: flex;
   flex-direction: column;
   justify-content: space-around;
   align-items: center;
   border-radius: 8px;
-  padding: 8%;
+  padding: 15%;
   cursor: pointer;
   position: relative;
 }
@@ -25,7 +24,7 @@
   font-size: 1.2rem;
   color: white;
   user-select: none;
-  margin-top: 1rem;
+  margin: 1.5rem 0;
 }
 
 .textTile__level {
@@ -49,7 +48,6 @@
   width: 90%;
   margin: 0 auto;
   margin-top: 5%;
-  
 }
 
 .textTile__delete,
@@ -58,6 +56,24 @@
   color: black;
 }
 
+//tablet
+@media only screen and (min-width: 750px) {
+  .textTile__title {
+    font-size: 2rem;
+  }
+  .textTile__level {
+    font-size: 1.5rem;
+  }
+  .textTile__added {
+    font-size: 1.8rem;
+  }
+  .textTile__delete,
+  .textTile__edit {
+    font-size: 2rem;
+  }
+}
+
+//desktop
 @media only screen and (min-width: 1000px) {
   .textTile__wrapper {
     flex-basis: calc(100% / 5);
@@ -99,5 +115,8 @@
   .textTile__edit-buttons {
     width: 60%;
   }
+  .textTile__added {
+    font-size: 1.2rem;
+    margin-top: 1rem;
+  }
 }
-

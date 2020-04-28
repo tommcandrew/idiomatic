@@ -41,6 +41,27 @@
   }
 }
 
+//tablet
+@media only screen and (min-width: 750px) {
+  .reader__title {
+    font-size: 3rem;
+  }
+  .reader__text {
+    width: 95%;
+    font-size: 2.5rem;
+  }
+
+  .reader__word {
+    margin: 0 0 0 0.8em;
+  }
+
+  .reader__exercises-button {
+    @include button($mySeaBlue, 2.5rem);
+    margin: 2rem 0 5rem 0;
+  }
+}
+
+//desktop
 @media only screen and (min-width: 1000px) {
   .reader__text {
     font-size: 1.6rem;

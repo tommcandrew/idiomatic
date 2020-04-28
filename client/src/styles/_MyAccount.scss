@@ -38,6 +38,26 @@
   }
 }
 
+//tablet
+@media only screen and (min-width: 750px) {
+  .myAccount__title {
+    font-size: 3rem;
+  }
+  .myAccount__list {
+    li {
+      font-size: 2.5rem;
+    }
+  }
+  .myAccount__delete-account {
+    @include button(red, 2.5rem);
+  }
+
+  .myAccount__logout {
+    @include button($mySeaBlue, 2.5rem);
+  }
+}
+
+//desktop
 @media only screen and (min-width: 1000px) {
   .myAccount__list {
     width: 40vw;
@@ -46,4 +66,3 @@
     }
   }
 }
-

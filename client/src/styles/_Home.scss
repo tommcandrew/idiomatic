@@ -1,12 +1,10 @@
 .home__wrapper {
   height: 100vh;
-  // background: #eee;
   display: flex;
   flex-direction: column;
 }
 
 .home__header {
-  // background: #26547c;
   background: $mySeaBlue;
   height: 7vh;
   display: flex;
@@ -41,16 +39,12 @@
   padding: 0.5rem;
   outline: none;
   border: 2px solid rgb(248, 253, 253);
-  // background: #26547c;
   background: $mySeaBlue;
-
-  // color: #eee;
   color: white;
   font-size: 0.8rem;
   font-weight: bold;
   cursor: pointer;
   &:hover {
-    // background: #eee;
     background: white;
     color: #373277;
   }
@@ -70,6 +64,20 @@
   font-size: 1rem;
 }
 
+//tablet
+@media only screen and (min-width: 750px) {
+  .home__button {
+    font-size: 1.7rem;
+  }
+  .home__app-title {
+    font-size: 8rem;
+  }
+  .home__app-subtitle {
+    font-size: 2.3rem;
+  }
+}
+
+//desktop
 @media only screen and (min-width: 1000px) {
   .home__header {
     padding: 1.8rem 0;

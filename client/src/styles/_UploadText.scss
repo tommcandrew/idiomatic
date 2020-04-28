@@ -158,6 +158,106 @@
   align-items: center;
 }
 
+//off page rather than display: none for accessibility reasons
+input[type="file"] {
+  position: absolute;
+  left: -99999rem;
+}
+
+//upload button will disappear once file is selected, leaving only file name visible
+.uploadText__wrapper .uploadText__upload-file--hidden {
+  display: none;
+}
+
+.uploadText__upload-file {
+  border: 1px solid #ccc;
+  border-radius: 4rem;
+  display: inline-block;
+  padding: 6px 12px;
+  cursor: pointer;
+  width: 80vw;
+  text-align: center;
+  padding: 2rem;
+  background: lightgreen;
+  &:hover {
+    background: rgb(88, 207, 88);
+  }
+}
+
+.uploadText__upload-icon {
+  margin-right: 1rem;
+}
+
+.uploadText__file-name {
+  font-size: 1.5rem;
+  text-align: center;
+}
+
+//tablet
+@media only screen and (min-width: 750px) {
+  .uploadText__option-buttons {
+    button {
+      @include button($mySeaBlue, 2.5rem);
+      width: 50vw;
+    }
+  }
+  .uploadText__wrapper {
+    form {
+      label {
+        font-size: 3rem;
+      }
+    }
+  }
+  .uploadText__wrapper {
+    form {
+      .uploadText__go,
+      .uploadText__back {
+        @include button($mySeaBlue, 2rem);
+        margin: 1rem 0;
+        width: 30vw;
+      }
+    }
+  }
+  .uploadText__save,
+  .uploadText__cancel {
+    @include button($mySeaBlue, 2.5rem);
+
+    width: 25vw;
+  }
+  .uploadText__title-input {
+    font-size: 2rem;
+  }
+  .uploadText__text-input {
+    font-size: 2rem;
+  }
+  .uploadText__choose-file {
+    font-size: 2rem;
+  }
+  .uploadText__wrapper {
+    form {
+      label {
+        font-size: 2rem;
+      }
+    }
+  }
+  .uploadText__file-name {
+    font-size: 3rem;
+    text-align: center;
+  }
+  .uploadText__text-content {
+    div {
+      font-size: 2.5rem;
+      width: 100%;
+      padding-right: 30px;
+    }
+  }
+  .uploadText__instruction {
+    font-size: 2.2rem;
+    width: 90%;
+  }
+}
+
+//desktop
 @media only screen and (min-width: 1000px) {
   .uploadText__option-buttons {
     margin-top: 5rem;
@@ -181,20 +281,59 @@
       }
     }
   }
+  .uploadText__title-input {
+  }
   .uploadText__instruction {
-    font-size: 1.2rem;
+    font-size: 1.5rem;
   }
   .uploadText__text-content {
     width: 60%;
   }
-  
-.uploadText__buttons {
-  width: 30%;
 
-}
+  .uploadText__buttons {
+    width: 30%;
+  }
+  .uploadText__text-content {
+    div {
+      font-size: 1.5rem;
+      width: 100%;
+      padding-right: 30px;
+    }
+  }
+  .uploadText__save,
+  .uploadText__cancel {
+    @include button($mySeaBlue, 1.5rem);
 
-.uploadText__save,
-.uploadText__cancel {
-  width: 10vw;
-}
+    width: 10vw;
+  }
+  .uploadText__save,
+  .uploadText__cancel {
+    width: 10vw;
+  }
+  .uploadText__upload-file {
+    width: 30vw;
+  }
+
+  .uploadText__option-buttons {
+    button {
+      @include button($mySeaBlue, 1.3rem);
+      width: 50vw;
+    }
+  }
+
+  .uploadText__wrapper {
+    form {
+      label {
+        font-size: 1.5rem;
+      }
+      .uploadText__go,
+      .uploadText__back {
+        @include button($mySeaBlue, 1.3rem);
+      }
+    }
+  }
+
+  .uploadText__file-name {
+    font-size: 2rem;
+  }
 }

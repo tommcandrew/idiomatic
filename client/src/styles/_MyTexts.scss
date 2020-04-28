@@ -30,3 +30,27 @@
 .myTexts__no-texts {
   text-align: center;
 }
+
+//tablet
+@media only screen and (min-width: 750px) {
+  .myTexts__upload-wrapper {
+    button {
+      @include button($mySeaBlue, 2.5rem);
+    }
+  }
+  .myTexts__no-texts {
+    font-size: 2rem;
+  }
+}
+
+//desktop
+@media only screen and (min-width: 1000px) {
+  .myTexts__upload-wrapper {
+    button {
+      @include button($mySeaBlue, 1.3rem);
+    }
+  }
+  .myTexts__no-texts {
+    font-size: 2rem;
+  }
+}

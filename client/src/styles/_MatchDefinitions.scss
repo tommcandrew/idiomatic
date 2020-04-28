@@ -1,5 +1,3 @@
-
-
 .matchDefinitions__definition {
   font-style: italic;
   width: 90%;
@@ -49,7 +47,6 @@
     padding: 0.2rem 0.5rem;
     flex-basis: 35%;
     margin: 0.3rem 0;
-
   }
 }
 .matchDefinitions__punctuation {
@@ -74,13 +71,13 @@
   }
 }
 
-.matchDefinitions__correct-answer, .matchDefinitions__correct-message {
+.matchDefinitions__correct-answer,
+.matchDefinitions__correct-message {
   font-size: 1.5rem;
   margin: 0.8rem auto;
   border: 1px solid black;
   border-radius: 6px;
   width: 90%;
-  
 }
 
 .matchDefinitions__correct-message {
@@ -112,6 +109,32 @@
   }
 }
 
+//tablet
+@media only screen and (min-width: 750px) {
+  .matchDefinitions__title {
+    font-size: 2.5rem;
+  }
+  .matchDefinitions__options {
+    button {
+      font-size: 2.1rem;
+    }
+  }
+
+  .matchDefinitions__definition {
+    font-size: 2.3rem;
+  }
+  .matchDefinitions__submit {
+    @include button($mySeaBlue, 2.5rem);
+  }
+  .matchDefinitions__next-button {
+    @include button($mySeaBlue, 2.5rem);
+  }
+  .matchDefinitions__correct-message {
+    font-size: 2.5rem;
+  }
+}
+
+//desktop
 @media only screen and (min-width: 1000px) {
   .matchDefinitions__content {
     width: 60%;

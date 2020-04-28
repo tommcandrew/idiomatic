@@ -1,78 +1,99 @@
 .wizard__wrapper {
-    position: fixed;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    background: rgba($color: #000000, $alpha: 0.7);
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background: rgba($color: #000000, $alpha: 0.7);
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .wizard__content {
-    width: 50%;
-    border: 1px solid black;
-    background: white;
-    border-radius: 8px;
-    position: relative;
+  width: 50%;
+  border: 1px solid black;
+  background: white;
+  border-radius: 8px;
+  position: relative;
 }
 
 .wizard__close {
-    font-size: 2.5rem;
-    position: absolute;
-    top: 3px;
-    right: 10px;
-    cursor: pointer;
+  font-size: 2.5rem;
+  position: absolute;
+  top: 3px;
+  right: 10px;
+  cursor: pointer;
 }
 
 .wizard__slide {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .wizard__text {
-    font-size: 1.5rem;
-    text-align: center;
-    margin: 3rem 0 1rem 0;
-    min-height: 80px;
-    width: 90%;
+  font-size: 1.5rem;
+  text-align: center;
+  margin: 3rem 0 1rem 0;
+  min-height: 80px;
+  width: 90%;
 }
 
 .wizard__gif {
-    width: 90%;
-    border: 1px solid black;
-    margin: 1rem 0;
+  width: 90%;
+  border: 1px solid black;
+  margin: 1rem 0;
 }
 
 .wizard__buttons {
-    margin: 1rem 0;
-    width: 50%;
-    display: flex;
-    justify-content: space-around;
-    button {
-        @include button($mySeaBlue, 1.5rem);
-        &:hover {
-          background: $mySeaBlueDark;
-        }
+  margin: 1rem 0;
+  width: 50%;
+  display: flex;
+  justify-content: space-around;
+  button {
+    @include button($mySeaBlue, 1.5rem);
+    &:hover {
+      background: $mySeaBlueDark;
     }
-}
-
-@media only screen and (max-width: 1000px) { 
-    
-.wizard__content {
-    width: 90%;
-    min-height: 90%;
-}
-.wizard__gif {
-    width: 95%;
-}
-.wizard__text {
-    font-size: 1.3rem;
-}
-
-.wizard__buttons {
-    width: 100%;
-}
   }
+}
+
+//tablet
+@media only screen and (max-width: 1000px) {
+  .wizard__content {
+    width: 80%;
+    min-height: 70%;
+  }
+  .wizard__gif {
+    width: 90%;
+  }
+  .wizard__text {
+    font-size: 2rem;
+  }
+  .wizard__buttons {
+    button {
+      @include button($mySeaBlue, 2rem);
+    }
+  }
+}
+
+//mobile
+@media only screen and (max-width: 750px) {
+  .wizard__content {
+    width: 90%;
+    min-height: 85%;
+  }
+  .wizard__gif {
+    width: 95%;
+  }
+  .wizard__text {
+    font-size: 1.3rem;
+  }
+  .wizard__buttons {
+    width: 100%;
+    button {
+      @include button($mySeaBlue, 1.5rem);
+    }
+  }
+}

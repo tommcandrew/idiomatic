@@ -34,3 +34,8 @@
 {"message":"New user registering: olga@gmail.com, Sun, 26 Apr 2020 13:17:29 GMT","level":"info"}
 {"message":"New user registering: julia@gmail.com, Sun, 26 Apr 2020 13:51:10 GMT","level":"info"}
 {"message":"User logging in: julia@gmail.com, Sun, 26 Apr 2020 16:10:38 GMT","level":"info"}
+{"message":"New user registering: niamh@gmail.com, Mon, 27 Apr 2020 22:11:26 GMT","level":"info"}
+{"message":"User logging in: niamh@gmail.com, Tue, 28 Apr 2020 12:24:40 GMT","level":"info"}
+{"message":"User logging in: niamh@gmail.com, Tue, 28 Apr 2020 12:30:23 GMT","level":"info"}
+{"message":"New user registering: sam@gmail.com, Tue, 28 Apr 2020 12:31:23 GMT","level":"info"}
+{"message":"User logging in: sam@gmail.com, Tue, 28 Apr 2020 12:31:55 GMT","level":"info"}

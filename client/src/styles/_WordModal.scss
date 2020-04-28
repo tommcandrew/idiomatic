@@ -1,101 +1,125 @@
+//mobile
 .wordModal__wrapper {
-    position: fixed;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    background: rgba($color: #000000, $alpha: 0.7);
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background: rgba($color: #000000, $alpha: 0.7);
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
-
 .wordModal__content {
-    width: 35%;
-    top: 20vh;
-    background: white;
-    font-size: 1.6rem;
-    padding: 0.7rem;
-    border-radius: 8px;
-    display: flex;
-    flex-direction: column;
-    text-align: center;
-    align-items: center;
+  width: 90%;
+  font-size: 1.2rem;
+  top: 20vh;
+  background: white;
+  padding: 0.7rem;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  align-items: center;
 }
-
 .wordModal__form {
-    width: 80%;
+  width: 100%;
 }
-
-.wordModal__field {
-    display: flex;
-    justify-content: space-between;
-    margin: 0.5rem 0;
-}
-
-.wordModal__field--definition {
-    display: flex;
-    flex-direction: column;
-    align-items: stretch;
-}
-
-.wordModal__wrapper input {
-    width: 200px;
-    font-size: 1.3rem;
-} 
-
+.wordModal__wrapper input,
 .wordModal__wrapper textarea {
-    font-size: 1.3rem;
-    margin-top: 0.5rem;
-    padding: 0.5rem;
+  font-size: 1.3rem;
+  padding: 0rem;
+  width: 200px;
+}
+.wordModal__field {
+  display: flex;
+  justify-content: space-between;
+  margin: 0.5rem 0;
+  align-items: center;
+}
+.wordModal__field--definition {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+}
+.wordModal__label {
+  white-space: nowrap;
+}
+.wordModal__wrapper input {
+  width: 150px;
+}
+.wordModal__wrapper textarea {
+  width: 100%;
 }
 
 .wordModal__buttons {
-    margin: 1rem 0;
-    display: flex;
-    flex-direction: column;
+  margin: 1rem 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  button {
+    @include button($mySeaBlue, 1.3rem);
+    &:hover {
+      background: $mySeaBlueDark;
+    }
+  }
+}
+
+.wordModal__word {
+  margin: 1rem 0;
+}
+
+.wordModal__main-buttons {
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+  margin-top: 0.5rem;
+}
+
+//tablet
+@media only screen and (min-width: 750px) {
+  .wordModal__content {
+    font-size: 2rem;
+    width: 80%;
+  }
+  .wordModal__form {
+    width: 90%;
+  }
+  .wordModal__wrapper input,
+  .wordModal__wrapper textarea {
+    font-size: 2rem;
+  }
+  .wordModal__wrapper textarea {
+    width: 90%;
+  }
+  .wordModal__field--definition {
     align-items: center;
+  }
+  .wordModal__buttons {
     button {
-      @include button($mySeaBlue, 1.3rem);
-      &:hover {
-        background: $mySeaBlueDark;
-      }
+      @include button($mySeaBlue, 2.3rem);
     }
   }
-  
-  .wordModal__word {
-      margin: 1rem 0;
+}
+
+//desktop
+@media only screen and (min-width: 1000px) {
+  .wordModal__content {
+    width: 35%;
+    font-size: 1.6rem;
+  }
+  .wordModal__form {
+    width: 80%;
   }
 
-  .wordModal__main-buttons {
-      width: 100%;
-      display: flex;
-      justify-content: space-around;
-      margin-top: 0.5rem;
+  .wordModal__wrapper textarea {
+    font-size: 1.3rem;
+    margin-top: 0.5rem;
+    padding: 0.5rem;
   }
-
-  @media only screen and (max-width: 1000px) { 
-    .wordModal__content {
-        width: 90%;
-        font-size: 1.2rem;
-    }
-    .wordModal__form {
-        width: 100%;
-    }
-    .wordModal__wrapper input, .wordModal__wrapper textarea {
-        font-size: 1.3rem;
-        padding: 0rem;
-    }
-    .wordModal__field {
-        align-items: center;
-    }
-    .wordModal__label {
-        white-space: nowrap;
-    }
-    .wordModal__wrapper input {
-        width: 150px;
-    } 
-    .wordModal__wrapper textarea {
-        width: 100%;
+  .wordModal__buttons {
+    button {
+      @include button($mySeaBlue, 1.2rem);
     }
   }
+}

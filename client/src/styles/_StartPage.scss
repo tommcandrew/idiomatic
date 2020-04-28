@@ -35,6 +35,35 @@
   font-size: 1.1rem;
 }
 
+//tablet
+@media only screen and (min-width: 750px) {
+  .startPage__content {
+    width: 100%;
+    height: 80%;
+  }
+
+  .startPage__title {
+    font-size: 5rem;
+  }
+
+  .startPage__level {
+    font-size: 2.5rem;
+  }
+
+  .startPage__instructions {
+    font-size: 2rem;
+    margin-top: 5rem;
+    p {
+      margin: 1rem 0;
+    }
+  }
+  .startPage__button {
+    @include button($mySeaBlue, 3rem);
+    margin-top: 10vh;
+  }
+}
+
+//desktop
 @media only screen and (min-width: 1000px) {
   .startPage__content {
     padding: 8rem 30rem;

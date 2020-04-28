@@ -12,12 +12,10 @@
   //start with opacity at 0 as otherwise you can see the menu apparently shrinking when changing to mobile view
   opacity: 0;
   &__show {
-    clip-path: circle(360px at 100% 0%);
     animation: expand 300ms ease-out forwards;
     opacity: 1;
   }
   &__hide {
-    clip-path: circle(0px at 100% -10%);
     animation: shrink 300ms ease-out forwards;
   }
   &__close-button {
@@ -57,5 +55,43 @@
   }
   to {
     clip-path: circle(0px at 100% -10%);
+  }
+}
+
+@keyframes expandTablet {
+  from {
+    clip-path: circle(0px at 100% -10%);
+  }
+  to {
+    clip-path: circle(750px at 100% 0%);
+  }
+}
+
+@keyframes shrinkTablet {
+  from {
+    clip-path: circle(750px at 100% 0%);
+  }
+  to {
+    clip-path: circle(0px at 100% -10%);
+  }
+}
+
+//tablet
+@media only screen and (min-width: 750px) {
+  .mobile-menu {
+    &__show {
+      animation: expandTablet 300ms ease-out forwards;
+    }
+    &__hide {
+      animation: shrinkTablet 300ms ease-out forwards;
+    }
+    &__links {
+      font-size: 3rem;
+      height: 45vh;
+    }
+    &__close-button {
+      font-size: 7rem;
+      top: -15px;
+    }
   }
 }

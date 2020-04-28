@@ -17,17 +17,17 @@
 .texts__texts {
   display: flex;
   flex-wrap: wrap;
-  // height: 100%;
 }
 
-.texts__level-filters, .texts__topic-filters {
+.texts__level-filters,
+.texts__topic-filters {
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 
-
-.texts__topic-list, .texts__level-list {
+.texts__topic-list,
+.texts__level-list {
   display: flex;
   list-style: none;
   justify-content: center;
@@ -48,6 +48,17 @@
   background: red;
 }
 
+//tablet
+@media only screen and (min-width: 750px) {
+  .texts__filter-label {
+    font-size: 2.3rem;
+  }
+  .texts__filter-item {
+    font-size: 2rem;
+  }
+}
+
+//desktop
 @media only screen and (min-width: 1000px) {
   .texts__filter-label {
     font-size: 1.5rem;

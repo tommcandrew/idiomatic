@@ -24,6 +24,21 @@
   }
 }
 
+//tablet
+@media only screen and (min-width: 750px) {
+  .results__title {
+    font-size: 3rem;
+  }
+  .results__info {
+    font-size: 3rem;
+  }
+  .results__button {
+    @include button($mySeaBlue, 2.5rem);
+    width: auto;
+  }
+}
+
+//desktop
 @media only screen and (min-width: 1000px) {
   .results__button {
     width: 10vw;

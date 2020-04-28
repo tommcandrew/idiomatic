@@ -32,8 +32,8 @@ const TextTile = ({
   }
 
   let shortenedTitle
-  if (title.length > 50) {
-    shortenedTitle = title.substr(0, 50) + "..."
+  if (title.length > 40) {
+    shortenedTitle = title.substr(0, 40) + "..."
   }
 
   return (

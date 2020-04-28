@@ -2,11 +2,9 @@
   height: 100vh;
   display: flex;
   flex-direction: column;
-  // justify-content: space-around;
 }
 
-.editor__instruction1,
-.editor__instruction2 {
+.editor__instruction1 {
   font-size: 1.5rem;
   text-align: center;
   font-weight: bold;
@@ -43,145 +41,31 @@
   cursor: pointer;
 }
 
-.editor__table {
-  display: flex;
-  flex-direction: column;
-  width: 95%;
-  margin: 0 auto;
-}
-
-.editor__table .editor__table-header {
-  display: none;
-}
-
-.editor__table-row {
-  display: flex;
-  justify-content: space-around;
-  flex-direction: column;
-  margin-bottom: 1rem;
-}
-
-.editor__table .editor__table-label {
-  font-weight: bold;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex: 1;
-}
-
-.editor__table-cell span {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.editor__table .editor__dic, .editor__table .editor__table-cell input {
-  flex: 3;
-}
-
-
-.editor__table div > * {
-  outline: 1px solid black;
-  text-align: center;
-  flex-grow: 1;
-  font-size: 1.2rem;
-  background: rgb(60, 182, 60);
-  color: white;
-  display: flex;
-  justify-content: center;
-  // align-items: center;
-}
-
-.editor__table input {
-  border: none;
-  background: white;
-  color: black;
-  padding: 5px;
-}
-
-.editor__def {
-  padding: 0 5px;
-}
-
-.editor__table-header span {
-  padding: 5px;
-}
-
-
-.editor__table div > *:nth-child(2) {
-  font-weight: bold;
-}
-
-
-.editor__table div .editor__dic {
-  cursor: pointer;
-}
-
-.editor__table-header > span {
-  font-weight: bold;
-}
-
-.editor__table .editor__delete {
-  cursor: pointer;
-  font-size: 1.7rem;
-  &:hover {
-    color: red;
-  }
-}
-
 .editor__buttons {
+  margin: 1rem 0;
   display: flex;
-  width: 20%;
-  justify-content: space-around;
-  margin: 0 auto;
+  flex-direction: column;
+  align-items: center;
   button {
-    margin-left: 3rem;
-    margin-right: 3rem;
     @include button($mySeaBlue, 1.3rem);
-    margin: 1rem 0;
     &:hover {
       background: $mySeaBlueDark;
     }
   }
 }
 
-.editor__wrapper .editor__table .greyedOut {
-  background: rgb(219, 219, 219);
+//tablet
+@media only screen and (min-width: 750px) {
+  .editor__instruction1 {
+    font-size: 2.3rem;
+  }
+  .editor__text {
+    font-size: 2.3rem;
+    width: 95%;
+  }
+  .editor__buttons {
+    button {
+      @include button($mySeaBlue, 2.5rem);
+    }
+  }
 }
-
-
-  .editor__table .editor__table-header {
-   display: flex;
- }
- 
-.editor__table-row {
-  flex-direction: row;
-  margin-bottom: 0;
-}
-
-.editor__table div > *:nth-child(1) {
-  width: 1%;
-}
-
-.editor__table div > *:nth-child(2) {
-  width: 6%;
-}
-
-.editor__table div > *:nth-child(3) {
-  width: 4%;
-
-}
-
-.editor__table div > *:nth-child(4),
-.editor__table div > *:nth-child(5),
-.editor__table div > *:nth-child(6) {
-  width: 6%;
-}
-
-.editor__table div > *:nth-child(7) {
-  width: 50%;
-}
-.editor__table .editor__table-label {
-  display: none;
-}
-

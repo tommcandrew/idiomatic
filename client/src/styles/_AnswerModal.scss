@@ -50,6 +50,20 @@
   }
 }
 
+//tablet
+@media only screen and (min-width: 750px) {
+  .answerModal__content {
+    font-size: 2.8rem;
+    padding: 1.5rem;
+  }
+  .answerModal__buttons {
+    button {
+      @include button($mySeaBlue, 2.5rem);
+    }
+  }
+}
+
+//desktop
 @media only screen and (min-width: 1000px) {
   .answerModal__content {
     width: 40%;

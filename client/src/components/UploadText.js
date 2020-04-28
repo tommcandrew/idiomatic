@@ -1,6 +1,8 @@
 import React, { useState, useEffect, useRef } from "react";
 import axios from "axios";
 import AlertWrapper from "./AlertWrapper";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faUpload } from "@fortawesome/free-solid-svg-icons";
 
 const UploadText = ({
   setCurrentComponent,
@@ -8,7 +10,7 @@ const UploadText = ({
   setInfoMessages,
   infoMessages,
   savedTexts,
-  closeAlert
+  closeAlert,
 }) => {
   const [uploadedFile, setUploadedFile] = useState(null);
   const [showOptionButtons, setShowOptionButtons] = useState(true);
@@ -18,12 +20,17 @@ const UploadText = ({
   const [selectedWords, setSelectedWords] = useState([]);
   const [allSentences, setAllSentences] = useState([]);
   const [loading, setLoading] = useState(false);
+  const [fileName, setFileName] = useState(null);
 
   //necessary to avoid handleSelectWord using stale state
   const refValue = useRef(selectedWords);
   useEffect(() => {
     refValue.current = selectedWords;
   });
+
+  const handleChooseFile = (e) => {
+    setFileName(e.target.value);
+  };
 
   const goBack = () => {
     setShowUploadForm(false);
@@ -32,6 +39,7 @@ const UploadText = ({
   };
 
   const handleShowUploadForm = () => {
+    setFileName(null);
     setShowOptionButtons(false);
     setShowUploadForm(true);
   };
@@ -41,11 +49,11 @@ const UploadText = ({
     setShowPasteForm(true);
   };
 
-  const handleUpload = e => {
+  const handleUpload = (e) => {
     e.preventDefault();
     if (!e.target.elements.myfile && !e.target.pasted.value) {
       setInfoMessages([
-        { text: "Either choose a file or paste some text", type: "warning" }
+        { text: "Either choose a file or paste some text", type: "warning" },
       ]);
       return;
     }
@@ -54,12 +62,12 @@ const UploadText = ({
     if (showUploadForm) {
       formData.append("file", e.target.elements.myfile.files[0]);
       axios
-        .post("/upload", formData, {
+        .post("/api/upload", formData, {
           headers: {
-            "Content-Type": "multipart/form-data"
-          }
+            "Content-Type": "multipart/form-data",
+          },
         })
-        .then(res => {
+        .then((res) => {
           if (res.data.content.length < 50) {
             alert("The text must be at least 50 characters long");
             return;
@@ -70,8 +78,8 @@ const UploadText = ({
                 ...infoMessages,
                 {
                   text: "A text with that name already exists",
-                  type: "warning"
-                }
+                  type: "warning",
+                },
               ]);
               return;
             }
@@ -90,7 +98,7 @@ const UploadText = ({
       if (!title) {
         setInfoMessages([
           ...infoMessages,
-          { text: "You must add a title", type: "warning" }
+          { text: "You must add a title", type: "warning" },
         ]);
         return;
       }
@@ -99,8 +107,8 @@ const UploadText = ({
           ...infoMessages,
           {
             text: "The text must be at least 50 characters long",
-            type: "warning"
-          }
+            type: "warning",
+          },
         ]);
         return;
       }
@@ -115,7 +123,7 @@ const UploadText = ({
 
   useEffect(() => {
     //wait for code above to finish before doing the rest
-    const splitSentences = allSentences.map(sentence => {
+    const splitSentences = allSentences.map((sentence) => {
       return sentence.match(/[\w'’]+|[.,!?;]/g);
     });
     const splitSentencesWithObjs = splitSentences.map(
@@ -128,38 +136,38 @@ const UploadText = ({
     setSplitSentencesWithObjs(splitSentencesWithObjs);
   }, [allSentences]);
 
-  const handleSubmit = e => {
+  const handleSubmit = (e) => {
     setLoading(true);
     e.preventDefault();
     const token = localStorage.getItem("idiomatic-token");
     axios
       .post(
-        "/saveText",
+        "/api/saveText",
         {
           title: uploadedFile.title,
           selectedWords,
-          content: uploadedFile.content
+          content: uploadedFile.content,
         },
         {
           headers: {
-            Authorization: "Bearer " + token
-          }
+            Authorization: "Bearer " + token,
+          },
         }
       )
-      .then(res => {
+      .then((res) => {
         setInfoMessages(res.data);
         setCurrentComponent("MyTexts");
         fetchSavedTexts();
       });
   };
 
-  const handleSelectWord = e => {
+  const handleSelectWord = (e) => {
     const sentenceIndex = parseInt(e.target.dataset.sentenceIndex);
     const elementIndex = parseInt(e.target.dataset.elementIndex);
     const element = e.target.innerText;
     if (e.target.classList.contains("uploadText__word--selected")) {
       const updatedSelectedWords = selectedWords.filter(
-        obj =>
+        (obj) =>
           obj.sentenceIndex !== sentenceIndex ||
           obj.elementIndex !== elementIndex
       );
@@ -169,7 +177,7 @@ const UploadText = ({
 
     setSelectedWords([
       ...refValue.current,
-      { element, sentenceIndex, elementIndex }
+      { element, sentenceIndex, elementIndex },
     ]);
   };
 
@@ -206,13 +214,27 @@ const UploadText = ({
       )}
       {showUploadForm && (
         <form onSubmit={handleUpload}>
-          <label htmlFor="myfile">Select a file (must be .txt or .pdf):</label>
-          <input
-            type="file"
-            id="myfile"
-            name="myfile"
-            className="uploadText__choose-file"
-          ></input>
+          <label
+            htmlFor="myfile"
+            className={`uploadText__upload-file ${
+              fileName ? "uploadText__upload-file--hidden" : null
+            }`}
+          >
+            <FontAwesomeIcon
+              icon={faUpload}
+              className="uploadText__upload-icon"
+            />
+            <input
+              type="file"
+              id="myfile"
+              name="myfile"
+              onChange={handleChooseFile}
+            ></input>
+            Select a file (must be .txt or .pdf):
+          </label>
+          {fileName && (
+            <span className="uploadText__file-name">{fileName}</span>
+          )}
           <div className="uploadText__submit-buttons">
             <button type="submit" className="uploadText__go">
               Go

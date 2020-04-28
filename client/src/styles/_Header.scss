@@ -28,6 +28,7 @@
   cursor: pointer;
 }
 
+//menu that appears when hover over user icon (desktop)
 .header__options-menu {
   position: absolute;
   width: 15vw;
@@ -56,6 +57,18 @@
   }
 }
 
+//tablet
+@media only screen and (min-width: 750px) {
+  .header__hamburger {
+    & div {
+      width: 55px;
+      height: 8px;
+      margin: 10px 0;
+    }
+  }
+}
+
+//desktop
 @media only screen and (min-width: 1000px) {
   .header__wrapper {
     button {

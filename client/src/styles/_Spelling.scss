@@ -20,6 +20,7 @@
   input {
     font-size: 1.5rem;
     border: 1px solid #333;
+    padding: 0.1rem 0.3rem;
   }
   display: flex;
   flex-direction: column;
@@ -67,7 +68,30 @@
   font-size: 2rem;
 }
 
+//tablet
+@media only screen and (min-width: 750px) {
+  .spelling__title {
+    font-size: 2.5rem;
+    margin: 2rem 0;
+  }
 
+  .spelling__play-icon {
+    font-size: 3rem;
+  }
+  .spelling__question-number {
+    font-size: 3rem;
+  }
+  .spelling__content {
+    input {
+      font-size: 2.5rem;
+    }
+    button {
+      @include button($mySeaBlue, 2.5rem);
+    }
+  }
+}
+
+//desktop
 @media only screen and (min-width: 1000px) {
   .spelling__wrapper {
     padding-top: 10vh;
@@ -75,5 +99,18 @@
   .spelling__title {
     font-size: 1.6rem;
   }
+  .spelling__question-number {
+    font-size: 2rem;
+  }
+  .spelling__play-icon {
+    font-size: 2rem;
+  }
+  .spelling__content {
+    input {
+      font-size: 1.3rem;
+    }
+    button {
+      @include button($mySeaBlue, 1.3rem);
+    }
+  }
 }
-

@@ -36,7 +36,9 @@
   font-weight: bold;
 }
 
-table, th, td {
+table,
+th,
+td {
   border-bottom: 1px solid rgba(0, 0, 0, 0.3);
   border-collapse: collapse;
 }
@@ -53,3 +55,32 @@ tr:nth-child(odd) {
   background-color: white;
 }
 
+//tablet
+@media only screen and (min-width: 750px) {
+  .myWords__title {
+    font-size: 3.5rem;
+  }
+  .myWords__wrapper {
+    button {
+      @include button($mySeaBlue, 2rem);
+    }
+  }
+  .myWords__content {
+    font-size: 2rem;
+  }
+}
+
+//desktop
+@media only screen and (min-width: 1000px) {
+  .myWords__title {
+    font-size: 2.5rem;
+  }
+  .myWords__wrapper {
+    button {
+      @include button($mySeaBlue, 1.1rem);
+    }
+  }
+  .myWords__content {
+    font-size: 1.1rem;
+  }
+}

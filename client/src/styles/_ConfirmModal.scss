@@ -36,6 +36,21 @@
   }
 }
 
+//tablet
+@media only screen and (min-width: 750px) {
+  .confirmModal__content {
+    font-size: 2.5rem;
+    padding: 3rem;
+  }
+  .confirmModal__buttons {
+    margin-top: 1rem;
+    button {
+      @include button($mySeaBlue, 2.5rem);
+    }
+  }
+}
+
+//desktop
 @media only screen and (min-width: 1000px) {
   .confirmModal__content {
     width: 40%;

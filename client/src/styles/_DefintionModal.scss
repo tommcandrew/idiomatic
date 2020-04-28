@@ -48,6 +48,23 @@
   cursor: pointer;
 }
 
+//tablet
+@media only screen and (min-width: 750px) {
+  .definitionModal__content {
+    font-size: 2.5rem;
+  }
+  .definitionModal__content > * {
+    margin: 0.8rem 0;
+  }
+  .definitionModal__play-icon {
+    font-size: 2.5rem;
+  }
+  .definitionModal__close {
+    @include button(black, 2rem);
+  }
+}
+
+//desktop
 @media only screen and (min-width: 1000px) {
   .definitionModal__content {
     width: 40%;

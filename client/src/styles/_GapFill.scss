@@ -69,14 +69,6 @@
   color: blue;
 }
 
-.gapFill__submit {
-  @include button($mySeaBlue, 1.3rem);
-  margin: 1rem 0;
-  &:hover {
-    background: $mySeaBlueDark;
-  }
-}
-
 .gapFill__filled--right {
   // color: green;
   font-weight: bold;
@@ -91,7 +83,8 @@
   cursor: pointer;
 }
 
-.gapFill__correct-answer, .gapFill__correct-message {
+.gapFill__correct-answer,
+.gapFill__correct-message {
   font-size: 1.5rem;
   margin: 0.8rem auto;
   border: 1px solid black;
@@ -111,6 +104,14 @@
   background: rgb(98, 196, 98);
 }
 
+.gapFill__submit {
+  @include button($mySeaBlue, 1.3rem);
+  margin: 1rem 0;
+  &:hover {
+    background: $mySeaBlueDark;
+  }
+}
+
 .gapFill__next {
   @include button($mySeaBlue, 1.3rem);
   margin: 1rem 0 3rem 0;
@@ -119,6 +120,39 @@
   }
 }
 
+//tablet
+@media only screen and (min-width: 750px) {
+  .gapFill__title {
+    margin: 2rem 0 0 0;
+    font-size: 3rem;
+  }
+  .gapFill__sentence,
+  .gapFill__result-sentence {
+    font-size: 2.5rem;
+    display: flex;
+    flex-wrap: wrap;
+    line-height: 1.5em;
+  }
+  .gapFill__submit {
+    @include button($mySeaBlue, 2.5rem);
+  }
+  .gapFill__next {
+    @include button($mySeaBlue, 2.5rem);
+    margin: 1rem 0 3rem 0;
+  }
+  .gapFill__correct-answer,
+  .gapFill__correct-message {
+    font-size: 2.5rem;
+  }
+  .gapFill__content,
+  .gapFill__results {
+    input {
+      font-size: 2.5rem;
+    }
+  }
+}
+
+//desktop
 @media only screen and (min-width: 1000px) {
   .gapFill__content,
   .gapFill__results {

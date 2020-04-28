@@ -34,8 +34,7 @@ const Main = () => {
   const [savedTexts, setSavedTexts] = useState([]);
   const [studiedWords, setStudiedWords] = useState([]);
 
-  const { isNewUser, setIsNewUser } = useContext(AuthContext)
-
+  const { isNewUser, setIsNewUser } = useContext(AuthContext);
 
   useEffect(() => {
     fetchSavedTexts();
@@ -53,28 +52,28 @@ const Main = () => {
   const fetchSavedTexts = () => {
     const token = localStorage.getItem("idiomatic-token");
     axios
-      .get("/savedtexts", {
+      .get("/api/savedtexts", {
         headers: {
-          Authorization: "Bearer " + token
-        }
+          Authorization: "Bearer " + token,
+        },
       })
-      .then(res => {
+      .then((res) => {
         setSavedTexts(res.data.texts);
         setCompletedTexts(res.data.completedTexts);
       });
   };
 
   //would id be better?
-  const deleteText = title => {
+  const deleteText = (title) => {
     const token = localStorage.getItem("idiomatic-token");
     axios
       .put(
-        "/deleteText",
+        "/api/deleteText",
         { title },
         {
           headers: {
-            Authorization: "Bearer " + token
-          }
+            Authorization: "Bearer " + token,
+          },
         }
       )
       .then(() => {
@@ -87,19 +86,19 @@ const Main = () => {
     let selectedText;
     //if user is looking at own uploaded texts
     if (currentComponent === "MyTexts") {
-      selectedText = savedTexts.filter(text => text.title === title)[0];
+      selectedText = savedTexts.filter((text) => text.title === title)[0];
     } else {
       //or site's texts
-      selectedText = texts.filter(text => text.title === title)[0];
+      selectedText = texts.filter((text) => text.title === title)[0];
     }
     setSelectedText(selectedText);
-    setCorrectAnswers(0)
+    setCorrectAnswers(0);
     setCurrentComponent("StartPage");
     //used when giving final results
     setNumQuestions(selectedText.targetWordObjs.length * 3);
   };
 
-  const incrementCorrectAnswers = num => {
+  const incrementCorrectAnswers = (num) => {
     setCorrectAnswers(correctAnswers + num);
   };
 
@@ -107,57 +106,57 @@ const Main = () => {
     const token = localStorage.getItem("idiomatic-token");
     axios
       .post(
-        "/complete",
+        "/api/complete",
         { title: selectedText.title },
         {
           headers: {
-            Authorization: "Bearer " + token
-          }
+            Authorization: "Bearer " + token,
+          },
         }
       )
       //probably not very efficient to fetch all texts again
       .then(() => {
         fetchSavedTexts();
         setInfoMessages([
-          { text: "New words added to My Words!", type: "info" }
+          { text: "New words added to My Words!", type: "info" },
         ]);
       });
   };
 
   const handleEditText = (e, title) => {
     e.stopPropagation();
-    const selectedText = savedTexts.find(text => text.title === title);
+    const selectedText = savedTexts.find((text) => text.title === title);
     setSelectedText(selectedText);
     setCurrentComponent("Editor");
   };
 
-  const updateText = updatedText => {
+  const updateText = (updatedText) => {
     const token = localStorage.getItem("idiomatic-token");
     axios
       .put(
-        "/updateText",
+        "/api/updateText",
         { updatedText },
         {
           headers: {
-            Authorization: "Bearer " + token
-          }
+            Authorization: "Bearer " + token,
+          },
         }
       )
-      .then(res => {
+      .then((res) => {
         fetchSavedTexts();
       });
   };
 
-  const handleStartFlashcardStudy = studiedWords => {
+  const handleStartFlashcardStudy = (studiedWords) => {
     if (studiedWords.length === 0) {
       setInfoMessages([
-        { text: "You don't have any studied words yet.", type: "warning" }
+        { text: "You don't have any studied words yet.", type: "warning" },
       ]);
       return;
     }
-    setStudiedWords(studiedWords)
+    setStudiedWords(studiedWords);
     setCurrentComponent("FlashcardContainer");
-  }
+  };
 
   return (
     <div className="main__wrapper">
@@ -255,7 +254,12 @@ const Main = () => {
         />
       )}
       {currentComponent === "FlashcardContainer" && (
-        <FlashcardContainer studiedWords={studiedWords} setCurrentComponent={setCurrentComponent} infoMessages={infoMessages} setInfoMessages={setInfoMessages} />
+        <FlashcardContainer
+          studiedWords={studiedWords}
+          setCurrentComponent={setCurrentComponent}
+          infoMessages={infoMessages}
+          setInfoMessages={setInfoMessages}
+        />
       )}
       {currentComponent === "MyAccount" && <MyAccount />}
       {infoMessages.length > 0 && <AlertWrapper messages={infoMessages} />}

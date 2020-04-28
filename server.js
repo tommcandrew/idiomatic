@@ -10,7 +10,7 @@ const dictionaryKey = "083cdcb6-cd9f-4856-a7b6-21c474d149c8";
 const pluralize = require("pluralize");
 const winston = require("winston");
 const logger = winston.createLogger({
-  transports: [new winston.transports.File({ filename: "logs.txt" })]
+  transports: [new winston.transports.File({ filename: "logs.txt" })],
 });
 const path = require("path");
 
@@ -19,7 +19,7 @@ mongoose.connect(
   {
     useNewUrlParser: true,
     useUnifiedTopology: true,
-    useFindAndModify: false
+    useFindAndModify: false,
   },
   () => console.log("connected to db")
 );
@@ -30,7 +30,7 @@ app.use(express.json());
 
 app.use(fileUpload());
 
-// app.use(express.static(path.join(__dirname, "client/build")));
+app.use(express.static(path.join(__dirname, "client/build")));
 
 const verifyToken = (req, res, next) => {
   const bearer = req.headers["authorization"];
@@ -51,7 +51,7 @@ const verifyToken = (req, res, next) => {
 app.post("/login", (req, res) => {
   const { email, password } = req.body;
   const time = new Date(Date.now()).toUTCString();
-  User.findOne({ email }).then(user => {
+  User.findOne({ email }).then((user) => {
     if (!user) {
       res.status(403).send("That email is not registered");
     } else {
@@ -66,7 +66,7 @@ app.post("/login", (req, res) => {
             jwt.sign({ user }, "secretkey", (err, token) => {
               res.status(200).send({
                 token: token,
-                userName: user.name
+                userName: user.name,
               });
             });
           }
@@ -91,7 +91,7 @@ app.post("/register", (req, res) => {
     res.status(400).send("Passwords must match");
     return;
   }
-  User.findOne({ email }).then(user => {
+  User.findOne({ email }).then((user) => {
     if (user) {
       res.status(403).send("That email is already registered");
       return;
@@ -101,7 +101,7 @@ app.post("/register", (req, res) => {
   bcrypt.genSalt(10, (err, salt) => {
     bcrypt.hash(user.password, salt, (err, hash) => {
       user.password = hash;
-      user.save().then(user => {
+      user.save().then((user) => {
         logger.info("New user registering: " + email + ", " + time);
         jwt.sign({ user }, "secretkey", (err, token) => {
           res.send({ token });
@@ -134,12 +134,12 @@ app.post("/upload", async (req, res) => {
 app.get("/savedTexts", verifyToken, (req, res) => {
   const email = req.tokenData.user.email;
   User.findOne({ email })
-    .then(user => {
+    .then((user) => {
       res
         .status(200)
         .send({ texts: user.texts, completedTexts: user.completedTexts });
     })
-    .catch(err => {
+    .catch((err) => {
       console.log(err);
     });
 });
@@ -148,19 +148,18 @@ app.post("/complete", verifyToken, (req, res) => {
   const email = req.tokenData.user.email;
   const title = req.body.title;
   User.findOne({ email: email })
-    .then(user => {
+    .then((user) => {
       user.completedTexts.push(title);
       user
         .save()
         .then(() => {
-          res
-            .status(200).send("User's completed texts updated")
+          res.status(200).send("User's completed texts updated");
         })
-        .catch(err => {
+        .catch((err) => {
           console.log(err);
         });
     })
-    .catch(err => {
+    .catch((err) => {
       console.log(err);
     });
 });
@@ -172,7 +171,7 @@ app.post("/deleteAccount", verifyToken, (req, res) => {
     .then(() => {
       res.status(200).send("Account deleted");
     })
-    .catch(err => {
+    .catch((err) => {
       console.log(err);
     });
 });
@@ -189,9 +188,9 @@ app.post("/getWordData", async (req, res) => {
   }
   const response = await axios.get(
     "https://dictionaryapi.com/api/v3/references/learners/json/" +
-    word +
-    "?key=" +
-    dictionaryKey
+      word +
+      "?key=" +
+      dictionaryKey
   );
 
   let definition;
@@ -241,7 +240,7 @@ app.post("/getWordData", async (req, res) => {
     singularForm: singularForm,
     wordType: wordType,
     infinitiveForm: infinitiveForm,
-    positiveForm
+    positiveForm,
   };
   res.status(200).send(wordData);
 });
@@ -261,9 +260,9 @@ app.post("/saveText", verifyToken, async (req, res) => {
     }
     const response = await axios.get(
       "https://dictionaryapi.com/api/v3/references/learners/json/" +
-      wordToSearch +
-      "?key=" +
-      dictionaryKey
+        wordToSearch +
+        "?key=" +
+        dictionaryKey
     );
     //definition
     if (!response.data[0].shortdef) {
@@ -273,7 +272,7 @@ app.post("/saveText", verifyToken, async (req, res) => {
           selectedWords[i].element +
           '"' +
           " was not found in the dictionary",
-        type: "warning"
+        type: "warning",
       });
       break;
     }
@@ -325,13 +324,13 @@ app.post("/saveText", verifyToken, async (req, res) => {
       singularForm: singularForm,
       wordType: wordType,
       infinitiveForm: infinitiveForm,
-      positiveForm
+      positiveForm,
     });
   }
   if (targetWordObjs.length < 3) {
     infoMessages.push({
       text: "Not saved - text must contain at least 3 target words",
-      type: "failure"
+      type: "failure",
     });
     res.status(200).send(infoMessages);
     return;
@@ -341,19 +340,19 @@ app.post("/saveText", verifyToken, async (req, res) => {
     added: date,
     content,
     targetWordObjs,
-    _id: mongoose.Types.ObjectId()
+    _id: mongoose.Types.ObjectId(),
   };
   const email = req.tokenData.user.email;
 
   User.findOne({ email })
-    .then(user => {
+    .then((user) => {
       user.texts.push(text);
       user.save().then(() => {
         infoMessages.push({ text: "Text saved", type: "success" });
         res.status(200).send(infoMessages);
       });
     })
-    .catch(err => {
+    .catch((err) => {
       console.log(err);
     });
 });
@@ -369,7 +368,7 @@ app.put("/deleteText", verifyToken, (req, res) => {
     .then(() => {
       res.status(200).send("Text deleted");
     })
-    .catch(err => {
+    .catch((err) => {
       console.log(err);
     });
 });
@@ -378,7 +377,7 @@ app.put("/updateText", verifyToken, (req, res) => {
   const email = req.tokenData.user.email;
   const { updatedText } = req.body;
   User.findOne({ email })
-    .then(user => {
+    .then((user) => {
       for (let i = 0; i < user.texts.length; i++) {
         //not using strict equality because id on document in db will be object while updatedText._id will be string
         if (user.texts[i]._id == updatedText._id) {
@@ -391,11 +390,11 @@ app.put("/updateText", verifyToken, (req, res) => {
         .then(() => {
           res.status(200).send("Text updated");
         })
-        .catch(err => {
+        .catch((err) => {
           console.log(err);
         });
     })
-    .catch(err => {
+    .catch((err) => {
       console.log(err);
     });
 });
