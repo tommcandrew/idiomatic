@@ -34,13 +34,24 @@
   }
   .results__button {
     @include button($mySeaBlue, 2.5rem);
-    width: auto;
+    width: 40vw;
   }
 }
 
 //desktop
 @media only screen and (min-width: 1000px) {
   .results__button {
+    width: 10vw;
+  }
+  .results__title {
+    font-size: 2rem;
+  }
+  .results__info {
+    font-size: 2rem;
+  }
+  .results__button {
+    @include button($mySeaBlue, 1.3rem);
+    margin: 1rem 0;
     width: 10vw;
   }
 }

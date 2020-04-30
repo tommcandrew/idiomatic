@@ -69,8 +69,15 @@
   .definitionModal__content {
     width: 40%;
     padding: 2rem 1rem;
+    font-size: 1.6rem;
     h3 {
       margin-bottom: 1rem;
     }
+  }
+  .definitionModal__play-icon {
+    font-size: 1.3rem;
+  }
+  .definitionModal__close {
+    @include button(black, 1rem);
   }
 }

@@ -66,4 +66,10 @@
   .reader__text {
     font-size: 1.6rem;
   }
+  .reader__exercises-button {
+    @include button($mySeaBlue, 1.3rem);
+  }
+  .reader__title {
+    font-size: 2rem;
+  }
 }

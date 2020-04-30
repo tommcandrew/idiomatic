@@ -59,4 +59,12 @@
       margin-bottom: 1rem;
     }
   }
+  .confirmModal__content {
+    font-size: 1.3rem;
+  }
+  .confirmModal__buttons {
+    button {
+      @include button($mySeaBlue, 1.3rem);
+    }
+  }
 }

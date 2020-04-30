@@ -3,7 +3,7 @@ import React from "react";
 const OptionsMenu = ({
   logout,
   setCurrentComponent,
-  setMouseOverOptionsMenu
+  setMouseOverOptionsMenu,
 }) => {
   return (
     <div
@@ -13,7 +13,7 @@ const OptionsMenu = ({
     >
       <ul>
         <li>Settings</li>
-        <li onClick={() => setCurrentComponent("MyProfile")}>Profile</li>
+        <li onClick={() => setCurrentComponent("MyAccount")}>Account</li>
       </ul>
       <button onClick={logout}>Log out</button>
     </div>

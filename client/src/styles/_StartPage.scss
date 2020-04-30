@@ -69,4 +69,17 @@
     padding: 8rem 30rem;
     margin-top: 5vh;
   }
+
+  .startPage__title {
+    font-size: 3rem;
+  }
+
+  .startPage__instructions {
+    font-size: 1.1rem;
+    margin-top: 3rem;
+  }
+  .startPage__button {
+    @include button($mySeaBlue, 2rem);
+    margin-top: 1rem;
+  }
 }

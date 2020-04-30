@@ -59,10 +59,16 @@
 
 //desktop
 @media only screen and (min-width: 1000px) {
+  .myAccount__title {
+    font-size: 2rem;
+  }
   .myAccount__list {
     width: 40vw;
     li {
       font-size: 2em;
     }
+  }
+  .myAccount__delete-account {
+    @include button(red, 1.3rem);
   }
 }
