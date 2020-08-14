@@ -39,3 +39,5 @@
 {"message":"User logging in: niamh@gmail.com, Tue, 28 Apr 2020 12:30:23 GMT","level":"info"}
 {"message":"New user registering: sam@gmail.com, Tue, 28 Apr 2020 12:31:23 GMT","level":"info"}
 {"message":"User logging in: sam@gmail.com, Tue, 28 Apr 2020 12:31:55 GMT","level":"info"}
+{"message":"New user registering: cheddar@gmail.com, Tue, 12 May 2020 15:27:17 GMT","level":"info"}
+{"message":"New user registering: tim@gmail.com, Sat, 06 Jun 2020 14:53:20 GMT","level":"info"}

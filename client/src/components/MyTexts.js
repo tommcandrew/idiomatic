@@ -6,11 +6,12 @@ const MyTexts = ({
   handleChooseText,
   deleteText,
   setCurrentComponent,
-  handleEditText
+  handleEditText,
 }) => {
+  console.log("this is MyTexts");
   return (
     <div className="myTexts__wrapper">
-            <div className="myTexts__upload-wrapper">
+      <div className="myTexts__upload-wrapper">
         <button onClick={() => setCurrentComponent("UploadText")}>
           Upload Text
         </button>
@@ -32,7 +33,6 @@ const MyTexts = ({
       ) : (
         <h2 className="myTexts__no-texts">You don't have any saved texts.</h2>
       )}
-
     </div>
   );
 };

@@ -1,3 +1,4 @@
+//mobile
 .editor__wrapper {
   height: 100vh;
   display: flex;
@@ -66,6 +67,18 @@
   .editor__buttons {
     button {
       @include button($mySeaBlue, 2.5rem);
+    }
+  }
+}
+
+//desktop
+@media only screen and (min-width: 1000px) {
+  .editor__text {
+    font-size: 1.6rem;
+  }
+  .editor__buttons {
+    button {
+      @include button($mySeaBlue, 1.3rem);
     }
   }
 }

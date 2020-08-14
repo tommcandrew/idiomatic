@@ -1,15 +1,14 @@
 .definitionModal__wrapper {
-  position: fixed;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
+  align-items: center;
+  animation: fade-in 150ms linear forwards;
   background: rgba($color: #000000, $alpha: 0.7);
+  bottom: 0;
   display: flex;
   justify-content: center;
-  align-items: center;
-  opacity: 0;
-  animation: fade-in 150ms linear forwards;
+  left: 0;
+  position: fixed;
+  right: 0;
+  top: 0;
 }
 
 @keyframes fade-in {
@@ -22,21 +21,22 @@
 }
 
 .definitionModal__content {
-  width: 90%;
-  top: 20vh;
+  align-items: center;
   background: white;
-  font-size: 1.6rem;
-  padding: 0.7rem;
   border-radius: 8px;
   display: flex;
   flex-direction: column;
-  text-align: center;
-  align-items: center;
+  font-size: 1.6rem;
+  padding: 0.7rem;
+  width: 90%;
+}
+
+.definitionModal__content > * {
+  margin: 0.8rem 0;
 }
 
 .definitionModal__close {
   @include button(black, 1rem);
-  color: white;
   margin: 0 auto;
   text-align: center;
   margin-top: 1rem;
@@ -53,9 +53,6 @@
   .definitionModal__content {
     font-size: 2.5rem;
   }
-  .definitionModal__content > * {
-    margin: 0.8rem 0;
-  }
   .definitionModal__play-icon {
     font-size: 2.5rem;
   }
@@ -67,12 +64,12 @@
 //desktop
 @media only screen and (min-width: 1000px) {
   .definitionModal__content {
-    width: 40%;
-    padding: 2rem 1rem;
     font-size: 1.6rem;
-    h3 {
-      margin-bottom: 1rem;
-    }
+    padding: 2rem 1rem;
+    width: 40%;
+  }
+  .definitionModal__word {
+    margin-bottom: 1rem;
   }
   .definitionModal__play-icon {
     font-size: 1.3rem;

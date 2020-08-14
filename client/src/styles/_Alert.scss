@@ -1,56 +1,45 @@
-.alerts__wrapper {
-  display: flex;
-  flex-direction: column;
-  position: fixed;
-  top: 50px;
+//mobile
+.alert__wrapper {
   align-items: center;
   animation: bounce-in 2500ms forwards;
+  display: flex;
+  flex-direction: column;
   left: 50%;
+  position: fixed;
+  top: 55px;
   transform: translate(-50%);
   width: 100%;
 }
 
 .alert {
-  border-radius: 6px;
-  display: flex;
-  flex-grow: 1;
-  font-size: 1.8rem;
-  padding: 10px;
-  z-index: 10;
-  color: white;
-  justify-content: center;
   align-items: center;
-  margin: 0.5rem 0;
+  border-radius: 6px;
+  color: white;
+  display: flex;
+  font-size: 1.8rem;
   min-width: 65vw;
+  padding: 10px;
+}
+
+.alert {
+  &--success {
+    background: rgb(98, 196, 98);
+  }
+  &--failure {
+    background: rgb(250, 66, 66);
+  }
+  &--warning {
+    background: gold;
+  }
+  &--info {
+    background: rgb(60, 60, 141);
+  }
 }
 
 .alert__text {
   flex-grow: 5;
-  text-align: center;
   font-size: 1.2rem;
-}
-
-.alert--success {
-  background: rgb(98, 196, 98);
-}
-.alert--failure {
-  background: rgb(250, 66, 66);
-}
-
-.alert--warning {
-  background: gold;
-}
-
-.alert--info {
-  background: rgb(60, 60, 141);
-}
-
-.alert__icon-wrapper {
-  flex-grow: 1;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-right: 0.5rem;
+  text-align: center;
 }
 
 @keyframes bounce-in {

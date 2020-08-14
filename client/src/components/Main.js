@@ -14,7 +14,7 @@ import Spelling from "./Spelling";
 import Results from "./Results";
 import MyWords from "./MyWords";
 import MyAccount from "./MyAccount";
-import AlertWrapper from "./AlertWrapper";
+import Alert from "./Alert";
 import Editor from "./Editor";
 import FlashcardContainer from "./FlashcardContainer";
 import Wizard from "./Wizard";
@@ -262,7 +262,7 @@ const Main = () => {
         />
       )}
       {currentComponent === "MyAccount" && <MyAccount />}
-      {infoMessages.length > 0 && <AlertWrapper messages={infoMessages} />}
+      {infoMessages.length > 0 && <Alert messages={infoMessages} />}
       {isNewUser && <Wizard setIsNewUser={setIsNewUser} />}
     </div>
   );

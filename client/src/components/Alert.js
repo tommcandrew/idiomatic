@@ -4,10 +4,10 @@ import {
   faCheckCircle,
   faTimesCircle,
   faExclamationCircle,
-  faLightbulb
+  faLightbulb,
 } from "@fortawesome/free-solid-svg-icons";
 
-const getIcon = message => {
+const getIcon = (message) => {
   let icon;
   if (message.type === "success") {
     icon = faCheckCircle;
@@ -21,12 +21,13 @@ const getIcon = message => {
   return icon;
 };
 
-const AlertWrapper = ({ messages }) => {
+const Alert = ({ messages }) => {
+  console.log("this is Alert");
   return (
-    <div className="alerts__wrapper">
+    <div className="alert__wrapper">
       {messages.map((message, index) => (
         <div className={`alert alert--${message.type}`} key={"alert" + index}>
-          <span className="alert__icon-wrapper">
+          <span>
             <FontAwesomeIcon icon={getIcon(message)} />
           </span>
           <p className="alert__text">{message.text}</p>
@@ -36,4 +37,4 @@ const AlertWrapper = ({ messages }) => {
   );
 };
 
-export default AlertWrapper;
+export default Alert;

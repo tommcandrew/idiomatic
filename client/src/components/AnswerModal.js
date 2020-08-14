@@ -1,7 +1,7 @@
 import React from "react";
 
 const AnswerModal = ({ setShowAnswerModal, answer, gotToNextQuestion }) => {
-  const handleCloseModal = e => {
+  const handleCloseModal = (e) => {
     if (
       e.target.classList.contains("answerModal__wrapper") ||
       e.target.classList.contains("answerModal__close")

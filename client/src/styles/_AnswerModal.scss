@@ -1,15 +1,15 @@
+//mobile
 .answerModal__wrapper {
-  position: fixed;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
+  align-items: center;
+  animation: fade-in 150ms linear forwards;
   background: rgba($color: #000000, $alpha: 0.7);
+  bottom: 0;
   display: flex;
   justify-content: center;
-  align-items: center;
-  opacity: 0;
-  animation: fade-in 150ms linear forwards;
+  left: 0;
+  position: fixed;
+  right: 0;
+  top: 0;
 }
 
 @keyframes fade-in {
@@ -22,16 +22,12 @@
 }
 
 .answerModal__content {
-  width: 90%;
-  top: 20vh;
   background: white;
+  border-radius: 8px;
   font-size: 1.6rem;
   padding: 0.7rem;
-  border-radius: 8px;
-  display: flex;
-  flex-direction: column;
   text-align: center;
-  align-items: center;
+  width: 90%;
 }
 
 .answerModal__correct-answer {
@@ -41,12 +37,11 @@
 .answerModal__buttons {
   button {
     @include button($mySeaBlue, 1.3rem);
-    margin: 1rem 0;
     &:hover {
       background: $mySeaBlueDark;
     }
-    min-width: 7vw;
     margin: 0 1rem;
+    min-width: 7vw;
   }
 }
 
@@ -58,7 +53,7 @@
   }
   .answerModal__buttons {
     button {
-      @include button($mySeaBlue, 2.5rem);
+      font-size: 2.5rem;
     }
   }
 }
@@ -66,10 +61,13 @@
 //desktop
 @media only screen and (min-width: 1000px) {
   .answerModal__content {
-    width: 40%;
+    font-size: 2rem;
     padding: 2rem 1rem;
-    h3 {
-      margin-bottom: 1rem;
+    width: 40%;
+  }
+  .answerModal__buttons {
+    button {
+      font-size: 1.3rem;
     }
   }
 }

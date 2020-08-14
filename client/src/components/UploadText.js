@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import axios from "axios";
-import AlertWrapper from "./AlertWrapper";
+import Alert from "./Alert";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUpload } from "@fortawesome/free-solid-svg-icons";
 
@@ -155,6 +155,7 @@ const UploadText = ({
         }
       )
       .then((res) => {
+        //if I'm rendering the Alert component here, after setting infoMessages, but I immediately change component to MyTexts, why does the Alert still appear?
         setInfoMessages(res.data);
         setCurrentComponent("MyTexts");
         fetchSavedTexts();
@@ -309,7 +310,7 @@ const UploadText = ({
           </>
         )}
         {infoMessages.length > 0 && (
-          <AlertWrapper messages={infoMessages} closeAlert={closeAlert} />
+          <Alert messages={infoMessages} closeAlert={closeAlert} />
         )}
       </div>
     </div>

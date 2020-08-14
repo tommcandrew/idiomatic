@@ -30,7 +30,7 @@ const DefinitionModal = ({ definition, closeModal, selectedTargetWordObj }) => {
   return (
     <div className="definitionModal__wrapper" onClick={closeModal}>
       <div className="definitionModal__content">
-        <h3>{displayedWord.toLowerCase()}</h3>
+        <h3 className="definitionModal__word">{displayedWord.toLowerCase()}</h3>
         <p>{definition}</p>
         {audioUrl && (
           <FontAwesomeIcon
@@ -39,9 +39,9 @@ const DefinitionModal = ({ definition, closeModal, selectedTargetWordObj }) => {
             className="definitionModal__play-icon"
           />
         )}
-        <p className="definitionModal__close" onClick={closeModal}>
+        <button className="definitionModal__close" onClick={closeModal}>
           Close
-        </p>
+        </button>
       </div>
     </div>
   );

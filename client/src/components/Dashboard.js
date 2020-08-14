@@ -8,10 +8,10 @@ const Dashboard = ({ setCurrentComponent }) => {
     <div className="dashboard__wrapper">
       <div className="dashboard__text">
         <h1 className="dashboard__greeting">Hi {userName}!</h1>
-        <h1 className="dashboard__instruction">
+        <p className="dashboard__instruction">
           This is the dashboard. Get started by choosing a text or uploading one
           of your own.
-        </h1>
+        </p>
       </div>
       <div className="dashboard__buttons">
         <button onClick={() => setCurrentComponent("Texts")}>

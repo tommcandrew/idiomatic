@@ -1,8 +1,16 @@
+//mobile
 .dashboard__wrapper {
-  background: white;
   display: flex;
   flex-direction: column;
-  flex-grow: 1;
+}
+
+.dashboard__text {
+  display: flex;
+  flex-direction: column;
+  height: 25vh;
+  justify-content: space-around;
+  margin-top: 5vh;
+  text-align: center;
 }
 
 .dashboard__greeting {
@@ -11,47 +19,45 @@
 
 .dashboard__instruction {
   font-size: 1.5rem;
-  font-weight: normal;
 }
 
 .dashboard__buttons {
-  height: 20vh;
+  align-items: center;
   display: flex;
   flex-direction: column;
+  height: 20vh;
   justify-content: space-around;
-  align-items: center;
   margin-top: 10vh;
   user-select: none;
   button {
     @include button($myLilac, 1.7rem);
-    min-width: 55vw;
-    color: white;
     &:hover {
       background: $myLilacDark;
     }
+    color: white;
+    min-width: 55vw;
   }
-}
-
-.dashboard__text {
-  text-align: center;
-  height: 25vh;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-around;
-  margin-top: 5vh;
 }
 
 //tablet
 @media only screen and (min-width: 750px) {
   .dashboard__wrapper {
     justify-content: center;
+    align-items: center;
   }
+
+  .dashboard__text {
+    width: 80%;
+  }
+
   .dashboard__greeting {
     font-size: 5rem;
   }
+
   .dashboard__instruction {
     font-size: 2.5rem;
   }
+
   .dashboard__buttons {
     button {
       @include button($myLilac, 2.5rem);
@@ -65,16 +71,15 @@
   .dashboard__wrapper {
     flex-direction: row;
   }
-  .dashboard__buttons {
-    margin-top: 20vh;
-    flex-grow: 1;
-    width: 30vw;
+
+  .dashboard__text {
     height: 40vh;
-    button {
-      min-width: auto;
-      font-size: 3rem;
-    }
+    margin-left: 3vw;
+    padding-top: 10vh;
+    text-align: left;
+    width: 35vw;
   }
+
   .dashboard__greeting {
     font-size: 4rem;
   }
@@ -83,12 +88,13 @@
     font-size: 2rem;
   }
 
-  .dashboard__text {
-    width: 35vw;
-    text-align: center;
+  .dashboard__buttons {
+    flex-grow: 1;
     height: 40vh;
-    text-align: left;
-    margin-left: 3vw;
-    padding-top: 10vh;
+    margin-top: 20vh;
+    button {
+      font-size: 3rem;
+      min-width: auto;
+    }
   }
 }
