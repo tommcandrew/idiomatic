@@ -14,7 +14,6 @@ export const AuthContextProvider = (props) => {
   const [isNewUser, setIsNewUser] = useState(false);
 
   useEffect(() => {
-    console.log("authcontext mounted");
     const token = localStorage.getItem("idiomatic-token");
     if (token) {
       axios
